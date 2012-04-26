@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{Title}</title>
+	{Feed}
+	<link rel="shortcut icon" type="image/ico" href="/files/{Theme}/i/favicon.ico" />
+	{MinifyCSS(files:'css/base.css|css/base.forms.css|css/tb.css|css/master.css')}
+	<!--[if lt IE 8]><link rel="stylesheet" href="/files/{Theme}/css/base.ie.css" type="text/css" media="all" /><![endif]-->
+	<script type="text/javascript">
+	//<![CDATA[
+		
+		var tb_pathToImage = "/files/{Theme}/i/tb-load.gif", mcfLang = {};
+		
+		mcfLang.ProductName = '{ProductName}';
+		mcfLang.ProductAddedNotification = '<p>Tuote ' + mcfLang.ProductName + ' lisättiin ostoskoriin onnistuneesti.</p><p><a href="/">Palaa etusivulle</a>, <a href="/cart/">näytä ostoskori</a> tai <a href="/checkout/">siirry kassalle</a>.</p>';
+		mcfLang.RemoveProductFromCart = "Poistetaan tuote ostoskorista";
+		mcfLang.AddingToCart = "Lisätään tuote ostoskoriin";
+		mcfLang.AddedMessage = ' lisättiin ostoskoriin onnistuneesti. <a href="/cart/">Näytä ostoskori</a>, <a href="/checkout/">tilaa tuotteet</a> tai <a href="#" id="CloseAjaxMsg">sulje tämä ilmoitus</a>.';
+		mcfLang.ShowSubCategories = "Näytä alakategoriat";
+		mcfLang.HideSubCategories = "Piilota alakategoriat";
+		mcfLang.Searching = "Haetaan tuotteita...";
+		mcfLang.Loading = "Ladataan...";
+		mcfLang.Next = "Seuraava";
+		mcfLang.Prev = "Edellinen";
+		mcfLang.NextPlural = "Seuraavat";
+		mcfLang.PrevPlural = "Edelliset";
+
+	//]]>
+	</script>
+	<style type="text/css" media="all">
+		{BannerText(name:'head-styles')}
+	</style>
+</head>
+
+<body class="{BodyClass}">
+	{AdminTools}
+	<div id="Container">
+		<div id="Header" style="{BannerText(name:'header-styles')}">
+			{Logo(width:384,height:126)}
+			{CustomerNavigation}
+			{LanguageNavigation}
+			{Search}
+		</div>

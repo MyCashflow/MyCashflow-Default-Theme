@@ -1,0 +1,25 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				{Path}
+				<h1>{PageTitle}</h1>
+			</div>
+			<div class="Content">
+				<div id="NewsPage">
+					<div class="NewsDate">
+						<span class="NewsHeader">Julkaistu</span>
+						<span class="NewsDay">{NewsDate(format:'j.n')}</span>
+						<span class="NewsYear">{NewsDate(format:'Y')}</span>
+					</div>
+					<p class="NewsOverview">{NewsOverview}</p>
+					{NewsBody}
+				</div>
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

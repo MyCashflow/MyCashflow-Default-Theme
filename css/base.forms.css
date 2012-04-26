@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+form, fieldset { margin: 0; padding: 0; }
+
+.FormItem { /* This is the basic wrapperclass. */
+	position: relative; clear: left;
+	padding-bottom: 18px;
+}
+
+input, textarea, button, select {
+	position: relative; float: left;
+	top: -1px; margin: 0 3px -3px 0;
+	font-size: 12px; line-height: 18px;
+	font-family: Arial, Verdana, Geneva, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+label, .label { float: left; width: 105px; margin: 0 3px 0 0; }
+
+input { height: 15px; padding: 1px 2px; }
+input[type="file"] { height: auto; padding: 0; margin-bottom: -5px; }
+input[type="radio"], input[type="checkbox"] { width: 15px; height: 15px; top: 1px; padding: 0; }
+select { height: 21px; margin-bottom: -3px; }
+textarea { top: -2px; padding: 0 1px; }
+button { padding: 0px 3px; margin-bottom: -7px; top: -2px; }
+
+/* Checkbox & Radio inputs */
+
+.CheckWrap { padding-left: 108px; }
+.CheckWrap .label { margin-left: -108px; display: inline; /* <- For IE */ }
+.CheckWrap .Checks { position: relative; width: 100%; float: left; }
+.Checks label { width: auto; display: block; float: none; margin: 0; padding: 0 0 0 18px; clear: left; }
+.Checks input { float: left; width: 15px; height: 15px; margin: 0 0 0 -18px; padding: 0; top: 1px; }
+.InlineCheck { float: left; margin-left: 3px; width: auto; white-space: nowrap; }
+
+/* Set of FromItems displayed as group */
+
+.GroupItem {}
+.GroupItem .GroupLabel { clear: left; margin-top: 0; }
+.GroupItem div { position: relative; float: left; padding-bottom: 18px; }
+.GroupItem div label, .GroupItem div .label { clear: left; display: block; float: none; width: auto; position: absolute; bottom: -1px; left: 0px; }
+.GroupItem div input { clear: left; } 
+.GroupItem div select { clear: left; }
+.GroupItem div label { font-size: 11px; font-weight: normal; }
+.GroupItem div .after { clear: none; float: left; margin-right: 3px; }
+
+/* Item containing fieldsets Header information */
+
+.HeaderItem, .HeaderItem h2 { margin: 0; padding: 0; font-size: 12px; }
+
+body#Checkout .HeaderItem { margin: 0; padding: 0; }
+body#Checkout .HeaderItem h2 {
+	z-index: 2; font-size: 18px;
+	width: 100%; position: relative; font-weight: normal;
+	padding: 18px 15px 17px; margin: -1px -15px 18px;
+	border-bottom: 1px solid #D9D9D9; border-top: 1px solid #D9D9D9;
+	background: #EEE;
+}
+body#Checkout .HeaderItem p {
+	margin: -9px 0 18px; font-size: 15px;
+}
+
+/* All the Errors & Help */
+
+.FormError, .GroupError {
+	background: #fff2f2; padding: 8px 8px 17px;
+	margin: 0 0 9px; border: 1px solid #ffd9d9;
+}
+.FormHelp, .FormErrorMessage,
+.GroupErrorMessage, .GroupHelp { /* Basic indent on all errors & help */
+	clear: left; padding: 0;
+	margin: 0 0 0 108px;
+}
+.FormHelp, .GroupHelp { color: #666; font-size: 11px; } /* Help messages. */
+.GroupError .GroupLabel, .GroupError .FormError label,.GroupError .FormError .label,
+.FormError label, .FormError .label { color: #900; } /* Labels inside wrapper which has errors in it */
+.FormError .Checks label { color: #333; }
+.GroupItem .FormError { padding: 0; margin: 0; background: none; border: 0; } /* FormError inside of group doesn't need more styling */
+.FormErrorMessage, .GroupErrorMessage { color: #900; font-size: 11px; } /* The error messages */
+.GroupItem .FormErrorMessage, .GroupItem .FormHelp { display: none; } /* Individual help and errors are not displayed, because group-level help & errormessage exits. */
+.Checks .FormHelp, .Checks .FormNotification { margin: 0; padding: 0 0 0 18px; } /* Help with checkboxes & radiobuttons */
+.Checks .FormNotification { color: #900; padding-top: 4px; padding-bottom: 5px; }
+
+/* Item containing button and possibly the alternative action (cancel/back) as link */
+
+.FormSubmit, #NewCustomerContinue {}
+.FormSubmit .SubmitButton { padding: 9px; font-size: 15px; line-height: 18px; margin-right: 6px; margin-left: 108px; }
+.FormAltAction { position: relative; float: left; line-height: 36px; margin: 0; }
+.FormAltAction a {}
+ 
+.required {} /* When item is required it get's this wrapperclass. Here required items label gets bolding. */
+.required label, .required .label { font-weight: bold; }
+.required label:after { content: " *"; }
+.required .Checks label:after { content: ""; }
+.required .after, .required .after label, .required .after .label,
+.required .Checks label, .required .Checks .label { font-weight: normal; }
+
+.after { width: auto; font-weight: normal; } /* Very useful if you need currency or some other suffix after your input. */

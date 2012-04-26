@@ -1,0 +1,28 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				{Path}
+				<h1>{PageTitle}</h1>
+			</div>
+			<div class="Content">{Content}</div>
+			{CrossSaleProducts(
+				type:'normal',
+				limit:12,
+				before:'
+					<h2 class="BoxHeader Center">Näitä tuotteita ostaneet ostivat myös...</h2>
+					<div id="CrossSaleScroller">
+						<div id="CrossSaleProducts">',
+				after:'</div></div>'
+			)}
+		</div>
+		<div id="Secondary" class="Column">
+			{TopSellers(limit:5,before:'<h2 class="BoxHeader">Suosituimmat</h2>')}
+			{HotPicks(limit:1,before:'<h2 class="BoxHeader">Suosittelemme</h2>')}
+			{Banners(name:'sidebar-right',helper:helpers/sidebar-banners)}
+		</div>
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

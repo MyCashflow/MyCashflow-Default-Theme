@@ -1,0 +1,799 @@
+@charset "utf-8";
+
+/* -------------------------------------------------------------- 
+   Master.css  
+-------------------------------------------------------------- 
+
+Imports disabled because of {MinifyCSS} tag
+
+@import "base.css";
+@import "base.forms.css";
+@import "tb.css";
+
+*/
+
+/* Layout base
+-------------------------------------------------------------- */
+
+html, body { height: 100%; }
+html { overflow-y: scroll; }
+body { text-align: center; background: #f8f8f8; }
+
+/* Add these lines if you want your AdminTools to be fixed on the top of the page */
+body.adminLoggedIn { padding: 36px 0 0; }
+body.adminLoggedIn #AdminTools { position: fixed; z-index: 2; top: 0px; left: 0px; }
+body.adminLoggedIn #Container { z-index: 1; }
+
+#Container {
+	position: relative; margin: 0 auto; min-height: 100%;
+	width: 960px; padding: 0; text-align: left;
+	border-left: 1px solid #D9D9D9; border-right: 1px solid #D9D9D9;
+	background: #FFFFFF;
+}
+
+#AjaxMsg {
+	position: fixed; z-index: 999; display: none; text-align: center;
+	top: 0px; left: 50%; width: 360px; margin: 0 -189px; padding: 9px 18px 8px;
+	background: #FFC; border: 1px solid #e5e58a; border-top: 0;
+  -moz-border-radius-bottomleft: 3px; -webkit-border-bottom-left-radius:  3px;
+	border-bottom-left-radius:  3px; -moz-border-radius-bottomright:  3px;
+	-webkit-border-bottom-right-radius:  3px; border-bottom-right-radius:  3px;
+}
+#AjaxMsg a { font-weight: bold; }
+body.adminLoggedIn #AjaxMsg { top: 36px; }
+
+/* Header
+-------------------------------------------------------------- */
+
+#Header {
+	position: relative; width: 960px;
+	background: #FFFFFF; border-bottom: 1px solid #D9D9D9;
+	padding-bottom: 9px; z-index: 99;
+}
+.LogoLink { float: left; margin: 9px 6px 0; padding: 9px; /* border: 1px solid #D9D9D9; background: #FFF; */ }
+.LogoLink img { display: block; margin: 0; padding: 0; }
+.NoLogoImage { font-size: 32px; line-height: 72px; text-decoration: none; }
+
+#Header .NavigationList { position: relative; float: right; margin: 0 6px 63px 0; list-style: none outside; }
+#Header .CustomerNavigation  { margin-left: 6px; }
+#Header .NavigationList li { position: relative; float: left; margin: 0 0 0 3px; }
+#Header .NavigationList li a {
+	position: relative; float: left; width: auto;
+	padding: 9px 8px 8px; margin: -1px 0 0;
+	font-size: 11px; font-weight: bold;
+	white-space: nowrap; text-decoration: none;
+	background: #F8F8F8;
+	border: 1px solid #D9D9D9;
+}
+
+#SearchForm {
+	position: absolute; right: 6px; bottom: 9px;
+	padding: 8px; height: 18px; z-index: 99;
+	background: #F8F8F8; border: 1px solid #D9D9D9;
+}
+#SearchForm .FormItem { border: 0; padding: 0; background: none; }
+#SearchForm label { display: none; }
+#SearchForm input { width: 240px; float: left; }
+#SearchForm button { margin-right: 0; }
+
+#LiveSearchResults {
+	display: block; margin: 0; list-style: none outside;
+	position: absolute; top: 35px; left: -1px;
+	z-index: 100; background: #F8F8F8; padding: 0 9px;
+}
+#LiveSearchResults li {
+	width: 100%;
+	padding: 9px 8px 8px; margin: 0 -9px;
+	border: 1px solid #D9D9D9; border-top: 0;
+}
+.SearchIndicator {
+	display: none; position: absolute;
+	top: 0px; left: 226px;
+	padding: 1px; width: 16px; height: 16px;
+	background: url(../i/search-load.gif) no-repeat 50% 50%;
+}
+.CloseSearchResults { background-image: url(../i/search-close.gif); cursor: pointer; }
+
+/* Same Form @ Content area */
+
+#ContentSearch #SearchForm { position: relative; right: auto; bottom: auto; float: none; width: auto; margin: 0 0 18px; }
+#ContentSearch #SearchForm input { width: 62%; font-size: 14px; padding: 2px; }
+
+/* Layout
+-------------------------------------------------------------- */
+
+#SidebarBg { background: #FAFAFA; /* Sidepanel bg */ }
+#Main {
+	position: relative; overflow: visible; z-index: 1;
+	width: 576px; margin: 0 191px; padding: 0; background: #FFFFFF; /* Main-bg */
+	border-left: 1px solid #D9D9D9; border-right: 1px solid #D9D9D9;
+}
+body#Checkout #Main { width: 768px; margin-right: 0; border-right: 0; }
+.Column { position: relative; float: left; width: 191px; padding: 0; overflow: hidden; }
+#MainNavigation { margin-left: -192px; min-height: 18px; }
+#Secondary { float: right; margin-right: -192px; min-height: 18px; }
+#Primary { width: 576px; }
+body#Checkout #Primary { width: 768px; border-bottom: 1px solid #D9D9D9; }
+
+/* Footer */
+
+#Footer {
+	position: relative; margin: -1px 0 0;
+	padding: 0; text-align: center;
+	border-top: 1px solid #D9D9D9; z-index: 2;
+}
+#Footer .BrandsNavigation {
+	width: 954px; overflow: hidden;
+	margin: 0; padding: 9px 3px 0;
+	list-style: none outside;
+	text-align: center; font-size: 0px;
+	word-spacing: -1em;
+	background: #F2F2F2;
+	border-bottom: 1px solid #D9D9D9;
+}
+#Footer .BrandsNavigation li {
+	margin: 0 0 9px;
+	font-size: 14px; word-spacing: normal;
+	font-weight: bold;
+	vertical-align: middle;
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+}
+#Footer .BrandsNavigation li a {
+	display: block; border: 1px solid #d9d9d9;
+	margin: 6px; padding: 8px; color: #888;
+	text-decoration: none; background: #fff;
+}
+#Footer .BrandsNavigation li a img { display: block; margin: 0; padding: 0; }
+#Footer .BrandsNavigation li a:hover { border-color: #09f; color: #069; }
+
+#Footer .FooterBanner {
+	font-size: 11px;
+	margin: 9px 6px; padding: 8px 8px 0; border: 1px solid #d9d9d9; vertical-align: top;
+	display: -moz-inline-stack;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+}
+#Footer .FooterBanner > * { margin: 0 auto 9px; }
+#Footer .FooterBanner > img { display: block; margin: 0 auto 8px; }
+
+#Copyrights { clear: both; width: 960px; margin: 0; padding: 18px 0; }
+
+/* Content masthead
+-------------------------------------------------------------- */
+
+#PageHeader {
+	padding: 6px 15px 11px; margin: -1px 0 0;
+	background: #F2F2F2;
+	border-bottom: 1px solid #D9D9D9; border-top: 1px solid #D9D9D9;
+}
+
+.Breadcrumb { margin: 0; padding: 0; line-height: 18px; font-size: 11px; border: 0; }
+.Breadcrumb ul, .Breadcrumb li { display: inline; line-height: 18px; margin: 0; padding: 0; border: 0; }
+.Breadcrumb li a {
+	font-weight: bold; text-decoration: none; line-height: 18px;
+}
+
+#PageHeader h1 { margin: 0; padding: 0; }
+.Welcome h1 { font-size: 32px; line-height: 36px; }
+
+.CategoryDescription { padding: 9px 15px 0; }
+
+/* Left Column
+-------------------------------------------------------------- */
+
+#MainNavigation ul.Categories, #MainNavigation ul.Categories ul { position: relative; margin: 0; padding: 0; list-style: none outside; }
+#MainNavigation ul.Categories li { position: relative; border-bottom: 1px solid #D9D9D9; background: #F8F8F8; }
+#MainNavigation ul.Categories li a {
+	position: relative; display: block; padding: 8px 15px 9px;
+	font-size: 15px; font-weight: bold; line-height: 18px; text-decoration: none;
+}
+#MainNavigation ul.Categories li ul { padding: 0 15px 9px 36px; }
+#MainNavigation ul.Categories li ul li { border: 0; }
+#MainNavigation ul.Categories li ul li a {
+	font-size: 12px; font-weight: normal;
+	line-height: 18px; padding: 0;
+	background: none; border: 0;
+}
+#MainNavigation ul.Categories li ul li ul { padding: 0 0 0 18px; border: 0; }
+
+/* Categoryopeners */
+
+#MainNavigation ul.Categories li.Openable a { margin-left: 35px; padding-left: 0; }
+#MainNavigation ul.Categories li.Openable ul li a { margin: 0; padding: 0; }
+#MainNavigation ul.Categories li span.NavOpener {
+	position: absolute; display: block; margin: 0;
+	top: 6px; left: 6px; width: 21px; height: 21px;
+	line-height: 21px; text-align: center; font-weight: bold;
+	background: #FFF url(../i/arrows.gif) no-repeat -1px -1px;
+	overflow: hidden; text-indent: -1000em;
+	border: 1px solid #D9D9D9; -moz-border-radius: 2px;
+	-webkit-border-radius: 2px; border-radius: 2px;
+}
+#MainNavigation ul.Categories li span.NavOpener:hover { background-color: #069; color: #FFF; cursor: pointer; background-position: -1px -24px; }
+#MainNavigation ul.Categories li span.Opened { background-position: -23px -2px; }
+#MainNavigation ul.Categories li span.Opened:hover { background-position: -23px -25px; }
+#MainNavigation ul.Categories li ul li span.NavOpener { top: 1px; left: -24px; width: 15px; height: 15px; line-height: 15px; background-position: -4px -4px; }
+#MainNavigation ul.Categories li ul li span.NavOpener:hover { background-position: -4px -27px; }
+#MainNavigation ul.Categories li ul li span.Opened { background-position: -26px -5px; }
+#MainNavigation ul.Categories li ul li span.Opened:hover { background-position: -26px -28px; }
+#MainNavigation ul.Categories li ul li ul li span.NavOpener { top: 2px; left: -18px; width: 13px; height: 13px; line-height: 13px; background-position: -5px -5px; }
+#MainNavigation ul.Categories li ul li ul li span.NavOpener:hover { background-position: -5px -28px; }
+#MainNavigation ul.Categories li ul li ul li span.Opened {  background-position: -27px -6px; }
+#MainNavigation ul.Categories li ul li ul li span.Opened:hover { background-position: -27px -29px; }
+
+/* Info & News navigation */
+
+#MainNavigation ul.InfoNavigation, #MainNavigation ul.NewsList {
+	margin: 0; padding: 9px 15px 8px 15px;
+	border-bottom: 1px solid #D9D9D9; list-style: none outside;
+}
+#MainNavigation ul.InfoNavigation li, #MainNavigation ul.NewsList li {}
+#MainNavigation ul.InfoNavigation li a, #MainNavigation ul.NewsList li a { text-decoration: none; }
+#MainNavigation ul.InfoNavigation li ul, #MainNavigation ul.NewsList li ul { padding: 0; border: 0; margin-left: 21px; list-style: none outside; }
+
+/* Current page & subcategories */
+
+#MainNavigation ul.Categories > li.Current > a { color: #246; }
+#MainNavigation li.Current > a { font-weight: bold !important; color: #058; }
+#MainNavigation ul ul { display: none; }
+#MainNavigation ul li.Current > ul { display: block; }
+
+/* Right Column
+-------------------------------------------------------------- */
+
+#Secondary .EmptyCart {
+	padding: 8px 15px 9px; margin: 0;
+	border-bottom: 1px solid #D9D9D9;
+}
+#Secondary .CartProduct {
+	float: none; display: block;
+	margin: 0; width: auto; height: auto;
+	padding: 8px 15px 9px; border: 0;
+	border-bottom: 1px dotted #D9D9D9;
+	font-size: 11px;
+}
+#Secondary .CartProduct .ProductName { font-size: 11px; padding: 0; margin: 0; }
+#Secondary .CartProduct .VariationName { display: none; }
+#Secondary .CartProduct dl { margin: 0; padding: 0; }
+#Secondary .CartProduct dl dt { margin-right: 2px; }
+#Secondary .CartProduct dl dd { margin-right: 6px; }
+#Secondary .CartProduct dl dd.CartProductQuantity,
+#Secondary .CartProduct dl dd.CartProductTotal { white-space: nowrap; }
+
+#Secondary dl.CartProceed { margin: 0; padding: 0; border: 0; }
+#Secondary dt.SubTotal, #Secondary dd.SubTotal { padding: 0 15px; margin: 0; line-height: 35px; }
+#Secondary dd.SubTotal { font-size: 15px; font-weight: bold; padding-left: 0; margin-left: -10px; }
+#Secondary dd.ToShoppingCart, #Secondary dd.ToCheckout { margin: 0; padding: 0; display: block; }
+#Secondary dd.ToShoppingCart a, #Secondary dd.ToCheckout a {
+	position: relative;
+	display: block; padding: 8px 15px 9px;
+	margin: -1px 0 0; text-decoration: none;
+	background: #F8F8F8; border-top: 1px solid #D9D9D9;
+	border-bottom: 1px solid #D9D9D9;
+}
+#Secondary .ToShoppingCart a { font-weight: normal; }
+#Secondary .ToCheckout a { font-size: 15px; font-weight: bold; }
+
+/* Banners at sidebar */
+
+.SidebarBanner { clear: both; background: #FFF; border: 1px solid #d9d9d9; margin: 6px; padding: 8px 8px 0; text-align: center; font-size: 11px; }
+.SidebarBanner > * { margin: 0 auto 9px; }
+.SidebarBanner > img { display: block; margin: 0 auto 8px; }
+
+/* Productlist
+-------------------------------------------------------------- */
+
+.Pagination {
+	margin: 0 6px; clear: both; padding: 8px; font-size: 11px;
+	background: #F8F8F8; border: 1px solid #D9D9D9; 
+}
+.PaginationAfter { margin: 9px 6px; }
+.ShowingItems { font-size: 11px; float: left; margin-bottom: 0; }
+
+.SortForm { font-size: 11px; float: right; }
+.SortForm .FormItem { width: auto; clear: none; font-size: 11px; padding-bottom: 0; }
+.SortForm .FormItem label { width: auto; padding-right: 10px; font-size: 11px; }
+.SortForm .FormItem select { font-size: 11px; }
+.SortForm .FormItem button { display: none; }
+
+.PageNavigation {
+	position: relative; text-align: center;
+	list-style: none outside; margin: 0; padding: 0;
+}
+.PageNavigation li { list-style: none outside; margin: 0; padding: 0; display: inline; line-height: 18px; }
+.PageNavigation li { margin: 0 2px; font-weight: bold; }
+.PageNavigation li.CurrentPage { background: #F8F8F8; border: 1px solid #D9D9D9; padding: 4px 8px; }
+.PageNavigation li a { line-height: 18px; padding: 5px; }
+
+.Product {
+	position: relative; float: left; overflow: hidden;
+	width: 162px; margin: 0 6px; padding: 9px 9px 27px;
+}
+.first { clear: left; }
+.last {}
+
+.Product .ProductImage {
+	display: block; position: relative;
+	margin: 0 -9px; padding: 8px;
+	height: 162px; width: 162px;
+	background: #FFF; border: 1px solid #D9D9D9;
+	text-align: center; line-height: 160px;
+}
+.Product .ProductImage img {
+	display: inline;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+.Product .ProductImage:hover { border: 1px solid #09f; }
+
+.Product h2 { font-size: 12px; margin: 0; padding: 9px 0 0; }
+.Product .Prices { padding: 0 0 9px; margin: 0; }
+
+.Product a:link, .Product a:visited { text-decoration: none; }
+.Product a:active, .Product a:hover { text-decoration: underline; }
+
+/* .Categories, .SubCategories, .BrandsNavigation
+-------------------------------------------------------------- */
+
+#Primary .NavigationList, #Primary .NavigationList li { margin: 0; padding: 0; list-style: none outside; font-size: 11px; }
+#Primary .NavigationList li {	margin: 0; padding: 0; border-bottom: 1px dotted #D9D9D9; }
+#Primary .NavigationList li a {	display: block; padding: 8px 15px 9px; }
+
+/* Small Productlists
+-------------------------------------------------------------- */
+
+ul.ProductList, ol.ProductList, .ProductList li {
+	position: relative; margin: 0; padding: 0;
+	list-style: none outside;
+}
+ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
+
+.ProductList li, #side-features .ProductList li { min-height: 36px; padding: 5px 15px 12px; border-bottom: 1px dotted #D9D9D9; }
+
+.ProductList li h3 { margin: 0; padding: 0 0 0 45px; }
+.ProductList li h3 a {
+	position: relative; display: block;
+	margin: 0; padding: 0;
+	line-height: 18px; font-size: 10px;
+}
+.ProductList li a.ListImage {
+	position: absolute; display: block;
+	top: 9px; left: 15px; text-align: center;
+	width: 34px; height: 34px; line-height: 32px;
+	border: 1px solid #D9D9D9; background: #FFF;
+}
+.ProductList li a.ListImage:hover { border-color: #09f; }
+.ProductList li a.ListImage img {
+	display: inline;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+
+/* Product
+-------------------------------------------------------------- */
+
+#ProductAddedNotification { margin: 9px 6px 0; display: none; }
+#ProductAddedNotification p { font-size: 12px; margin-bottom: 9px; }
+#ProductAddedNotification p+p { margin-bottom: 0; font-size: 15px; }
+
+#ProductImages, #ProductBuy {
+	position: relative; float: left;
+	width: 258px; overflow: hidden;
+	margin: 0 6px; padding: 9px;
+}
+
+#ProductShortDesc { font-size: 15px; }
+#ProductFullDesc { clear: both; margin: 0 6px; padding: 0 9px; }
+
+#CurrentProductImage {
+	width: 258px; height: 258px; line-height: 256px;
+	position: relative; display: block; overflow: hidden;
+	text-align: center; text-decoration: none;
+	margin: 0 -9px 10px; padding: 8px;
+	border: 1px solid #D9D9D9;
+}
+#CurrentProductImage:hover { border-color: #09f; }
+#CurrentProductImage img {
+	display: inline;
+	vertical-align: middle; 
+	margin: 0 auto;
+}
+#ImgLoader {
+	position: absolute; display: block; top: 0px; left: 0px;
+	width: 100%; height: 100%; margin: 0px;
+	background: #FFF url(../i/tb-load.gif) no-repeat 50% 50%;
+	overflow: hidden; text-indent: -10000em;
+}
+#ProductImageCaption {
+	margin: -5px 0 5px; padding: 0;
+	text-align: center; font-size: 11px;
+}
+#ProductThumbnails {
+	width: 280px; position: relative;
+	overflow: hidden; height: auto;
+	margin: 0 -13px 0 -9px;
+	list-style: none outside;
+}
+#ProductThumbnails li { position: relative; float: left; }
+#ProductThumbnails li a {
+	position: relative; display: block; float: left;
+	width: 34px; height: 34px; line-height: 32px;  text-align: center;
+	padding: 8px; margin: 0 4px 2px 0; border: 1px solid #D9D9D9;
+}
+#ProductThumbnails li a:hover { border-color: #09f; }
+#ProductThumbnails li a img {
+	vertical-align: middle;
+	display: inline;
+	margin: 0 auto;
+}
+#ProductBuy .Prices {
+	font-size: 15px; width: 100%;
+	margin-bottom: 18px;
+	position: relative;
+	overflow: hidden;
+}
+#ProductBuy dl { width: 100%; overflow: hidden; margin: 0 0 18px; padding: 0; }
+#ProductBuy dt, #ProductBuy dd {
+	position: relative; float: left;
+	width: auto; margin: 0; padding: 0;
+}
+#ProductBuy dt { width: 108px; font-size: 12px; font-weight: normal; }
+#ProductBuy dd { width: 150px; }
+
+#ProductBuy .Availability {}
+#ProductBuy .Availability .DeliveryTime { margin-left: 108px; color: #c00; }
+
+.BuyForm fieldset {
+	clear: left; position: relative;
+	margin: 0 -9px 18px; padding: 8px;
+	border: 1px solid #D9D9D9; background-color: #FCFCFC;
+}
+
+.BuyForm .FormItem { font-size: 11px; padding-bottom: 9px; }
+.BuyForm input, .BuyForm textarea, .BuyForm button,
+.BuyForm select, .BuyForm label, .BuyForm .label { clear: left; }
+.BuyForm label, .BuyForm .label { display: block; float: none; width: auto; }
+.BuyForm .Checks, .BuyForm .FormHelp, .BuyForm .FormErrorMessage { margin-left: 0; }
+.BuyForm .CheckWrap { padding-left: 0; }
+.BuyForm .CheckWrap .label { margin-left: 0; }
+.BuyForm .CheckWrap .Checks label { font-weight: normal; }
+
+.BuyForm .FormSubmit {
+	margin: 8px -8px -8px; padding: 17px 8px 18px; width: 100%;
+	background: #F2F2F2; border-top: 1px solid #D9D9D9;
+}
+.BuyForm .FormSubmit button { margin-left: 0; }
+
+/* Scroller styles for crosssales */
+
+#CrossSaleScroller { position: relative; width: 100%; height: 360px; overflow: auto; }
+#CrossSaleProducts { position: relative; width: auto; height: 360px; overflow: visible; }
+#CrossSaleProducts .Product { padding-left: 15px; padding-right: 15px; margin: 0; }
+
+#ScrollToPrev, #ScrollToNext {
+	cursor: pointer; position: relative; z-index: 3; float: left; margin-top: -36px; padding: 9px 9px 9px 36px;
+	color: #069; text-decoration: underline; font-size: 11px; font-weight: bold;
+}
+#ScrollToNext { float: right; padding: 9px 36px 9px 9px; }
+#ScrollToPrev:hover, #ScrollToNext:hover { color: #09F; }
+
+#ScrollToPrev span.Icon, #ScrollToNext span.Icon,
+#PrevBanner .Icon, #NextBanner .Icon {
+	position: absolute; display: block; margin: 0;
+	top: 6px; width: 21px; height: 21px;
+	line-height: 21px; text-align: center; font-weight: bold;
+	background: #FFF url(../i/arrows.gif) no-repeat -1px -1px;
+	overflow: hidden; text-indent: -1000em;
+	border: 1px solid #D9D9D9; -moz-border-radius: 2px;
+	-webkit-border-radius: 2px; border-radius: 2px;
+}
+#ScrollToPrev span.Icon, #PrevBanner .Icon { left: 6px; background-position: -47px -1px; }
+#ScrollToNext span.Icon, #NextBanner .Icon { right: 6px; }
+#ScrollToPrev:hover span.Icon, #ScrollToNext:hover span.Icon,
+#PrevBanner:hover .Icon, #NextBanner:hover .Icon { background-color: #069; color: #FFF; background-position: -1px -24px; }
+#ScrollToPrev:hover span.Icon, #PrevBanner:hover .Icon { background-position: -47px -24px; }
+
+/* Category Frontpage
+-------------------------------------------------------------- */
+
+#BannerScroller { position: relative; width: 576px; overflow: hidden; }
+#ScrollableBanners { position: relative; width: 9999em; }
+.FrontBanner { position: relative; width: 576px; float: left; }
+.FrontBanner img { position: relative; display: block; float: left; margin: 0; padding: 0; width: 576px; }
+.BannerInfo {
+	position: absolute; bottom: 0px; left: 0px; right: 0px;
+	padding: 9px 15px 0; background: #000; opacity: 0.85; color: #FFF;
+}
+.BannerInfo h3 { margin: 0 0 9px; padding: 0; }
+.BannerInfo h3, .BannerInfo a { color: #FFF; }
+.BannerInfo h3 + p { margin-top: -9px; }
+.BannerInfo p { margin-bottom: 9px; }
+
+#PrevBanner, #NextBanner {
+	display: none;
+	position: absolute; top: 0px;
+	padding: 8px 15px 9px; margin: 0;
+	text-decoration: none;
+	border-bottom: 1px solid #d9d9d9;
+	background: #FFF; z-index: 999;
+}
+#PrevBanner {
+	padding-left: 36px;
+	left: 0px; border-right: 1px solid #d9d9d9;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-bottom-right-border-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#NextBanner {
+	padding-right: 36px;
+	right: 0px; border-left: 1px solid #d9d9d9;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-bottom-left-border-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+#PrevBanner .Icon, #NextBanner .Icon {}
+
+.CategoryImage, .BrandImage {
+	display: block; margin: 0;
+	border-bottom: 1px solid #D9D9D9;
+}
+#LandingPageWrapper {
+	position: relative; overflow: visible;
+	width: 384px; margin: 0 191px 0 0;
+	border-right: 1px solid #D9D9D9;
+	border-bottom: 1px solid #D9D9D9;
+}
+#PrimaryFeatures {
+	position: relative; float: left;
+	width: 384px; min-height: 18px;
+}
+#SecondaryFeatures {
+	position: relative; float: right;
+	width: 191px; min-height: 18px;
+	margin-right: -192px;
+}
+#BrandLogo { text-align: center; }
+#BrandLogo { display: block; margin: 18px auto; padding: 0; }
+
+/* Infopages
+-------------------------------------------------------------- */
+
+/* Subnavigation */
+#Primary .Content .InfoNavigation { position: relative; left: -9px; width: 100%; overflow: hidden; margin: 0 0 18px; padding: 0; list-style: none outside; }
+#Primary .Content .InfoNavigation:before { content: "Tämän sivun alasivut: "; float: left; font-size: 12px; color: #444; padding-left: 9px; }
+#Primary .Content .InfoNavigation li { float: left; padding: 0; margin: 0; border: 0; border-right: 2px solid #d9d9d9; }
+#Primary .Content .InfoNavigation li.LastNavigationItem { border: 0; }
+#Primary .Content .InfoNavigation li a { float: left; margin: 0; padding: 0 9px; font-size: 12px; font-weight: bold; }
+
+/* News
+-------------------------------------------------------------- */
+
+.HomepageNewsDate { float: left; }
+
+.NewsDate {
+	float: right; width: 54px; padding: 9px; text-align: center;
+	margin: -1px 0 17px 17px; font-size: 10px;
+	background: #F8F8F8;
+	border: 1px solid #D9D9D9;
+}
+.NewsDate span { display: block; margin: 0; padding: 0; }
+.NewsDate .NewsHeader { font-size: 10px; }
+.NewsDate .NewsDay { font-size: 20px; letter-spacing: 1px; }
+.NewsDate .NewsYear { font-size: 12px; letter-spacing: 2px; font-weight: bold; }
+
+.NewsOverview { font-size: 15px; }
+
+/* Account pages
+-------------------------------------------------------------- */
+
+#OrderStatus { margin: 18px 0; font-size: 15px; }
+#OrderStatus dd+dd { margin-left: -6px; }
+
+#OrderHistoryTable { margin: 18px 0; }
+
+dl#AccountInformation {
+	margin: 18px 0; width: 280px; overflow: hidden;
+	padding: 0 116px 0 150px;
+}
+dl#AccountInformation dt,
+dl#AccountInformation dd {
+	position: relative; float: left;
+	margin: 0; padding: 4px 0;
+}
+dl#AccountInformation dt { margin-left: -150px; width: 150px; clear: left; }
+dl#AccountInformation dd { width: 100%; }
+dl#AccountInformation dd.AccountLogout,
+dl#AccountInformation dd.AccountEdit {
+	text-align: right; float: right;
+	width: 116px; margin-right: -116px;
+}
+dl#AccountInformation dd p { margin: 0; }
+
+
+/* Cart
+-------------------------------------------------------------- */
+
+#CartForm { margin: 9px 0; }
+
+table .FormItem, table .FormItem:hover { float: none; margin: 0; padding: 0; border: 0; background: none; }
+table input, table button { float: none; display: block; }
+table dl { width: 100%; overflow: hidden; margin-bottom: 0; font-size: 11px; font-weight: normal; white-space: normal; }
+table dt, table dd { float: left; width: auto; }
+
+.CartPrice, .CartTotal, .CartShippingCost, .CartPaymentCost, .CartProductsTotal { white-space: nowrap; text-align: right; }
+td.CartTotal { font-weight: bold; }
+.CartPrice, .CartQuantity { text-align: center; }
+.CartQuantity input { top: 3px; margin: -4px auto 0; }
+.CartQuantity .CartRemove {
+	font-size: 10px; font-weight: bold;
+	line-height: 18px; text-align: center; display: block;
+}
+table .CartProduct dl { font-size: 11px; font-weight: normal; }
+table .ProductName { padding: 0; margin: 0; font-size: 12px; }
+
+.CartPic { width: 36px; }
+.CartPic a {
+	display: block; position: relative;
+	text-align: center; background: #FFF;
+	width: 34px; height: 34px; line-height: 32px;
+	border: 1px solid #d9d9d9;
+}
+.CartPic a:hover { border-color: #09f; }
+.CartPic a img {
+	vertical-align: middle;
+	display: inline;
+	margin: 0 auto;
+}
+
+#CartTable tfoot th, #CartTable tfoot td,
+#PreviewTable tfoot th, #PreviewTable tfoot td { text-align: right; }
+
+#UpdateCart button { padding: 1px 2px; font-size: 11px; line-height: 15px; float: right; margin: -9px 0 0; }
+
+#ContinueToCheckout { margin: 0; padding: 0; border: 0; background: none; }
+#ShoppingCartSubmit {}
+#ShoppingCartSubmit .ToCheckout { float: right; margin-right: 0; }
+#ShoppingCartSubmit .ContinueShopping { float: left; margin: 0; padding: 0; }
+#ShoppingCartSubmit .ContinueShopping a {
+	float: left; position: relative; height: 34px; line-height: 34px;
+	margin: -54px 0 0; padding: 0 17px; text-decoration: none;
+	background: #F8F8F8; border: 1px solid #D9D9D9;
+}
+
+/* Checkout
+-------------------------------------------------------------- */
+
+#CheckoutHeader {
+	position: relative; overflow: hidden; z-index: 3;
+	border-bottom: 1px solid #D9D9D9;
+	background: #F8F8F8; padding: 18px 15px 17px;
+}
+#CheckoutHeader h1 {
+	position: relative; float: left; width: auto;
+	height: 36px; line-height: 36px; padding: 0 36px 0 0; 
+	border: 0; margin: 0; background: none;
+}
+#CheckoutHeader #CheckoutStage {
+	position: relative; overflow: hidden; width: auto;
+	list-style: decimal inside; margin: 0; padding: 0;
+	height: 36px; line-height: 36px;
+}
+#CheckoutHeader #CheckoutStage li {
+	position: relative; float: left; height: 34px; line-height: 34px;
+	margin: 0 3px 0 0; padding: 0 17px; font-weight: normal;
+	background: #F8F8F8; border: 1px solid #D9D9D9;
+}
+#CheckoutHeader #CheckoutStage li.CurrentCheckoutStage {
+	background: #F8F8F8;
+	font-weight: bold;
+}
+#CheckoutHeader #CheckoutStage li.CompletedCheckoutStage {}
+#CheckoutHeader #CheckoutStage li.CompletedCheckoutStage a {}
+.CheckoutStageEdit {
+	font-size: 10px; font-weight: normal;
+	position: relative; top: -6px;
+	color: #000; padding: 0 0.15em;
+}
+#LoginForm {
+	position: relative; overflow: visible;
+	width: 384px; margin: 0 -15px 0 368px;
+	border-left: 1px solid #D9D9D9;
+}
+#CheckoutNewCustomer {
+	position: relative; float: left; border-bottom: 0;
+	margin: 0 0 0 -384px; padding: 0 15px; width: 353px;
+}
+#CheckoutReturningCustomer {
+	position: relative; float: left; border-bottom: 0;
+	margin: 0; padding: 0 15px; width: 354px;
+}
+#NewCustomerContinue a.Button {
+	float: left; position: relative; height: 34px; line-height: 34px;
+	margin: 0; padding: 0 17px; text-decoration: none; font-size: 15px;
+	background: #F8F8F8; border: 1px solid #D9D9D9; font-weight: bold;
+}
+
+/* Shipping Methods
+-------------------------------------------------------------- */
+
+#SelectShippingMethod .ShippingMethodWrapper .DefineShippingMethod {
+	float: none; clear: none;
+	overflow: auto; margin: 0 0 0 18px;
+	padding: 8px; border: 1px solid #d9d9d9;
+	background: #ffffcc; font-size: 11px;
+}
+#SelectShippingMethod .ShippingMethodWrapper .DefineShippingMethod label { float: left; width: auto; clear: none; margin-right: 9px; }
+#SelectShippingMethod .ShippingMethodWrapper .DefineShippingMethod select { font-size: 11px; }
+
+#SelectShippingMethod .ShippingMethodWrapper .DefineDisabled { background: #f8f8f8; border: 1px solid #f2f2f2; }
+#SelectShippingMethod .ShippingMethodWrapper .DefineDisabled label { color: #ccc; }
+
+#SelectShippingMethod .CheckWrap {}
+#SelectShippingMethod .CheckWrap p.label { display: none; }
+#SelectShippingMethod .CheckWrap .ShippingMethodWrapper {
+	clear: both; width: 100%; overflow: hidden;
+	padding: 0 0 9px 108px; margin: 0 0 8px -108px;
+	border-bottom: 1px dotted #d9d9d9;
+} 
+#SelectShippingMethod .CheckWrap .ShippingMethodWrapper .FormHelp { padding: 5px 0 4px 18px; }
+.ShippingMethodWithLogo {}
+.ShippingMethodWrapper .ShippingMethodLogo {
+	position: relative; float: left; width: 90px;
+	margin: 0 0 0 -126px; padding: 3px 3px 4px 4px;
+	background: #FFF; border: 1px solid #d9d9d9;
+	text-align: center; overflow: hidden;
+}
+.ShippingMethodWrapper .ShippingMethodLogo img { display: block; margin: 0 auto; }
+.ShippingMethodWithLogo .FormHelp { width: 100%; clear: none; }
+
+/* Payment Methods
+-------------------------------------------------------------- */
+
+#SelectPaymentMethod .CheckWrap {}
+#SelectPaymentMethod .CheckWrap p.label { display: none; }
+#SelectPaymentMethod .CheckWrap .PaymentMethodWrapper {
+	clear: both; width: 100%; overflow: hidden;
+	padding: 0 0 9px 108px; margin: 0 0 8px -108px;
+	border-bottom: 1px dotted #d9d9d9;
+} 
+#SelectPaymentMethod .CheckWrap .PaymentMethodWrapper .FormHelp { padding: 5px 0 4px 18px; }
+.PaymentMethodWithLogo {}
+.PaymentMethodWrapper .PaymentMethodLogo {
+	position: relative; float: left; width: 90px;
+	margin: 0 0 0 -126px; padding: 3px 3px 4px 4px;
+	background: #FFF; border: 1px solid #d9d9d9;
+	text-align: center; overflow: hidden;
+}
+.PaymentMethodWrapper .PaymentMethodLogo img { display: block; margin: 0 auto; }
+.PaymentMethodWithLogo .FormHelp { clear: none; }
+
+#SelectPaymentMethod .CheckWrap .PaymentMethodDisabled label { color: #888; }
+#SelectPaymentMethod .CheckWrap .PaymentMethodDisabled .PaymentMethodLogo {
+	filter: alpha(opacity=50); -ms-filter: "alpha(opacity=50)";
+	-khtml-opacity: .50; -moz-opacity: .50; opacity: .50;
+}
+
+/* Checkouts transfer to payment
+-------------------------------------------------------------- */
+
+.CheckoutTransferToPayment { width: 31.3%; float: left; height: 120px; clear: none; text-align: center; margin: 0 2% 10px 0; padding: 0; }
+.CheckoutTransferToPayment button {
+	vertical-align: middle; height: 120px; width: 100%;
+	padding: 0 10px; text-align: center; background: #FFF;
+	border: 1px solid #aaa; cursor: pointer; color: #666;
+	-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+	-moz-box-shadow: 0 1px 2px #aaa; -webkit-box-shadow: 0 1px 2px #aaa; box-shadow: 0 1px 2px #aaa;
+}
+.CheckoutTransferToPayment button:hover { background: #e1eef5; border-color: #09f; }
+.CheckoutTransferToPayment button img {
+	display: block; padding: 4px; background: #FFF;
+	border: 1px solid #aaa; margin: 0 auto 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.CheckoutTransferToPayment button:hover img { border-color: #09f; }

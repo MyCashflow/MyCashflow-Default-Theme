@@ -1,0 +1,27 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="LandingPageWrapper" class="clearfix">
+				<div id="PrimaryFeatures">
+					{BrandImage(width:384,link:'true')}
+					<div id="PageHeader">
+						{Path}
+						<h1>{PageTitle}</h1>
+					</div>
+					<div class="CategoryDescription">{BrandDescription}</div>
+					{Products(classes:'first|last')}
+				</div>
+				<div id="SecondaryFeatures">
+					{BrandLogo(link:'false',height:126,width:161,id:'BrandLogo')}
+					{BrandTopSellers(limit:5,timelimit:'-2 months',before:'<h2 class="BoxHeader">Suositut tuotteet</h2>')}
+					{BrandNewProducts(limit:5,timelimit:'-2 years',before:'<h2 class="BoxHeader">Uudet tuotteet</h2>')}
+					{BrandHotPicks(limit:5,type:'normal',before:'<h2 class="BoxHeader">Suosittelemme</h2>')}
+				</div>
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

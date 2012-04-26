@@ -1,0 +1,143 @@
+@charset "utf-8";
+
+/* Eric Meyer reset: http://meyerweb.com/eric/thoughts/2008/01/15/resetting-again/
+----------------------------------------------------------- */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote:before, blockquote:after, q:before, q:after { Content: ""; }
+blockquote, q { quotes: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* Clearing and other cadgets.
+----------------------------------------------------------- */
+
+.clearfix:after, .FormItem:after, .CheckWrap:after, .Checks:after, .Pagination:after,
+#LoginForm:after, #PageHeader:after, .ProductList:after, #CheckoutHeader:after, #Header:after { Content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+.clearfix, .FormItem, .CheckWrap, .Checks, .Pagination, #LoginForm, #PageHeader, .ProductList, #CheckoutHeader, #Header { display: inline-block; }
+/* IE-mac \*/ .clearfix, .FormItem, .CheckWrap, .Checks, .Pagination, #LoginForm, #PageHeader, .ProductList, #CheckoutHeader, #Header { display: block; } /* IE-mac */
+
+.clear { clear: both; }
+.HiddenInput, .hide, .hidden { display: none; }
+
+/* Basic Typography
+----------------------------------------------------------- */
+
+body { /* The base of all typographic rules */
+  font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
+  font-size: 12px; line-height: 18px; color: #222;
+}
+
+/* Basic margins on block elements */
+
+ul,ol,dl,h1,h2,h3,h4,h5,h6,table,pre,p,blockquote,blockcode,address { margin: 0 0 18px; }
+
+/* Headings */
+
+h1,h2,h3,h4,h5,h6 { 
+  font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
+  color: #444; font-weight: bold;
+}
+h1 { font-size: 26px; font-weight: normal; text-indent: -0.02em; }
+h2 { font-size: 15px; }
+h3 { font-size: 12px; margin: 0; }
+h4 { font-size: 11px; text-transform: uppercase; margin: 0; }
+
+.BoxHeader {
+	position: relative; width: auto; clear: both;
+	margin: -1px 0 0; padding: 8px 15px 9px; background: #F2F2F2;
+	border-bottom: 1px solid #D9D9D9; border-top: 1px solid #D9D9D9;
+}
+
+/* Text elements */
+
+dt { display: inline; margin-right: 3px; font-weight: bold; }
+dd { display: inline; margin-right: 9px; }
+
+a { color: #069; }
+a:hover { color: #09f; }
+
+blockquote, q { font-style: italic; }
+blockquote { margin: 0 54px; font-size: 15px; }
+cite { font-weight: bold; font-style: normal; }
+strong { font-weight: bold; }
+em, dfn { font-style: italic; }
+dfn { font-weight: bold; }
+
+abbr, acronym { border-bottom: 1px dotted #666; }
+address { font-style: italic; }
+ins { text-decoration: none; background: #ffc; }
+
+/* Sub & Sub @ defaul styling messes up the baseline! */
+sup, sub {
+	vertical-align: baseline; line-height: 1; font-size: 75%;
+	position: relative; padding: 0 1px;
+}
+sup { top: -0.5em; }
+sub { top: 0.25em; }
+
+/* Lists */
+
+ul, ol { list-style-type: disc; list-style-position: outside; margin-left: 27px; }
+ul ul, ol ol, ol ul, ul ol { margin-bottom: 0; margin-left: 27px; }
+ul ul, ol ul { list-style-type: circle; }
+ul ul ul { list-style-type: square; }
+ol { list-style-type: decimal; }
+
+/* Some default classes
+-------------------------------------------------------------- */
+
+.Content { padding: 18px 15px; }
+body#Checkout .Content { padding: 0 15px; }
+
+.Center { text-align: center; }
+
+.Prices dt {}
+.Prices dd {}
+.Prices dd.Price { font-weight: bold; }
+.Prices dd.ListPrice {
+	text-decoration: line-through; margin-right: 5px; font-size: 11px; color: #888;
+}
+.Prices dd.DiscountPrice	{ font-size: 15px;  }
+
+.Product .Prices dt { display: none; } /* @ productlist */
+.Product .Prices dd { display: inline; } /* @ productlist */
+
+.Currency { padding: 0 2px; }
+
+.Notification {
+	position: relative; text-align: center;
+	margin: 0 0 18px; padding: 17px; font-size: 15px;
+	border: 1px solid #d9d9d9; background: #F8F8F8;
+	-moz-border-radius: 3px; -webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.Notification a { font-weight: bold; }
+.Notification * { margin-bottom: 0; }
+.Success { background: #ebf5e1; }
+.Error { background: #f5e1e1; }
+
+/* Tables */
+
+table	{
+	position: relative; width: 100%; text-align: left;
+	margin: 0 0 17px; vertical-align: top;
+	border: 1px solid #D9D9D9; border-collapse: collapse;
+}
+caption {
+	caption-side: top; text-align: center;
+	font-size: 11px; text-transform: uppercase;
+	margin-left: -1px; padding: 0;
+	font-weight: bold; border: 0;
+	letter-spacing: 2px;
+}	
+th, td {
+	border-collapse: collapse; border: 1px solid #D9D9D9;
+	padding: 8px 9px 9px 8px; vertical-align: top; text-align: left;
+}
+th { font-weight: bold; }
+thead th, thead td { background: #F2F2F2; }
+tfoot td, tfoot th {}
+tfoot th { font-weight: normal; }

@@ -1,0 +1,35 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				{Path}
+				<h1>{PageTitle}</h1>
+			</div>
+			<div id="ProductImages">
+				{ProductImages}
+			</div>
+			<div id="ProductBuy">
+				<div id="ProductShortDesc">{ProductShortDesc}</div>
+				{ProductPrices}
+				{ProductAvaibility}
+				{ProductBuy(variations:'radio')}
+			</div>
+			<div id="ProductFullDesc">
+				{ProductFullDesc}
+			</div>
+			{CrossSaleProducts(
+				type:'normal',
+				limit:12,
+				before:'
+					<h2 class="BoxHeader Center">Tämän tuotteen ostaneet ostivat myös...</h2>
+					<div id="CrossSaleScroller">
+						<div id="CrossSaleProducts">',
+				after:'</div></div>'
+			)}
+		</div>
+		{Helper(file:'helpers/sidebar-right-product')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

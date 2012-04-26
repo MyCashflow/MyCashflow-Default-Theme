@@ -1,0 +1,18 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				{Path}
+				<h1>Sivua ei löydy</h1>
+			</div>
+			<div class="Content">
+				<div class="Notification Error"><p>Etsimääsi sivua ei löytynyt. Voi olla, että kirjoitit osoitteen väärin tai sivu on poistettu. Voit yrittää hakea etsimääsi sivua oheisella hakulomakkeella.</p></div>
+				<div id="ContentSearch">{Search}</div>
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

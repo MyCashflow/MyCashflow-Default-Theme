@@ -1,0 +1,36 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="BannerScroller">
+				<div id="ScrollableBanners">
+					<div class="FrontBanner" id="FrontpageCategoryImage">
+						{CategoryImage(width:576)}
+						<div class="BannerInfo">
+							<h3>{PageTitle}</h3>
+						</div>
+					</div>
+					{Banners(name:'frontpage',helper:helpers/homepage-banners)}
+				</div>
+			</div>
+			<div id="LandingPageWrapper" class="clearfix">
+				<div id="PrimaryFeatures">
+					<div id="PageHeader" class="Welcome">
+						<h1>{PageTitle}</h1>
+					</div>
+					<div class="CategoryDescription">{CategoryDescription}</div>
+					{Products(classes:'first|last')}
+					{NewProducts(limit:6,classes:'first|last',type:normal,timelimit:'-2 years',before:'<h2 class="BoxHeader">Uudet tuotteet</h2>')}
+				</div>
+				<div id="SecondaryFeatures">
+					{TopSellers(limit:10,before:'<h2 class="BoxHeader">Suositut tuotteet</h2>')}
+					{HotPicks(limit:10,type:'list',before:'<h2 class="BoxHeader">Suosittelemme</h2>')}
+					{SubCategories(before:'<h2 class="BoxHeader">Selaa tuoteryhmiä</h2>')}
+				</div>
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

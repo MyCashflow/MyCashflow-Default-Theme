@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <title>Tilaus {OrderNumber}</title>
+          <style type="text/css">
+						* { margin: 0; padding: 0; border: 0; }
+            @page {
+              size: A5 landscape;
+							margin: 0; padding: 15mm;
+            }
+						body {
+							color: #000; background: #FFF;
+							font-family: Helvetica, Arial, sans-serif;
+							font-size: 14pt; line-height: 18pt;
+							text-align: left;
+						}
+						h2 { font-size: 8pt; font-weight: bold; text-transform: uppercase; color: #666; }
+						#Parcel {
+							width: 100%; overflow: hidden;
+							border-bottom: 0.5pt solid #000;
+							margin-bottom: 18pt;
+						}
+						#Parcel h2, #Parcel p { width: 15%; float: left; margin: 0; padding: 0; font-size: 8pt; }
+						#Sender {
+							float: left; width: 33%;
+						}
+						#Sender p { font-size: 10pt; }
+						#Receiver {
+							float: right; text-align: right;
+							width: 66%; margin-top: 20%;
+						}
+          </style>
+        </head>
+        <body>
+					<div id="Parcel">
+						<h2>Tilaus</h2>
+						<p>{OrderNumber}</p>
+						<h2>Toimitustapa</h2>
+						<p>{OrderShippingMethod}</p>
+					</div>
+          <div id="Sender">
+						<h2>Lähettäjä</h2>
+            <p>
+              {ContactCompany}<br />
+							{ContactStreetAddress1}<br />
+							{ContactZip} {ContactCity}
+            </p>
+          </div>
+          <div id="Receiver">
+            <p>
+            {OrderShippingInformation}
+            </p>
+          </div>
+        </body>
+        </html>

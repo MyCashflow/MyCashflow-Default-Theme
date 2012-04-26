@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
+<title>Lasku #{OrderNumber}</title>
+
+<style type="text/css">
+
+* { margin: 0; padding: 0; border: 0; }
+
+@page {
+	size: A4;
+	margin: 30.6mm 20mm 29.7mm 14.85mm;
+	border-top: 0.5pt solid black;
+	@top {
+		Content: flow(head);
+		vertical-align: top;
+	}
+	@bottom {
+		Content: flow(foot);
+		vertical-align: top;
+	}
+}
+body {
+  color: #000; background: #FFF;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 9pt; line-height: 12pt;
+	text-align: left;
+}
+#ReceiptHeader {
+	position: relative;
+	top: 10mm; flow: static(head);
+	height: 20.6mm;
+}
+#SenderInfo {
+	float: left; width: 103mm; overflow: hidden;
+}
+#Logo {
+	float: left; width: 67mm;
+}
+#Logo img {
+	display: block; margin: 0; padding: 0;
+	prince-image-resolution: 300;
+	max-height: 15.9mm;
+	max-width: 67.1mm;
+}
+#ReceiptContact {
+	position: relative;
+	border-top: 1pt solid black;
+	flow: static(foot);
+}
+#InfoWrapper {
+	float: left; width: 100%; overflow: hidden; padding: 4.7mm 0 6.3mm;
+}
+#ShippingAddress {
+	position: relative;
+	float: left; width: 103mm;
+	overflow: hidden;
+}
+#ShippingAddress p {
+	font-size: 12pt; line-height: 18pt;
+	margin: 0; padding: 0;
+}
+#OrderInfo {
+	position: relative;
+	float: left; width: 67mm;
+}
+#OrderInfo h1 { font-size: 12pt; font-weight: bold; padding: 0 0 6pt; margin: 0; }
+#OrderInfo dl { margin: 0; width: 42.25mm; }
+
+#CustomerInfo {
+	position: relative; float: left;
+	width: 41.1mm; padding: 7pt 0;
+}
+#PrintContactAddress, #PrintContactElectrical, #PrintContactOther {
+	position: relative; float: left;
+	width: 33.30%; padding: 7pt 0;
+}
+
+dl { padding: 0 0 0 25mm; }
+dl:after { Content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+dt { float: left; clear: left; margin-left: -25mm; width: 25mm; height: auto; font-weight: normal; color: #666; }
+dd { width: 100%; float: left; }
+dd:after { Content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+small { font-size: 8.5pt; font-weight: normal !important; }
+
+#PrintProducts {
+	width: 100%; clear: both;
+	margin-top: 28pt;
+}
+#VatDesc { text-align: center; font-size: 7.5pt; }
+
+ul,ol,dl,h1,h2,h3,h4,h5,h6,table,pre,p,blockquote,blockcode,address { margin: 0 0 14pt; }
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold; color: #000;
+	padding: 0; margin: 0 0 14pt;
+}
+h2 { font-size: 14pt; }
+h3 { font-size: 12pt; }
+h4 { font-size: 10pt; }
+
+a, a:link, a:visited, a:active { outline: 0; text-decoration: none; color: #000; }
+
+table#PaymentDetails {
+	width: 100%; border-collapse: collapse;
+	border: 0.5pt solid black;
+	caption-side: top;
+	height: 6cm;
+}
+
+table#PaymentDetails td {
+	border: 0.5pt solid black;
+	padding: 3px;
+}
+
+table {
+	width: 100%; border-collapse: collapse;
+	/* border: 0.5pt solid black; */
+	caption-side: top;
+}
+caption {
+	text-align: center; font-size: 14pt;
+	padding: 7pt 0 6pt; border-bottom: 1pt solid #000;
+}
+th, td {
+	text-align: left;
+	padding: 7.75pt 7pt 7pt;
+	border-bottom: 0.25pt dashed black; 
+	font-weight: normal;
+	vertical-align: top;
+}
+
+th *, td * { margin: 0; }
+
+tr > :first-child { padding-left: 0; }
+tr > :last-child { padding-right: 0; }
+
+th h3 { font-size: 10pt; font-weight: bold; }
+th dl { padding-left: 23.2mm; font-size: 8.5pt !important; }
+th dl dt { width: 17.9pt; margin-left: -23.2mm; }
+
+.Price, .Quantity, .Total { text-align: right; }
+.OrderTotal { text-align: right; font-size: 12pt; font-weight: bold; }
+
+</style>
+
+</head>
+
+<body>
+
+	<div id="ReceiptHeader">
+		<div id="SenderInfo">
+			{ContactCompany}<br />
+			{ContactStreetAddress1}<br />
+			{ContactZip} {ContactCity}
+		</div>
+		<div id="Logo">{Logo}</div>
+	</div>
+
+	<div id="InfoWrapper">
+		<div id="ShippingAddress">
+			<p>{OrderShippingInformation}<br />{OrderShippingPhone}</p>
+		</div>
+		<div id="OrderInfo">
+			<h1>Lasku tilaukselle {OrderNumber}</h1>
+			<dl>
+				<dt>Asiakastiedot</dt>
+				<dd>{OrderCustomerInformation}<br />{OrderPhone}</dd>
+			</dl>
+			{OrderInfo}
+		</div>
+	</div>
+
+	<div id="PrintProducts">
+		{ReceiptProducts}
+	</div>
+	<div id="VatDesc">{OrderVATDescription}</div>
+	
+	<table id="PaymentDetails">
+		<tr>
+			<td style="width:2cm;">Saajan tilinumero</td>
+			<td style="width:8cm;">{ContactBankAccount}</td>
+			<td style="width:10cm;" colspan="3" rowspan="3"><h4>TILISIIRTO</h4><p>Käytä maksaessasi viitettä.</p><p>Toimitamme tilauksen, kun maksusuoritus näkyy tilillämme.</p></td>
+		</tr>
+		<tr>
+			<td>Saaja</td>
+			<td>{ContactCompany}</td>
+		</tr>
+		<tr>
+			<td rowspan="3">Maksaja</td>
+			<td rowspan="3">{OrderCustomerInformation}</td>
+		</tr>
+		<tr>
+			<td style="width:2cm;">Viite</td>
+			<td style="width:8cm;" colspan="2">{OrderPaymentReference}</td>
+		</tr>
+		<tr>
+			<td style="width:2cm;">Eräpäivä</td>
+			<td style="width:4cm;">{OrderDueDate(expiry:'14')}</td>
+			<td style="width:4cm;">{OrderTotal}</td>
+		</tr>
+	</table>
+
+	<div id="ReceiptContact">
+
+		<p id="PrintContactAddress">
+			{ContactCompany}<br />
+			{ContactStreetAddress1}<br />
+			{ContactZip} {ContactCity}
+		</p>
+		<p id="PrintContactElectrical">
+			{ContactEmail}<br />
+			{ContactInternet}<br />
+			{ContactPhone}
+		</p>
+		<p id="PrintContactOther">
+			Y-tunnus {ContactBusinessID}
+		</p>
+	</div>
+	
+</body>
+</html>
