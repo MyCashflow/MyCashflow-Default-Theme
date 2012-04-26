@@ -7,14 +7,15 @@
 				{Path}
 				<h1>{PageTitle}</h1>
 			</div>
-			<div id="ProductImages">
-				{ProductImages}
-			</div>
-			<div id="ProductBuy">
+			<div id="ProductBuy" class="BlockForm">
 				<div id="ProductShortDesc">{ProductShortDesc}</div>
 				{ProductPrices}
 				{ProductAvaibility}
 				{ProductBuy(variations:'radio')}
+			</div>
+			<div id="ProductImages">
+				{ProductImages}
+				<div id="ProductLikes" class="fb-like" data-send="true" data-width="276" data-show-faces="true" data-font="arial"></div>
 			</div>
 			<div id="ProductFullDesc">
 				{ProductFullDesc}

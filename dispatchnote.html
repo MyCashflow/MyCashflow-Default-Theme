@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Lähetyslista tilaukselle {OrderNumber}</title>
+<title>{%DispatchNote}: {OrderNumber}</title>
 
 <style type="text/css">
 
@@ -163,9 +163,9 @@ table tr .CartProduct { min-width: 60mm; }
 			<br />{OrderShippingPhone}
 		</div>
 		<div id="OrderInfo">
-			<h1>Lähetyslista tilaukselle {OrderNumber}</h1>
+			<h1>{%DispatchNote}: {OrderNumber}</h1>
 			<dl>
-				<dt>Asiakastiedot</dt>
+				<dt>{%Address}</dt>
 				<dd>
 					{OrderCustomerInformation}
 					<br />{OrderPhone}
@@ -177,35 +177,35 @@ table tr .CartProduct { min-width: 60mm; }
 	
 	<div id="PrintProducts">
 		<table>
-			<caption>Tilauksen tuotteet</caption>
+			<caption>{%CheckoutProductsTotal}</caption>
 			<thead>
 				<tr>
-					<th class="Product">Tuote</th>
-					<th class="ShippingDate">Varastopaikka</th>
-					<th class="Price">Kappalehinta</th>
-					<th class="Quantity">Määrä</th>
-					<th class="Total">Yhteensä</th>
+					<th class="Product">{%Product}</th>
+					<th class="Storage">{%Storage}</th>
+					<th class="Price">{%Price}</th>
+					<th class="Quantity">{%Quantity}</th>
+					<th class="Total">{%Total}</th>
 				</tr>
 			</thead>
 			<tbody>		
 				{OrderProducts(helper:'dispatchnotehelper')}
 				<tr>
-					<th colspan="4">Välisumma</th>
+					<th colspan="4">{%Subtotal}</th>
 					<td class="Total">{OrderSubtotal}</td>
 				</tr>
 				<tr>
-					<th colspan="4">Maksukulut: {OrderPaymentMethod}</td>
+					<th colspan="4">{%PaymentCosts}: {OrderPaymentMethod}</td>
 					<td class="Total">{OrderPaymentCosts}</td>
 				</tr>
 				<tr>
-					<th colspan="4">Toimituskulut: {OrderShippingMethod}</td>
+					<th colspan="4">{%ShippingCosts}: {OrderShippingMethod}</td>
 					<td class="Total">{OrderShippingCosts}</td>
 				</tr>
 				<tr>
-					<th colspan="4">Yhteensä</th>
+					<th colspan="4">{%Total}</th>
 					<td class="OrderTotal">
 						<strong>{OrderTotal}</strong><br />
-						<small>ALV {OrderVAT}</small>
+						<small>{%VAT} {OrderVAT}</small>
 					</td>
 				</tr>
 			</tbody>
@@ -225,7 +225,7 @@ table tr .CartProduct { min-width: 60mm; }
 			{ContactPhone}
 		</p>
 		<p id="PrintContactOther">
-			Y-tunnus {ContactBusinessID}
+			{%BusinessID} {ContactBusinessID}
 		</p>
 	</div>
 	

@@ -1,0 +1,46 @@
+<!-- OpenGraph Data -->
+<meta property="og:title" content="{PageTitle}" />
+<meta property="og:url" content="{CurrentUrl(before:'{ShopURL}')}" />
+<meta property="og:site_name" content="{ShopName}" />
+
+<!--	These should be filled in	if possible											-->
+<!--	<meta property="fb:admins" content="Facebook Admin ID "/>	-->
+<!--	<meta property="fb:app_id" content="Shop's page ID" />		-->
+<!--	<meta property="fb:page_id" content="Shop's app ID" />		-->
+
+<meta property="og:description" content="{MetaDescription}" />
+{Helper(
+	case: 'isproduct',
+	file: '{{
+		<meta property="og:type" content="product" />
+		<meta property="og:image" content="{ProductImageUrl(before:'{ShopURL}')}" />
+	}}'
+)}
+{Helper(
+	case: 'iscategory',
+	file: '{{
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="{CategoryImageUrl(before:'{ShopURL}')}" />
+	}}'
+)}
+{Helper(
+	case: 'isbrand',
+	file: '{{
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="{BrandLogoUrl(before:'{ShopURL}')}" />
+	}}'
+)}
+{Helper(
+	case: 'ispage',
+	file: '{{
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="{LogoUrl(width:250,height:250,before:'{ShopURL}')}" />
+	}}'
+)}
+{Helper(
+	case: 'isnews',
+	file: '{{
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="{NewsImageUrl(width:250,height:250,before:'{ShopURL}')}" />
+	}}'
+)}

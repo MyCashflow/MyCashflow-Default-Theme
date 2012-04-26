@@ -15,8 +15,14 @@
 					{Products(classes:'first|last')}
 				</div>
 				<div id="SecondaryFeatures">
-					{CategoryNewProducts(limit:10,before:'<h2 class="BoxHeader">Uudet tuotteet</h2>')}
-					{SubCategories(before:'<h2 class="BoxHeader">Selaa tuoteryhmiä</h2>')}
+					{CategoryNewProducts(
+						limit:10,
+						type:'normal',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%NewProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
 				</div>
 			</div>
 		</div>

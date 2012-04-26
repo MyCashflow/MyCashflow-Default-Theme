@@ -14,10 +14,36 @@
 					{Products(classes:'first|last')}
 				</div>
 				<div id="SecondaryFeatures">
-					{BrandLogo(link:'false',height:126,width:161,id:'BrandLogo')}
-					{BrandTopSellers(limit:5,timelimit:'-2 months',before:'<h2 class="BoxHeader">Suositut tuotteet</h2>')}
-					{BrandNewProducts(limit:5,timelimit:'-2 years',before:'<h2 class="BoxHeader">Uudet tuotteet</h2>')}
-					{BrandHotPicks(limit:5,type:'normal',before:'<h2 class="BoxHeader">Suosittelemme</h2>')}
+					{BrandLogo(
+						link: 'false',
+						height: 126,
+						width: 161,
+						id: 'BrandLogo'
+					)}
+					{BrandTopSellers(
+						limit:5,
+						type:'normal',
+						timelimit:'-2 years',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%BestsellingProducts}</h2><ol class="ProductList">',
+						after:'</ol>'
+					)}
+					{BrandNewProducts(
+						limit:5,
+						type:'normal',
+						timelimit:'-2 years',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%NewProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+					{BrandHotPicks(
+						limit:5,
+						type:'normal',
+						timelimit:'-2 years',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
 				</div>
 			</div>
 		</div>

@@ -1,8 +1,44 @@
-    <div id="Footer">
-			{BrandsNavigation(showlogo:'true',width:162,height:72)}{Banners(name:'footer',helper:helpers/footer-banners)}<p id="Copyrights">&copy; {shopname} | <a href="/terms/">Toimitusehdot</a> | {MyCashflowTextAd}</p>
-    </div>
+    <footer id="Footer">
+			{BrandsNavigation(showlogo:'true',width:162,height:72)}
+			{Banners(name:'footer',helper:'helpers/footer-banners')}
+			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
+    </footer>
 	</div>
-	{MinifyJS(files:'js/jq144min.js|js/easing.js|js/scroll.js|js/tb31.js|js/form.js|js/typewatch.js|js/main.js|js/checkout.js')}
+	<script type="text/javascript">
+	//<![CDATA[
+		
+		var mcfLang = {};
+		mcfLang = {
+
+			ProductName:							'{ProductName}',
+			ProductAddedNotification:	'{%ProductAddedNotification}',
+			RemoveProductFromCart:		'{%RemoveProductFromCart}',
+			AddingToCart:							'{%AddingToCart}',
+			AddedMessage:							'{%AddedMessage}',
+			ShowSubCategories:				'{%ShowSubCategories}',
+			HideSubCategories:				'{%HideSubCategories}',
+			Searching:								'{%Searching}',
+			Loading:									'{%Loading}',
+			Next:											'{%Next}',
+			Prev:											'{%Prev}',
+			NextPlural:								'{%NextPlural}',
+			PrevPlural:								'{%PrevPlural}'
+
+		};
+
+	//]]>
+	</script>
+	<!-- TO-DO: Minify these -->
+	<script src="/files/{Theme}/js/jquery-1.7.1.min.js"></script>
+	<script src="/files/{Theme}/js/jquery.easing.js"></script>
+	<script src="/files/{Theme}/js/jquery.scroll.js"></script>
+	<script src="/files/{Theme}/js/jquery.form.js"></script>
+	<script src="/files/{Theme}/js/jquery.customselect.js"></script>
+	<script src="/files/{Theme}/js/jquery.colorbox.js"></script>
+	<script src="/files/{Theme}/js/jquery.typewatch.js"></script>
+	<script src="/files/{Theme}/js/mcf.imageswapper.js"></script>
+	<script src="/files/{Theme}/js/mcf.main.js"></script>
+	<script src="/files/{Theme}/js/mcf.onepagecheckout.js"></script>
 	{Analytics}
 </body>
 </html>

@@ -1,5 +1,4 @@
-<div class="SidebarBanner">
-	<a href="{BannerUrl}" title="{BannerName}">{BannerImage(width:162)}</a>
-	<h3><a href="{BannerUrl}">{BannerName}</a></h3>
+<a {BannerUrl(before:'href="',after:'"')} title="{BannerName}" class="SidebarBanner">
+	{BannerImage(width:162,link:'false')}
 	{BannerText}
 </a>

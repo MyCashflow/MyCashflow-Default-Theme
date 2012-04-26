@@ -1,10 +1,22 @@
 <div id="Secondary" class="Column">
-	<h2 class="BoxHeader">Ostoskorisi</h2>
+	<h2 class="BoxHeader">{%ShoppingCart}</h2>
 	<div id="MiniCartWrapper">
 		{MiniCart}
 	</div>
-	{CompatibleProducts(limit:5,classes:'first||last',before:'<h2 class="BoxHeader">Yhteensopivat</h2>')}
-	{SimilarProducts(limit:5,classes:'first||last',before:'<h2 class="BoxHeader">Samankaltaiset</h2>')}
-	{HotPicks(limit:1,before:'<h2 class="BoxHeader">Suosittelemme</h2>')}
+	{CompatibleProducts(
+		limit:5,
+		type:'normal',
+		helper:'helpers/listproduct-small',
+		before:'<h2 class="BoxHeader">{%CompatibleProducts}</h2><ul class="ProductList">',
+		after:'</ul>'
+	)}
+	{SimilarProducts(
+		limit:5,
+		type:'normal',
+		helper:'helpers/listproduct-small',
+		before:'<h2 class="BoxHeader">{%SimilarProducts}</h2><ul class="ProductList">',
+		after:'</ul>'
+	)}
+	{HotPicks(limit:1,before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2>')}
 	{Banners(name:'sidebar-right',helper:helpers/sidebar-banners)}
 </div>

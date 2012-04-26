@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Kuitti tilaukselle {OrderNumber}</title>
+<title>{%Receipt} {OrderNumber}</title>
 
 <style type="text/css">
 
@@ -162,9 +162,9 @@ table tr .CartProduct { min-width: 60mm; }
 			{OrderShippingInformation}<br />{OrderShippingPhone}
 		</div>
 		<div id="OrderInfo">
-			<h1>Kuitti tilaukselle {OrderNumber}</h1>
+			<h1>{%Receipt} {OrderNumber}</h1>
 			<dl>
-				<dt>Asiakastiedot</dt>
+				<dt>{%CheckoutCustomerInformation}</dt>
 				<dd>{OrderCustomerInformation}<br />{OrderPhone}</dd>
 			</dl>
 			{OrderInfo}
@@ -188,7 +188,7 @@ table tr .CartProduct { min-width: 60mm; }
 			{ContactPhone}
 		</p>
 		<p id="PrintContactOther">
-			Y-tunnus {ContactBusinessID}
+			{%BusinessID} {ContactBusinessID}
 		</p>
 	</div>
 	

@@ -7,7 +7,17 @@
 				{Path}
 				<h1>{PageTitle}</h1>
 			</div>
-			<div class="Content">{SubInfoNavigation}{Content}</div>
+			<div class="Content">
+				{SubInfoNavigation(
+					before: '
+						<div id="SubPageNavigation">
+							<h3 id="Header">{%SubPages}</h3>
+					',
+					after: '</div>'
+				   )  
+				}
+				{Content}
+			</div>
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

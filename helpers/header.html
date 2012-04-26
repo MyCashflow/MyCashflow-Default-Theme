@@ -1,44 +1,67 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<!--[if lt IE 7]>			<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en">	<![endif]-->
+<!--[if IE 7]>				<html class="no-js lt-ie9 lt-ie8" lang="en">				<![endif]-->
+<!--[if IE 8]>				<html class="no-js lt-ie9" lang="en">								<![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en">											<!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{Title}</title>
 	{Feed}
-	<link rel="shortcut icon" type="image/ico" href="/files/{Theme}/i/favicon.ico" />
-	{MinifyCSS(files:'css/base.css|css/base.forms.css|css/tb.css|css/master.css')}
-	<!--[if lt IE 8]><link rel="stylesheet" href="/files/{Theme}/css/base.ie.css" type="text/css" media="all" /><![endif]-->
-	<script type="text/javascript">
-	//<![CDATA[
-		
-		var tb_pathToImage = "/files/{Theme}/i/tb-load.gif", mcfLang = {};
-		
-		mcfLang.ProductName = '{ProductName}';
-		mcfLang.ProductAddedNotification = '<p>Tuote ' + mcfLang.ProductName + ' lisättiin ostoskoriin onnistuneesti.</p><p><a href="/">Palaa etusivulle</a>, <a href="/cart/">näytä ostoskori</a> tai <a href="/checkout/">siirry kassalle</a>.</p>';
-		mcfLang.RemoveProductFromCart = "Poistetaan tuote ostoskorista";
-		mcfLang.AddingToCart = "Lisätään tuote ostoskoriin";
-		mcfLang.AddedMessage = ' lisättiin ostoskoriin onnistuneesti. <a href="/cart/">Näytä ostoskori</a>, <a href="/checkout/">tilaa tuotteet</a> tai <a href="#" id="CloseAjaxMsg">sulje tämä ilmoitus</a>.';
-		mcfLang.ShowSubCategories = "Näytä alakategoriat";
-		mcfLang.HideSubCategories = "Piilota alakategoriat";
-		mcfLang.Searching = "Haetaan tuotteita...";
-		mcfLang.Loading = "Ladataan...";
-		mcfLang.Next = "Seuraava";
-		mcfLang.Prev = "Edellinen";
-		mcfLang.NextPlural = "Seuraavat";
-		mcfLang.PrevPlural = "Edelliset";
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{Title}</title>
+  <meta name="description" content="{MetaDescription}">
 
-	//]]>
-	</script>
+  <meta name="viewport" content="width=device-width">
+  
+  <!-- OpenGraph for Facebook -->
+	{Helper(file:'helpers/facebook-opengraph')}
+	
+	<link rel="shortcut icon" type="image/ico" href="/files/{Theme}/i/favicon.ico" />
+
+  <link rel="stylesheet" type="text/css" href="/files/{Theme}/css/master.css" />
+
+  <script src="/files/{Theme}/js/modernizr-2.5.2.min.js"></script>
+  
 	<style type="text/css" media="all">
 		{BannerText(name:'head-styles')}
 	</style>
+	
 </head>
 
 <body class="{BodyClass}">
 	{AdminTools}
+
+	<div id="fb-root"></div>
+	<script type="text/javascript">
+		(function(d, s, id) {
+			var langcode = "{CurrentLanguageCode}";
+			switch (langcode) {
+				case "fi":
+					langcode = "fi_FI";
+					break;
+				case "se":
+					langcode = "sv_SE";
+					break;
+				case "de":
+					langcode = "de_DE";
+					break;
+				default:
+					langcode = "en_US";					
+			}
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/" + langcode + "/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
 	<div id="Container">
-		<div id="Header" style="{BannerText(name:'header-styles')}">
-			{Logo(width:384,height:126)}
+		<header id="Header" class="clearfix">
+			{Logo(
+				width:384,
+				height:126
+			)}
 			{CustomerNavigation}
 			{LanguageNavigation}
 			{Search}
-		</div>
+		</header>

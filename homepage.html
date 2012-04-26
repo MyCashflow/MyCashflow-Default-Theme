@@ -16,17 +16,38 @@
 			</div>
 			<div id="LandingPageWrapper" class="clearfix">
 				<div id="PrimaryFeatures">
-					<div id="PageHeader" class="Welcome">
+					<div id="PageHeader">
 						<h1>{PageTitle}</h1>
+						{CategoryDescription}
+						{CurrentLanguage}
+						{CurrentLanguageCode}
 					</div>
-					<div class="CategoryDescription">{CategoryDescription}</div>
+					<div id="ShopLikes" class="fb-like" data-send="true" data-width="354" data-show-faces="true" data-font="arial"></div>
 					{Products(classes:'first|last')}
-					{NewProducts(limit:6,classes:'first|last',type:normal,timelimit:'-2 years',before:'<h2 class="BoxHeader">Uudet tuotteet</h2>')}
+					{NewProducts(
+						limit:6,
+						classes:'first|last',
+						type:'normal',
+						timelimit:'-2 years',
+						before:'<h2 class="BoxHeader">{%NewProducts}</h2>'
+					)}
 				</div>
 				<div id="SecondaryFeatures">
-					{TopSellers(limit:10,before:'<h2 class="BoxHeader">Suositut tuotteet</h2>')}
-					{HotPicks(limit:10,type:'list',before:'<h2 class="BoxHeader">Suosittelemme</h2>')}
-					{SubCategories(before:'<h2 class="BoxHeader">Selaa tuoteryhmiä</h2>')}
+					{TopSellers(
+						limit:10,
+						type:'normal',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%BestsellingProducts}</h2><ol class="ProductList">',
+						after:'</ol>'
+					)}
+					{HotPicks(
+						limit:10,
+						type:'normal',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,36 @@
 $(function() {
-					 
+
+	$("#ProductImages").mcfImageSwapper();
+	
+	$("select").customSelect();
+
+	// Text from formhelp into inputs title
+	$(".FormItem:not(.CheckWrap)").find(".FormHelp").each(function() {
+		var $that = $(this), inputs = $that.prevAll("input");
+		inputs.attr("title", $that.text());
+		$that.remove();
+	});
+	
+	// Clone the thumbnails so they can be used as colorbox group and open preview from actual thumbnails
+	$("#ProductThumbnails").clone().hide().attr("id","fakethumbs").appendTo(document.body);
+	
+	// Make colorbox group or just open the image
+	if ($("#fakethumbs").length) {
+		$("#fakethumbs li a").colorbox({
+			rel: "fake",
+			current: "{current} / {total}"
+		});
+		// Trigger click on first thumbnail
+		$("#CurrentProductImage").click(function(event) {
+			$("#fakethumbs li:first-child a").trigger("click");
+			event.preventDefault();
+		});
+	} else {
+		$("#CurrentProductImage").colorbox({
+			current: "{current} / {total}"
+		});
+	}
+
 	// Livesearch
 	var mcfLiveSearchResultsWidth = $("#SearchForm").css("width");
 	$("#SearchForm").append($('<ul id="LiveSearchResults" style="width: '+ mcfLiveSearchResultsWidth +'"></ul>').hide());
@@ -39,7 +70,7 @@ $(function() {
 	});
 
 
-	// Front page banners scrolling away
+	// Front page banners scroller
 	if ($("#BannerScroller").length) {
 		if ($("#FrontpageCategoryImage").find("img").length===0) {
 			$("#FrontpageCategoryImage").remove();
@@ -85,16 +116,20 @@ $(function() {
 			}
 		});
 	}
-
-	// Hide the headers if no products found next to them
-	//if (!($("#CompatibleProductsHeader").next().is(".ProductList"))) { $("#CompatibleProductsHeader").hide(); }
-	//if (!($("#SimilarProductsHeader").next().is(".ProductList"))) { $("#SimilarProductsHeader").hide(); }
 	
-	// Crossselling carousel at productpage and in cart
-	if ($("#CrossSaleProducts div.Product").length) {
-		$("#CrossSaleScroller").css("overflow","hidden").before('<span id="ScrollToPrev" style="display: none;"><span class="Icon"></span>'+mcfLang.PrevPlural+'</span><span id="ScrollToNext"><span class="Icon"></span>'+mcfLang.NextPlural+'</span>');
+	// Crossselling carousel at productpage and cart
+	if ($("#CrossSaleProducts").find("div.Product").length) {
+	
+		$("#CrossSaleScroller")
+			.css("overflow","hidden")
+			.before('<span id="ScrollToPrev" style="display: none;"><span class="Icon"></span>'+mcfLang.PrevPlural+'</span><span id="ScrollToNext"><span class="Icon"></span>'+mcfLang.NextPlural+'</span>');
+			
 		$("#CrossSaleProducts").css("width","2304px");
-		var $prev = $('#ScrollToPrev'), $next = $('#ScrollToNext'), $scp = $('#CrossSaleScroller');
+		
+		var $prev = $('#ScrollToPrev'),
+				$next = $('#ScrollToNext'),
+				$scp = $('#CrossSaleScroller');
+				
 		$scp.serialScroll({
 			items: '.Product',
 			prev: '#ScrollToPrev',
@@ -113,8 +148,9 @@ $(function() {
 				} else if (pos==$items.length-3) {
 					$next.fadeOut(250);
 				}
-			}				
+			}
 		});
+		
 		$(document).keyup(function(e) {
 			switch (e.keyCode) {
 				case 39:
@@ -125,6 +161,7 @@ $(function() {
 					break;
 			}
 		});
+		
 	}
 
 	// Ajax messages which are fixed on top of page via CSS
@@ -134,8 +171,9 @@ $(function() {
 	$('#AjaxMsg').delegate("#CloseAjaxMsg", "click", function() { $('#AjaxMsg').slideUp(250); });
 
 	// Adding products to cart from productlists with ajax and refreshing of the minicart-tag (some things IE6-disabled)
-	$("#Primary,#Secondary").find(".Product:not('.ProductVariations') .AddToCart").click(function(event) {
-		var pid = $(this).attr("href").split("/")[2], listproductname = $(this).closest(".Product").find(".ProductName").text();
+	$("#Primary, #Secondary").find(".Product:not('.ProductVariations') .AddToCart").click(function(event) {
+		var pid = $(this).attr("href").split("/")[2];
+		var	listproductname = $(this).closest(".Product").find(".ProductName").text();
 		$("#AjaxMsg").text(mcfLang.AddingToCart); 
 		$.ajax({
 			type: "post",
@@ -157,7 +195,7 @@ $(function() {
 		event.preventDefault();
 	});
 
-	// Adding products to cart with ajax and refreshing of the minicart-tag (some things IE6-disabled)
+	// Adding products to cart with ajax and refreshing of the minicart-tag
 	if ($("#ProductBuy").length) {
 		$(".BuyForm").submit(function(event) {
 			$("#AjaxMsg").text(mcfLang.AddingToCart); 
@@ -166,7 +204,7 @@ $(function() {
 				$("#ProductAddedNotification").slideUp(250, function() { $(this).remove(); });
 				if (!($.browser.msie && parseInt($.browser.version)==6)) {
 					$.get("/interface/MiniCart", function(minicart) {
-						$(".AddToCart",".BuyForm").attr("disabled","");
+						$(".AddToCart",".BuyForm").removeAttr("disabled");
 						$("#PageHeader").after('<div class="Notification Success" id="ProductAddedNotification">'+mcfLang.ProductAddedNotification+'</div>');
 						$("#ProductAddedNotification").slideDown(250);
 						$("#MiniCartWrapper").html(minicart).slideDown(250);
@@ -174,7 +212,7 @@ $(function() {
 					});
 					$("#MiniCartWrapper").slideUp(250);
 				} else {
-					$(".AddToCart",".BuyForm").attr("disabled","");
+					$(".AddToCart",".BuyForm").removeAttr("disabled");
 					$("#PageHeader").after('<div class="Notification Success" id="ProductAddedNotification">'+mcfLang.ProductAddedNotification+'</div>');
 					$("#ProductAddedNotification").slideDown(250);
 					$('#AjaxMsg').slideUp(250);
@@ -184,7 +222,7 @@ $(function() {
 		});
 	}
 	
-	// Removing products from minicart with ajax (IE6-disabled)
+	// Removing products from minicart with ajax
 	if (!($.browser.msie && parseInt($.browser.version)==6)) {
 		$("#MiniCartWrapper").delegate(".CartProductRemove a","click", function(event) {
 			$("#AjaxMsg").text(mcfLang.RemoveProductFromCart);
@@ -227,125 +265,4 @@ $(function() {
 		});
 	});
 
-	// Productimageswapper via clik on thumbnail or changing the variation and the other way aroung
-	if ($("#ProductImages").length) {
-		$("#CurrentProductImage").prepend($('<span id="ImgLoader">'+mcfLang.Loading+'</span>').hide());
-		if ($("#ProductBuy .BuyFormVariationSelect").length) {
-			$(".BuyFormVariationSelect select").change(function(event, triggered) {
-				if (triggered==undefined) {
-					var vName = $("option:selected", this).text();
-					var vSplit = vName.split("(");
-					var vTrim = vSplit[0].replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-					$("#ProductThumbnails li a").each(function() {
-						var title = $(this).attr("title");
-						var href = $(this).attr("href");
-						var iTrim = title.replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-						var iSubstr = iTrim.substr(0,vTrim.length);
-						var vSubstr = vTrim.substr(0,iTrim.length);
-						if (iSubstr==vSubstr) {
-							var triggered = true;
-							$(this).trigger("click", triggered);
-							return false;
-						}
-					});
-				}
-			});
-			$("#ProductThumbnails li a").click(function(event, triggered) {
-				event.preventDefault();
-				var title = $(this).attr("title");
-				var href = $(this).attr("href");
-				var src = $("#CurrentProductImage img").attr("src");
-				var sizeArr = src.split("/");
-				var targetSize = sizeArr[2];
-				var tnSrc = href.split("/");
-				var targetImg = tnSrc[3];
-				var newImg = "/tuotekuvat/"+targetSize+"/"+targetImg;
-				SwapImg(newImg,href,title);
-				if (triggered==undefined) {
-					var iTrim = title.replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-					$(".BuyFormVariationSelect select option").each(function() {
-						var vName = $(this).text();
-						var vSplit = vName.split("(");
-						var vTrim = vSplit[0].replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-						var iSubstr = iTrim.substr(0,vTrim.length);
-						var vSubstr = vTrim.substr(0,iTrim.length);
-						if (vSubstr==iSubstr) {
-							var triggered = true;
-							$(this).attr("selected","selected");
-							return false;
-						}
-					});
-				}
-			});
-			$("#ProductBuy .BuyFormVariationSelect select").trigger("change");
-		} else {
-			$("#ProductBuy .BuyFormVariationRadio input").click(function(event, triggered) {
-				if (triggered==undefined) {
-					var vName = $(this).parent("label").text();
-					var vTrim = vName.replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-					$("#ProductThumbnails li a").each(function() {
-						var iTrim = $(this).attr("title").replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-						var iSubstr = iTrim.substr(0,vTrim.length);
-						var vSubstr = vTrim.substr(0,iTrim.length);
-						if (iSubstr==vSubstr) {
-							var triggered = true;
-							$(this).trigger("click", triggered);
-							return false;
-						}
-					});
-				}
-			});
-			$("#ProductThumbnails li a").click(function(event, triggered) {
-				event.preventDefault();
-				var title = $(this).attr("title");
-				var href = $(this).attr("href");
-				var src = $("#CurrentProductImage img").attr("src");
-				var sizeArr = src.split("/");
-				var targetSize = sizeArr[2];
-				var tnSrc = href.split("/");
-				var targetImg = tnSrc[3];
-				var newImg = "/tuotekuvat/"+targetSize+"/"+targetImg;
-				SwapImg(newImg,href,title);
-				if (triggered==undefined) {
-					var iTrim = title.replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-					$("#ProductBuy .BuyFormVariationRadio input").each(function() {
-						var vName = $(this).parent("label").text();
-						var vTrim = vName.replace(/^[ \t]+|[ \t]+$/,"").toLowerCase();
-						var iSubstr = iTrim.substr(0,vTrim.length);
-						var vSubstr = vTrim.substr(0,iTrim.length);
-						if (vSubstr==iSubstr) {
-							var triggered = true;
-							$(this).trigger("click", triggered);
-							return false;
-						}
-					});
-				}
-			});
-			if ($("#ProductBuy .BuyFormVariationRadio").length) { $("#ProductBuy .BuyFormVariationRadio input:checked").trigger("click"); }
-		}
-	}
-
 });
-
-// Imageswapperscript
-function SwapImg(i,href,title) {
-	if ($("#CurrentProductImage img").attr("src") != i) {
-		$("#CurrentProductImage img").fadeOut(200, function() {
-			$("#ImgLoader").fadeIn(100, function() {
-				$("#CurrentProductImage img").attr("src",i).load(function() {
-					$("#ImgLoader").fadeOut(100, function() {
-						$("#CurrentProductImage img").fadeIn(200);
-					});
-				}).each(function() {
-					if (this.complete && $.browser.msie) {
-						$(this).trigger("load");
-					}
-				});
-			});
-		});
-		$("#ProductImageCaption").html(title);
-		$("#CurrentProductImage img").attr("alt",title);
-		$("#CurrentProductImage").attr("title",title);
-		$("#CurrentProductImage").attr("href",href); 
-	}
-}

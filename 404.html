@@ -5,10 +5,12 @@
 		<div id="Primary" class="Column">
 			<div id="PageHeader">
 				{Path}
-				<h1>Sivua ei löydy</h1>
+				<h1>{%PageNotFound}</h1>
 			</div>
 			<div class="Content">
-				<div class="Notification Error"><p>Etsimääsi sivua ei löytynyt. Voi olla, että kirjoitit osoitteen väärin tai sivu on poistettu. Voit yrittää hakea etsimääsi sivua oheisella hakulomakkeella.</p></div>
+				<div class="Notification Error">
+					<p>{%PageNotFoundInfo}</p>
+				</div>
 				<div id="ContentSearch">{Search}</div>
 			</div>
 		</div>

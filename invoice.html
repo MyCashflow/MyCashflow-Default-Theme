@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
-<title>Lasku #{OrderNumber}</title>
+<title>{%Invoice} #{OrderNumber}</title>
 
 <style type="text/css">
 
@@ -164,9 +164,9 @@ th dl dt { width: 17.9pt; margin-left: -23.2mm; }
 			<p>{OrderShippingInformation}<br />{OrderShippingPhone}</p>
 		</div>
 		<div id="OrderInfo">
-			<h1>Lasku tilaukselle {OrderNumber}</h1>
+			<h1>{%Invoice}: {OrderNumber}</h1>
 			<dl>
-				<dt>Asiakastiedot</dt>
+				<dt>{%CheckoutCustomerInformation}</dt>
 				<dd>{OrderCustomerInformation}<br />{OrderPhone}</dd>
 			</dl>
 			{OrderInfo}
@@ -180,24 +180,24 @@ th dl dt { width: 17.9pt; margin-left: -23.2mm; }
 	
 	<table id="PaymentDetails">
 		<tr>
-			<td style="width:2cm;">Saajan tilinumero</td>
+			<td style="width:2cm;">{%InvoiceRecipientAccountNumber}</td>
 			<td style="width:8cm;">{ContactBankAccount}</td>
-			<td style="width:10cm;" colspan="3" rowspan="3"><h4>TILISIIRTO</h4><p>Käytä maksaessasi viitettä.</p><p>Toimitamme tilauksen, kun maksusuoritus näkyy tilillämme.</p></td>
+			<td style="width:10cm;" colspan="3" rowspan="3"><h4>{%InvoiceBankTransfer}</h4><p>{%InvoicePaymentReferenceInfo}</p></td>
 		</tr>
 		<tr>
-			<td>Saaja</td>
+			<td>{%InvoiceRecipientName}</td>
 			<td>{ContactCompany}</td>
 		</tr>
 		<tr>
-			<td rowspan="3">Maksaja</td>
+			<td rowspan="3">{%InvoicePayer}</td>
 			<td rowspan="3">{OrderCustomerInformation}</td>
 		</tr>
 		<tr>
-			<td style="width:2cm;">Viite</td>
+			<td style="width:2cm;">{%PaymentReference}</td>
 			<td style="width:8cm;" colspan="2">{OrderPaymentReference}</td>
 		</tr>
 		<tr>
-			<td style="width:2cm;">Eräpäivä</td>
+			<td style="width:2cm;">{%InvoiceDueDate}</td>
 			<td style="width:4cm;">{OrderDueDate(expiry:'14')}</td>
 			<td style="width:4cm;">{OrderTotal}</td>
 		</tr>
@@ -216,7 +216,7 @@ th dl dt { width: 17.9pt; margin-left: -23.2mm; }
 			{ContactPhone}
 		</p>
 		<p id="PrintContactOther">
-			Y-tunnus {ContactBusinessID}
+			{%BusinessID} {ContactBusinessID}
 		</p>
 	</div>
 	

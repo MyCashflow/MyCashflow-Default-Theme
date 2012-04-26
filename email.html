@@ -59,27 +59,27 @@
 <table width="100%" cellspacing="0" cellpadding="0" style="background:#f2f2f2; text-align:center;">
 	<tr>
 		<td align="center" width="100%" style="text-align:center; padding: 18px;">
-			<p style="width:558px; margin: 0 auto; padding: 9px 0; font-size: 11px; text-align:center;"><a href="/">Mikäli et näe tätä sähköpostia oikein, voit katsoa tilauksesti tiedot myös tilausseurannasta.</a></p>
+			<p style="width:558px; margin: 0 auto; padding: 9px 0; font-size: 11px; text-align:center;"><a href="/">{%EmailWebVersionLink}</a></p>
 			<table width="558" cellspacing="0" cellpadding="18" style="background:#FFFFFF; margin: 0 auto; border: 3px double #ccc;">
 				<tr>
 					<td align="left" width="100%" style="padding-bottom:18px;">
 
 {Logo(width:558,height:90)}
 <h1>{OrderEmailTitle}</h1>
-<p><strong>Hei, {OrderEmailMessage}</strong></p>
+<p><strong>{%Hi}, {OrderEmailMessage}</strong></p>
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 	<tr>
-		<td width="50%">
-		<h2>Tilauksen tiedot</h2>
-		{OrderInfo}
-		</td>
-		<td width="50%">
-		<h3>Toimitusosoite</h3>
-		{OrderShippingInformation}
+		<td width="40%">
+			<h3>{%CheckoutShippingInformation}</h3>
+			{OrderShippingInformation}
 
-		<h3>Asiakastiedot</h3>
-		{OrderCustomerInformation}
+			<h3>{%CheckoutCustomerInformation}</h3>
+			{OrderCustomerInformation}
+		</td>
+		<td width="60%">
+			<h3>{%OrderInformation}</h3>
+			{OrderInfo(type:'table')}
 		</td>
 	</tr>
 </table>
@@ -87,7 +87,7 @@
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom: 0;">
 	<tr valign="top">
 		<td valign="top" align="left" width="100%">
-			<h3 style="text-align:center; margin: 0; padding: 9px 0 0;">Tilauksen tuotteet</h3>
+			<h3 style="text-align:center; margin: 0; padding: 9px 0 0;">{%CheckoutOrderContents}</h3>
 			{OrderProducts}
 		</td>
 	</tr>
@@ -110,7 +110,7 @@
 			{ContactPhone}
 		</td>
 		<td width="34%">
-			Y-tunnus: {ContactBusinessID}
+			{%BusinessID}: {ContactBusinessID}
 		</td>
 	</tr>
 </table>
