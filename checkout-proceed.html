@@ -1,75 +1,23 @@
-{Helper(file:'helpers/header')}
-<div id="SidebarBg" class="OmitRightSidebar">
-	<div id="Main" class="clearfix">
-		{Helper(file:'helpers/sidebar-left')}
-		<div id="Primary" class="Column">
-		
-			<div class="Content" id="OnePageCheckout">
-				
-				{Notifications}
-
-				<form action="/checkout/process/" method="post" class="BlockForm">
-				
-					<h2>{%CheckoutCustomerInformation}</h2>
-					<fieldset class="TagWrapper" id="CheckoutBillingAddress">
-						{CheckoutBillingAddress(
-							mode: 'form',
-							notifications: 'true',
-							ajax: 'true'
-						)}
-					</fieldset>
-	
-					<h2>Toimitusosoite</h2>
-				
-					<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
-						<div class="Checks">
-							<label>
-								<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
-							</label>
-							<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
-						</div>
-					</div>
-	
-					<fieldset class="TagWrapper" id="CheckoutShippingAddress">
-						{CheckoutShippingAddress(
-							mode: 'form',
-							notifications: 'true',
-							ajax: 'true'
-						)}
-					</fieldset>
-					
-	
-					<h2>{%CheckoutChooseShippingMethod}</h2>
-					<fieldset class="TagWrapper" id="CheckoutShippingMethod">
-						{CheckoutShippingMethod(
-							mode: 'form',
-							notifications:'true',
-							ajax:'true',
-							preselect:'false'
-						)}
-					</fieldset>
-	
-					<h2>{%CheckoutChoosePaymentMethod}</h2>
-					<fieldset class="TagWrapper" id="CheckoutPaymentMethod">
-						{CheckoutPaymentMethod(
-							mode: 'form',
-							notifications:'true',
-							ajax:'true',
-							preselect:'false'
-						)}
-					</fieldset>
-			
-					<h2>Lähetä tilaus</h2>
-					
-					<fieldset id="CheckoutAcceptTerms">
-						{CheckoutAcceptTerms}
-					</fieldset>
-					
-				</form>
-				
-			</div>
-					
-		</div>
+{Helper(file:'helpers/cartheader')}
+<div id="CheckoutWrapper" class="BlockForm">
+	<div id="PageHeader">
+		<h1>{PageTitle}</h1>
+		{CheckoutNavigation}
 	</div>
+	
+	{Notifications}
+	
+	<div class="FormItem HeaderItem">
+		<h1>Uudet asiakkaat</h1>	
+		<p><a href="/checkout/customer_information/" class="Button">Jatka tilaamista</a></p>
+	</div>
+			
+	<h1>Vanhat asiakkaat</h1>
+	
+	{Login(
+		on_success: '/checkout/customer/',
+		on_error: '/checkout/proceed/'
+	)}
+	
 </div>
 {Helper(file:'helpers/footer')}

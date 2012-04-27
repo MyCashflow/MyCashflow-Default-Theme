@@ -1,0 +1,28 @@
+{Helper(file:'helpers/cartheader')}
+<div id="CheckoutWrapper" class="BlockForm">
+	<div id="PageHeader">
+		<h1>{PageTitle}</h1>
+		{CheckoutNavigation}
+	</div>
+	
+	{Notifications}
+	
+	<form action="/checkout/" method="post">
+	
+		<h2 class="BoxHeader">Maksutapa</h2>
+		<fieldset>
+		
+			{CheckoutPaymentMethod(
+				mode: 'form'
+			)}
+		
+		</fieldset>
+		
+		<div class="FormItem FormSubmit">
+			<button type="submit" class="SubmitButton">Jatka tilaamista</button>
+		</div>
+		
+	</form>
+	
+</div>
+{Helper(file:'helpers/footer')}

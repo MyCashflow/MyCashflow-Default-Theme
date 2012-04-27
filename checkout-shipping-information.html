@@ -1,0 +1,28 @@
+{Helper(file:'helpers/cartheader')}
+<div id="CheckoutWrapper" class="BlockForm">
+	<div id="PageHeader">
+		<h1>{PageTitle}</h1>
+		{CheckoutNavigation}
+	</div>
+	
+	{Notifications}
+	
+	<form action="/checkout/" method="post">
+			
+			{CheckoutShippingAddress(
+				mode: 'form',
+				before: '
+					<h2 class="BoxHeader">Toimitusosoite</h2>
+					<fieldset>
+				',
+				after: '</fieldset>'
+			)}
+		
+		<div class="FormItem FormSubmit">
+			<button type="submit">Tallenna toimitusosoite ja jatka tilaamista</button>
+		</div>
+
+	</form>
+	
+</div>
+{Helper(file:'helpers/footer')}
