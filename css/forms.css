@@ -13,7 +13,8 @@ label,
 input,
 select,
 textarea,
-button {
+button,
+.Button {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -26,7 +27,8 @@ button {
 input,
 select,
 textarea,
-button {
+button,
+.Button {
   color: #333333;
   font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
   font-size: 12px;
@@ -37,6 +39,7 @@ button {
   border-radius: 2px;
 }
 label, .label {
+	display: block;
   text-align: right;
   clear: left;
   width: 126px;
@@ -54,13 +57,18 @@ label, .label {
 .required > label {
 	font-weight: bold;
 }
-.required > label:after {
-	content: " *";
+.required > label:before {
+	content: "* ";
+	width: 8px;
+	margin-left: -8px;
+	color: #c00;
+	font-weight: bold;
 }
 .required > * + label {
 	font-weight: normal;
 }
-.required > * + label:after {
+.required > * + label:before {
+	display: none;
 	content: "";
 }
 
@@ -102,12 +110,24 @@ button[disabled] {
 /* Input states
 ----------------------------------------------------------- */
 
+button:hover,
+.Button:hover {
+  background-color: #ebebeb;
+  background-repeat: repeat-x;
+	background-image: linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -o-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -moz-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -webkit-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -ms-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #ebebeb));
+}
 input:focus,
 select:focus,
 textarea:focus,
 button:focus,
-button:hover,
-button:active {
+button:active,
+.Button:focus,
+.Button:active {
 	outline: none;
   border-color: #09f;
   border-bottom-color: #08e;
@@ -116,14 +136,26 @@ button:active {
   box-shadow: 0 0 5px #08e;
 }
 
-
 /* Buttons
 ----------------------------------------------------------- */
 
+.Button {
+	float: none;
+	text-decoration: none;
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+}
+.Button:hover {
+	text-decoration: none;
+	color: #333333;
+}
 button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"],
+.Button {
   width: auto;
   height: auto;
   top: -2px;
@@ -143,6 +175,9 @@ input[type="submit"] {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
   border: 1px solid #c8c8c8;
   border-bottom-color: #a8a8a8;
+	 -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 button::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
@@ -151,7 +186,7 @@ input[type="submit"]::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
-button.SubmitButton {
+button.SubmitButton, .Big .Button {
 	padding: 10px 15px;
 	font-size: 15px;
 	font-weight: bold;
@@ -213,8 +248,8 @@ input[type="radio"] {
   float: none;
   clear: both;
   width: 100%;
-  padding: 0 0 0 18px;
-  margin: 0 0 0 -18px;
+  padding: 0;
+  margin: 0;
   text-align: left;
 }
 .Checks label input[type="checkbox"],
@@ -269,7 +304,8 @@ input[type="radio"] {
   padding: 0 0 0 18px;
   clear: both;
 }
-.BlockForm .Checks label:before, .BlockForm .Checks label:after {
+.BlockForm .Checks label:before,
+.BlockForm .Checks label:after {
   display: table;
   content: "";
   zoom: 1;
@@ -348,15 +384,12 @@ input[type="radio"] {
 .CustomSelectWrap {
   position: relative;
   float: left;
-  margin-right: 5px;
-  margin-bottom: 14px;
 }
 .ReplacedSelect {
   position: relative;
   z-index: 10;
   width: 100%;
   border: 0;
-  margin-bottom: 0;
   padding-right: 31px;
   padding-left: 4px;
   -khtml-opacity: 0;
@@ -381,7 +414,6 @@ input[type="radio"] {
   height: 22px;
   color: #333333;
   font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
-  font-size: 12px;
   font-weight: normal;
   line-height: 16px;
 }

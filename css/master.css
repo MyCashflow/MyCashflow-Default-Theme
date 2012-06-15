@@ -12,7 +12,10 @@
 
 html, body { height: 100%; }
 html { overflow-y: scroll; }
-body { text-align: center; background: #f8f8f8; }
+body {
+	text-align: center;
+  background-color: #F2F2F2;
+}
 
 /* Add these lines if you want your AdminTools to be fixed on the top of the page */
 body.AdminLoggedIn { padding: 36px 0 0; }
@@ -31,7 +34,6 @@ body.AdminLoggedIn #Container { z-index: 1; }
 #AjaxMsg a { font-weight: bold; }
 body.adminLoggedIn #AjaxMsg { top: 36px; }
 
-
 /* Layout
 -------------------------------------------------------------- */
 
@@ -40,6 +42,9 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 	width: 960px; padding: 0; text-align: left;
 	border-left: 1px solid #D9D9D9; border-right: 1px solid #D9D9D9;
 	background: #FFFFFF;
+	-webkit-box-shadow: 0 0 30px #DDD;
+	-moz-box-shadow: 0 0 30px #DDD;
+	box-shadow: 0 0 30px #DDD;
 }
 #SidebarBg {
 	background: #FAFAFA; /* Sidepanel bg */
@@ -49,10 +54,14 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 	width: 576px; margin: 0 191px; padding: 0; background: #FFFFFF; /* Main-bg */
 	border-left: 1px solid #D9D9D9; border-right: 1px solid #D9D9D9;
 }
+.OmitSidebars #Main {
+	border-left: 0;
+	margin: 0 383px 0 0;
+}
 .OmitRightSidebar #Main {
 	width: 768px;
-	margin-right: 0;
 	border-right: 0;
+	margin: 0 0 0 191px;
 }
 .Column {
 	position: relative;
@@ -87,13 +96,13 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 .LogoLink img { display: block; margin: 0; padding: 0; }
 .NoLogoImage { font-size: 32px; line-height: 72px; text-decoration: none; }
 
-#Header .NavigationList {
+header .NavigationList {
 	position: relative; float: right;
 	margin: 0 6px 63px 0; list-style: none outside;
 }
-#Header .CustomerNavigation  { margin-left: 6px; }
-#Header .NavigationList li { position: relative; float: left; margin: 0 0 0 3px; }
-#Header .NavigationList li a {
+header .CustomerNavigation  { margin-left: 6px; }
+header .NavigationList li { position: relative; float: left; margin: 0 0 0 3px; }
+header .NavigationList li a {
 	position: relative; float: left; width: auto;
 	padding: 9px 8px 8px; margin: -1px 0 0;
 	font-size: 11px; font-weight: bold;
@@ -119,7 +128,7 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-#Header .NavigationList li a:hover {
+header .NavigationList li a:hover {
 	background-image: -o-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
 	background-image: -moz-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
 	background-image: -webkit-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
@@ -129,9 +138,78 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 	border-bottom-color: #BBB;
 }
 
-/* Version switch */
-
-#VersionSwitcher {
+header .DropdownNavigation {
+	position: relative; z-index: 499;
+}
+header .DropdownNavigation li {
+	position: relative; z-index: 999;
+}
+header .DropdownNavigation li a {
+}
+header .DropdownNavigation:hover > li > a {
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	background-image: -o-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
+	background-image: -moz-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
+	background-image: -webkit-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
+	background-image: -ms-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFF), color-stop(1, #F2F2F2));
+	background-image: linear-gradient(top, #FFF 0%, #F2F2F2 100%);
+	border-bottom-color: #BBB;
+}
+header .DropdownNavigation .Icon {
+	float: left; width: 54px; height: 36px;
+	margin: -9px 0 -9px -9px;
+	background: url("../i/icons.png") no-repeat left top;
+}
+header .DropdownNavigation:hover .Icon {
+	background-position: left -36px; 
+}
+header .DropdownNavigation .CurrencyIcon {
+	background-position: left -72px; 
+}
+header .DropdownNavigation:hover .CurrencyIcon {
+	background-position: left -108px;
+}
+header .DropdownNavigation ul {
+	position: absolute; overflow: hidden;
+	top: 35px; left: -9999em;
+	width: 160px; background: #FFF;
+	margin: 0; padding: 0;
+	border: 1px solid #d9d9d9;
+	border-bottom: 1px solid #CCC;
+	border-bottom: 0; z-index: 499;
+	-moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}
+header .DropdownNavigation:hover ul { left: 0; }
+header .DropdownNavigation ul li { padding: 0; }
+header .DropdownNavigation ul li,
+header .DropdownNavigation ul li a {
+	background: none;
+	position: relative;
+	z-index: 499;
+	display: block;
+	float: none;
+	margin: 0;
+}
+header .DropdownNavigation ul li a {
+	background: none;
+	border: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+header .DropdownNavigation ul li + li a {
+	border-top: 1px solid #d9d9d9;
+}
+header .DropdownNavigation ul li a:hover {
+	background: none;
 }
 
 /* Search */
@@ -139,6 +217,17 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 	position: absolute; right: 6px; bottom: 9px;
 	padding: 8px; height: 18px; z-index: 99;
 	background: #F8F8F8; border: 1px solid #D9D9D9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+#SearchForm.SearchActive {
+  -moz-border-bottom-left-radius: 0;
+  -moz-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 #SearchForm .FormItem { border: 0; padding: 0; background: none; }
 #SearchForm label { display: none; }
@@ -148,16 +237,27 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 #LiveSearchResults {
 	display: block; margin: 0; list-style: none outside;
 	position: absolute; top: 35px; left: -1px;
-	z-index: 100; background: #F8F8F8; padding: 0 9px;
+	z-index: 100; background: #F8F8F8; padding: 0 8px;
+  -moz-border-bottom-left-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #D9D9D9;
+  border-top: 0;
 }
 #LiveSearchResults li {
 	width: 100%;
-	padding: 9px 8px 8px; margin: 0 -9px;
-	border: 1px solid #D9D9D9; border-top: 0;
+	padding: 9px; margin: 0 -9px;
+}
+#LiveSearchResults li + li {
+	padding-top: 8px;
+	border-top: 1px solid #D9D9D9;
 }
 .SearchIndicator {
 	display: none; position: absolute;
-	top: 0px; left: 226px;
+	top: 8px; left: 226px;
 	padding: 1px; width: 16px; height: 16px;
 	background: url(../i/search-load.gif) no-repeat 50% 50%;
 }
@@ -330,13 +430,22 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 
 /* Info & News navigation */
 
-#MainNavigation ul.InfoNavigation, #MainNavigation ul.NewsList {
+#MainNavigation ul.InfoNavigation,
+#MainNavigation ul.NewsList,
+#MainNavigation ul.Campaigns {
 	margin: 0; padding: 9px 15px 8px 15px;
 	border-bottom: 1px solid #D9D9D9; list-style: none outside;
 }
-#MainNavigation ul.InfoNavigation li, #MainNavigation ul.NewsList li {}
-#MainNavigation ul.InfoNavigation li a, #MainNavigation ul.NewsList li a { text-decoration: none; }
-#MainNavigation ul.InfoNavigation li ul, #MainNavigation ul.NewsList li ul { padding: 0; border: 0; margin-left: 21px; list-style: none outside; }
+#MainNavigation ul.InfoNavigation li,
+#MainNavigation ul.NewsList li {}
+
+#MainNavigation ul.InfoNavigation li a,
+#MainNavigation ul.NewsList li a,
+#MainNavigation ul.Campaigns li a { text-decoration: none; }
+
+#MainNavigation ul.InfoNavigation li ul,
+#MainNavigation ul.NewsList li ul,
+#MainNavigation ul.Campaigns li ul { padding: 0; border: 0; margin-left: 21px; list-style: none outside; }
 
 /* Current page & subcategories */
 
@@ -348,64 +457,169 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 /* Right Column
 -------------------------------------------------------------- */
 
-#Secondary .EmptyCart {
-	padding: 8px 15px 9px; margin: 0;
-	border-bottom: 1px solid #D9D9D9;
+#MiniCartWrapper {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
 }
-#Secondary .CartProduct {
-	float: none; display: block;
-	margin: 0; width: auto; height: auto;
-	padding: 8px 15px 9px; border: 0;
+#MiniCartWrapper .CheckoutLoader {
+	top: 0; left: 0;
+	padding: 0;
+}
+#MiniCartWrapper .CartEmpty {
+	padding: 9px 15px; margin: 0;
+}
+#MiniCartWrapper ul {
+	margin: 0; padding: 0;
+	list-style: none outside;
+}
+#MiniCartWrapper ul li {
+	position: relative;
+	padding: 8px 15px 9px;
 	border-bottom: 1px dotted #D9D9D9;
 	font-size: 11px;
 }
-#Secondary .CartProduct .ProductName { font-size: 11px; padding: 0; margin: 0; }
-#Secondary .CartProduct .VariationName { display: none; }
-#Secondary .CartProduct dl { margin: 0; padding: 0; }
-#Secondary .CartProduct dl dt { margin-right: 2px; }
-#Secondary .CartProduct dl dd { margin-right: 6px; }
-#Secondary .CartProduct dl dd.CartProductQuantity,
-#Secondary .CartProduct dl dd.CartProductTotal { white-space: nowrap; }
-#Secondary .CartProduct dl dd.CartProductRemove a { color: #888; }
-
-#Secondary dl.CartProceed { margin: 0; padding: 0; border: 0; }
-#Secondary dt.SubTotal, #Secondary dd.SubTotal { padding: 0 15px; margin: 0; line-height: 35px; }
-#Secondary dd.SubTotal { font-size: 15px; font-weight: bold; padding-left: 0; margin-left: -10px; }
-#Secondary dd.ToShoppingCart, #Secondary dd.ToCheckout { margin: 0; padding: 0; display: block; }
-#Secondary dd.ToShoppingCart a, #Secondary dd.ToCheckout a {
-	position: relative;
-	display: block; padding: 8px 15px 9px;
-	margin: -1px 0 0; text-decoration: none;
-	background: #F8F8F8; border-top: 1px solid #D9D9D9;
-	border-bottom: 1px solid #D9D9D9;
+#MiniCartWrapper ul li:hover {
+	background: #FFF;
 }
-#Secondary .ToShoppingCart a { font-weight: normal; }
-#Secondary .ToCheckout a { font-size: 15px; font-weight: bold; }
+#MiniCartWrapper ul li h3 {
+	font-size: 11px;
+	margin: 0;
+}
+#MiniCartWrapper dl { margin: 0; padding: 0; }
+#MiniCartWrapper dl dt { display: inline; margin: 0 3px 0 0; }
+#MiniCartWrapper dl dd { display: inline; margin: 0 7px 0 0; white-space: nowrap; }
+#MiniCartWrapper dl dd.CartProductRemove {
+	position: absolute;
+	top: 3px; right: 1px;
+	width: 16px; height: 16px;
+	display: none; margin: 0;
+}
+#MiniCartWrapper dl dd.CartProductRemove a {
+	display: block; width: 16px; height: 16px;
+	overflow: hidden; text-indent: -10000em;
+	background: url(../i/search-close.gif) no-repeat 50% 50%;
+}
+#MiniCartWrapper ul li:hover dl dd.CartProductRemove {
+	display: block;
+}
+dl#MiniCartFooter {
+	margin: 0; padding: 0;
+}
+dl#MiniCartFooter dd, dl#MiniCartFooter dt {
+	display: block;
+	margin: 0; padding: 0 15px;
+}
+dl#MiniCartFooter dt {
+	font-weight: bold;
+	color: #444;
+	font-size: 11px;
+	padding-top: 8px;
+}
+dl#MiniCartFooter .SubTotal {
+	font-size: 15px; font-weight: bold;
+}
+dl#MiniCartFooter .CartLink {
+	padding: 0 15px 9px;
+	font-size: 11px;
+	border-bottom: 1px dotted #D9D9D9;
+}
+dl#MiniCartFooter .CheckoutLink {
+	padding: 9px 0;
+}
+dl#MiniCartFooter .CheckoutButton {
+	margin: 0 15px;
+	padding: 8px;
+	float: none;
+	text-align: center;
+	display: block;
+}
 
 /* Productlist
 -------------------------------------------------------------- */
 
-.Pagination {
-	margin: 0 6px; clear: both; padding: 8px; font-size: 11px;
-	background: #F8F8F8; border: 1px solid #D9D9D9; 
+.PaginationAfter {
+	position: relative; width: auto; clear: both;
+	margin: 18px 6px; padding: 8px;
+	border: 1px solid #D9D9D9; border-bottom: 1px solid #CCCCCC;
+  background-color: #E8E8E8;
+  background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
+	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+  -webkit-box-shadow: inset 0 1px 0 #FFF;
+  -moz-box-shadow: inset 0 1px 0 #FFF;
+  box-shadow: inset 0 1px 0 #FFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
-.PaginationAfter { margin: 9px 6px; }
+.PaginationBefore { position: relative; margin: 0 6px 0 15px; color: #444; font-size: 11px; }
 .ShowingItems { font-size: 11px; float: left; margin-bottom: 0; }
 
-.SortForm { font-size: 11px; float: right; }
-.SortForm .FormItem { width: auto; clear: none; font-size: 11px; padding-bottom: 0; }
-.SortForm .FormItem label { width: auto; padding-right: 10px; font-size: 11px; }
-.SortForm .FormItem select { font-size: 11px; }
-.SortForm .FormItem button { display: none; }
+.PaginationSorterForm { float: right; font-size: 12px; }
+.PaginationSorterForm .FormItem { width: auto; clear: none; padding-bottom: 0; }
+.PaginationSorterForm .FormItem label { float: left; width: auto; padding-right: 5px; top: 0; color: #888; }
+.PaginationSorterForm .FormItem select { width: 120px; margin-right: 0; margin-bottom: 0; }
+.PaginationSorterForm .FormItem .CustomSelectWrap { margin-right: 0; }
 
 .PageNavigation {
+	font-size: 12px;
 	position: relative; text-align: center;
 	list-style: none outside; margin: 0; padding: 0;
 }
-.PageNavigation li { list-style: none outside; margin: 0; padding: 0; display: inline; line-height: 18px; }
-.PageNavigation li { margin: 0 2px; font-weight: bold; }
-.PageNavigation li.CurrentPage { background: #F8F8F8; border: 1px solid #D9D9D9; padding: 4px 8px; }
-.PageNavigation li a { line-height: 18px; padding: 5px; }
+.PageNavigation li {
+	text-align: center;
+	height: 27px;
+	line-height: 27px;
+	margin: -4px 0 -5px;
+	padding: 0 9px;
+	border: 1px solid transparent;
+	display: -moz-inline-stack;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	font-weight: bold;
+	color: #888;
+}
+.PageNavigation li.PagesBetween {
+	padding: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+.PageNavigation li.CurrentPage {
+	border: 1px solid #d9d9d9;
+	border-color: #CCCCCC #d9d9d9 #e2e2e2;
+	background: #FFF;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #222;
+}
+.PageNavigation li.NextPageLink,
+.PageNavigation li.PreviousPageLink {
+	white-space: nowrap;
+}
+.PageNavigation li.NextPageLink { float: right; }
+.PageNavigation li.NextPageLink a,
+.PageNavigation li.NextPageLink { padding-right: 0; margin-right: 0; }
+
+.PageNavigation li.PreviousPageLink { float: left; }
+.PageNavigation li.PreviousPageLink,
+.PageNavigation li.PreviousPageLink a { padding-left: 0; margin-left: 0; }
+.PageNavigation li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0 -6px;
+	padding: 0 6px;
+	text-decoration: none;
+	font-weight: bold;
+}
 
 .Product {
 	position: relative; float: left;
@@ -452,6 +666,14 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 
 .Product a:link, .Product a:visited { text-decoration: none; }
 .Product a:active, .Product a:hover { text-decoration: underline; }
+
+.Product .AddToCart {
+	margin: 9px -6px;
+	text-decoration: none;
+}
+.Product .AddToCart:hover {
+	text-decoration: none;
+}
 
 /* .Categories, .SubCategories, .BrandsNavigation
 -------------------------------------------------------------- */
@@ -562,7 +784,7 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	border-bottom: 1px solid #cccccc;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	-border-radius: 5px;
+	border-radius: 5px;
 	-webkit-transition: all 0.15s ease-in-out;
 	-moz-transition: all 0.15s ease-in-out;
 	-o-transition: all 0.15s ease-in-out;
@@ -583,7 +805,7 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 #ImgLoader {
 	position: absolute; display: block; top: 0px; left: 0px;
 	width: 100%; height: 100%; margin: 0px;
-	background: #FFF url(../i/tb-load.gif) no-repeat 50% 50%;
+	background: #FFF url(../i/loader.gif) no-repeat 50% 50%;
 	overflow: hidden; text-indent: -10000em;
 }
 #ProductImageCaption {
@@ -672,7 +894,10 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 #ProductBuy .BuyForm .HiddenInput + .HeaderItem {
 	margin-top: -9px;
 }
-#ProductBuy .BuyForm .HeaderItem h3 {
+#ProductBuy .BuyForm .HeaderItem h3 {}
+#ProductBuy .BuyForm .HeaderItem .FormHelp {
+	margin: 0;
+	top: 0;
 }
 #ProductBuy .BuyForm .FormItem > label,
 #ProductBuy .BuyForm .FormItem > p.label {
@@ -683,7 +908,7 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 }
 
 #ProductBuy .BuyForm .FormSubmit {
-	margin: 8px -8px -8px; padding: 17px 8px 18px; width: 100%;
+	margin: 8px -8px -8px; padding: 17px 8px 0; width: 100%;
 	background: #F2F2F2; border-top: 1px solid #D9D9D9;
 }
 .BuyForm .FormSubmit button { margin-left: 0; }
@@ -866,10 +1091,12 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 /* Account pages
 -------------------------------------------------------------- */
 
-#OrderStatus { margin: 18px 0; font-size: 15px; }
-#OrderStatus dd+dd { margin-left: -6px; }
+#OrderStatus dd { display: inline; }
+#OrderStatus dd + dd { margin-left: 3px; }
 
 #OrderHistoryTable { margin: 18px 0; }
+
+#OrderHistory thead th { font-size: 12px; }
 
 dl#AccountInformation {
 	margin: 18px 0; width: 280px; overflow: hidden;
@@ -887,11 +1114,14 @@ dl#AccountInformation dd.AccountEdit {
 	text-align: right; float: right;
 	width: 116px; margin-right: -116px;
 }
-dl#AccountInformation dd p { margin: 0; }
+dl#AccountInformation dd p, .OrderComments p { margin: 0; }
 
 /* Carts
 -------------------------------------------------------------- */
 
+#CartForm {
+	position: relative;
+}
 table input,
 table button {
 	float: none;
@@ -925,8 +1155,20 @@ td.CartTotal {
 	line-height: 18px; text-align: center;
 	color: #900;
 }
-table .CartProduct dl { font-size: 11px; font-weight: normal; margin: 0; }
-table .ProductName { padding: 0; margin: 0; font-size: 12px; font-weight: bold; }
+table .CartProduct {
+	width: 100%;
+}
+table .CartProduct h3 {
+	font-size: 15px;
+	margin: 0 0 9px;
+}
+table .CartProduct dl {
+	font-size: 12px; font-weight: normal;
+	margin: 0; width: 100%; overflow: hidden;
+}
+table .CartProduct dd,
+table .CartProduct dt { float: left; }
+table .CartProduct dt { clear: left; }
 
 .CartPic { width: 36px; }
 .CartPic a {
@@ -945,27 +1187,348 @@ table .ProductName { padding: 0; margin: 0; font-size: 12px; font-weight: bold; 
 	margin: 0 auto;
 }
 
+.EditableCart tfoot td,
+.EditableCart tfoot th,
+#OrderProducts tfoot td,
+#OrderProducts tfoot th {
+	text-align: right;
+}
+
+#FullTotal td, #FullTotal th {
+	font-size: 125%;
+}
+
+#UpdateCartButton {
+	float: right;
+	margin: -9px 0 9px;
+}
+#SubmitCampaignCode {
+	float: left; margin: -9px 0 9px;
+}
+#SubmitCampaignCode .FormItem {
+	padding-left: 0;
+}
+#SubmitCampaignCode label,
+#SubmitCampaignCode .label {
+	float: left; top: 0;
+	width: auto; text-align: left;
+	margin-left: 0; margin-right: 5px;
+}
+#SubmitCampaignCode a {
+	color: #666;
+}
+
+/* Big and beautiful order button */
+#Checkout .FormSubmit {
+	padding: 18px 0 0 126px;
+}
+.CheckoutButton,
+#Checkout .FormSubmit .SubmitButton,
+.BuyForm .FormSubmit .SubmitButton {
+	clear: both; padding: 8px 17px;
+	font-size: 15px; font-weight: bold; text-decoration: none;
+  color: #FFF; background-color: #058; background-repeat: repeat-x;
+	background-image: linear-gradient(top, #08A 0%, #058 100%);
+	background-image: -o-linear-gradient(top, #08A 0%, #058 100%);
+	background-image: -moz-linear-gradient(top, #08A 0%, #058 100%);
+	background-image: -webkit-linear-gradient(top, #08A 0%, #058 100%);
+	background-image: -ms-linear-gradient(top, #08A 0%, #058 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #08A), color-stop(1, #058));
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.66), 0 1px 0 rgba(255, 255, 255, 0.33);
+  border: 1px solid #058;
+  border-bottom-color: #037;
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.CheckoutButton {
+	float: right;
+	margin-right: 0;
+}
+.CheckoutButton:hover,
+#Checkout .FormSubmit .SubmitButton:hover,
+.BuyForm .FormSubmit .SubmitButton:hover {
+	color: #FFF;
+  background-color: #069;
+  background-repeat: repeat-x;
+	background-image: linear-gradient(top, #0AE 0%, #07B 100%);
+	background-image: -o-linear-gradient(top, #0AE 0%, #07B 100%);
+	background-image: -moz-linear-gradient(top, #0AE 0%, #07B 100%);
+	background-image: -webkit-linear-gradient(top, #0AE 0%, #07B 100%);
+	background-image: -ms-linear-gradient(top, #0AE 0%, #07B 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0AE), color-stop(1, #07B));
+  border: 1px solid #07B;
+  border-bottom-color: #049;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 /* Chekcout
 -------------------------------------------------------------- */
 
-#OnePageCheckout {
-	padding-left: 33px;
-}
+/* Multi page checout */
 
-#OnePageCheckout h2 {
+#Header.CheckoutHeader {
+	padding-bottom: 45px;
+}
+#MultiPageCheckout {
+	position: relative;
+	z-index: 100;
+	padding: 0 15px;
+}
+#MultiPageCheckout .Notification {
+	margin: 18px 0;
+	padding: 17px;
+	font-size: 15px;
+}
+#MultiPageCheckout h2 {
 	font-size: 24px;
-	margin: 9px 0;
+	font-weight: normal;
+	width: 100%;
+	margin: 0;
+	padding: 18px 0;
 	line-height: 36px;
 }
+#CheckoutStage {
+	position: relative;
+	float: left;
+	z-index: 500;
+	overflow: hidden;
+	list-style: decimal inside;
+	overflow: hidden;
+	padding: 0;
+	margin: -36px 0 0 15px;
+	border: 1px solid #D2D2D2;
+	border-top: 1px solid #D9D9D9;
+	border-bottom: 0;
+  background-color: #E8E8E8;
+  background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
+	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+  -webkit-box-shadow: inset 0 1px 0 #FFF;
+  -moz-box-shadow: inset 0 1px 0 #FFF;
+  box-shadow: inset 0 1px 0 #FFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+  -webkit-border-radius: 5px 5px 0px 0px;
+  -moz-border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
+}
+#CheckoutStage li {
+	float: left;
+	position: relative;
+	z-index: 501;
+	padding: 8px 14px;
+	border-right: 1px solid #d9d9d9;
+	border-bottom: 1px solid #CCC;
+	margin-right: -1px;
+	color: #888;
+}
+#CheckoutStage li + li {
+	border-left: 1px solid #FFFFFF;
+	margin-left: 1px;
+}
+#CheckoutStage .CurrentCheckoutStage {
+	color: #444;
+	font-weight: bold;
+	background: #FAFAFA;
+	border-bottom: 1px solid #FAFAFA;
+	margin-bottom: -1px;
+  background-color: #FAFAFA;
+  background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
+	background-image: -moz-linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
+	background-image: -webkit-linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
+	background-image: -ms-linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F2F2F2), color-stop(1, #FAFAFA));
+	background-image: linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
+}
+#CheckoutStage .CompletedCheckoutStage {
+	color: #444;
+}
 
+#CheckoutAddressBook {
+}
+#CheckoutAddressBook p.label {
+	display: none;
+}
+#CheckoutAddressBook .CheckWrap {
+	
+}
+#CheckoutAddressBook .CheckWrap .Checks {
+	padding-left: 0;
+}
+#CheckoutAddressBook .ShippingAddressWrapper {
+	position: relative; float: left;
+	width: 168px; height: 144px;
+	padding: 0 15px 0 18px; margin: 0 0 18px;
+}
+#CheckoutAddressBook .ShippingAddressWrapper .EditShippingAddress {
+	font-size: 11px;
+}
+#CheckoutAddressBook .ShippingAddressWrapper .EditShippingAddress a {
+	color: #666;
+}
+.NewShippingAddress {
+	margin-left: 126px;
+}
+.NewShippingAddress a {
+	font-weight: bold;
+}
+#MultiPageCheckout .HeaderItem {
+	position: relative; width: auto; clear: both;
+	margin: -1px -15px 18px; padding: 8px 15px 9px;
+	border-bottom: 1px solid #CCCCCC; border-top: 1px solid #D9D9D9;
+  background-color: #E8E8E8;
+  background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
+	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+  cursor: default;
+}
+#MultiPageCheckout .HeaderItem {
+	padding-left: 141px;
+}
+#MultiPageCheckout .HeaderItem.NoIndent {
+	padding-left: 15px;
+}
+
+#MultiPageCheckout .HeaderItem h2 {
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 27px;
+	margin: 0;
+	padding: 4px 0 0;
+}
+#MultiPageCheckout .HeaderItem p {
+	color: #666; padding: 0 0 5px;
+	margin: 0;
+}
+#MultiPageCheckout #CheckoutShippingAddressToggle {
+	margin-left: -18px;
+}
+
+
+#MultiPageCheckout .ShippingMethodWrapper,
+#MultiPageCheckout .PaymentMethodWrapper {
+	border-top: 1px dotted #d9d9d9;
+	border-bottom: 1px dotted #d9d9d9;
+	padding: 8px 9px 8px 27px;
+	margin-left: -18px;
+}
+#MultiPageCheckout .ShippingMethodWrapper + .ShippingMethodWrapper,
+#MultiPageCheckout .PaymentMethodWrapper + .PaymentMethodWrapper {
+	border-top: 0; padding-top: 9px;
+}
+#MultiPageCheckout .SelectedMethod {
+  background-color: #fafafa;
+  border: 1px solid #d9d9d9 !important;
+  padding: 8px 11px 8px 29px;
+  margin-left: -21px; margin-right: -3px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+#MultiPageCheckout * + .SelectedMethod  {
+	margin-top: -1px;
+}
+
+#PreviewSplit {
+	width: 384px; overflow: visible;
+	border-bottom: 1px solid #d9d9d9;
+	border-left: 1px solid #d9d9d9;
+	margin: -18px -15px 0 560px;
+	background: #fafafa;
+}
+#PreviewProducts {
+	float: left; width: 546px;
+	margin-left: -576px;
+	padding: 18px 15px 0;
+}
+#PreviewProducts #CartTable {
+	margin-bottom: 36px;
+}
+#PreviewProducts .FormSubmit {
+	padding-left: 0;
+}
+#PreviewProducts label { font-weight: bold; }
+#PreviewProducts .CheckWrap p.label {
+	display: none;
+}
+#PreviewInfo {
+	width: 354px; float: left;
+	padding: 18px 15px 0;
+}
+#PreviewInfo dl {
+	font-size: 15px;
+}
+#PreviewInfo dl dd {
+	margin-bottom: 18px;
+}
+
+/* One page checkout, we have it baby yeah! \o/ */
+
+#OnePageCheckout {
+	padding-left: 45px;
+}
+#OnePageCheckout .TagWrapper {
+	position: relative;
+}
+#OnePageCheckout h2 {
+	font-size: 24px;
+	width: 100%;
+	margin: 0 0 0 -30px;
+	padding: 9px 0 9px 30px;
+	line-height: 36px;
+	border-top: 6px solid #eee;
+}
+#OnePageCheckout #CheckoutCustomerInformationHeader {
+	border-top: 0;
+	margin-top: 0;
+}
+#OnePageCheckout h2 span {
+	float: left; width: 25px;
+	margin-left: -30px;
+	text-align: right;
+	padding-right: 5px;
+}
+#OnePageCheckout h2 + p {
+	font-size: 14px;
+	margin: -4px 0 22px;
+	color: #555;
+}
+.CheckoutLoader {
+	position: absolute; z-index: 999;
+	top: -9px; left: -9px; padding: 9px 9px 0;
+	width: 100%; height: 100%;
+	background: #FFF url("../i/checkoutloader.gif") no-repeat 50% 50%;
+	opacity: 0.7;
+}
 #CheckoutShippingAddressToggle {
 	/* Hide it to be shown with javascript */
 	display: none;
+	font-size: 14px;
+	margin: -4px 0 22px;
+	color: #555;
+}
+#CheckoutShippingAddressToggle a {
+	color: #900; font-size: 11px;
 }
 #CheckoutShippingAddressToggle .Checks {
-	/* Let the checkbox come out of the column */
-	padding-left: 0;
+	margin-bottom: 0;
 }
+#CheckoutShippingAddressToggle input { top: 4px; }
 #CheckoutShippingAddress {
 	/* Fixes the overflow clipping issue with effects */
 	margin-top: -9px; padding-top: 9px;
@@ -973,21 +1536,29 @@ table .ProductName { padding: 0; margin: 0; font-size: 12px; font-weight: bold; 
 
 /* Shipping and payment methods */
 
-#CheckoutShippingMethod .Checks,
-#CheckoutPaymentMethod .Checks {
-	padding-left: 0;
+#OnePageCheckout #CheckoutShippingMethods .Checks,
+#OnePageCheckout #CheckoutPaymentMethods .Checks {
+	margin: -6px 0 22px;
+	padding: 0;
+	border: 2px solid #d9d9d9;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
 }
-#CheckoutShippingMethod .CheckWrap > .label,
-#CheckoutPaymentMethod .CheckWrap > .label {
+#CheckoutShippingMethods .CheckWrap > .label,
+#CheckoutPaymentMethods .CheckWrap > .label {
 	display: none;
 }
 .ShippingMethodWrapper,
 .PaymentMethodWrapper {
-	padding: 0;
-	margin-bottom: 8px;
-	padding-bottom: 8px;
-	border-bottom: 2px solid #D9D9D9;
+	padding: 9px 9px 9px 27px;
 	clear: both;
+}
+.ShippingMethodWrapper + .ShippingMethodWrapper,
+.PaymentMethodWrapper + .PaymentMethodWrapper {
+	padding-top: 8px;
+	border-top: 1px dotted #d9d9d9;
 }
 .ShippingMethodLogo,
 .PaymentMethodLogo {
@@ -1003,21 +1574,164 @@ table .ProductName { padding: 0; margin: 0; font-size: 12px; font-weight: bold; 
 	font-weight: bold; font-size: 15px;
 	float: left;
 }
+.ShippingMethodWrapper input[disabled="disabled"] + .ShippingMethodName,
+.PaymentMethodWrapper input[disabled="disabled"] + .PaymentMethodName {
+	color: #888;
+}
+.SelectedMethod .ShippingMethodPrice,
+.SelectedMethod .PaymentMethodPrice {
+	color: #222;
+}
+
 .ShippingMethodPrice,
 .PaymentMethodPrice {
 	float: right;
+	color: #999;
 }
 .DefineShippingMethod,
 .DefinePaymentMethod {
+	clear: both;
+	background: #F2F2F2;
+	border: 1px solid #D9D9D9;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+	padding: 5px 8px;
+	margin: 3px 0 21px;
+	opacity: .5;
+	filter: alpha(opacity=50);
+	-ms-filter: "alpha(opacity=50)";
+	-khtml-opacity: .5;
+	-moz-opacity: .5;
+}
+.SelectedMethod .DefineShippingMethod,
+.SelectedMethod .DefinePaymentMethod {
 	background: #ffc;
 	border: 1px solid #cc6;
-	padding: 9px;
-	margin-bottom: 18px;
+	opacity: 1;
+	filter: alpha(opacity=100);
+	-ms-filter: "alpha(opacity=100)";
+	-khtml-opacity: 1;
+	-moz-opacity: 1;
 }
 .DefineShippingMethod select, .DefineShippingMethod .CustomSelectWrap,
 .DefinePaymentMethod select, .DefineShippingMethod .CustomSelectWrap {
 	margin-bottom: 0;
 }
+
+/* Previewable cart at OnePageCheckout */
+
+#CheckoutPreviewCart,
+#CheckoutThanksOrderInfo {
+	float: right;
+	margin-right: -384px;
+	width: 383px;
+}
+#PreviewContent {
+	width: 383px;
+	max-height: 100%;
+	overflow-y: auto;
+}
+#PreviewContent.Fixed {
+	position: fixed; top: 0px;
+}
+body.AdminLoggedIn #PreviewContent.Fixed { top: 36px; }
+
+#PreviewContent .CheckoutLoader {
+	position: absolute; z-index: 999;
+	top: 0; left: 0; padding: 0;
+	width: 100%; height: 100%;
+	background: #fafafa url("../i/checkoutloader.gif") no-repeat 50% 50%;
+	opacity: 0.7;
+}
+#PreviewContent #SubmitCampaignCode {
+	padding: 0 15px;
+}
+
+#CartTable.PreviewTable {
+	margin: 0 6px 18px;
+	width: auto;
+}
+.PreviewTable thead th {
+	font-size: 12px;
+}
+.PreviewTable .CartProduct h3 {
+	font-size: 12px;
+	margin: 0;
+}
+.PreviewTable .CartProduct dl {
+	font-size: 11px; margin-top: 9px;
+}
+
+/* Accept terms */
+
+#CheckoutAcceptTerms .CheckWrap > .label {
+	display: none;
+}
+
+/* Transfer to payment (/checkout/process/)
+-------------------------------------------------------------- */
+
+/* CHECKOUT */
+
+#CHECKOUT {
+	width: 960px;
+	margin: 0 -15px;
+}
+
+.CheckoutTransferToPayment {
+	width: 180px; float: left;
+	height: 117px; clear: none;
+	text-align: center;
+	padding: 0; margin:  0 6px 9px;
+}
+.CheckoutTransferToPayment button {
+	display: block; float: none;
+	width: 180px; height: 115px;
+	padding: 0 8px; margin: 0;
+	text-align: center; background: #FFF;
+	cursor: pointer; color: #666;
+	border: 1px solid #aaa;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 1px 2px #aaa;
+	-webkit-box-shadow: 0 1px 2px #aaa;
+	box-shadow: 0 1px 2px #aaa;
+	text-shadow: none;
+}
+.CheckoutTransferToPayment button:hover {
+	background: #e1eef5; border-color: #09f;
+}
+.CheckoutTransferToPayment button img {
+	display: block; padding: 4px; background: #FFF;
+	border: 1px solid #aaa; margin: 0 auto 4px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.CheckoutTransferToPayment button:hover img { border-color: #09f; }
+
+/* Thanks-page
+-------------------------------------------------------------- */
+
+#CheckoutThanksOrderInfo {
+	float: right;
+	margin-right: -384px;
+	width: 383px;
+}
+#CheckoutThanksOrderInfo .Content {
+	padding-top: 0;
+}
+#CheckoutThanksOrderInfo .BoxHeader {
+	width: 100%;
+	margin: -1px -15px 18px; padding: 8px 15px 9px;
+}
+
+/* Registration */
+
+#CheckoutThanksRegistrationForm { display: none; }
+#cboxLoadedContent #CheckoutThanksRegistrationForm { display: block; }
+#NewCustomerPassword .CheckWrap > .label { display: none; }
+#NewCustomerPassword label { font-weight: bold; }
+

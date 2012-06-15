@@ -1,0 +1,64 @@
+<table id="CartTable" class="EditableCart">
+
+	<thead>
+		<tr>
+			<th colspan="2" scope="col" class="CartProduct">Tuote</th>
+			<th scope="col" class="CartPrice">Hinta</th>
+			<th scope="col" class="CartQuantity">Määrä</th>
+			<th scope="col" class="CartTotal">Yhteensä</th>
+		</tr>
+	</thead>
+	
+	<tfoot>
+		{CartSubTotal(
+			before:	'<tr><th scope="row" colspan="4">Tuotteet yhteensä</th><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+		{CartShippingCosts(
+			before:	'<tr><th scope="row" colspan="4">Toimitustapa: <strong>{CartShippingMethod}</strong></td><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+		{CartPaymentCosts(
+			force: 'false',
+			before:	'<tr><th scope="row" colspan="4">Maksutapa: <strong>{CartPaymentMethod}</strong></td><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+		{CartDiscount(
+			before:	'<tr><th scope="row" colspan="4">Alennuskoodi: <strong>{CartCouponCode}</strong></td><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+		{CartTotal(
+			before:	'<tr id="FullTotal"><th scope="row" colspan="4">Yhteensä</th><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+	</tfoot>
+	
+	<tbody>
+		{CartProducts(
+			helper:	'{{
+				<tr>
+					<td class="CartPic">
+						{ProductImage(
+							link: 'false',
+							width: 32,
+							height: 32
+						)}
+					</td>
+					<th scope="row" class="CartProduct">
+						<h3>{CartProductName}</h3>
+						{CartProductDetails}	
+					</th>
+					<td class="CartPrice">{CartProductPrice}</td>
+					<td class="CartQuantity">
+						{CartProductQuantity(
+							mode: 'form'
+						)}
+						{CartProductDelete}
+					</td>
+					<td class="CartTotal">{CartProductTotal}</td>
+				</tr>
+			}}'
+		)}
+	</tbody>
+	
+</table>

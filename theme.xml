@@ -1,2 +1,17 @@
 <?xml version="1.0"?>
-<Theme><ImageSizes><Mini width="32" height="32"/><List width="162" height="162"/><Normal width="258" height="258"/><Big width="450" height="450"/><BrandList width="32" height="32"/><BrandNormal width="162" height="162"/><CampaignImage width="383"/><CheckoutLogo width="90" height="90"/></ImageSizes></Theme>
+<Theme>
+	<ImageSizes>
+	
+		<Mini width="32" height="32"/>
+		<List width="162" height="162"/>
+		<Normal width="258" height="258"/>
+		<Big width="900" height="600"/>
+		
+		<BrandList width="32" height="32"/>
+		<BrandNormal width="162" height="162"/>
+		
+		<CampaignImage width="383"/>
+		<CheckoutLogo width="270" height="90"/>
+	
+	</ImageSizes>
+</Theme>

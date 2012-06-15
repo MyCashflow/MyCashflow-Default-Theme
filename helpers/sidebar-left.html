@@ -1,6 +1,7 @@
-<div id="MainNavigation" class="Column">
+<nav id="MainNavigation" class="Column">
 	{Categories(show:'all')}
+	{Campaigns(before:'<h2 class="BoxHeader">{%Campaigns}</h2>')}
 	{InfoNavigation(before:'<h2 class="BoxHeader">{%AboutUs}</h2>')}
 	{News(before:'<h2 class="BoxHeader">{%News}</h2>')}
 	{Banners(name:'sidebar-left',helper:helpers/sidebar-banners)}
-</div>
+</nav>

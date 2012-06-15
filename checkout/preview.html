@@ -1,0 +1,111 @@
+{Helper(file:'checkout/header')}
+<div id="MultiPageCheckout" class="clearfix">
+
+	{Notifications}
+	<div class="FormItem HeaderItem NoIndent">
+		<h2>Tilauksen esikatselu</h2>
+		<p>Tarkista vielä ettei tilauksesi tiedoissa ole virheitä ja hyväksy tilaus.</p>
+	</div>
+	
+	<div id="PreviewSplit" class="clearfix">
+		<div id="PreviewProducts" class="BlockForm">
+			<table id="CartTable">
+			
+				<thead>
+					<tr>
+						<th colspan="2" scope="col" class="CartProduct">Tuote</th>
+						<th scope="col" class="CartPrice">Hinta</th>
+						<th scope="col" class="CartQuantity">Määrä</th>
+						<th scope="col" class="CartTotal">Yhteensä</th>
+					</tr>
+				</thead>
+				
+				<tfoot>
+					{CartSubTotal(
+						before:	'<tr><th scope="row" colspan="4">Tuotteet yhteensä</th><td class="CartTotal">',
+						after:	'</td></tr>'
+					)}
+					{CartShippingCosts(
+						before:	'<tr><th scope="row" colspan="4">Toimitustapa: <strong>{CartShippingMethod}</strong></td><td class="CartTotal">',
+						after:	'</td></tr>'
+					)}
+					{CartPaymentCosts(
+						force: 'false',
+						before:	'<tr><th scope="row" colspan="4">Maksutapa: <strong>{CartPaymentMethod}</strong></td><td class="CartTotal">',
+						after:	'</td></tr>'
+					)}
+					{CartDiscount(
+						before:	'<tr><th scope="row" colspan="4">Alennuskoodi: <strong>{CartCouponCode}</strong></td><td class="CartTotal">',
+						after:	'</td></tr>'
+					)}
+					{CartTotal(
+						before:	'<tr id="FullTotal"><th scope="row" colspan="4">Yhteensä</th><td class="CartTotal">',
+						after:	'</td></tr>'
+					)}
+				</tfoot>
+				
+				<tbody>
+					{CartProducts(
+						helper:	'{{
+							<tr>
+								<td class="CartPic">
+									{ProductImage(
+										link: 'false',
+										width: 32,
+										height: 32
+									)}
+								</td>
+								<th scope="row" class="CartProduct">
+									<h3>{CartProductName}</h3>
+									{CartProductDetails}	
+								</th>
+								<td class="CartPrice">{CartProductPrice}</td>
+								<td class="CartQuantity">
+									{CartProductQuantity(
+										mode: 'preview'
+									)}
+								</td>
+								<td class="CartTotal">{CartProductTotal}</td>
+							</tr>
+						}}'
+					)}
+				</tbody>
+				
+			</table>
+			
+			{CurrencyNotification}
+		
+			<form action="/checkout/process/" method="post">
+
+				{CheckoutAcceptTerms}
+				
+			</form>
+		
+		</div>
+		<div id="PreviewInfo">
+			
+			<dl>
+			{CartShippingMethod(
+				before: '<dt>Toimitustapa</dt><dd>',
+				after: '&nbsp;<a href="/checkout/shipping/">Muuta</a></dd>'
+			)}
+			{CartPaymentMethod(
+				before: '<dt>Maksutapa</dt><dd>',
+				after: '&nbsp;<a href="/checkout/payment/">Muuta</a></dd>'
+			)}
+			{CheckoutBillingAddress(
+				mode:'preview',
+				before: '<dt>Laskutusosoite</dt><dd>',
+				after: '<br><a href="/checkout/customer_information/">Muuta</a></dd>'
+			)}
+			{CheckoutShippingAddress(
+				mode:'preview',
+				before: '<dt>Toimitusosoite</dt><dd>',
+				after: '<br><a href="/checkout/shipping_information/">Muuta</a></dd>'
+			)}
+			</dl>
+		</div>
+	</div>
+	
+</div>
+{Helper(file:'checkout/footer')}

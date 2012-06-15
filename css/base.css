@@ -14,7 +14,9 @@
 .PaymentMethodWrapper:before,
 .PaymentMethodWrapper:after,
 .DefinePaymentMethod:before,
-.DefinePaymentMethod:after {
+.DefinePaymentMethod:after,
+.Pagination:before,
+.Pagination:after {
     content:"";
     display:table;
 }
@@ -25,7 +27,8 @@
 .ShippingMethodWrapper:after,
 .DefineShippingMethod:after,
 .PaymentMethodWrapper:after,
-.DefinePaymentMethod:after {
+.DefinePaymentMethod:after,
+.Pagination:after {
     clear:both;
 }
 
@@ -38,7 +41,8 @@
 .ShippingMethodWrapper,
 .DefineShippingMethod,
 .PaymentMethodWrapper,
-.DefinePaymentMethod {
+.DefinePaymentMethod,
+.Pagination:after {
 	zoom:1;
 }
 
@@ -128,6 +132,7 @@ cite { font-weight: bold; font-style: normal; }
 strong { font-weight: bold; }
 em { font-style: italic; }
 dfn { font-weight: bold; }
+small { font-size: 85%; }
 
 abbr { border-bottom: 1px dotted #666; }
 address { font-style: italic; }
@@ -161,6 +166,7 @@ ol {
 /* Some default classes
 -------------------------------------------------------------- */
 
+.Big { font-size: 125%; }
 .Center { text-align: center; }
 
 /* Content wrapper */
@@ -197,20 +203,47 @@ ol {
 /* Some padding around currency symbol */
 .Currency { padding: 0 2px; }
 
-/* Notifications */
-
+#NotificationCenter {
+	position: fixed; z-index: 999;
+	top: 18px; left: 50%;
+	margin: 0 -360px; padding: 0;
+	width: 720px;
+}
 .Notification {
-	position: relative; text-align: center;
-	margin: 0 0 18px; padding: 17px; font-size: 15px;
-	border: 1px solid #d9d9d9; background: #F8F8F8;
+	position: relative;
+	padding: 8px; font-size: 12px;
+	margin: 0 0 9px; border: 1px solid #dedecc;
+	background: #ffffe5; text-align: center;
 	-moz-border-radius: 5px; -webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-.Notification a { font-weight: bold; }
-.Notification > *:last-child { margin-bottom: 0; }
-.Success { background: #ebf5e1; }
-.Error { background: #f5e1e1; }
+#NotificationCenter .Notification {
+	opacity: .9;
+	filter: alpha(opacity=90);
+	-ms-filter: "alpha(opacity=90)";
+	-khtml-opacity: .9;
+	-moz-opacity: .9;
+}
+.Notification p {
+	margin: 0;
+}
+.Notification p a { font-weight: bold; }
+.Notification p + p { margin-top: 18px; }
 
+.Success {
+	border-color: #d5decc;
+	background: #ebf5e1; 
+}
+.Error {
+	border-color: #decccc;
+	background: #f5e1e1;
+}
+.Notification span.Close {
+	display: block; position: absolute;
+	top: 8px; right: 8px;
+	width: 16px; height: 16px;
+	background: url(../i/close.png) no-repeat 50% 50%;
+}
 
 /* Banners
 -------------------------------------------------------------- */
@@ -264,10 +297,10 @@ ol {
 -------------------------------------------------------------- */
 
 table	{
-	clear: both; margin: 0 0 17px;
+	clear: both; margin: 0 0 18px;
 	position: relative; width: 100%;
 	text-align: left; vertical-align: top;
-	border: 0; border-collapse: collapse;
+	border: 0;
 }
 caption {
 	caption-side: top; text-align: center;

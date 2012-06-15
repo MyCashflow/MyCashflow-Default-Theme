@@ -7,8 +7,15 @@
 				{Path}
 				<h1>{PageTitle}</h1>
 			</div>
-			<div class="CategoryDescription">{CategoryDescription}</div>
-			{Products(classes:'first||last')}
+			{CategoryDescription(before:'<div class="CategoryDescription">',after:'</div>')}
+			{Products(
+				classes:'first||last',
+				limit: 24,
+				pagination: 'after',
+				sorter:  'before',
+				counter: 'before',
+				limiter: false
+			)}
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

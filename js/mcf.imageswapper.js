@@ -31,7 +31,7 @@
     }
     
     // Image changing. Simply fade in and out stuff before and after of loading the new image.
-		function SwapImage(image, href, caption) {
+		function SwapImage(image, href, caption, eq) {
 		
 			var $imgWrapper = $("#CurrentProductImage"),
 					$imgElement = $("img", $imgWrapper),
@@ -40,6 +40,9 @@
 			var $newImage = $('<img alt="' + caption + '" />').hide(0);
 		
 			if ($imgElement.attr("src") != image) {
+			
+				$imgWrapper.data("eq", eq);
+			
 				$imgElement.fadeOut(300, function() {
 					$imgLoader.fadeIn(150, function() {
 
@@ -124,15 +127,17 @@
 				event.preventDefault();
 				
 				// Gather the needed information from clicked image
-				var title = $(this).attr("title"),
-						href = $(this).attr("href"),
+				var self = $(this),
+						eq = self.parent().prevAll("li").length,
+						title = self.attr("title"),
+						href = self.attr("href"),
 						src = $("#CurrentProductImage img").attr("src"),
 						targetSize = src.split("/")[2],
 						targetImg = href.split("/")[3],
 						newImg = "/tuotekuvat/"+targetSize+"/"+targetImg;
-				
+
 				// Trigger the change
-				SwapImage(newImg,href,title);
+				SwapImage(newImg,href,title,eq);
 				
 				// Do nothing if the event is triggered
 				if (triggered===undefined) {

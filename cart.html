@@ -4,82 +4,32 @@
 		{Helper(file:'helpers/sidebar-left')}
 		<div id="Primary" class="Column">
 			<div id="PageHeader">
+				<a class="Button CheckoutButton" href="/checkout/">Tilaa tuotteet</a>
 				{Path}
 				<h1>{PageTitle}</h1>
 			</div>
 			<div class="Content">
+
+				{Notifications(group:'cart')}
+
+				<form action="/cart/update/" method="post" id="CartForm">
+					{Helper(file:'helpers/full-cart')}
+					<button type="submit" id="UpdateCartButton">Päivitä ostoskori</button>
+				</form>
+
+				<div id="SubmitCampaignCode" data-helper="full-cart" data-view="cart">
+					{CampaignCode(
+						mode: 'auto',
+						action: 'cart',
+						notifications: 'true',
+						ajax: 'true'
+					)}
+				</div>
 				
-				{Notifications}
-				
-				<table id="CartTable">
-				
-					<thead>
-						<tr>
-							<th colspan="2" scope="col" class="CartProduct">Tuote</th>
-							<th scope="col" class="CartPrice">Hinta</th>
-							<th scope="col" class="CartQuantity">Määrä</th>
-							<th scope="col" class="CartTotal">Yhteensä</th>
-						</tr>
-					</thead>
-					
-					<tfoot>
-						{CartSubTotal(
-							before:	'<tr></tr><th scope="row" colspan="4">Tuotteet yhteensä</th><td class="CartTotal">',
-							after:	'</td></tr>'
-						)}
-						{CartShippingMethodPrice(
-							before:	'<tr></tr><th scope="row" colspan="4">Toimitustapa: {CartShippingMethodName}</td><td class="CartTotal">',
-							after:	'</td></tr>'
-						)}
-						{CartPaymentMethodPrice(
-							before:	'<tr></tr><th scope="row" colspan="4">Maksutapa: {CartPaymentMethodName}</td><td class="CartTotal">',
-							after:	'</td></tr>'
-						)}
-						{CartCouponPrice(
-							before:	'<tr></tr><th scope="row" colspan="4">Alennuskoodi: {CartCouponCode}</td><td class="CartTotal">',
-							after:	'</td></tr>'
-						)}
-						{CartTotal(
-							before:	'<tr></tr><th scope="row" colspan="4">Yhteensä</th><td class="CartTotal">',
-							after:	'</td></tr>'
-						)}
-					</tfoot>
-					
-					<tbody>
-						{CartProducts(
-							helper:	'{{
-								<tr>
-									<td class="CartPic">
-										{ProductImage(
-											link: 'false',
-											width: 32,
-											height: 32
-										)}
-									</td>
-									<th scope="row" class="CartProduct">
-										{CartProductName}						
-										{CartProductDetails}	
-									</th>
-									<td class="CartPrice">{ProductPrice}</td>
-									<td class="CartQuantity">
-										{CartProductQuantity(
-											mode: 'preview'
-										)}
-									</td>
-									<td class="CartTotal">{CartProductTotal}</td>
-								</tr>
-							}}'
-						)}
-					</tbody>
-					
-				</table>
-				
-				{CampaignCode(mode:'auto', action: 'checkout')}
-				
-				<a href="/checkout/" class="Button">Tilaa tuotteet</a>
+				<a class="Button CheckoutButton" href="/checkout/">Tilaa tuotteet</a>
 				
 			</div>
-					
+
 			{CrossSaleProducts(
 				type:'normal',
 				limit:16,
@@ -89,7 +39,7 @@
 						<div id="CrossSaleProducts">',
 				after:'</div></div>'
 			)}
-					
+
 		</div>
 	</div>
 </div>

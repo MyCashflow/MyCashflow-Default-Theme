@@ -1,8 +1,5 @@
 <!doctype html>
-<!--[if lt IE 7]>			<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en">	<![endif]-->
-<!--[if IE 7]>				<html class="no-js lt-ie9 lt-ie8" lang="en">				<![endif]-->
-<!--[if IE 8]>				<html class="no-js lt-ie9" lang="en">								<![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" lang="en">											<!--<![endif]-->
+<html class="no-js" lang="{CurrentLanguageCode}">
 <head>
 	{Feed}
   <meta charset="utf-8">
@@ -27,7 +24,7 @@
 	
 </head>
 
-<body class="{BodyClass}">
+<body class="{BodyClass} BlockForm">
 	{AdminTools}
 
 	<div id="fb-root"></div>
@@ -62,6 +59,25 @@
 				height:126
 			)}
 			{CustomerNavigation}
-			{LanguageNavigation}
+			
+			{CurrencyNavigation(
+				before: '
+					<ul class="NavigationList DropdownNavigation" id="CurrencyNavigation">
+						<li><a><span class="Icon CurrencyIcon"></span>{Currency}</a>',
+				after: '
+						</li>
+					</ul>'
+			)}
+			
+			<!-- TO-DO: Versiovalikon helper -->
+			{LanguageNavigation(
+				before: '
+					<ul class="NavigationList DropdownNavigation" id="LanguageNavigation">
+						<li><a><span class="Icon LanguageIcon"></span>{CurrentLanguage}</a>',
+				after: '
+						</li>
+					</ul>'
+			)}
+			
 			{Search}
 		</header>

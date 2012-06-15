@@ -1,36 +1,96 @@
-$(function() {
+/* jQuery Tiny Pub/Sub - v0.7 - 10/27/2011
+ * http://benalman.com/
+ * Copyright (c) 2011 "Cowboy" Ben Alman; Licensed MIT, GPL */
 
-	$("#ProductImages").mcfImageSwapper();
-	
-	$("select").customSelect();
+(function($) {
+	var o = $({});
+	$.subscribe = function() {
+		o.on.apply(o, arguments);
+	};
+	$.unsubscribe = function() {
+		o.off.apply(o, arguments);
+	};
+	$.publish = function() {
+		o.trigger.apply(o, arguments);
+	};
+}(jQuery));
 
-	// Text from formhelp into inputs title
-	$(".FormItem:not(.CheckWrap)").find(".FormHelp").each(function() {
-		var $that = $(this), inputs = $that.prevAll("input");
-		inputs.attr("title", $that.text());
-		$that.remove();
-	});
+$.subscribe("ajax_event", function(originalEvent, ajaxEvent, eventCategory, message, type) {
 	
-	// Clone the thumbnails so they can be used as colorbox group and open preview from actual thumbnails
-	$("#ProductThumbnails").clone().hide().attr("id","fakethumbs").appendTo(document.body);
+	var categoryEl = $("#" + eventCategory + "Notification"),
+		message = "<p>" + message + "</p><span class='Close'></span>",
+		$notification = $('<div class="Notification" id="' + eventCategory + 'Notification"></div>').hide();
+		
+		if (type !== undefined) {
+			$notification.addClass(type);
+		}
 	
-	// Make colorbox group or just open the image
-	if ($("#fakethumbs").length) {
-		$("#fakethumbs li a").colorbox({
-			rel: "fake",
-			current: "{current} / {total}"
+	// If product is added to cart
+	if (ajaxEvent === "adding_to_cart") {
+		$("#MiniCartWrapper").append('<div class="CheckoutLoader"></div>');
+	} else if (ajaxEvent === "added_to_cart") {
+		message = message + '<p><a href="#Close" class="Close">' + mcfLang.HideNotification + '</a> | <a href="/cart/">' + mcfLang.ShoppingCartEdit + '</a> | <a href="/checkout/">' + mcfLang.OrderProducts + '</a></p>';
+		$.ajax({
+			type: "GET",
+			url: "/interface/Helper",
+			data: {
+				file: 'helpers/minicart'
+			},
+			success: function(minicart) {
+				$("#MiniCartWrapper").html(minicart);
+			}
 		});
-		// Trigger click on first thumbnail
-		$("#CurrentProductImage").click(function(event) {
-			$("#fakethumbs li:first-child a").trigger("click");
-			event.preventDefault();
-		});
-	} else {
-		$("#CurrentProductImage").colorbox({
-			current: "{current} / {total}"
+	} else if (ajaxEvent === "removed_from_cart") {
+		$.ajax({
+			type: "GET",
+			url: "/interface/CartSubTotal",
+			success: function(price) {
+				$("#MiniCartFooter").find(".SubTotal").html(price);
+			}
 		});
 	}
+	
+	// Keep just one notification per notification category
+	if (categoryEl.length) {
+		categoryEl.fadeOut(250, function() {
+			categoryEl.html(message);
+			categoryEl.fadeIn(250);
+		});
+	} else {
+		$notification.append(message).appendTo("#NotificationCenter").fadeIn(250);
+	}
+	
+})
 
+$(function() {
+
+	$("#NotificationCenter").on("click", ".Close", function(event) {
+		event.preventDefault();
+		$(this).closest(".Notification").fadeOut(125, function() { $(this).remove(); });
+	});
+	
+	$("#Primary").find("form.PaginationSorterForm").find("select").change(function(event) {
+		$(this).closest("form").trigger("submit");
+	}).end().find("button").hide();
+		
+	$("select").customSelect();
+	
+	// Header Dropdowns
+	$("#Header").find(".DropdownNavigation").hover(function(event) {
+		$(this).find("ul").stop(true, true).animate({
+			height: "show",
+			opacity: "show"
+		},125);
+	}, function(event) {
+		$(this).find("ul").stop(true, true).animate({
+			height: "hide",
+			opacity: "hide"
+		},125);
+	}).find("ul").css({
+		left: "0px"
+	}).hide();
+
+	
 	// Livesearch
 	var mcfLiveSearchResultsWidth = $("#SearchForm").css("width");
 	$("#SearchForm").append($('<ul id="LiveSearchResults" style="width: '+ mcfLiveSearchResultsWidth +'"></ul>').hide());
@@ -39,7 +99,7 @@ $(function() {
 		highlight:true,
 		wait: 500,
 		callback: function(txt) {
-			$("#AjaxMsg").text(mcfLang.Searching); 
+			//$("#AjaxMsg").text(mcfLang.Searching);
 			$.ajax({
 				type: "GET",
 				url: "/interface/SearchProducts",
@@ -49,15 +109,18 @@ $(function() {
 					helper: "helpers/livesearchresults"
 				},
 				beforeSend: function() {
-					$(".SearchIndicator","#SearchForm").fadeIn(500);
+					$(".SearchIndicator", "#SearchForm").fadeIn(500);
+					$("#SearchForm").addClass("SearchActive");
 				},
 				success: function(results) {
-					$('#AjaxMsg').slideUp(250);
+					//$('#AjaxMsg').slideUp(250);
+					$.publish('foo', 1);
 					$("#LiveSearchResults").html(results).fadeTo(500,0.9);
 					$(".SearchIndicator","#SearchForm").addClass("CloseSearchResults").click(function() {
 						$("#SearchInput").val("").blur();
 						$("#LiveSearchResults").html("");
 						$(this).hide().removeClass("CloseSearchResults");
+						$("#SearchForm").removeClass("SearchActive");
 					});
 				}
 			})
@@ -66,6 +129,7 @@ $(function() {
 		if ($(this).val()==="") {
 			$("#LiveSearchResults").html("");
 			$(".SearchIndicator","#SearchForm").hide().removeClass("CloseSearchResults");
+			$("#SearchForm").removeClass("SearchActive");
 		};
 	});
 
@@ -75,43 +139,42 @@ $(function() {
 		if ($("#FrontpageCategoryImage").find("img").length===0) {
 			$("#FrontpageCategoryImage").remove();
 		}
-		var $self = $("#BannerScroller");
-		if ($self.find(".FrontBanner").length > 1) {
-			$self.wrap('<div id="HoverWrapper" style="position: relative; width: 100%; overflow: hidden;"></div>')
+		var $FrontBannerScroller = $("#BannerScroller");
+		if ($FrontBannerScroller.find(".FrontBanner").length > 1) {
+			$FrontBannerScroller.wrap('<div id="HoverWrapper" style="position: relative; width: 100%; overflow: hidden;"></div>')
 			.after('<a href="#" id="NextBanner"><span class="Icon"></span>'+mcfLang.Next+'</a><a href="#" id="PrevBanner"><span class="Icon"></span>'+mcfLang.Prev+'</a>');
-			$("#ScrollableBanners").css("width",$self.find(".FrontBanner").length * 576 + "px");
+			$("#ScrollableBanners").css("width", $FrontBannerScroller.find(".FrontBanner").length * 576 + "px");
 			$("#HoverWrapper").hover(function() {
 				$("#NextBanner,#PrevBanner").stop(true, true).fadeTo(500,0.8);
 			}, function() {
 				$("#NextBanner,#PrevBanner").stop(true, true).fadeTo(500,0);
 			});
 		}
-		$self.find(".BannerInfo").fadeTo(0,0);
+		$FrontBannerScroller.find(".BannerInfo").fadeTo(0,0);
 		$("#HoverWrapper").hover(function() {
 			$(this).find(".BannerInfo").stop(true, true).fadeTo(500,0.8);
 		}, function() {
 			$(this).find(".BannerInfo").stop(true, true).fadeTo(500,0);
 		});
-		$self.serialScroll({
+		$FrontBannerScroller.serialScroll({
 			items: '.FrontBanner',
 			prev: '#PrevBanner',
 			next: '#NextBanner',
 			axis: 'x',
-			easing: 'easeOutQuart',
 			duration: 600,
 			force: true,
 			step: 1,
 			cycle: true,
 			onBefore: function(ev,el) {
-				var elh = $(el).css("height"), h = $self.css("height");
+				var elh = $(el).css("height"), h = $FrontBannerScroller.css("height");
 				if (h>elh) {
-					$self.animate({ height: elh }, 300, 'easeInQuart');
+					$FrontBannerScroller.animate({ height: elh }, 300);
 				}
 			},
 			onAfter: function(el) {
-				var elh = $(el).css("height"), h = $self.css("height");
+				var elh = $(el).css("height"), h = $FrontBannerScroller.css("height");
 				if (h!=elh) {
-					$self.animate({ height: elh }, 300, 'easeOutQuart');
+					$FrontBannerScroller.animate({ height: elh }, 300);
 				}
 			}
 		});
@@ -135,7 +198,6 @@ $(function() {
 			prev: '#ScrollToPrev',
 			next: '#ScrollToNext',
 			axis: 'x',
-			easing: 'easeOutQuart',
 			duration: 350,
 			force: true,
 			step: 3,
@@ -164,89 +226,110 @@ $(function() {
 		
 	}
 
-	// Ajax messages which are fixed on top of page via CSS
-	$.ajaxSetup({ cache: false });
-	$('<p id="AjaxMsg"></p>').insertAfter("#Container");
-	$('#AjaxMsg').ajaxStart(function() { $(this).slideDown(250); });
-	$('#AjaxMsg').delegate("#CloseAjaxMsg", "click", function() { $('#AjaxMsg').slideUp(250); });
-
 	// Adding products to cart from productlists with ajax and refreshing of the minicart-tag (some things IE6-disabled)
-	$("#Primary, #Secondary").find(".Product:not('.ProductVariations') .AddToCart").click(function(event) {
-		var pid = $(this).attr("href").split("/")[2];
-		var	listproductname = $(this).closest(".Product").find(".ProductName").text();
-		$("#AjaxMsg").text(mcfLang.AddingToCart); 
-		$.ajax({
-			type: "post",
-			url: "/cart/",
-			data: {maara:1,tuote:pid},
-			success: function() {
-				$("#AjaxMsg").html(listproductname + mcfLang.AddedMessage).slideDown(250); 
-				if (!($.browser.msie && parseInt($.browser.version)==6)) {
-					$.get("/interface/MiniCart", function(minicart) {
-						$("#ProductAddedNotification").slideDown(250);
-						$("#MiniCartWrapper").html(minicart).slideDown(250);
-					});
-					$("#MiniCartWrapper").slideUp(250);
-				} else {
-					$("#ProductAddedNotification").slideDown(250);
-				}
-			}
-		});
+	$(document).on("click", "a.AddToCart", function(event) {
+		
 		event.preventDefault();
+		
+		var target = $(event.currentTarget),
+				pid = target.attr("href").split("/")[2],
+				product = target.closest(".Product"),
+				name = product.find(".ProductName").text();
+		
+		if (product.hasClass("ProductVariations") || product.hasClass("ProductTailorings")) {
+			$.colorbox({
+				width: "640px",
+				title: target.text() + "&nbsp;" + name,
+				href: "/interface/ProductBuy?setProduct=" + pid
+			});
+		} else {
+			$.ajax({
+				type: "POST",
+				url: "/cart/",
+				data: {
+					products: [
+						{ product_id: pid }
+					],
+					ajax: 1,
+					response_type: "json"
+				},
+				dataType: 'json',
+				beforeSend: function() {
+					$.publish("ajax_event", ["adding_to_cart", "product", mcfLang.AddingToCart]);
+				},
+				success: function(response) {
+					if (response.notifications && response.notifications.length > 0) {
+						var response_notification = $(response.notifications),
+							response_text = response_notification.text(),
+							response_type = response_notification.removeClass("Notification").attr("class");
+						$.publish("ajax_event", ["added_to_cart", "product", response_text, response_type]);
+					}
+				}
+			});
+		}
+		
 	});
 
 	// Adding products to cart with ajax and refreshing of the minicart-tag
-	if ($("#ProductBuy").length) {
-		$(".BuyForm").submit(function(event) {
-			$("#AjaxMsg").text(mcfLang.AddingToCart); 
-			$(".AddToCart",".BuyForm").attr("disabled","disabled");
-			$(this).ajaxSubmit(function() {
-				$("#ProductAddedNotification").slideUp(250, function() { $(this).remove(); });
-				if (!($.browser.msie && parseInt($.browser.version)==6)) {
-					$.get("/interface/MiniCart", function(minicart) {
-						$(".AddToCart",".BuyForm").removeAttr("disabled");
-						$("#PageHeader").after('<div class="Notification Success" id="ProductAddedNotification">'+mcfLang.ProductAddedNotification+'</div>');
-						$("#ProductAddedNotification").slideDown(250);
-						$("#MiniCartWrapper").html(minicart).slideDown(250);
-						$('#AjaxMsg').slideUp(250);
-					});
-					$("#MiniCartWrapper").slideUp(250);
-				} else {
-					$(".AddToCart",".BuyForm").removeAttr("disabled");
-					$("#PageHeader").after('<div class="Notification Success" id="ProductAddedNotification">'+mcfLang.ProductAddedNotification+'</div>');
-					$("#ProductAddedNotification").slideDown(250);
-					$('#AjaxMsg').slideUp(250);
-				}
-			});
-			event.preventDefault();
-		});
-	}
+	$(document).on("submit", ".BuyForm", function(event) {
 	
-	// Removing products from minicart with ajax
-	if (!($.browser.msie && parseInt($.browser.version)==6)) {
-		$("#MiniCartWrapper").delegate(".CartProductRemove a","click", function(event) {
-			$("#AjaxMsg").text(mcfLang.RemoveProductFromCart);
-			var $parent = $(this).closest(".CartProduct");
-			var rm = $(this).attr("href");
-			$.get(rm, function() {
-				$parent.slideUp(250, function() { $(this).remove(); });
-				$.get("/interface/MiniCart", function(data) {
-					var $subtotal = $("dd.SubTotal", data).html();
-					$("#MiniCartWrapper dd.SubTotal").fadeOut(250, function() {
-						if ($subtotal==null) {
-							$("#MiniCartWrapper dd.SubTotal").html('0,<span class="PriceDecimals">00</span><span class="Currency">€</span>');
-						} else {
-							$("#MiniCartWrapper dd.SubTotal").html($subtotal);
-						}
-						$("#MiniCartWrapper dd.SubTotal").fadeIn(250);
-						$('#AjaxMsg').slideUp(250);
-					});
-				});
-			});
-			event.preventDefault();
-		});
-	}
+		event.preventDefault();
+		
+		var target = $(event.currentTarget),
+			btn = target.find(".AddToCart"),
+			formData = target.serialize() + "&ajax=1",
+			colorboxed = target.closest("#cboxLoadedContent").length;
 
+		btn.attr("disabled", "disabled");
+
+		$.ajax({
+			type: "POST",
+			url: "/cart/",
+			data: formData + "&ajax=1&response_type=json",
+			dataType: 'json',
+			beforeSend: function() {
+				$.publish("ajax_event", ["adding_to_cart", "product", mcfLang.AddingToCart]);
+			},
+			success: function(response) {
+				
+				if (colorboxed) {
+					$.colorbox.close();
+				}
+				btn.removeAttr("disabled");
+
+				if (response.notifications && response.notifications.length > 0) {
+					var response_notification = $(response.notifications),
+						response_text = response_notification.text(),
+						response_type = response_notification.removeClass("Notification").attr("class");
+					$.publish("ajax_event", ["added_to_cart", "product", response_text, response_type]);
+				}
+
+			}
+		});
+		
+	});
+
+	$("#MiniCartWrapper").on("click", ".CartRemove", function(event) {
+	
+		event.preventDefault();
+		
+		var target = $(event.target),
+			parent = target.closest("li"),
+			name = parent.find("h3 a").text();
+			
+		parent.slideUp(250);
+		
+		$.ajax({
+			type: "GET",
+			url: target.attr("href"),
+			data: { ajax: 1 },
+			success: function(response) {
+				var $response = $(response).text();
+				$.publish("ajax_event", ["removed_from_cart", "cart", $response]);
+			}
+		});
+	});
+	
 	// Categorynavigation openers
 	$("ul.Categories li:has(> ul)").addClass("Openable").each(function() {
 		if ($(this).hasClass("Current")) {

@@ -3,6 +3,7 @@
 	<div id="Main" class="clearfix">
 		{Helper(file:'helpers/sidebar-left')}
 		<div id="Primary" class="Column">
+			{Notifications(group: 'account')}
 			<div id="BannerScroller">
 				<div id="ScrollableBanners">
 					<div class="FrontBanner" id="FrontpageCategoryImage">
@@ -11,7 +12,7 @@
 							<h3>{PageTitle}</h3>
 						</div>
 					</div>
-					{Banners(name:'frontpage',helper:helpers/homepage-banners)}
+					{Banners(name:'frontpage',helper:'helpers/homepage-banners')}
 				</div>
 			</div>
 			<div id="LandingPageWrapper" class="clearfix">
@@ -19,8 +20,6 @@
 					<div id="PageHeader">
 						<h1>{PageTitle}</h1>
 						{CategoryDescription}
-						{CurrentLanguage}
-						{CurrentLanguageCode}
 					</div>
 					<div id="ShopLikes" class="fb-like" data-send="true" data-width="354" data-show-faces="true" data-font="arial"></div>
 					{Products(classes:'first|last')}

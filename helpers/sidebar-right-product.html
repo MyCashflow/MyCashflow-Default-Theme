@@ -1,8 +1,8 @@
-<div id="Secondary" class="Column">
+<aside id="Secondary" class="Column">
 	<h2 class="BoxHeader">{%ShoppingCart}</h2>
-	<div id="MiniCartWrapper">
-		{MiniCart}
-	</div>
+	<article id="MiniCartWrapper">
+		{Helper(file: 'helpers/minicart')}
+	</article>
 	{CompatibleProducts(
 		limit:5,
 		type:'normal',
@@ -19,4 +19,4 @@
 	)}
 	{HotPicks(limit:1,before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2>')}
 	{Banners(name:'sidebar-right',helper:helpers/sidebar-banners)}
-</div>
+</aside>

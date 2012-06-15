@@ -1,11 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
-<title>{%Invoice} #{OrderNumber}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%Receipt} {OrderNumber}</title>
+
+<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css" />
 
 <style type="text/css">
-
+/*
 * { margin: 0; padding: 0; border: 0; }
 
 @page {
@@ -117,7 +119,6 @@ table#PaymentDetails td {
 
 table {
 	width: 100%; border-collapse: collapse;
-	/* border: 0.5pt solid black; */
 	caption-side: top;
 }
 caption {
@@ -143,13 +144,157 @@ th dl dt { width: 17.9pt; margin-left: -23.2mm; }
 
 .Price, .Quantity, .Total { text-align: right; }
 .OrderTotal { text-align: right; font-size: 12pt; font-weight: bold; }
-
+*/
 </style>
 
 </head>
 
 <body>
 
+	<div id="ReceiptHeader">
+		<div id="Logo">
+			{Logo}
+		</div>
+		<div id="ReceiptTitle">
+			<h4>{ShopName}</h4>
+			<h1>{%Invoice} {OrderNumber}</h1>
+		</div>
+	</div>
+
+	<div id="InfoWrapper">
+		<div id="ShippingAddress">
+			{OrderShippingInformation}
+		</div>
+		<div id="OrderInfo">
+			<dl>
+				<dt>{%CheckoutCustomerInformation}</dt>
+				<dd>{OrderCustomerInformation}</dd>
+			</dl>
+			{OrderInfo}
+		</div>
+	</div>
+	
+	{OrderProducts(
+		before: '
+			<div id="PrintProducts">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col" class="CartProduct">{%Product}</th>
+							<th scope="col">{%ShippingDate}</th>
+							<th scope="col">{%Quantity}</th>
+							<th scope="col">{%Price}</th>
+							<th scope="col" class="CartTotal">{%Total}</th>
+						</tr>
+					</thead>
+		',
+		helper: '{{
+			<tr>
+				<th class="CartProduct">
+					<h3>{OrderProductName}{OrderProductVariation(before:':<br><em class="ProductVariation">',after:'</em>')}</h3>
+					{OrderProductCode(
+						before: '<dl><dt>{%ProductCode}</dt><dd>',
+						after: '</dd></dl>'
+					)}
+					{OrderProductWarranty(
+						before: '<dl><dt>{%Warranty}</dt><dd>',
+						after: '&nbsp;{%Months}</dd></dl>'
+					)}
+					{OrderProductChoices}
+				</th>
+				<td>{OrderProductShippingStatus}</td>
+				<td>{OrderProductQuantity}</td>
+				<td>
+					{OrderProductPrice(
+						after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>'
+					)}
+				</td>
+				<td class="CartTotal">
+					{OrderProductTotal(
+						after: '<br><small>{OrderProductTotalTax}</small>'
+					)}
+				</td>
+			</tr>
+		}}',
+		after: '
+					<tfoot>
+						<tr class="CartTotal">
+							<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT}</small></th>
+							<td class="CartTotal">
+								{OrderSubTotal}<br>
+								<small>{OrderSubtotalTax}</small>
+							</td>
+						</tr>
+						{OrderShippingCosts(
+							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br><small>{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+							after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
+						)}
+						{OrderPaymentCosts(
+							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+							after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
+						)}
+						<tr class="CartTotal" id="FullTotal">
+							<th scope="row" colspan="4">{%Total} <br><small>{%VAT}</small></th>
+							<td class="CartTotal">
+								{OrderTotal}<br>
+								<small>{OrderTax}</small>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		'
+	)}
+	
+	<div id="VatInfo">
+		{OrderTotalsByTaxRate}
+		{OrderVATDescription}
+	</div>
+
+	<table id="PaymentDetails">
+		<tr>
+			<td style="width:2cm;">{%InvoiceRecipientAccountNumber}</td>
+			<td style="width:8cm;">{ContactBankAccount}</td>
+			<td style="width:10cm;" colspan="3" rowspan="3"><h4>{%InvoiceBankTransfer}</h4><p>{%InvoicePaymentReferenceInfo}</p></td>
+		</tr>
+		<tr>
+			<td>{%InvoiceRecipientName}</td>
+			<td>{ContactCompany}</td>
+		</tr>
+		<tr>
+			<td rowspan="3">{%InvoicePayer}</td>
+			<td rowspan="3">{OrderCustomerInformation}</td>
+		</tr>
+		<tr>
+			<td style="width: 2cm;">{%PaymentReference}</td>
+			<td style="width: 8cm;" colspan="2">{OrderPaymentReference}</td>
+		</tr>
+		<tr>
+			<td style="width: 2cm;">{%InvoiceDueDate}</td>
+			<td style="width: 4cm;">{OrderDueDate(expiry:'14')}</td>
+			<td style="width: 4cm;">{OrderTotal}</td>
+		</tr>
+	</table>
+
+	<div id="ReceiptContact">
+		<p id="PrintContactAddress">
+			{ContactCompany(after:'<br>')}
+			{ContactStreetAddress1(after:'{ContactStreetAddress2(before:',&nbsp;')}<br>')}
+			{ContactZip} {ContactCity(after:'<br>')}
+			{ContactCountry}
+		</p>
+		<p id="PrintContactElectrical">
+			{ContactEmail(after:'<br>')}
+			{ContactInternet(after:'<br>')}
+			{ContactPhone(after:'<br>')}
+		</p>
+		<p id="PrintContactOther">
+			{ContactBusinessID(before:'{%BusinessID}')}
+		</p>
+	</div>
+	
+
+<!--
 	<div id="ReceiptHeader">
 		<div id="SenderInfo">
 			{ContactCompany}<br />
@@ -219,6 +364,6 @@ th dl dt { width: 17.9pt; margin-left: -23.2mm; }
 			{%BusinessID} {ContactBusinessID}
 		</p>
 	</div>
-	
+-->	
 </body>
 </html>

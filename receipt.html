@@ -4,191 +4,124 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{%Receipt} {OrderNumber}</title>
 
-<style type="text/css">
-
-* { margin: 0; padding: 0; border: 0; }
-
-@page {
-	size: A4;
-	margin: 30.6mm 20mm 29.7mm 14.85mm;
-	border-top: 0.5pt solid black;
-	@top {
-		content: flow(head);
-		vertical-align: top;
-	}
-	@bottom {
-		content: flow(foot);
-		vertical-align: top;
-	}
-}
-body {
-  color: #000; background: #FFF;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 9pt; line-height: 12pt;
-	text-align: left;
-}
-#ReceiptHeader {
-	position: relative;
-	top: 10mm; flow: static(head);
-	height: 20.6mm;
-}
-#SenderInfo {
-	float: left; width: 103mm; overflow: hidden;
-}
-#Logo {
-	float: left; width: 67mm;
-}
-#Logo img {
-	display: block; margin: 0; padding: 0;
-	prince-image-resolution: 300;
-	max-height: 15.9mm;
-	max-width: 67.1mm;
-}
-#ReceiptContact {
-	position: relative;
-	border-top: 1pt solid black;
-	flow: static(foot);
-}
-#InfoWrapper {
-	float: left; width: 100%; overflow: hidden; padding: 4.7mm 0 6.3mm;
-}
-#ShippingAddress {
-	position: relative;
-	float: left; width: 103mm;
-	overflow: hidden;
-}
-#ShippingAddress p {
-	font-size: 12pt; line-height: 18pt;
-	margin: 0; padding: 0;
-}
-#OrderInfo {
-	position: relative;
-	float: left; width: 67mm;
-}
-#OrderInfo h1 { font-size: 12pt; font-weight: bold; padding: 0 0 6pt; margin: 0; }
-#OrderInfo dl { margin: 0; width: 42.25mm; }
-
-#CustomerInfo {
-	position: relative; float: left;
-	width: 41.1mm; padding: 7pt 0;
-}
-#PrintContactAddress, #PrintContactElectrical, #PrintContactOther {
-	position: relative; float: left;
-	width: 33.30%; padding: 7pt 0;
-}
-/* #PrintContactAddress { width: 87.4mm; margin-right: 5.3mm; } */ 
-/* #PrintContactElectrical { margin-right: 5.3mm; } */
-
-dl { padding: 0 0 0 32mm; }
-dl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-dt { float: left; clear: left; margin-left: -32mm; width: 32mm; height: auto; font-weight: normal; color: #666; white-space: nowrap; }
-dd { width: 100%; float: left; }
-dd:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-
-small { font-size: 8.5pt; font-weight: normal !important; }
-
-#PrintProducts {
-	width: 100%; clear: both;
-	margin-top: 28pt;
-}
-#VatDesc { text-align: center; font-size: 7.5pt; }
-ul,ol,dl,h1,h2,h3,h4,h5,h6,table,pre,p,blockquote,blockcode,address { margin: 0 0 14pt; }
-
-h1, h2, h3, h4, h5, h6 {
-	font-weight: bold; color: #000;
-	padding: 0; margin: 0 0 14pt;
-}
-h2 { font-size: 14pt; }
-h3 { font-size: 12pt; }
-h4 { font-size: 10pt; }
-
-a, a:link, a:visited, a:active { outline: 0; text-decoration: none; color: #000; }
-
-table {
-	width: 100%; border-collapse: collapse;
-	/* border: 0.5pt solid black; */
-	caption-side: top;
-}
-caption {
-	text-align: center; font-size: 14pt;
-	padding: 7pt 0 6pt; border-bottom: 1pt solid #000;
-}
-th, td {
-	text-align: left;
-	padding: 7.75pt 2.5pt 7pt;
-	border-bottom: 0.25pt dashed black; 
-	font-weight: normal;
-	vertical-align: top;
-}
-
-th *, td * { margin: 0; }
-
-tr > :first-child { padding-left: 0; }
-tr > :last-child { padding-right: 0; }
-
-th h3 { font-size: 10pt; font-weight: bold; }
-th dl { padding-left: 23.2mm; font-size: 8.5pt !important; }
-th dl dt { width: 17.9pt; margin-left: -23.2mm; }
-
-table tr .CartProduct { min-width: 60mm; }
-
-.CartShippingDate, .CartPrice, .CartQuantity, .CartTotal { text-align: right; }
-
-.CartCoupon,
-.CartProductsTotal,
-.CartShippingCost,
-.CartPaymentCost,
-.CartTotal { text-align: right; }
-.CartTotalRow td, .CartTotalRow th { border-bottom: 0; }
-.CartTotalRow td.CartTotal { font-size: 12pt; font-weight: bold; }
-
-</style>
+<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css" />
 
 </head>
 
 <body>
 
 	<div id="ReceiptHeader">
-		<div id="SenderInfo">
-			{ContactCompany}<br />
-			{ContactStreetAddress1}<br />
-			{ContactZip} {ContactCity}
+		<div id="Logo">
+			{Logo}
 		</div>
-		<div id="Logo">{Logo}</div>
+		<div id="ReceiptTitle">
+			<h4>{ShopName}</h4>
+			<h1>{%ReceiptForOrder} {OrderNumber}</h1>
+		</div>
 	</div>
 
 	<div id="InfoWrapper">
 		<div id="ShippingAddress">
-			{OrderShippingInformation}<br />{OrderShippingPhone}
+			{OrderShippingInformation}
 		</div>
 		<div id="OrderInfo">
-			<h1>{%Receipt} {OrderNumber}</h1>
 			<dl>
 				<dt>{%CheckoutCustomerInformation}</dt>
-				<dd>{OrderCustomerInformation}<br />{OrderPhone}</dd>
+				<dd>{OrderCustomerInformation}</dd>
 			</dl>
 			{OrderInfo}
 		</div>
 	</div>
-
-	<div id="PrintProducts">
-		{ReceiptProducts}
+	
+	{OrderProducts(
+		before: '
+			<div id="PrintProducts">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col" class="CartProduct">{%Product}</th>
+							<th scope="col">{%ShippingDate}</th>
+							<th scope="col">{%Quantity}</th>
+							<th scope="col">{%Price}</th>
+							<th scope="col" class="CartTotal">{%Total}</th>
+						</tr>
+					</thead>
+		',
+		helper: '{{
+			<tr>
+				<th class="CartProduct">
+					<h3>{OrderProductName}{OrderProductVariation(before:':<br><em class="ProductVariation">',after:'</em>')}</h3>
+					{OrderProductCode(
+						before: '<dl><dt>{%ProductCode}</dt><dd>',
+						after: '</dd></dl>'
+					)}
+					{OrderProductWarranty(
+						before: '<dl><dt>{%Warranty}</dt><dd>',
+						after: '&nbsp;{%Months}</dd></dl>'
+					)}
+					{OrderProductChoices}
+				</th>
+				<td>{OrderProductShippingStatus}</td>
+				<td>{OrderProductQuantity}</td>
+				<td>
+					{OrderProductPrice(
+						after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>'
+					)}
+				</td>
+				<td class="CartTotal">
+					{OrderProductTotal(
+						after: '<br><small>{OrderProductTotalTax}</small>'
+					)}
+				</td>
+			</tr>
+		}}',
+		after: '
+					<tr class="CartTotal">
+						<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+						<td class="CartTotal">
+							{OrderSubTotal}<br>
+							<small>{OrderSubtotalTax}</small>
+						</td>
+					</tr>
+					{OrderShippingCosts(
+						before: '<tr class="CartTotal"><th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br><small>{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+						after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
+					)}
+					{OrderPaymentCosts(
+						before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+						after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
+					)}
+					<tr class="CartTotal" id="FullTotal">
+						<th scope="row" colspan="4">{%Total} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+						<td class="CartTotal">
+							{OrderTotal}<br>
+							<small>{OrderTax}</small>
+						</td>
+					</tr>
+				</table>
+			</div>
+		'
+	)}
+	
+	<div id="VatInfo">
+		{OrderTotalsByTaxRate}
+		{OrderVATDescription}
 	</div>
-	<div id="VatDesc">{OrderVATDescription}</div>
 
 	<div id="ReceiptContact">
 		<p id="PrintContactAddress">
-			{ContactCompany}<br />
-			{ContactStreetAddress1}<br />
-			{ContactZip} {ContactCity}
+			{ContactCompany(after:'<br>')}
+			{ContactStreetAddress1(after:'{ContactStreetAddress2(before:',&nbsp;')}<br>')}
+			{ContactZip} {ContactCity(after:'<br>')}
+			{ContactCountry}
 		</p>
 		<p id="PrintContactElectrical">
-			{ContactEmail}<br />
-			{ContactInternet}<br />
-			{ContactPhone}
+			{ContactEmail(after:'<br>')}
+			{ContactInternet(after:'<br>')}
+			{ContactPhone(after:'<br>')}
 		</p>
 		<p id="PrintContactOther">
-			{%BusinessID} {ContactBusinessID}
+			{ContactBusinessID(before:'{%BusinessID}')}
 		</p>
 	</div>
 	

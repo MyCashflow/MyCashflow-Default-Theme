@@ -1,0 +1,145 @@
+{Helper(file:'checkout/header')}
+<div id="SidebarBg" class="OmitSidebars">
+	<div id="Main" class="clearfix">
+		<div id="Primary" class="Column">
+		
+			<div class="Content">
+			
+				{Notifications}
+				
+				<h1>{%CheckoutThanksForOrder}</h1>
+					{CheckoutRegistrationForm(
+						before: '
+							<p class="Big">Halutessasi voit vielä luoda tunnuksen kauppaamme tilauksesi tiedoilla, jolloin tilaamisesi jatkossa meiltä helpottuu.<br><a class="Button" title="Luo tunnus" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">Luo tunnus</a></p>
+							<form action="/account/register/" method="post" id="CheckoutThanksRegistrationForm" class="BlockForm">
+							<p>{%CheckoutCreateAccountInfo}</p>
+						',
+						after: '<div class="FormItem FormSubmit">
+							<button type="submit" class="SubmitButton">Luo tunnus</button>
+							</div>
+						</form>'
+					)}
+
+
+				
+				<p class="Big">{OrderPaymentInstructions}</p>
+				
+				{OrderProducts(
+					before: '
+						<div id="OrderProducts">
+							<table>
+								<thead>
+									<tr>
+										<th scope="col" class="CartProduct" colspan="2">{%Product}</th>
+										<th scope="col" class="CartPrice">{%Price}</th>
+										<th scope="col" class="CartQuantity">{%Quantity}</th>
+										<th scope="col" class="CartTotal">{%Total}</th>
+									</tr>
+								</thead>
+								<tfoot>
+								
+									<tr class="CartTotal">
+										<th scope="row" colspan="4">{%CheckoutProductsTotal}<br>
+										<small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+										<td class="CartTotal">
+											{OrderSubTotal}<br>
+											<small>{OrderSubtotalTax}</small>
+										</td>
+									</tr>
+									
+									{OrderShippingCosts(
+										before: '<tr class="CartTotal">
+											<th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br>
+											<small>{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small>
+										</th>
+										<td class="CartTotal">',
+										after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
+									)}
+									
+									{OrderPaymentCosts(
+										force: 'false',
+										before: '<tr class="CartTotal">
+											<th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod}<br>
+											<small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small>
+										</th>
+										<td class="CartTotal">',
+										after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
+									)}
+									
+									<tr class="CartTotal" id="FullTotal">
+										<th scope="row" colspan="4">{%Total}<br>
+										<small>{%VAT}</small>
+									</th>
+									<td class="CartTotal">
+										{OrderTotal}<br>
+										<small>{OrderTax}</small>
+									</td>
+								</tr>
+									
+							</tfoot>
+							<tbody>
+					',
+					helper: '{{
+						<tr>
+							<td class="CartPic">
+								{ProductImage(
+									link: 'false',
+									width: 32,
+									height: 32
+								)}
+							</td>
+							<th class="CartProduct">
+								<h3>{OrderProductName}{OrderProductVariation(before:':<br><em class="ProductVariation">',after:'</em>')}</h3>
+								{OrderProductCode(
+									before: '<dl><dt>{%ProductCode}</dt><dd>',
+									after: '</dd></dl>'
+								)}
+								{OrderProductWarranty(
+									before: '<dl><dt>{%Warranty}</dt><dd>',
+									after: '&nbsp;{%Months}</dd></dl>'
+								)}
+								{OrderProductChoices}
+							</th>
+							<td class="CartPrice">
+								{OrderProductPrice(
+									after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>'
+								)}
+							</td>
+							<td class="CartQuantity">{OrderProductQuantity}</td>
+							<td class="CartTotal">
+								{OrderProductTotal(
+									after: '<br><small>{OrderProductTotalTax}</small>'
+								)}
+							</td>
+						</tr>
+					}}',
+					after: '</tbody>
+							</table>
+						</div>
+					'
+				)}
+
+			</div>
+		</div>
+	
+		
+		<div id="CheckoutThanksOrderInfo" class="Column">
+			
+			<div class="Content">
+
+				<h2 class="BoxHeader">{%OrderInformation}</h2>
+
+				{OrderInfo}
+
+				{OrderShippingInformation(before: '<h2 class="BoxHeader">{%CheckoutShippingInformation}</h2><p>', after: '</p>')}
+
+				{OrderCustomerInformation(before: '<h2 class="BoxHeader">{%CheckoutCustomerInformation}</h2><p>', after: '</p>')}
+				
+				
+			</div>
+			
+		</div>
+
+	</div>
+</div>
+{Helper(file:'checkout/footer')}
