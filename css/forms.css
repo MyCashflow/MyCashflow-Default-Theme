@@ -104,7 +104,7 @@ select[disabled],
 textarea[disabled],
 button[disabled] {
 	color: #999;
-	opacity: 0.7;
+	opacity: 0.5;
 }
 
 /* Input states

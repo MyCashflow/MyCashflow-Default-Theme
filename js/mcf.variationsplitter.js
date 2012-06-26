@@ -1,8 +1,8 @@
 ;(function ( $, window, document, undefined ) {
     
 	function checkLangCode(code) {
-		var mcfLang = mcfLang || {};
-		if (mcfLang[code] === undefined) {
+		mcf.Lang = mcf.Lang || {};
+		if (mcf.Lang[code] === undefined) {
 			return false;
 		} else {
 			return true;
@@ -24,7 +24,7 @@
 		variationType: 'auto',
 		selectWrapper: '<div class="FormItem"></div>',
 		texts: {
-      	loading: (checkLangCode("Loading")) ? mcfLang.Loading : "Loading…"
+      	loading: (checkLangCode("Loading")) ? mcf.Lang.Loading : "Loading…"
   	}
   };
 

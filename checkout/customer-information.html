@@ -1,7 +1,5 @@
 {Helper(file:'checkout/header')}
 <div id="MultiPageCheckout" class="clearfix">
-
-	{Notifications}
 			
 	<form action="/checkout/" method="post">
 		
@@ -21,10 +19,12 @@
 			file: '{{
 				<!-- If user is not logged, ask for shipping address -->
 
-			<div class="FormItem HeaderItem">
-				<h2>Toimitusosoite</h2>
-				<p>Anna erillinen toimitusosoite mikäli se poikkeaa asiakastiedoistasi.</p>
-			</div>
+				<div class="FormItem HeaderItem">
+					<h2>Toimitusosoite</h2>
+					<p>Anna erillinen toimitusosoite mikäli se poikkeaa asiakastiedoistasi.</p>
+				</div>
+				
+				{Notifications(name:'CustomerShippingAddressError')}
 				
 				<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
 					<div class="Checks">
@@ -34,7 +34,7 @@
 						<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
 					</div>
 				</div>
-
+				
 				{CheckoutShippingAddress(
 					mode: 'form',
 					before: '

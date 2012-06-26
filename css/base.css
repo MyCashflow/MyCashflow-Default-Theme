@@ -297,6 +297,7 @@ ol {
 -------------------------------------------------------------- */
 
 table	{
+	position: relative;
 	clear: both; margin: 0 0 18px;
 	position: relative; width: 100%;
 	text-align: left; vertical-align: top;

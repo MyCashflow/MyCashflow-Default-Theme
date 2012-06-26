@@ -7,18 +7,11 @@
 				{Path}
 				<h1>{CampaignName}</h1>
 			</div>
-			{CampaignImage}
-			{CampaignLink}
-			{CampaignDescription(before:'<div class="CategoryDescription">',after:'</div>')}
-			{CampaignDiscountRange(before:'<h3>Alennukset välillä:</h3>')}
 			{CampaignProducts(
 				sort: 'price',
 				classes: 'first||last',
 				limit: 24,
-				pagination: 'after',
-				sorter:  'before',
-				counter: 'before',
-				limiter: false
+				pagination: 'after'
 			)}
 		</div>
 		{Helper(file:'helpers/sidebar-right')}

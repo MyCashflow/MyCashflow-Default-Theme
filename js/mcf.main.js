@@ -16,6 +16,8 @@
 }(jQuery));
 
 $.subscribe("ajax_event", function(originalEvent, ajaxEvent, eventCategory, message, type) {
+
+	window.clearTimeout(mcf.NotificationTimer);
 	
 	var categoryEl = $("#" + eventCategory + "Notification"),
 		message = "<p>" + message + "</p><span class='Close'></span>",
@@ -29,7 +31,7 @@ $.subscribe("ajax_event", function(originalEvent, ajaxEvent, eventCategory, mess
 	if (ajaxEvent === "adding_to_cart") {
 		$("#MiniCartWrapper").append('<div class="CheckoutLoader"></div>');
 	} else if (ajaxEvent === "added_to_cart") {
-		message = message + '<p><a href="#Close" class="Close">' + mcfLang.HideNotification + '</a> | <a href="/cart/">' + mcfLang.ShoppingCartEdit + '</a> | <a href="/checkout/">' + mcfLang.OrderProducts + '</a></p>';
+		message = message + '<p><a href="#Close" class="Close">' + mcf.Lang.HideNotification + '</a> | <a href="/cart/">' + mcf.Lang.ShoppingCartEdit + '</a> | <a href="/checkout/">' + mcf.Lang.OrderProducts + '</a></p>';
 		$.ajax({
 			type: "GET",
 			url: "/interface/Helper",
@@ -53,13 +55,19 @@ $.subscribe("ajax_event", function(originalEvent, ajaxEvent, eventCategory, mess
 	// Keep just one notification per notification category
 	if (categoryEl.length) {
 		categoryEl.fadeOut(250, function() {
-			categoryEl.html(message);
+			categoryEl.html(message).attr("class", "Notification " + type);
 			categoryEl.fadeIn(250);
 		});
 	} else {
 		$notification.append(message).appendTo("#NotificationCenter").fadeIn(250);
 	}
 	
+	// Remove the notifications 5 seconds after the last added notification
+	mcf.NotificationTimer = window.setTimeout(
+    function() {
+    	$("#NotificationCenter").find(".Notification").fadeOut(250);
+    }, 5000
+  );
 })
 
 $(function() {
@@ -92,31 +100,28 @@ $(function() {
 
 	
 	// Livesearch
-	var mcfLiveSearchResultsWidth = $("#SearchForm").css("width");
-	$("#SearchForm").append($('<ul id="LiveSearchResults" style="width: '+ mcfLiveSearchResultsWidth +'"></ul>').hide());
+	mcf.LiveSearchResultsWidth = $("#SearchForm").css("width");
+	$("#SearchForm").append($('<ul id="LiveSearchResults" style="width: '+ mcf.LiveSearchResultsWidth +'"></ul>').hide());
 	
 	$("#SearchInput").typeWatch({
-		highlight:true,
+		highlight: true,
 		wait: 500,
-		callback: function(txt) {
-			//$("#AjaxMsg").text(mcfLang.Searching);
+		callback: function(searchquery) {
 			$.ajax({
 				type: "GET",
 				url: "/interface/SearchProducts",
 				data: {
-					query: txt,
-					limit: 5,
+					query: searchquery,
+					limit: 8,
 					helper: "helpers/livesearchresults"
 				},
 				beforeSend: function() {
-					$(".SearchIndicator", "#SearchForm").fadeIn(500);
+					$("#SearchForm").find(".SearchIndicator").fadeIn(500);
 					$("#SearchForm").addClass("SearchActive");
 				},
 				success: function(results) {
-					//$('#AjaxMsg').slideUp(250);
-					$.publish('foo', 1);
 					$("#LiveSearchResults").html(results).fadeTo(500,0.9);
-					$(".SearchIndicator","#SearchForm").addClass("CloseSearchResults").click(function() {
+					$("#SearchForm").find(".SearchIndicator").addClass("CloseSearchResults").click(function() {
 						$("#SearchInput").val("").blur();
 						$("#LiveSearchResults").html("");
 						$(this).hide().removeClass("CloseSearchResults");
@@ -142,7 +147,7 @@ $(function() {
 		var $FrontBannerScroller = $("#BannerScroller");
 		if ($FrontBannerScroller.find(".FrontBanner").length > 1) {
 			$FrontBannerScroller.wrap('<div id="HoverWrapper" style="position: relative; width: 100%; overflow: hidden;"></div>')
-			.after('<a href="#" id="NextBanner"><span class="Icon"></span>'+mcfLang.Next+'</a><a href="#" id="PrevBanner"><span class="Icon"></span>'+mcfLang.Prev+'</a>');
+			.after('<a href="#" id="NextBanner"><span class="Icon"></span>' + mcf.Lang.Next + '</a><a href="#" id="PrevBanner"><span class="Icon"></span>' + mcf.Lang.Prev + '</a>');
 			$("#ScrollableBanners").css("width", $FrontBannerScroller.find(".FrontBanner").length * 576 + "px");
 			$("#HoverWrapper").hover(function() {
 				$("#NextBanner,#PrevBanner").stop(true, true).fadeTo(500,0.8);
@@ -185,9 +190,9 @@ $(function() {
 	
 		$("#CrossSaleScroller")
 			.css("overflow","hidden")
-			.before('<span id="ScrollToPrev" style="display: none;"><span class="Icon"></span>'+mcfLang.PrevPlural+'</span><span id="ScrollToNext"><span class="Icon"></span>'+mcfLang.NextPlural+'</span>');
+			.before('<span id="ScrollToPrev" style="display: none;"><span class="Icon"></span>' + mcf.Lang.PrevPlural + '</span><span id="ScrollToNext"><span class="Icon"></span>' + mcf.Lang.NextPlural + '</span>');
 			
-		$("#CrossSaleProducts").css("width","2304px");
+		$("#CrossSaleProducts").css("width","9999px");
 		
 		var $prev = $('#ScrollToPrev'),
 				$next = $('#ScrollToNext'),
@@ -233,14 +238,16 @@ $(function() {
 		
 		var target = $(event.currentTarget),
 				pid = target.attr("href").split("/")[2],
-				product = target.closest(".Product"),
-				name = product.find(".ProductName").text();
+				product = target.closest(".Product");
 		
 		if (product.hasClass("ProductVariations") || product.hasClass("ProductTailorings")) {
 			$.colorbox({
-				width: "640px",
-				title: target.text() + "&nbsp;" + name,
-				href: "/interface/ProductBuy?setProduct=" + pid
+				title: target.text(),
+				opacity: 0.5,
+				fixed: true,
+				initialWidth: 100,
+				initialHeight: 100,
+				href: "/interface/Helper?file=helpers/colorbox-buyform&setProduct=" + pid
 			});
 		} else {
 			$.ajax({
@@ -255,7 +262,7 @@ $(function() {
 				},
 				dataType: 'json',
 				beforeSend: function() {
-					$.publish("ajax_event", ["adding_to_cart", "product", mcfLang.AddingToCart]);
+					$.publish("ajax_event", ["adding_to_cart", "product", mcf.Lang.AddingToCart]);
 				},
 				success: function(response) {
 					if (response.notifications && response.notifications.length > 0) {
@@ -288,13 +295,10 @@ $(function() {
 			data: formData + "&ajax=1&response_type=json",
 			dataType: 'json',
 			beforeSend: function() {
-				$.publish("ajax_event", ["adding_to_cart", "product", mcfLang.AddingToCart]);
+				$.publish("ajax_event", ["adding_to_cart", "product", mcf.Lang.AddingToCart]);
 			},
 			success: function(response) {
 				
-				if (colorboxed) {
-					$.colorbox.close();
-				}
 				btn.removeAttr("disabled");
 
 				if (response.notifications && response.notifications.length > 0) {
@@ -306,6 +310,10 @@ $(function() {
 
 			}
 		});
+	
+		if (colorboxed) {
+			$.colorbox.close();
+		}
 		
 	});
 
@@ -333,16 +341,16 @@ $(function() {
 	// Categorynavigation openers
 	$("ul.Categories li:has(> ul)").addClass("Openable").each(function() {
 		if ($(this).hasClass("Current")) {
-			$(this).prepend('<span class="NavOpener Opened" title="'+ mcfLang.HideSubCategories +'">-</span>');
+			$(this).prepend('<span class="NavOpener Opened" title="'+ mcf.Lang.HideSubCategories +'">-</span>');
 		} else {
-			$(this).prepend('<span class="NavOpener" title="'+ mcfLang.ShowSubCategories +'">+</span>');
+			$(this).prepend('<span class="NavOpener" title="'+ mcf.Lang.ShowSubCategories +'">+</span>');
 		}
 		$("> .NavOpener", this).click(function() {
 			$(this).next("a").next("ul").slideToggle(300);
 			if ($(this).text() == "-" ) {
-				$(this).text("+").attr("title",mcfLang.ShowSubCategories);
+				$(this).text("+").attr("title",mcf.Lang.ShowSubCategories);
 			} else {
-				$(this).text("-").attr("title",mcfLang.HideSubCategories);
+				$(this).text("-").attr("title",mcf.Lang.HideSubCategories);
 			}
 			$(this).toggleClass("Opened")
 		});

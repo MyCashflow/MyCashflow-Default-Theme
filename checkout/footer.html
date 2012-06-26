@@ -2,47 +2,35 @@
 			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
     </footer>
 	</div>
+	<div id="NotificationCenter"></div>
 	<script type="text/javascript">
 	//<![CDATA[
 		
-		var mcfThemePath = "/files/{Theme}";
-		var mcfLang = {};
+		var mcf = {};
 		
-		mcfLang.ProductName =								'{ProductName}';
-		mcfLang.ProductAddedNotification =	'{%ProductAddedNotification}';
-		mcfLang.RemoveProductFromCart =			'{%RemoveProductFromCart}';
-		mcfLang.AddingToCart =							'{%AddingToCart}';
-		mcfLang.AddedMessage =							'{%AddedMessage}';
-		mcfLang.ShowSubCategories =					'{%ShowSubCategories}';
-		mcfLang.HideSubCategories =					'{%HideSubCategories}';
-		mcfLang.Searching =									'{%Searching}';
-		mcfLang.Loading =										'{%Loading}';
-		mcfLang.Next =											'{%Next}';
-		mcfLang.Prev =											'{%Prev}';
-		mcfLang.NextPlural =								'{%NextPlural}';
-		mcfLang.PrevPlural =								'{%PrevPlural}';
-		mcfLang.OrderProducts =							'{%OrderProducts}';
-		mcfLang.ShowShoppingCart =					'{%ShowShoppingCart}';
-		mcfLang.ContinueShopping =					'{%ShoppingCartContinueShopping}';
-		mcfLang.Or =												'{%Or}';
+		mcf.ThemePath = "/files/{Theme}";
+		mcf.Lang = {};
+		
+		mcf.Lang.AddingToCart = '{%AddingToCart}';
+		mcf.Lang.ShowSubCategories = '{%ShowSubCategories}';
+		mcf.Lang.HideSubCategories = '{%HideSubCategories}';
+		mcf.Lang.Loading = '{%Loading}';
+		mcf.Lang.Next = '{%Next}';
+		mcf.Lang.Prev = '{%Prev}';
+		mcf.Lang.NextPlural = '{%NextPlural}';
+		mcf.Lang.PrevPlural = '{%PrevPlural}';
+		mcf.Lang.OrderProducts = '{%OrderProducts}';
+		mcf.Lang.Or = '{%Or}';
+		mcf.Lang.HideNotification = '{%HideNotification}';
+		mcf.Lang.ShoppingCartEdit = '{%ShoppingCartEdit}';
+		mcf.Lang.OrderProducts = '{%OrderProducts}';
 
 	//]]>
 	</script>
 	
-	<!-- TO-DO: Minify these -->
-	<script src="/files/{Theme}/js/jquery-1.7.1.min.js"></script>
-	<script src="/files/{Theme}/js/jquery.scroll.js"></script>
-	<script src="/files/{Theme}/js/jquery.customselect.js"></script>
-	<script src="/files/{Theme}/js/jquery.colorbox.js"></script>
-	<script src="/files/{Theme}/js/jquery.typewatch.js"></script>
+	{MinifyJS(
+		files: 'js/jquery-1.7.1.min.js|js/jquery.scroll.js|js/jquery.customselect.js|js/jquery.colorbox.js|js/jquery.typewatch.js|js/mcf.main.js|js/mcf.imageswapper.js|js/mcf.productimages.js|js/mcf.checkout.js'
+	)}
 	
-	<script src="/files/{Theme}/js/mcf.main.js"></script>
-	<script src="/files/{Theme}/js/mcf.imageswapper.js"></script>
-	<script src="/files/{Theme}/js/mcf.productimages.js"></script>
-	
-	<script src="/files/{Theme}/js/mcf.onepagecheckout.js"></script>
-	<script src="/files/{Theme}/js/mcf.checkout.js"></script>
-	
-	{Analytics}
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="{CurrentLanguageCode}">
+<html lang="{CurrentLanguageCode}">
 <head>
 	{Feed}
   <meta charset="utf-8">
@@ -14,7 +14,7 @@
 	
 	<link rel="shortcut icon" type="image/ico" href="/files/{Theme}/i/favicon.ico" />
 
-  <link rel="stylesheet" type="text/css" href="/files/{Theme}/css/master.css" />
+	{MinifyCSS(files:'css/reset.css|css/base.css|css/forms.css|css/colorbox.css|css/master.css')}
 
   <script src="/files/{Theme}/js/modernizr-2.5.2.min.js"></script>
   
@@ -22,11 +22,15 @@
 		{BannerText(name:'head-styles')}
 	</style>
 	
+	{Analytics(for:'head')}
+	
 </head>
 
 <body class="{BodyClass} BlockForm">
-	{AdminTools}
 
+	{AdminTools}
+	{Analytics(for:'body')}
+	
 	<div id="fb-root"></div>
 	<script type="text/javascript">
 		(function(d, s, id) {

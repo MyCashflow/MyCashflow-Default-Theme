@@ -1,9 +1,8 @@
 {Helper(file:'checkout/header')}
 <div id="MultiPageCheckout" class="clearfix">
-	
-	{Notifications}
 			
 	<form action="/checkout/" method="post">
+	
 
 		{Helper(
 			case: 'CustomerNotLogged',
@@ -18,9 +17,10 @@
 							<h2>Asiakastiedot</h2>
 							<p>Asiakastiedot toimivat myös laskutusosoitteenasi.</p>
 						</div>
-						<div class="FormItem">
+						<fieldset id="CheckoutBillingAddress">
+						{Notifications(group:'account')}
 					',
-					after: '</div>'
+					after: '</fieldset>'
 				)}
 				
 				{CheckoutShippingAddress(

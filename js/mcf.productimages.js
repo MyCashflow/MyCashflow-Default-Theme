@@ -10,7 +10,8 @@ $(function() {
 		$("#fakethumbs li a").colorbox({
 			rel: "fake",
 			current: "{current} / {total}",
-			opacity: 0.8
+			opacity: 0.5,
+			fixed: true
 		});
 		// Trigger click on right thumbnail
 		$("#CurrentProductImage").click(function(event) {
@@ -21,7 +22,8 @@ $(function() {
 	} else {
 		$("#CurrentProductImage").colorbox({
 			current: "{current} / {total}",
-			opacity: 0.8
+			opacity: 0.5,
+			fixed: true
 		});
 	}
 

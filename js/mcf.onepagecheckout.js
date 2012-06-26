@@ -23,42 +23,24 @@
 
 		};
 		
-    function detectTagName(hint) {
-			// Build tagname option from the hint if needed
-			if (hint.search("customer_information") > -1) {
-				return "CheckoutBillingAddress";
-			} else if (hint.search("shipping_information") > -1) {
-				return "CheckoutShippingAddress";
-			} else if (hint.search("shipping_method") > -1) {
-				return "CheckoutShippingMethods";
-			} else if (hint.search("payment_method") > -1) {
-				return "CheckoutPaymentMethods";
-			} else if (hint.search("accept_terms") > -1) {
-				return "CheckoutAcceptTerms";
-			} else {
-				return "Cart";
-			}
-    }
-    
     function getDependencies(id) {
     
     	// shortcuts
-    	var that = this;
-    	var complete = that.options.complete;
-    	var get_success = that.options.get_success;
-    	var get_start = that.options.get_start;
-		
-			var url = "/interface/" + id;
-			var $el = $("#" + id);
-			var opts = {
-				mode: 'form',
-				notifications: 'true',
-				ajax: 'true'
-			};
+    	var that = this,
+    		complete = that.options.complete,
+    		get_success = that.options.get_success,
+	    	get_start = that.options.get_start,
+	    	url = "/interface/" + id,
+	    	$el = $("#" + id),
+	    	opts = {
+					mode: 'form',
+					ajax: 'true',
+					response_type: that.options.response_type
+				};
 			
 			// Set the ajax options depending on the tagname
 			if (id === "CheckoutShippingMethods" || id === "CheckoutPaymentMethods") {
-				opts.preselect = false;
+				opts.preselect = 'false';
 			}
 			
 			// Get the dependency and display the returned html
@@ -109,19 +91,34 @@
 				$.ajax({
 					
 					type: "POST",
-					url: 	"/cart/",
-					data: data + "&ajax=1",
+					url: 	"/checkout/",
+					data: data + "&ajax=1&response_type=" + opts.response_type,
 					beforeSend: function(jqXHR, settings) {
 					
 						verbose = (isFocused > 0 || opts.return_self === false) ? false : true;
 						
 						if (typeof opts.post_start === "function") {
-							var start = opts.post_start(el, from_event, verbose, jqXHR, settings);
-							if (start === false) { return false; }
+						
+							var send_data = opts.post_start(el, from_event, verbose, jqXHR, settings);
+							
+							if (send_data === false) {
+							
+								// If send_data is false, the POST is canceled all together
+								return false;
+								
+							} else if (send_data && typeof send_data === 'object' && send_data.length === 2) {
+							
+								// If send_data is object which length is 2, we assume it's the modified jqXHR and settings objects and return them
+								jqXHR = send_data[0];
+								settings = send_data[1];
+
+							}
 						}
 						
 					},
-					success: function(html, textStatus, jqXHR) {
+					success: function(response, textStatus, jqXHR) {
+					
+						var html = (opts.response_type === "json") ? response.content : response;
 									
 						// Check if there's many dependencies and get them
 						if ( typeof opts.dependencies === "object" ) {
@@ -138,16 +135,16 @@
 							that._depsCounter = 0;
 							// No dependencies, call complete
 							if (typeof opts.complete === "function") {
-								opts.complete(el, html);
+								opts.complete(el, response);
 							}
 						}
-												
+						
 						if (opts.return_self && isFocused <= 0 && verbose) {
 							el.html(html);
 						}
 						
 						if (typeof opts.post_success === "function") {
-							opts.post_success(el, html, verbose, textStatus, jqXHR);
+							opts.post_success(el, response, verbose, textStatus, jqXHR);
 						}
 						
 					}
@@ -163,18 +160,17 @@
     	tagname: "auto",
     	dependencies: "auto",
     	return_self: "auto",
+    	response_type: "html",
     	//notifications: "true",
-    	post_start: function(el, from_event, verbose, jqXHR, settings) {
-	    },
-    	post_success: function(el, html, verbose, textStatus, jqXHR) {
+    	post_start: function(el, from_event, verbose, jqXHR, settings) {},
+    	post_success: function(el, response, verbose, textStatus, jqXHR) {
 				var isFocused = el.find(":focus").length;
 				if (update_self && isFocused <= 0) {
 					el.html(html);
 				}
 	    },
-	    get_start: function(el, jqXHR, settings) {
-	    },
-	    get_success: function(el, html, textStatus, jqXHR) {
+	    get_start: function(el, jqXHR, settings) {},
+	    get_success: function(el, response, textStatus, jqXHR) {
 	    	el.find("select").customSelect();
 	    },
 	    complete: function(el) {
@@ -201,8 +197,8 @@
 			
 			// Check if tagname shold be autodetected
 			if (opts.tagname === "auto") {
-				var taghint = el.find("input[name='ajax']").val() || "";
-				opts.tagname = detectTagName(taghint);
+				var taghint = el.find("input[name='response_tag']").val() || "";
+				opts.tagname = taghint.split("(")[0];
 			}
 
 			// Set the tag dependant variables if they're not predefined
@@ -231,13 +227,8 @@
 					break;
 				/*
 				case "Cart":
-				
-					// Should we even make possible to edit the cart from same page as checkout?
+					// Should we even make possible to edit the cart from same page as checkout? Tell me: miska@pulse247.info
 					// While we ponder on this, you can make the Cart by yourself if you're capable :)
-					
-					opts.dependencies = (opts.dependencies === "auto") ? ["CheckoutShippingMethod", "CheckoutPaymentMethod"] : opts.dependencies;
-					opts.return_self = (opts.return_self === "auto") ? true : opts.return_self;
-					break;
 				*/
 				default:
 					// Normally we want to get shipping and payment methods because they tend to change the most

@@ -29,7 +29,7 @@ $(function() {
 				view = wrap.data("view"),
 				helper = "helpers/" + wrap.data("helper"),
 				loadingEl = (view === "cart") ? $("#CartForm") : $("#PreviewContent");
-			
+
 			loadingEl.append('<div class="CheckoutLoader"></div>');
 			
 			$.ajax({
@@ -77,15 +77,44 @@ $(function() {
 			tagname: "auto", // Detect from hidden input
     	dependencies: "auto", // Detect from tagname
     	return_self: "auto", // Detect from tagname
+    	response_type: "json", // We want to have notifications as separate so we ask for json back
 
-			post_start: function(el, from_event, verbose) {
+			post_start: function(el, from_event, verbose, jqXHR, settings) {
+			
 				// If the post updates the sent element it's verbose
 				if (verbose) {
 					// Append loading indicator
 					el.append('<div class="CheckoutLoader"></div>');
 				}
 			},
-			post_success: function(el, html, verbose) {
+			post_success: function(el, response, verbose) {
+			
+				var tagname = el.attr("id");
+			
+				if (response.notifications && response.notifications.length > 0) {
+				
+					var response_notification = $(response.notifications),
+						response_text = response_notification.text(),
+						response_type = response_notification.removeClass("Notification").attr("class");
+					
+					var ScrollToEl = el.prevAll("h2");
+					
+					$.scrollTo(ScrollToEl, {
+						axis: "y",
+						duration: 250,
+						offset: {
+							left: 0,
+							top: -18
+						}
+					});
+					
+					$.publish("ajax_event", ["onepagecheckout_post", tagname, response_text, response_type]);
+					
+				} else {
+					$("#" + tagname + "Notification").fadeOut(125, function() {
+						$(this).remove();
+					});
+				}
 			
 				// If the post updates the sent element it's verbose
 				if (verbose) {
