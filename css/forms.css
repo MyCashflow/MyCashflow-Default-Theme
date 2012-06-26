@@ -1,0 +1,464 @@
+form, fieldset {
+  margin-bottom: 0;
+}
+
+/* Basics
+----------------------------------------------------------- */
+
+.FormItem {
+  padding-left: 126px;
+}
+label,
+.label,
+input,
+select,
+textarea,
+button,
+.Button {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+input,
+select,
+textarea,
+button,
+.Button {
+  color: #333333;
+  font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 18px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+label, .label {
+	display: block;
+  text-align: right;
+  clear: left;
+  width: 126px;
+  margin-left: -126px;
+  margin-bottom: 18px;
+  margin-right: 0;
+  padding: 0 5px 0 0;
+}
+* + label, * + .label {
+  text-align: left;
+  clear: none;
+  width: auto;
+  margin: 0;
+}
+.required > label {
+	font-weight: bold;
+}
+.required > label:before {
+	content: "* ";
+	width: 8px;
+	margin-left: -8px;
+	color: #c00;
+	font-weight: bold;
+}
+.required > * + label {
+	font-weight: normal;
+}
+.required > * + label:before {
+	display: none;
+	content: "";
+}
+
+input, select, textarea {
+  top: -2px;
+  height: 22px;
+  padding: 1px 2px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-color: #a1a1a1 #ccc #d4d4d4;
+  -webkit-box-shadow: inset 0 1px 0 #f2f2f2;
+  -moz-box-shadow: inset 0 1px 0 #f2f2f2;
+  box-shadow: inset 0 1px 0 #f2f2f2;
+}
+textarea {
+  height: auto;
+}
+textarea {
+  height: auto;
+}
+select[multiple] {
+  height: inherit;
+  background-color: #fff;
+}
+:-moz-placeholder {
+  color: #888888;
+}
+::-webkit-input-placeholder {
+  color: #888888;
+}
+input[disabled],
+select[disabled],
+textarea[disabled],
+button[disabled] {
+	color: #999;
+	opacity: 0.5;
+}
+
+/* Input states
+----------------------------------------------------------- */
+
+button:hover,
+.Button:hover {
+  background-color: #ebebeb;
+  background-repeat: repeat-x;
+	background-image: linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -o-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -moz-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -webkit-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -ms-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #ebebeb));
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus,
+button:active,
+.Button:focus,
+.Button:active {
+	outline: none;
+  border-color: #09f;
+  border-bottom-color: #08e;
+  -webkit-box-shadow: 0 0 5px #08e;
+  -moz-box-shadow: 0 0 5px #08e;
+  box-shadow: 0 0 5px #08e;
+}
+
+/* Buttons
+----------------------------------------------------------- */
+
+.Button {
+	float: none;
+	text-decoration: none;
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+}
+.Button:hover {
+	text-decoration: none;
+	color: #333333;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.Button {
+  width: auto;
+  height: auto;
+  top: -2px;
+  padding: 1px 5px;
+  margin-bottom: 14px;
+  background-color: #dbdbdb;
+  background-repeat: repeat-x;
+	background-image: linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -o-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -moz-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -webkit-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -ms-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F4F4F4), color-stop(1, #DBDBDB));
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid #c8c8c8;
+  border-bottom-color: #a8a8a8;
+	 -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+button::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+button.SubmitButton, .Big .Button {
+	padding: 10px 15px;
+	font-size: 15px;
+	font-weight: bold;
+	 -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* Groups
+----------------------------------------------------------- */
+
+.GroupItem > div {
+  float: left;
+  position: relative;
+  padding-bottom: 18px;
+}
+.GroupItem > div > label {
+  display: block; float: none;
+  position: absolute; top: auto;
+	bottom: 16px; left: 0px;
+  padding: 0; margin: 0 5px 0 0;
+  width: auto;
+  color: #666;
+  font-size: 11px;
+  white-space: nowrap;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Checkboxes
+----------------------------------------------------------- */
+
+input[type="checkbox"],
+input[type="radio"] {
+  top: 3px;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  margin-right: 5px;
+  border: none;
+}
+.Checks {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  width: 100%;
+  padding-left: 18px;
+  margin-bottom: 18px;
+}
+.Checks.InlineCheck {
+  width: auto;
+}
+.Checks label {
+  float: none;
+  clear: both;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+.Checks label input[type="checkbox"],
+.Checks label input[type="radio"] {
+  margin-left: -18px;
+  margin-right: 0;
+}
+.Checks label + .FormHelp {
+  top: 0;
+  margin: 0;
+}
+.Checks .DefineShippingMethod + .FormHelp {
+	top: 0;
+	margin: -18px 0 0;
+}
+
+/* Labels on top
+----------------------------------------------------------- */
+
+.BlockForm .FormItem {
+  padding-left: 0;
+}
+.BlockForm label, .BlockForm .label,
+.BlockForm .FormErrorMessage + label,
+.BlockForm .FormErrorMessage + .label {
+  position: relative;
+  top: -4px;
+  text-align: left;
+  clear: left;
+  float: none;
+  display: block;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+.BlockForm * + label,
+.BlockForm * + .label {
+  top: 0;
+  clear: none;
+  float: left;
+  margin: 0 5px 0 0;
+}
+.BlockForm .CheckWrap > label {
+  margin-bottom: 18px;
+  top: 0;
+}
+.BlockForm .Checks label {
+  zoom: 1;
+  top: 0;
+  float: none;
+  margin: 0 0 0 -18px;
+  padding: 0 0 0 18px;
+  clear: both;
+}
+.BlockForm .Checks label:before,
+.BlockForm .Checks label:after {
+  display: table;
+  content: "";
+  zoom: 1;
+}
+.BlockForm .Checks label:after {
+  clear: both;
+}
+
+/* Errors
+----------------------------------------------------------- */
+
+.FormError input,
+.FormError select,
+.FormError textarea {
+	border-color: #900;	
+}
+.FormErrorMessage, .GroupErrorMessage {
+	position: relative;
+	top: -4px;
+	font-weight: bold;
+	color: #900;
+	margin: 0;
+}
+.FormErrorMessage + label,
+.FormErrorMessage + .label,
+.GroupErrorMessage + label,
+.GroupErrorMessage + .label {
+  text-align: right;
+  clear: left;
+  width: 126px;
+  margin-left: -126px;
+  margin-bottom: 18px;
+  margin-right: 0;
+}
+.BlockForm .FormErrorMessage + label,
+.BlockForm .FormErrorMessage + .label,
+.BlockForm .GroupErrorMessage + label,
+.BlockForm .GroupErrorMessage + .label {
+	display: none;
+}
+.GroupItem > div .FormErrorMessage {
+	display: none;
+}
+.GroupItem > div > .FormErrorMessage + label {
+  display: block; float: none;
+  position: absolute; top: auto;
+	bottom: 16px; left: 0px;
+  padding: 0; margin: 0 5px 0 0;
+  width: auto;
+  color: #666;
+  font-size: 11px;
+  white-space: nowrap;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Helps
+----------------------------------------------------------- */
+
+.FormHelp {
+  position: relative;
+  top: 4px;
+  color: #888888;
+  width: 100%;
+  overflow: hidden;
+  clear: both;
+  float: left;
+  margin: -18px 0 18px;
+}
+
+/* Customizing selectboxes
+----------------------------------------------------------- */
+
+.CustomSelectWrap {
+  position: relative;
+  float: left;
+}
+.ReplacedSelect {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  border: 0;
+  padding-right: 31px;
+  padding-left: 4px;
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+.CustomSelect {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: -2px;
+  left: 0;
+  width: 100%;
+}
+.CustomSelect span {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 22px;
+  color: #333333;
+  font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
+  font-weight: normal;
+  line-height: 16px;
+}
+.CustomSelect .sel_outer {
+  padding-right: 18px;
+  border: 1px solid #c8c8c8;
+  border-bottom-color: #a8a8a8;
+  background-color: #dbdbdb;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#f4f4f4), to(#dbdbdb));
+  background-image: -moz-linear-gradient(top, #f4f4f4, #dbdbdb);
+  background-image: -ms-linear-gradient(top, #f4f4f4, #dbdbdb);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #dbdbdb));
+  background-image: -webkit-linear-gradient(top, #f4f4f4, #dbdbdb);
+  background-image: -o-linear-gradient(top, #f4f4f4, #dbdbdb);
+  background-image: linear-gradient(top, #f4f4f4, #dbdbdb);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.CustomSelect .sel_outer .sel_inner {
+  height: 100%;
+  padding: 0 4px;
+  line-height: 20px;
+  border-right: 1px solid #c8c8c8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.CustomSelect .sel_outer .sel_arrow {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 21px;
+  height: 22px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAKCAYAAACJxx+AAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5NUE3NTM1NDM1MjA2ODExOEMxNzg3RDFDNjQ3OTU0NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCMkY4RDg2NjJENzIxMUUxODVGQ0I4OENDNjA4RkI2QyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCMkY4RDg2NTJENzIxMUUxODVGQ0I4OENDNjA4RkI2QyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDU4MDExNzQwNzIwNjgxMTg3MUZEMzcxRERBRTJGMEMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OTVBNzUzNTQzNTIwNjgxMThDMTc4N0QxQzY0Nzk1NDYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz531lxAAAAAgklEQVR42mJhQAAOKAaBH1DMwIIsmV1U+R7EmdrXLghTyIQuCQJQNlicESrwnwELAJrEyPj//39HINsSiA3R5M8D8XFGJMexoyn4CXIDyJE/gFZ8x2UFE8iKKb1teeiSIDGo9QwMIAYQ54IcC8IgNkySEaYDybEMYMcxMu4HMQACDAAx3T2dCpdi7AAAAABJRU5ErkJggg==) no-repeat 50% 50%;
+}
+.CustomSelect.ActiveSelect .sel_outer {
+  border-color: #09f;
+  border-bottom-color: #08e;
+  -webkit-box-shadow: 0 0 5px #6cf;
+  -moz-box-shadow: 0 0 5px #6cf;
+  box-shadow: 0 0 5px #6cf;
+}

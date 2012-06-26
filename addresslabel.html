@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>{%Order} {OrderNumber}</title>
+  <style type="text/css">
+		* { margin: 0; padding: 0; border: 0; }
+    @page {
+      size: A5 landscape;
+			margin: 0; padding: 0;
+    }
+		body {
+			color: #000; background: #FFF;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 12pt; line-height: 18pt;
+			text-align: left;
+		}
+		html, body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		img {
+			display: block;
+			margin: 0 auto 18pt; padding: 0;
+			prince-image-resolution: 300;
+			max-height: 60mm;
+			max-width: 60mm;
+		}
+		#AddressInformation {
+			float: left;
+			height: 100%;
+			width: 61.8%;
+			border-right: 0.5pt solid black;
+		}
+		#SenderInfo {
+			border-bottom: 0.5pt solid black;
+		}
+		#OrderInformation {
+			float: left;
+			width: 38.2%;
+			margin-left: -0.5pt;
+		}
+		.Content {
+			padding: 10mm;
+		}
+		h2 {
+			font-size: 16pt;
+			margin: 0 0 18pt;
+		}
+		dl {
+			display: block;
+			margin: 0 0 9pt;
+		}
+		dt {
+		}
+		dd {
+			margin-left: 18pt;
+		}
+  </style>
+</head>
+<body>
+
+	<div id="AddressInformation">
+		<div id="SenderInfo" class="Content">
+			<h2>Lähettäjä:</h2>
+			<p>
+				{ContactCompany(after:'<br>')}
+				{ContactStreetAddress1(after:'{ContactStreetAddress2(before:',&nbsp;')}<br>')}
+				{ContactZip} {ContactCity(after:'<br>')}
+				{ContactCountry}
+			</p>
+		</div>
+		<div id="ReceiverInfo" class="Content">
+			<h2>Vastaanottaja:</h2>
+			<p>
+				{OrderShippingCompany(after:',&nbsp;')}
+				{OrderShippingName}<br>
+				{OrderShippingAddress}<br>
+				{OrderShippingZip} {OrderShippingCity}<br>
+				{OrderShippingCountry}<br>
+				{OrderShippingPhone(before:'<br>')}
+				{OrderShippingEmail(before:'<br>')}
+			</p>
+		</div>
+	</div>
+	
+	<div id="OrderInformation">
+		<div class="Content">
+			{Logo}
+			<dl>
+			
+				<dt>{%Ordernumber}</dt>
+				<dd>{OrderNumber}</dd>
+				
+				<dt>{%OrderDate}</dt>
+				<dd>{OrderDate}</dd>
+				
+			</dl>
+		</div>
+	</div>
+	
+</body>
+</html>

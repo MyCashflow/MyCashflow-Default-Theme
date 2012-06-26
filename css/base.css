@@ -1,0 +1,327 @@
+/* Clearing where needed
+----------------------------------------------------------- */
+
+/* For modern browsers */
+.clearfix:before, .clearfix:after,
+.FormItem:before, .Content:after,
+.Content:before, .FormItem:after,
+.BlockForm .Checks label:before,
+.BlockForm .Checks label:after,
+.ShippingMethodWrapper:before,
+.ShippingMethodWrapper:after,
+.DefineShippingMethod:before,
+.DefineShippingMethod:after,
+.PaymentMethodWrapper:before,
+.PaymentMethodWrapper:after,
+.DefinePaymentMethod:before,
+.DefinePaymentMethod:after,
+.Pagination:before,
+.Pagination:after {
+    content:"";
+    display:table;
+}
+.clearfix:after,
+.FormItem:after,
+.Content:after,
+.BlockForm .Checks label:after,
+.ShippingMethodWrapper:after,
+.DefineShippingMethod:after,
+.PaymentMethodWrapper:after,
+.DefinePaymentMethod:after,
+.Pagination:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix,
+.FormItem,
+.Content,
+.BlockForm .Checks label,
+.ShippingMethodWrapper,
+.ShippingMethodWrapper,
+.DefineShippingMethod,
+.PaymentMethodWrapper,
+.DefinePaymentMethod,
+.Pagination:after {
+	zoom:1;
+}
+
+/* Basic Typography
+----------------------------------------------------------- */
+
+body { /* The base of all typographic rules */
+  font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
+  font-size: 12px; line-height: 18px; color: #222;
+}
+
+/* Basic margins on block elements */
+
+ul,ol,dl,h1,h2,h3,h4,h5,h6,table,pre,p,blockquote,blockcode,address { margin: 0 0 18px; }
+
+/* Headers */
+
+h1,h2,h3,h4,h5,h6 { 
+  font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
+  color: #444; font-weight: bold;
+}
+h1 { font-size: 26px; font-weight: normal; }
+h2 { font-size: 15px; }
+h3 { font-size: 12px; margin: 0; }
+h4 { font-size: 11px; text-transform: uppercase; margin: 0; }
+
+/* Headers in a pretty box */
+
+.BoxHeader {
+	position: relative; width: auto; clear: both;
+	margin: -1px 0 0; padding: 8px 15px 9px;
+	border-bottom: 1px solid #CCCCCC; border-top: 1px solid #D9D9D9;
+  background-color: #E8E8E8;
+  background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
+	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+  -webkit-box-shadow: inset 0 1px 0 #FFF;
+  -moz-box-shadow: inset 0 1px 0 #FFF;
+  box-shadow: inset 0 1px 0 #FFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+  cursor: default;
+}
+.BoxHeader label {
+	float: left !important;
+	width: auto !important;
+	top: 0px !important;
+	font-weight: bold;
+}
+.BoxHeader label + a {
+	font-size: 11px; float: right;
+}
+
+/* Text elements */
+
+dt {
+	color: #444;
+	font-weight: bold;
+}
+dd {
+	color: #222;
+	margin-left: 27px;
+}
+
+/* Some definition lists inline */
+.Product .Prices dt,
+table dt {
+	display: inline;
+	margin: 0 3px 0 0;
+}
+.Product .Prices dd,
+table dd {
+	display: inline;
+	margin: 0 9px 0 0;
+}
+
+
+a { color: #069; }
+a:hover { color: #09f; }
+
+blockquote, q { font-style: italic; }
+blockquote { margin: 0 54px; font-size: 15px; }
+cite { font-weight: bold; font-style: normal; }
+strong { font-weight: bold; }
+em { font-style: italic; }
+dfn { font-weight: bold; }
+small { font-size: 85%; }
+
+abbr { border-bottom: 1px dotted #666; }
+address { font-style: italic; }
+
+/* Lists */
+
+ul,
+ol {
+	list-style-type: disc;
+	list-style-position: outside;
+	margin-left: 27px;
+}
+ul ul,
+ol ol,
+ol ul,
+ul ol {
+	margin-bottom: 0;
+	margin-left: 27px;
+}
+ul ul,
+ol ul {
+	list-style-type: circle;
+}
+ul ul ul {
+	list-style-type: square;
+}
+ol {
+	list-style-type: decimal;
+}
+
+/* Some default classes
+-------------------------------------------------------------- */
+
+.Big { font-size: 125%; }
+.Center { text-align: center; }
+
+/* Content wrapper */
+.Content { padding: 18px 15px; }
+
+/* Prices */
+.Prices dt {}
+.Prices dd {}
+.Prices dd.Price { font-weight: bold; }
+.Prices dd.ListPrice {
+	text-decoration: line-through;
+	margin-right: 5px;
+	font-size: 11px;
+	color: #888;
+}
+.Prices dd.DiscountPrice	{
+	font-size: 15px;
+	color: #e55f05;
+}
+
+/* Prices at product lists */
+.Product .Prices dt {
+	display: none;
+}
+.Product .Prices dt.PriceFrom {
+	font-size: 11px;
+	color: #888;
+	font-weight: normal;
+}
+.Product .Prices dd {
+	margin: 0 6px 0 0;
+}
+
+/* Some padding around currency symbol */
+.Currency { padding: 0 2px; }
+
+#NotificationCenter {
+	position: fixed; z-index: 999;
+	top: 18px; left: 50%;
+	margin: 0 -360px; padding: 0;
+	width: 720px;
+}
+.Notification {
+	position: relative;
+	padding: 8px; font-size: 12px;
+	margin: 0 0 9px; border: 1px solid #dedecc;
+	background: #ffffe5; text-align: center;
+	-moz-border-radius: 5px; -webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+#NotificationCenter .Notification {
+	opacity: .9;
+	filter: alpha(opacity=90);
+	-ms-filter: "alpha(opacity=90)";
+	-khtml-opacity: .9;
+	-moz-opacity: .9;
+}
+.Notification p {
+	margin: 0;
+}
+.Notification p a { font-weight: bold; }
+.Notification p + p { margin-top: 18px; }
+
+.Success {
+	border-color: #d5decc;
+	background: #ebf5e1; 
+}
+.Error {
+	border-color: #decccc;
+	background: #f5e1e1;
+}
+.Notification span.Close {
+	display: block; position: absolute;
+	top: 8px; right: 8px;
+	width: 16px; height: 16px;
+	background: url(../i/close.png) no-repeat 50% 50%;
+}
+
+/* Banners
+-------------------------------------------------------------- */
+
+.Banner {
+	display: block;
+	font-size: 11px; color: #444;
+	background: #FFF; text-align: center;
+	margin: 9px 6px; padding: 8px 8px 0;
+	border: 1px solid #d9d9d9;
+	border-bottom: 1px solid #cccccc;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-border-radius: 5px;
+	-webkit-transition: all 0.15s ease-in-out;
+	-moz-transition: all 0.15s ease-in-out;
+	-o-transition: all 0.15s ease-in-out;
+	-ms-transition: all 0.15s ease-in-out;
+	transition: all 0.15s ease-in-out;
+	text-decoration: none;
+}
+.Banner:hover { color: #444; }
+.Banner[href]:hover {
+	border-color: #09f;
+  -webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+  -moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+  box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+}
+
+.Banner > * { margin: 0 auto 9px; }
+.Banner img { display: block; margin: 0 auto 9px; }
+
+/* Banners at footer */
+
+.FooterBanner {
+	vertical-align: top;
+	display: -moz-inline-stack;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+}
+
+/* Banners at sidebar */
+
+.SidebarBanner {
+	clear: both; 
+	margin: 6px;
+}
+
+/* Tables
+-------------------------------------------------------------- */
+
+table	{
+	position: relative;
+	clear: both; margin: 0 0 18px;
+	position: relative; width: 100%;
+	text-align: left; vertical-align: top;
+	border: 0;
+}
+caption {
+	caption-side: top; text-align: center;
+	font-size: 12px; padding: 0;
+	font-weight: normal; border: 0;
+	font-style: italic; color: #888;
+}	
+th, td {
+	border-bottom: 1px solid #D9D9D9;
+	padding: 8px 9px 9px;
+	vertical-align: top; text-align: left;
+}
+th {
+	color: #444;
+	font-weight: bold;
+}
+thead th, thead td {
+	font-size: 15px;
+	padding: 12px 9px 4px;
+	border-bottom: 2px solid #444;
+}
+tfoot td, tfoot th {}
+tfoot th { font-weight: normal; }

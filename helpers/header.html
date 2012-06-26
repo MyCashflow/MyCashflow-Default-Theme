@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="{CurrentLanguageCode}">
+<head>
+	{Feed}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{Title}</title>
+  <meta name="description" content="{MetaDescription}">
+
+  <meta name="viewport" content="width=device-width">
+  
+  <!-- OpenGraph for Facebook -->
+	{Helper(file:'helpers/facebook-opengraph')}
+	
+	<link rel="shortcut icon" type="image/ico" href="{ThemeUrl}/i/favicon.ico" />
+
+	{MinifyCSS(files:'css/reset.css|css/base.css|css/forms.css|css/colorbox.css|css/master.css')}
+
+  <script src="{ThemeUrl}/js/modernizr-2.5.2.min.js"></script>
+  
+	<style type="text/css" media="all">
+		{BannerText(name:'head-styles')}
+	</style>
+	
+	{Analytics(for:'head')}
+	
+</head>
+
+<body class="{BodyClass} BlockForm">
+
+	{AdminTools}
+	{Analytics(for:'body')}
+	
+	<div id="fb-root"></div>
+	<script type="text/javascript">
+		(function(d, s, id) {
+			var langcode = "{CurrentLanguageCode}";
+			switch (langcode) {
+				case "fi":
+					langcode = "fi_FI";
+					break;
+				case "se":
+					langcode = "sv_SE";
+					break;
+				case "de":
+					langcode = "de_DE";
+					break;
+				default:
+					langcode = "en_US";					
+			}
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/" + langcode + "/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="Container">
+		<header id="Header" class="clearfix">
+			{Logo(
+				width:384,
+				height:126
+			)}
+			{CustomerNavigation}
+			
+			{CurrencyNavigation(
+				before: '
+					<ul class="NavigationList DropdownNavigation" id="CurrencyNavigation">
+						<li><a><span class="Icon CurrencyIcon"></span>{Currency}</a>',
+				after: '
+						</li>
+					</ul>'
+			)}
+			
+			<!-- TO-DO: Versiovalikon helper -->
+			{LanguageNavigation(
+				before: '
+					<ul class="NavigationList DropdownNavigation" id="LanguageNavigation">
+						<li><a><span class="Icon LanguageIcon"></span>{CurrentLanguage}</a>',
+				after: '
+						</li>
+					</ul>'
+			)}
+			
+			{Search}
+		</header>

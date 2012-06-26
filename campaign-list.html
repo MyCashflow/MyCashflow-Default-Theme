@@ -1,0 +1,20 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				{Path}
+				<h1>{CampaignName}</h1>
+			</div>
+			{CampaignProducts(
+				sort: 'price',
+				classes: 'first||last',
+				limit: 24,
+				pagination: 'after'
+			)}
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

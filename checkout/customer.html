@@ -1,0 +1,92 @@
+{Helper(file:'checkout/header')}
+<div id="MultiPageCheckout" class="clearfix">
+			
+	<form action="/checkout/" method="post">
+
+		{Helper(
+			case: 'CustomerNotLogged',
+			file: '{{
+			
+				<!-- User is not logged, use forms to input addresses -->
+				
+				{CheckoutBillingAddress(
+					mode: 'form',
+					notifications: 'false',
+					before:	'
+						<div class="FormItem HeaderItem">
+							<h2>Asiakastiedot</h2>
+							<p>Asiakastiedot toimivat myös laskutusosoitteenasi.</p>
+						</div>
+						<fieldset id="CheckoutBillingAddress">
+					',
+					after: '</fieldset>'
+				)}
+				
+				{CheckoutShippingAddress(
+					mode: 'form',
+					notifications: 'false',
+					before: '
+						<div class="FormItem HeaderItem">
+							<h2>Toimitusosoite</h2>
+							<p>Anna erillinen toimitusosoite mikäli se poikkeaa asiakastiedoistasi.</p>
+						</div>
+
+						{Notifications(name:'CustomerShippingAddressError')}
+			
+						<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
+							<div class="Checks">
+								<label>
+									<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
+								</label>
+								<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
+							</div>
+						</div>
+		
+						<fieldset id="CheckoutShippingAddress">
+					',
+					after: '</fieldset>'
+				)}
+				
+			}}'
+		}
+
+		{Helper(
+			case: 'CustomerLogged',
+			file: '{{
+
+				<!-- User is logged, use preview and address book -->
+
+				{CheckoutBillingAddress(
+					before:	'
+						<div class="FormItem HeaderItem">
+							<h2>Asiakastiedot</h2>
+							<p>Asiakastiedot toimivat myös laskutusosoitteenasi.</p>
+						</div>
+						<div class="FormItem">
+						<p>
+					',
+					after: '<br><a href="/checkout/customer_information">Muokkaa</a></p></div>'
+				)}
+
+				{CheckoutShippingAddress(
+					mode: 'select',
+					before: '
+						<div class="FormItem HeaderItem">
+							<h2>Valitse toimitusosoite</h2>
+							<p>Valitse mihin osoitteeseen haluat tilauksesi toimitettavan tai <a href="/checkout/shipping_information/new/">lisää uusi toimitusosoite</a>.</p>
+						</div>
+						<fieldset id="CheckoutAddressBook">',
+					after: '</fieldset>'
+				)}
+				
+			}}'
+		}
+
+		<div class="FormItem FormSubmit">
+			<button type="submit" class="SubmitButton">Jatka tilaamista</button>
+		</div>
+		
+	</form>
+	
+</div>
+{Helper(file:'checkout/footer')}

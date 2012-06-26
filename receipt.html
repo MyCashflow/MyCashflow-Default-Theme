@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%Receipt} {OrderNumber}</title>
+
+<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css" />
+
+</head>
+
+<body>
+
+	<div id="ReceiptHeader">
+		<div id="Logo">
+			{Logo}
+		</div>
+		<div id="ReceiptTitle">
+			<h4>{ShopName}</h4>
+			<h1>{%ReceiptForOrder} {OrderNumber}</h1>
+		</div>
+	</div>
+
+	<div id="InfoWrapper">
+		<div id="ShippingAddress">
+			{OrderShippingInformation}
+		</div>
+		<div id="OrderInfo">
+			<dl>
+				<dt>{%CheckoutCustomerInformation}</dt>
+				<dd>{OrderCustomerInformation}</dd>
+			</dl>
+			{OrderInfo}
+		</div>
+	</div>
+	
+	{OrderProducts(
+		before: '
+			<div id="PrintProducts">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col" class="CartProduct">{%Product}</th>
+							<th scope="col">{%ShippingDate}</th>
+							<th scope="col">{%Quantity}</th>
+							<th scope="col">{%Price}</th>
+							<th scope="col" class="CartTotal">{%Total}</th>
+						</tr>
+					</thead>
+		',
+		helper: '{{
+			<tr>
+				<th class="CartProduct">
+					<h3>{OrderProductName}{OrderProductVariation(before:':<br><em class="ProductVariation">',after:'</em>')}</h3>
+					{OrderProductCode(
+						before: '<dl><dt>{%ProductCode}</dt><dd>',
+						after: '</dd></dl>'
+					)}
+					{OrderProductWarranty(
+						before: '<dl><dt>{%Warranty}</dt><dd>',
+						after: '&nbsp;{%Months}</dd></dl>'
+					)}
+					{OrderProductChoices}
+				</th>
+				<td>{OrderProductShippingStatus}</td>
+				<td>{OrderProductQuantity}</td>
+				<td>
+					{OrderProductPrice(
+						after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>'
+					)}
+				</td>
+				<td class="CartTotal">
+					{OrderProductTotal(
+						after: '<br><small>{OrderProductTotalTax}</small>'
+					)}
+				</td>
+			</tr>
+		}}',
+		after: '
+					<tr class="CartTotal">
+						<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+						<td class="CartTotal">
+							{OrderSubTotal}<br>
+							<small>{OrderSubtotalTax}</small>
+						</td>
+					</tr>
+					{OrderShippingCosts(
+						before: '<tr class="CartTotal"><th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br><small>{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+						after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
+					)}
+					{OrderPaymentCosts(
+						before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+						after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
+					)}
+					<tr class="CartTotal" id="FullTotal">
+						<th scope="row" colspan="4">{%Total} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+						<td class="CartTotal">
+							{OrderTotal}<br>
+							<small>{OrderTax}</small>
+						</td>
+					</tr>
+				</table>
+			</div>
+		'
+	)}
+	
+	<div id="VatInfo">
+		{OrderTotalsByTaxRate}
+		{OrderVATDescription}
+	</div>
+
+	<div id="ReceiptContact">
+		<p id="PrintContactAddress">
+			{ContactCompany(after:'<br>')}
+			{ContactStreetAddress1(after:'{ContactStreetAddress2(before:',&nbsp;')}<br>')}
+			{ContactZip} {ContactCity(after:'<br>')}
+			{ContactCountry}
+		</p>
+		<p id="PrintContactElectrical">
+			{ContactEmail(after:'<br>')}
+			{ContactInternet(after:'<br>')}
+			{ContactPhone(after:'<br>')}
+		</p>
+		<p id="PrintContactOther">
+			{ContactBusinessID(before:'{%BusinessID}')}
+		</p>
+	</div>
+	
+</body>
+</html>

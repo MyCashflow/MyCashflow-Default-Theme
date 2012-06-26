@@ -1,0 +1,23 @@
+{Helper(file:'checkout/header')}
+<div id="MultiPageCheckout" class="clearfix">
+			
+	<form action="/checkout/" method="post">
+		<div class="FormItem HeaderItem">
+			<h2>Toimitusosoite</h2>
+			<p>Anna osoite johon haluat tilauksesi toimitettavan.</p>
+		</div>
+		
+		{CheckoutShippingAddress(
+			mode: 'form',
+			before: '<fieldset>',
+			after: '</fieldset>'
+		)}
+		
+		<div class="FormItem FormSubmit">
+			<button type="submit">Tallenna toimitusosoite ja jatka tilaamista</button>
+		</div>
+
+	</form>
+	
+</div>
+{Helper(file:'checkout/footer')}

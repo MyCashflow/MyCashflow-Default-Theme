@@ -1,0 +1,24 @@
+{Helper(file:'checkout/header')}
+<div id="MultiPageCheckout" class="clearfix">
+	
+	<form action="/checkout/" method="post">
+
+		<div class="FormItem HeaderItem">
+			<h2>Toimitustapa</h2>
+			<p>Valitse sinulle sopivin toimitustapa.</p>
+		</div>
+
+		<fieldset id="CheckoutShippingMethods">
+			{CheckoutShippingMethods(
+				mode: 'form'
+			)}
+		</fieldset>
+
+		<div class="FormItem FormSubmit">
+			<button type="submit" class="SubmitButton">Jatka tilaamista</button>
+		</div>
+		
+	</form>
+
+</div>
+{Helper(file:'checkout/footer')}

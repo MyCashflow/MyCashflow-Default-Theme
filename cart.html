@@ -1,0 +1,46 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg" class="OmitRightSidebar">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				<a class="Button CheckoutButton" href="/checkout/">Tilaa tuotteet</a>
+				{Path}
+				<h1>{PageTitle}</h1>
+			</div>
+			<div class="Content">
+
+				{Notifications(group:'cart')}
+
+				<form action="/cart/update/" method="post" id="CartForm">
+					{Helper(file:'helpers/full-cart')}
+					<button type="submit" id="UpdateCartButton">Päivitä ostoskori</button>
+				</form>
+
+				<div id="SubmitCampaignCode" data-helper="full-cart" data-view="cart">
+					{CampaignCode(
+						mode: 'auto',
+						action: 'cart',
+						notifications: 'true',
+						ajax: 'true'
+					)}
+				</div>
+				
+				<a class="Button CheckoutButton" href="/checkout/">Tilaa tuotteet</a>
+				
+			</div>
+
+			{CrossSaleProducts(
+				type:'normal',
+				limit:12,
+				before:'
+					<h2 class="BoxHeader Center">{%CrossSalesForCart}</h2>
+					<div id="CrossSaleScroller">
+						<div id="CrossSaleProducts">',
+				after:'</div></div>'
+			)}
+
+		</div>
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

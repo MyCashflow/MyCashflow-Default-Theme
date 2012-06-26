@@ -1,0 +1,24 @@
+{CartProducts(
+	before: '<ul>',
+	helper:	'{{
+		<li>
+			<h3><a href="{ProductUrl}">{ProductName}</a></h3>
+			<dl>
+				<dt>{%Price}</dt>
+				<dd>{CartProductPrice}</dd>
+				<dt>{%Quantity}</dt>
+				<dd>{CartProductQuantity(mode:'preview')}</dd>
+				<dd class="CartProductRemove">{CartProductDelete}</dd>
+			</dl>
+		</li>
+	}}',
+	after: '
+		</ul>
+		<dl id="MiniCartFooter">
+			<dt>{%CheckoutProductsTotal}</dt>
+			<dd class="SubTotal">{CartSubTotal}</dd>
+			<dd class="CartLink"><a href="/cart/">{%ShoppingCartEdit}</a></dd>
+			<dd class="CheckoutLink"><a href="/checkout/" class="Button CheckoutButton">Tilaa tuotteet</a></dd>
+		</dl>',
+	or: '<p class="CartEmpty">{%ShoppingCartIsEmpty} :(</p>'
+)}

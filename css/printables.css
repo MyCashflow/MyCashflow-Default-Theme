@@ -1,0 +1,197 @@
+* { margin: 0; padding: 0; border: 0; }
+
+@page {
+	size: A4;
+	margin: 30mm 15mm;
+	border-top: 0.5pt solid black;
+	@top {
+		content: flow(head);
+		vertical-align: top;
+	}
+	@bottom {
+		content: flow(foot);
+		vertical-align: top;
+	}
+}
+body {
+  color: #000; background: #FFF;
+  font-family: sans-serif;
+  font-size: 9pt; line-height: 12pt;
+	text-align: left;
+}
+
+/* Header */
+#ReceiptHeader {
+	position: relative;
+	top: 5mm; flow: static(head);
+	height: 25mm; overflow: hidden;
+}
+#Logo {
+	float: left;
+	width: 100mm;
+	height: 20mm;
+	overflow: hidden;
+}
+#Logo img {
+	display: block;
+	margin: 0; padding: 0;
+	prince-image-resolution: 300;
+	max-height: 20mm;
+	max-width: 80mm;
+}
+#ReceiptTitle {
+	float: left; width: 80mm;
+	overflow: hidden;
+	padding-top: 4mm;
+}
+#ReceiptTitle * {
+	margin: 0; line-height: 16pt;
+}
+#ReceiptTitle h1 {
+	font-size: 14pt;
+}
+
+/* Footer */
+#ReceiptContact {
+	position: relative;
+	height: 25mm;
+	border-top: 1pt solid black;
+	flow: static(foot);
+}
+#PrintContactAddress,
+#PrintContactElectrical,
+#PrintContactOther {
+	position: relative; float: left;
+	width: 33.30%; padding: 7pt 0;
+}
+#InfoWrapper {
+	float: left; width: 100%;
+	overflow: hidden;
+	padding: 5mm 0;
+}
+#ShippingAddress {
+	position: relative;
+	float: left; width: 100mm;
+	overflow: hidden;
+}
+#ShippingAddress p {
+	font-size: 12pt; line-height: 18pt;
+	margin: 0; padding: 0;
+}
+#OrderInfo {
+	position: relative;
+	float: left; width: 80mm;
+}
+#OrderInfo dl {
+	margin: 0; width: 45mm;
+}
+
+#CustomerInfo {
+	position: relative; float: left;
+	width: 41.1mm; padding: 7pt 0;
+}
+
+dl { padding: 0 0 0 35mm; }
+dl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+dt { float: left; clear: left; margin-left: -35mm; width: 35mm; height: auto; font-weight: normal; color: #666; white-space: nowrap; }
+dd { width: 100%; float: left; }
+dd:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+small { font-size: 7.5pt; font-weight: normal !important; }
+
+ul,ol,dl,h1,h2,h3,h4,h5,h6,table,pre,p,blockquote,blockcode,address { margin: 0 0 14pt; }
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold; color: #000;
+	padding: 0; margin: 0 0 14pt;
+}
+h2 { font-size: 14pt; }
+h3 { font-size: 12pt; }
+h4 { font-size: 10pt; }
+
+a, a:link, a:visited, a:active { outline: 0; text-decoration: none; color: #000; }
+
+#PrintProducts {
+	width: 100%;
+	clear: both;
+	margin-top: 14pt;
+}
+#VatDesc { text-align: center; font-size: 7.5pt; }
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+th, td {
+	text-align: left;
+	padding: 5pt 3pt;
+	border-bottom: 0.25pt dashed black; 
+	font-weight: normal;
+	vertical-align: top;
+}
+
+thead th {
+	text-transform: uppercase;
+	font-size: 7.5pt;
+	color: #666; font-weight: bold;
+}
+
+#PrintProducts tfoot {display: table-row-group !important;}
+#PrintProducts tfoot tr td,
+#PrintProducts tfoot tr th {
+	padding-bottom: 0;
+}
+th *, td * { margin: 0; }
+
+tr > :first-child { padding-left: 0; }
+tr > :last-child { padding-right: 0; }
+
+tr th, tr td {
+	text-align: left;
+}
+tr th + th, tr th + td,
+tr td + td, tr td + th {
+	text-align: right;
+}
+
+thead tr th { text-align: left !important; }
+thead tr th + th { text-align: right !important; }
+
+#PrintProducts tfoot tr td,
+#PrintProducts tfoot tr th { text-align: right; }
+
+th h3 { font-size: 10.5pt; font-weight: bold; }
+th h3 .ProductVariation { font-size: 9pt; font-weight: normal; vertical-align: text-top; font-style: normal; }
+
+th h3 + * { margin-top: 3.5pt; }
+
+th dl { padding-left: 25mm; font-size: 8.5pt !important; }
+th dl dt { width: 23mm; margin-left: -25mm; }
+
+table tr th.CartProduct { min-width: 60mm; }
+
+td.CartTotal { font-weight: bold; }
+tr.CartTotal td, tr.CartTotal th { border-bottom: 0; }
+tr.CartTotal td.CartTotal { }
+tr#FullTotal td.CartTotal { font-size: 12pt; }
+
+#VatInfo { margin: 0 auto 1em; text-align: center; font-size: 7.5pt; }
+#VatInfo table {
+	width: auto; margin: 0 auto;
+	font-size: 7.5pt; line-height: 9pt;
+}
+#VatInfo table td,
+#VatInfo table th {
+	padding: 3px 9px;
+}
+#PaymentDetails {
+	width: 100%; border-collapse: collapse;
+	border: 0.5pt solid black;
+	caption-side: top; height: 6cm;
+	margin: 0 auto 1em;
+}
+#PaymentDetails td {
+	border: 0.5pt solid black;
+	padding: 3pt; text-align: left !important;
+}
+

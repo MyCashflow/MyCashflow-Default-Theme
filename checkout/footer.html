@@ -1,0 +1,36 @@
+    <footer id="Footer">
+			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
+    </footer>
+	</div>
+	<div id="NotificationCenter"></div>
+	<script type="text/javascript">
+	//<![CDATA[
+		
+		var mcf = {};
+		
+		mcf.ThemePath = "/files/{Theme}";
+		mcf.Lang = {};
+		
+		mcf.Lang.AddingToCart = '{%AddingToCart}';
+		mcf.Lang.ShowSubCategories = '{%ShowSubCategories}';
+		mcf.Lang.HideSubCategories = '{%HideSubCategories}';
+		mcf.Lang.Loading = '{%Loading}';
+		mcf.Lang.Next = '{%Next}';
+		mcf.Lang.Prev = '{%Prev}';
+		mcf.Lang.NextPlural = '{%NextPlural}';
+		mcf.Lang.PrevPlural = '{%PrevPlural}';
+		mcf.Lang.OrderProducts = '{%OrderProducts}';
+		mcf.Lang.Or = '{%Or}';
+		mcf.Lang.HideNotification = '{%HideNotification}';
+		mcf.Lang.ShoppingCartEdit = '{%ShoppingCartEdit}';
+		mcf.Lang.OrderProducts = '{%OrderProducts}';
+
+	//]]>
+	</script>
+	
+	{MinifyJS(
+		files: 'js/jquery-1.7.1.min.js|js/jquery.scroll.js|js/jquery.customselect.js|js/jquery.colorbox.js|js/jquery.typewatch.js|js/mcf.main.js|js/mcf.imageswapper.js|js/mcf.productimages.js|js/mcf.checkout.js'
+	)}
+	
+</body>
+</html>

@@ -1,0 +1,61 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="LandingPageWrapper" class="clearfix">
+				<div id="PrimaryFeatures">
+					{BrandImage(width:384,link:'true')}
+					<div id="PageHeader">
+						{Path}
+						<h1>{PageTitle}</h1>
+					</div>
+					<div class="CategoryDescription">{BrandDescription}</div>
+					{Products(classes:'first|last')}
+				</div>
+				<div id="SecondaryFeatures">
+					{BrandLogo(
+						link: 'false',
+						height: 126,
+						width: 161,
+						id: 'BrandLogo'
+					)}
+					{Categories(
+						brand: 'current',
+						before:' <h2 class="BoxHeader">Tuoteryhmät</h2><ul class="NavigationList CategoryNavigation">',
+						after: '</ul>',
+						helper: '{{
+							<li><a href="{SearchUrl(category:'current',brand:'current')}" title="{CategoryName}">{CategoryName}</a></li>
+						}}'
+					)}
+					{BrandTopSellers(
+						limit:5,
+						type:'normal',
+						timelimit:'-2 years',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%BestsellingProducts}</h2><ol class="ProductList">',
+						after:'</ol>'
+					)}
+					{BrandNewProducts(
+						limit:5,
+						type:'normal',
+						timelimit:'-2 years',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%NewProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+					{BrandHotPicks(
+						limit:5,
+						type:'normal',
+						timelimit:'-2 years',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+				</div>
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

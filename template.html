@@ -1,0 +1,26 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				{Path}
+				<h1>{PageTitle}</h1>
+			</div>
+			<div class="Content">
+				{Notifications(group: 'account')}
+				{SubInfoNavigation(
+					before: '
+						<div id="SubPageNavigation">
+							<h3 id="Header">{%SubPages}</h3>
+					',
+					after: '</div>'
+				   )  
+				}
+				{Content}
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

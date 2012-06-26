@@ -1,0 +1,38 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				{Path}
+				<h1>{PageTitle}</h1>
+			</div>
+			<div id="ProductBuy" class="BlockForm">
+				<div id="ProductShortDesc">{ProductShortDesc}</div>
+				{ProductPrices}
+				{ProductAvaibility}
+				{ProductBuy(
+					variations: 'radio'
+				)}
+			</div>
+			<div id="ProductImages">
+				{ProductImages}
+				<div id="ProductLikes" class="fb-like" data-send="true" data-width="276" data-show-faces="true" data-font="arial"></div>
+			</div>
+			<div id="ProductFullDesc">
+				{ProductFullDesc}
+			</div>
+			{CrossSaleProducts(
+				type:'normal',
+				limit:12,
+				before:'
+					<h2 class="BoxHeader Center">{%CrossSalesForProduct}</h2>
+					<div id="CrossSaleScroller">
+						<div id="CrossSaleProducts">',
+				after:'</div></div>'
+			)}
+		</div>
+		{Helper(file:'helpers/sidebar-right-product')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

@@ -1,0 +1,25 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Testi</title>
+</head>
+
+<body>
+<form id="Testiformi">
+	<label><input type="radio" value="123"> Hilipati: Heijaa | Väri: Vihreä | Koko: XS | Systeemi: Härdelli, 123,00€</label>
+	<label><input type="radio" value="12"> Hilipati: Heijaa | Väri: Sininen | Koko: M | Systeemi: Hässäkkä, 99,88€</label>
+	<label><input type="radio" value="1"> Hilipati: Heijaa | Väri: Keltainen | Koko: XS | Systeemi: Härdelli, 1,01€</label>
+	<p class="FormHelp">Tällä tässä on saatavuus.</p>
+	<label><input type="radio" value="1234"> Hilipati: Heijaa | Väri: Vihreä | Koko: XL | Systeemi: Härdelli, 1,99€</label>
+	<label><input type="radio" value="12345"> Hilipati: Heijaa | Väri: Sininen | Koko: XS | Systeemi: Judanssi, mutta ei hintaa</label>
+	<label><input type="radio" value="123456"> Hilipati: Heijaa | Väri: Keltainen | Koko: M | Systeemi: Härdelli</label>
+	<p class="FormHelp">Tällä tässä on saatavuus.</p>
+</form>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="mcf.variationsplitter.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("form").mcfVariationSplitter();
+	});
+</script>
+</body>

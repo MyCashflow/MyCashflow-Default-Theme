@@ -1,0 +1,35 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="PageHeader">
+				<p id="NewsDate">{NewsDate(format:'j.n.Y')}</p>
+				{Path}
+				<h1>{PageTitle}</h1>
+			</div>
+			<div class="Content">
+				{News(
+					before: '
+						<div id="SubPageNavigation">
+							<h3 id="Header">{%News}</h3>
+					',
+					after: '
+						</div>
+					'
+				)}
+				{NewsImage(
+					width: 354,
+					height: 234,
+					before: '<figure class="NewsImage">',
+					after: '<figcaption>{NewsImageCaption}</figcaption></figure>'
+				)}
+				<p class="NewsOverview">{NewsOverview}</p>
+				{NewsBody}
+				<div id="NewsLikes" class="fb-like" data-send="true" data-width="546" data-show-faces="true" data-font="arial"></div>
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

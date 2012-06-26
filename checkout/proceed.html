@@ -1,0 +1,19 @@
+{Helper(file:'checkout/header')}
+<div id="MultiPageCheckout" class="clearfix">
+	
+	<div class="FormItem HeaderItem">
+		<h2>Uudet asiakkaat</h2>
+		<p>{%CheckoutNewCustomerInfo}</p>
+	</div>
+	<div class="FormItem">
+		<p class="Big"><a href="/checkout/customer_information/" class="Button">Jatka tilaamista</a></p>
+	</div>
+			
+	{Login(
+		form_info: 'CheckoutExistingCustomerInfo',
+		on_success: '/checkout/customer/',
+		on_error: '/checkout/proceed/'
+	)}
+	
+</div>
+{Helper(file:'checkout/footer')}

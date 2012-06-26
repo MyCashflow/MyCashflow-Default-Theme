@@ -1,0 +1,40 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="LandingPageWrapper" class="clearfix">
+				<div id="PrimaryFeatures">		
+					{CategoryImage(width:384,link:'true')}
+					<div id="PageHeader">
+						{Path}
+						<h1>{PageTitle}</h1>
+					</div>
+					<div class="CategoryDescription">{CategoryDescription}</div>
+					{CategoryHotPicks(limit:6,classes:'first|last')}
+					{Products(classes:'first|last')}
+				</div>
+				<div id="SecondaryFeatures">
+					{CategoryNewProducts(
+						limit:10,
+						type:'normal',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%NewProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
+					{Brands(
+						category: 'current',
+						before:' <h2 class="BoxHeader">Tuotemerkit</h2><ul class="NavigationList BrandsNavigation">',
+						after: '</ul>',
+						helper: '{{
+							<li><a href="{SearchUrl(category:'current',brand:'current')}" title="{BrandName}">{BrandName}</a></li>
+						}}'
+					)}
+				</div>
+			</div>
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}

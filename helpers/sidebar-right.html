@@ -1,0 +1,8 @@
+<aside id="Secondary" class="Column">
+	<h2 class="BoxHeader">{%ShoppingCart}</h2>
+	<article id="MiniCartWrapper">
+		{Helper(file: 'helpers/minicart')}
+	</article>
+	{HotPicks(limit:1,before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2>')}
+	{Banners(name:'sidebar-right',helper:helpers/sidebar-banners)}
+</aside>
