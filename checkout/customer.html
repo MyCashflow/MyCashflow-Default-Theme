@@ -2,7 +2,6 @@
 <div id="MultiPageCheckout" class="clearfix">
 			
 	<form action="/checkout/" method="post">
-	
 
 		{Helper(
 			case: 'CustomerNotLogged',
@@ -12,24 +11,27 @@
 				
 				{CheckoutBillingAddress(
 					mode: 'form',
+					notifications: 'false',
 					before:	'
 						<div class="FormItem HeaderItem">
 							<h2>Asiakastiedot</h2>
 							<p>Asiakastiedot toimivat myös laskutusosoitteenasi.</p>
 						</div>
 						<fieldset id="CheckoutBillingAddress">
-						{Notifications(group:'account')}
 					',
 					after: '</fieldset>'
 				)}
 				
 				{CheckoutShippingAddress(
 					mode: 'form',
+					notifications: 'false',
 					before: '
 						<div class="FormItem HeaderItem">
 							<h2>Toimitusosoite</h2>
 							<p>Anna erillinen toimitusosoite mikäli se poikkeaa asiakastiedoistasi.</p>
 						</div>
+
+						{Notifications(name:'CustomerShippingAddressError')}
 			
 						<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
 							<div class="Checks">

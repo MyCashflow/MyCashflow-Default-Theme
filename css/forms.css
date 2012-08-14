@@ -207,8 +207,8 @@ button.SubmitButton, .Big .Button {
   display: block; float: none;
   position: absolute; top: auto;
 	bottom: 16px; left: 0px;
-  padding: 0; margin: 0 5px 0 0;
-  width: auto;
+  padding: 0; margin: 0;
+  width: 100%;
   color: #666;
   font-size: 11px;
   white-space: nowrap;
@@ -264,6 +264,14 @@ input[type="radio"] {
 .Checks .DefineShippingMethod + .FormHelp {
 	top: 0;
 	margin: -18px 0 0;
+}
+
+/* Notifications about why radiobuttons are disabled */
+.Checks .FormNotification {
+	margin: 0;
+	padding: 0;
+	color: #900;
+	font-weight: bold;
 }
 
 /* Labels on top
@@ -346,21 +354,24 @@ input[type="radio"] {
 .BlockForm .GroupErrorMessage + .label {
 	display: none;
 }
-.GroupItem > div .FormErrorMessage {
-	display: none;
-}
-.GroupItem > div > .FormErrorMessage + label {
-  display: block; float: none;
+.GroupItem > div > .FormErrorMessage {
   position: absolute; top: auto;
 	bottom: 16px; left: 0px;
-  padding: 0; margin: 0 5px 0 0;
-  width: auto;
-  color: #666;
+  padding: 0; margin: 0;
+  width: 100%;
   font-size: 11px;
+  font-weight: normal;
   white-space: nowrap;
-  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.GroupItem > div:hover  > .FormErrorMessage {
+	background: #FFF; z-index: 999;
+	width: auto;
+}
+.GroupItem > div > .FormErrorMessage + label {
+	/* Hide the label so that the error fits there instead */
+	display: none !important;
 }
 
 
@@ -376,6 +387,12 @@ input[type="radio"] {
   clear: both;
   float: left;
   margin: -18px 0 18px;
+}
+/* Helptext in header as an intro */
+.HeaderItem .FormHelp {
+	top: 0px;
+	margin: 0 0 18px;
+	color: #444;
 }
 
 /* Customizing selectboxes

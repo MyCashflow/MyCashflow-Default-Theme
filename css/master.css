@@ -668,6 +668,9 @@ dl#MiniCartFooter .CheckoutButton {
 .Product .AddToCart:hover {
 	text-decoration: none;
 }
+.AvailabilityOutOfStock .AddToCart {
+	display: none;
+}
 
 /* .Categories, .SubCategories, .BrandsNavigation
 -------------------------------------------------------------- */
