@@ -14,4 +14,12 @@
 		<CheckoutLogo width="270" height="90"/>
 	
 	</ImageSizes>
+	
+	<Features>
+		<Checkout>
+			<SinglePage supported="true" />
+			<MultiPage supported="false" />
+		</Checkout>
+	</Features>
+	
 </Theme>

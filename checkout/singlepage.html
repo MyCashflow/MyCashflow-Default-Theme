@@ -1,0 +1,104 @@
+{Helper(file:'checkout/header')}
+<div id="SidebarBg" class="OmitSidebars">
+	<div id="Main" class="clearfix">
+		<div id="Primary" class="Column">
+		
+			<div class="Content" id="OnePageCheckout">
+				
+				<form action="/checkout/" method="post">
+				
+					{Notifications(group:'account')}
+				
+					<h2 id="CheckoutCustomerInformationHeader"><span class="CheckoutStageNumber" id="CheckoutCustomer">1. </span>{%CheckoutCustomerInformation}
+					{Helper(
+						case:'CustomerNotLogged',
+						file:'{{ <a href="/account/login/" class="Button PrimaryAction" id="CheckoutLoginButton">Kirjaudu sisään</a>}}',
+						or: ' <a href="/account/logout/" class="Button">Kirjaudu ulos</a>'
+					)}</h2>
+					<p>Asiakastiedot toimivat laskutusosoitteenasi. Erillinen toimitusosoite on mahdollista määritellä myöhemmin.</p>
+					<fieldset class="TagWrapper" id="CheckoutBillingAddress">
+						{CheckoutBillingAddress(
+							mode: 'form',
+							ajax: 'true'
+						)}
+					</fieldset>
+	
+					<h2><span class="CheckoutStageNumber">2. </span>Toimitusosoite</h2>
+					
+					{Notifications(name:'CustomerShippingAddressError')}
+				
+					<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
+						<div class="Checks">
+							<label>
+								<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
+							</label>
+							<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
+						</div>
+					</div>
+	
+					<fieldset class="TagWrapper" id="CheckoutShippingAddress">
+						{CheckoutShippingAddress(
+							mode: 'form',
+							ajax: 'true'
+						)}
+					</fieldset>
+					
+					<h2><span class="CheckoutStageNumber" id="CheckoutShipping">3. </span>{%CheckoutChooseShippingMethod}</h2>
+					<p>Tilauksesi tuotteet voidaan toimittaa seuraavilla toimitustavoilla.</p>
+
+					<fieldset class="TagWrapper" id="CheckoutShippingMethods">
+						{CheckoutShippingMethods(
+							mode: 'form',
+							ajax: 'true',
+							preselect: 'false'
+						)}
+					</fieldset>
+	
+					<h2><span class="CheckoutStageNumber" id="CheckoutPayment">4. </span>{%CheckoutChoosePaymentMethod}</h2>
+					<p>Voit maksaa tilauksesi seuraavilla maksutavoilla.</p>
+
+					<fieldset class="TagWrapper" id="CheckoutPaymentMethods">
+						{CheckoutPaymentMethods(
+							mode: 'form',
+							ajax: 'true',
+							preselect: 'false'
+						)}
+					</fieldset>
+			
+					<h2><span class="CheckoutStageNumber" id="CheckoutPreview">5. </span>Lähetä tilaus</h2>
+					<p>Esikatsele tilauksesi ennen lähettämistä. Voit antaa tarvittaessa lisätietoja tilauksen käsittelijälle.</p>
+					
+					<fieldset id="CheckoutAcceptTerms">
+						{CheckoutAcceptTerms}
+					</fieldset>
+					
+				</form>
+				
+			</div>
+					
+		</div>
+		
+		<div id="CheckoutPreviewCart" class="Column">
+			
+			<div id="PreviewContent">
+
+				<h2 class="BoxHeader">Tilauksesi esikatselu</h2>
+
+				{Helper(file:'helpers/preview-cart')}
+				
+				<div id="SubmitCampaignCode" data-helper="preview-cart" data-view="checkout">
+					{CampaignCode(
+						mode: 'auto',
+						action: 'checkout',
+						notifications: 'true',
+						ajax: 'true'
+					)}
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+{Helper(file:'checkout/footer')}
