@@ -48,6 +48,10 @@
 			font-size: 16pt;
 			margin: 0 0 18pt;
 		}
+		.NoLogoImage {
+			display: block;
+			margin: 0 0 18pt;
+		}
 		dl {
 			display: block;
 			margin: 0 0 9pt;
@@ -75,10 +79,10 @@
 			<h2>Vastaanottaja:</h2>
 			<p>
 				{OrderShippingCompany(after:',&nbsp;')}
-				{OrderShippingName}<br>
-				{OrderShippingAddress}<br>
-				{OrderShippingZip} {OrderShippingCity}<br>
-				{OrderShippingCountry}<br>
+				{OrderShippingName}
+				{OrderShippingAddress(before:'<br>')}
+				{OrderShippingZip(before:'<br>')} {OrderShippingCity}
+				{OrderShippingCountry(before:'<br>')}
 				{OrderShippingPhone(before:'<br>')}
 				{OrderShippingEmail(before:'<br>')}
 			</p>
@@ -89,13 +93,19 @@
 		<div class="Content">
 			{Logo}
 			<dl>
-			
+
+				<dt>Toimitustapa</dt>
+				<dd>{OrderShippingMethod}</dd>
+
+				<dt>Maksutapa</dt>
+				<dd>{OrderPaymentMethod}</dd>
+
 				<dt>{%Ordernumber}</dt>
 				<dd>{OrderNumber}</dd>
-				
+
 				<dt>{%OrderDate}</dt>
 				<dd>{OrderDate}</dd>
-				
+
 			</dl>
 		</div>
 	</div>

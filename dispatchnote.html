@@ -70,19 +70,37 @@
 	
 	<div id="ReceiptContact">
 		<p id="PrintContactAddress">
-			{ContactCompany(after:'<br>')}
-			{ContactStreetAddress1(after:'{ContactStreetAddress2}<br>')}
-			{ContactZip} {ContactCity(after:'<br>')}
-			{ContactCountry}
+			{ContactCompany}
+			{ContactBusinessID(
+				before: ' (',
+				after: ')'
+			)}
+			<br>
+			{ContactStreetAddress1(
+				after: '
+					{ContactStreetAddress2(
+						before: ',&nbsp;'
+					)}
+				'
+			)}
+			<br>
+			{ContactZip} {ContactCity(after:',&nbsp;')} {ContactCountry}
 		</p>
 		<p id="PrintContactElectrical">
 			{ContactEmail(after:'<br>')}
 			{ContactInternet(after:'<br>')}
 			{ContactPhone(after:'<br>')}
 		</p>
-		<p id="PrintContactOther">
-			{ContactBusinessID(before:'{%BusinessID}')}
-		</p>
+		<div id="PrintBanner">
+			{Banners(
+				name: 'print',
+				sort: 'random',
+				limit: 1,
+				helper: '{{
+					{BannerText}
+				}}'
+			)}
+		</div>
 	</div>
 	
 </body>

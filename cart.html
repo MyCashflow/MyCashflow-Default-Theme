@@ -31,13 +31,14 @@
 			</div>
 
 			{CrossSaleProducts(
-				type:'normal',
-				limit:12,
-				before:'
+				type: 'normal',
+				limit: 12,
+				before: '
 					<h2 class="BoxHeader Center">{%CrossSalesForCart}</h2>
 					<div id="CrossSaleScroller">
 						<div id="CrossSaleProducts">',
-				after:'</div></div>'
+				after: '</div></div>',
+				helper: 'helpers/listproduct'
 			)}
 
 		</div>

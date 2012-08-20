@@ -176,32 +176,28 @@ ol {
 .Prices dt {}
 .Prices dd {}
 .Prices dd.Price { font-weight: bold; }
-.Prices dd.ListPrice {
+.Prices dd.ListPrice,
+.ProductComparePrice {
 	text-decoration: line-through;
-	margin-right: 5px;
 	font-size: 11px;
 	color: #888;
 }
-.Prices dd.DiscountPrice	{
+.Prices dd.DiscountPrice,
+.DiscountProduct .ProductPrice {
 	font-size: 15px;
 	color: #e55f05;
 }
 
-/* Prices at product lists */
-.Product .Prices dt {
-	display: none;
-}
-.Product .Prices dt.PriceFrom {
-	font-size: 11px;
+/* Part payment's prefix */
+.PriceFrom {
 	color: #888;
 	font-weight: normal;
 }
-.Product .Prices dd {
-	margin: 0 6px 0 0;
-}
-
 /* Some padding around currency symbol */
 .Currency { padding: 0 2px; }
+
+/* Notifications
+-------------------------------------------------------------- */
 
 #NotificationCenter {
 	position: fixed; z-index: 999;
@@ -243,6 +239,18 @@ ol {
 	top: 8px; right: 8px;
 	width: 16px; height: 16px;
 	background: url(../i/close.png) no-repeat 50% 50%;
+}
+#Primary > .Notification {
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	font-size: 15px;
+	padding-top: 17px;
+	padding-bottom: 18px;
 }
 
 /* Banners

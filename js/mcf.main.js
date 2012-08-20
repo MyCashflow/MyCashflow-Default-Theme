@@ -72,6 +72,11 @@ $.subscribe("ajax_event", function(originalEvent, ajaxEvent, eventCategory, mess
 
 $(function() {
 
+	$("#PaginationSortForm").find("button").parent("div").hide()
+	$("#PaginationSortForm").find("select").change(function() {
+		$("#PaginationSortForm").submit();
+	});
+
 	$("#NotificationCenter").on("click", ".Close", function(event) {
 		event.preventDefault();
 		$(this).closest(".Notification").fadeOut(125, function() { $(this).remove(); });

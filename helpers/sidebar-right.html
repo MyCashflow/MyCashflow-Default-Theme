@@ -3,6 +3,13 @@
 	<article id="MiniCartWrapper">
 		{Helper(file: 'helpers/minicart')}
 	</article>
-	{HotPicks(limit:1,before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2>')}
-	{Banners(name:'sidebar-right',helper:helpers/sidebar-banners)}
+	{HotPicks(
+		limit: 1,
+		before: '<h2 class="BoxHeader">{%RecommendedProducts}</h2>',
+		helper: 'helpers/listproduct'
+	)}
+	{Banners(
+		name: 'sidebar-right',
+		helper: 'helpers/sidebar-banners'
+	)}
 </aside>

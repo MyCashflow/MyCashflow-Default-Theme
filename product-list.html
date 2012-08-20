@@ -8,11 +8,36 @@
 				<h1>{PageTitle}</h1>
 			</div>
 			{CategoryDescription(before:'<div class="CategoryDescription">',after:'</div>')}
+			
 			{Products(
-				classes:'first||last',
-				limit: 24,
-				pagination: 'after'
+				pagination: 'true',
+				classes: 'first||',
+				limit: '30|15|60|90',
+				sort: 'manual|name_asc|released_asc|price_asc',
+				before: '
+					<form action="{CurrentUrl}" method="get" id="PaginationSortForm">
+						{PaginationStatus}
+						<div class="FormItem GroupItem">
+							{PaginationFormParameters(
+								name: 'keyword'
+							)}
+							<div>
+								{PaginationSort}
+							</div>
+							<div>
+								{PaginationLimit}
+							</div>
+							<div>
+								<button type="submit">Lähetä</button>
+							</div>
+						</div>
+					</form>
+				',
+				after: '{PaginationPages(items: 7)}',
+				helper: 'helpers/listproduct'
 			)}
+			
+			
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

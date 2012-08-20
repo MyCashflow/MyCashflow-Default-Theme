@@ -4,19 +4,26 @@
 		{Helper(file: 'helpers/minicart')}
 	</article>
 	{CompatibleProducts(
-		limit:5,
-		type:'normal',
-		helper:'helpers/listproduct-small',
-		before:'<h2 class="BoxHeader">{%CompatibleProducts}</h2><ul class="ProductList">',
-		after:'</ul>'
+		limit: 5,
+		type: 'normal',
+		helper: 'helpers/listproduct-small',
+		before: '<h2 class="BoxHeader">{%CompatibleProducts}</h2><ul class="ProductList">',
+		after: '</ul>'
 	)}
 	{SimilarProducts(
-		limit:5,
-		type:'normal',
-		helper:'helpers/listproduct-small',
-		before:'<h2 class="BoxHeader">{%SimilarProducts}</h2><ul class="ProductList">',
-		after:'</ul>'
+		limit: 5,
+		type: 'normal',
+		helper: 'helpers/listproduct-small',
+		before: '<h2 class="BoxHeader">{%SimilarProducts}</h2><ul class="ProductList">',
+		after: '</ul>'
 	)}
-	{HotPicks(limit:1,before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2>')}
-	{Banners(name:'sidebar-right',helper:helpers/sidebar-banners)}
+	{HotPicks(
+		limit: 1,
+		before: '<h2 class="BoxHeader">{%RecommendedProducts}</h2>',
+		helper: 'helpers/listproduct'
+	)}
+	{Banners(
+		name: 'sidebar-right',
+		helper: 'helpers/sidebar-banners'
+	)}
 </aside>

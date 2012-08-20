@@ -257,6 +257,8 @@ header .DropdownNavigation ul li a:hover {
 }
 .CloseSearchResults { background-image: url(../i/search-close.gif); cursor: pointer; }
 
+.NoResults { padding: 0 15px; }
+
 /* Same Form @ Content area */
 
 #ContentSearch #SearchForm { position: relative; right: auto; bottom: auto; float: none; width: auto; margin: 0 0 18px; }
@@ -529,10 +531,32 @@ dl#MiniCartFooter .CheckoutButton {
 	display: block;
 }
 
-/* Productlist
+/* Pagination
 -------------------------------------------------------------- */
 
-.PaginationAfter {
+#PaginationSortForm {
+	padding: 0 6px;
+}
+#PaginationSortForm .PaginationStatus {
+	float: left;
+	font-size: 11px; color: #888;
+	margin-top: 18px;
+	padding-left: 9px;
+}
+#PaginationSortForm select {
+	min-width: 60px;
+}
+#PaginationSortForm .GroupItem { float: right; }
+#PaginationSortForm .GroupItem > div { padding: 18px 0 0; margin: 0 0 0 3px; }
+#PaginationSortForm .GroupItem > div label { bottom: auto; top: -2px; }
+#PaginationSortForm .GroupItem > div .CustomSelectWrap { margin-right: 0; }
+#PaginationSortForm .GroupItem > div button { margin-right: 0; }
+
+.ShowingItems { font-size: 12px; float: left; margin-bottom: 0; }
+
+.PageNavigation {
+	text-align: center;
+	list-style: none outside;
 	position: relative; width: auto; clear: both;
 	margin: 18px 6px; padding: 8px;
 	border: 1px solid #D9D9D9; border-bottom: 1px solid #CCCCCC;
@@ -551,20 +575,6 @@ dl#MiniCartFooter .CheckoutButton {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-}
-.PaginationBefore { position: relative; margin: 0 6px 0 15px; color: #444; font-size: 11px; }
-.ShowingItems { font-size: 11px; float: left; margin-bottom: 0; }
-
-.PaginationSorterForm { float: right; font-size: 12px; }
-.PaginationSorterForm .FormItem { width: auto; clear: none; padding-bottom: 0; }
-.PaginationSorterForm .FormItem label { float: left; width: auto; padding-right: 5px; top: 0; color: #888; }
-.PaginationSorterForm .FormItem select { width: 120px; margin-right: 0; margin-bottom: 0; }
-.PaginationSorterForm .FormItem .CustomSelectWrap { margin-right: 0; }
-
-.PageNavigation {
-	font-size: 12px;
-	position: relative; text-align: center;
-	list-style: none outside; margin: 0; padding: 0;
 }
 .PageNavigation li {
 	text-align: center;
@@ -615,12 +625,25 @@ dl#MiniCartFooter .CheckoutButton {
 	font-weight: bold;
 }
 
+/* Productlist
+-------------------------------------------------------------- */
+
 .Product {
 	position: relative; float: left;
 	width: 162px; margin: 0 6px; padding: 9px 9px 27px;
 }
+.Product.Unavailable {
+	opacity: 0.5;
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+	-o-transition: all 0.25s ease-in-out;
+	-ms-transition: all 0.25s ease-in-out;
+	transition: all 0.25s ease-in-out;
+}
+.Product.Unavailable:hover {
+	opacity: 1;
+}
 .first { clear: left; }
-.last {}
 
 .Product .ProductImage {
 	display: block; position: relative;
@@ -632,13 +655,12 @@ dl#MiniCartFooter .CheckoutButton {
 	border-bottom: 1px solid #cccccc;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	-border-radius: 5px;
+	border-radius: 5px;
 	-webkit-transition: all 0.15s ease-in-out;
 	-moz-transition: all 0.15s ease-in-out;
 	-o-transition: all 0.15s ease-in-out;
 	-ms-transition: all 0.15s ease-in-out;
 	transition: all 0.15s ease-in-out;
-
 }
 .Product .ProductImage img {
 	display: inline;
@@ -651,12 +673,23 @@ dl#MiniCartFooter .CheckoutButton {
   -moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
   box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
 }
-
 .Product h2 {
 	font-size: 12px;
 	margin: 0; padding: 9px 0 0;
 }
-.Product .Prices { padding: 0 0 9px; margin: 0; }
+.ListProductPrices {
+	padding: 0 0 9px;
+	margin: 0;
+}
+.ListProductPrices .ProductComparePrice {
+	margin-left: 9px;
+	position: relative;
+	bottom: 1px;
+}
+.ListProductPrices .ProductPrice,
+.ListProductPrices .ProductComparePrice {
+	white-space: nowrap;
+}
 
 .Product a:link, .Product a:visited { text-decoration: none; }
 .Product a:active, .Product a:hover { text-decoration: underline; }
@@ -668,8 +701,14 @@ dl#MiniCartFooter .CheckoutButton {
 .Product .AddToCart:hover {
 	text-decoration: none;
 }
-.AvailabilityOutOfStock .AddToCart {
+.Unavailable .AddToCart,
+.Available .ListProductAvailability {
 	display: none;
+}
+.Unavailable .ListProductAvailability {
+	display: block;
+	margin: 9px 0;
+	color: #C33;
 }
 
 /* .Categories, .SubCategories, .BrandsNavigation
@@ -844,6 +883,11 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	margin-bottom: 18px;
 	position: relative;
 	overflow: hidden;
+}
+#ProductBuy .PartPaymentPrice,
+#ProductBuy .PartPaymentPrice .PriceFrom {
+	font-size: 12px;
+	color: #444;
 }
 #ProductBuy dl { width: 100%; overflow: hidden; margin: 0 0 18px; padding: 0; }
 #ProductBuy dt, #ProductBuy dd {
@@ -1121,6 +1165,7 @@ dl#AccountInformation dd.AccountEdit {
 	text-align: right; float: right;
 	width: 116px; margin-right: -116px;
 }
+dl#AccountInformation dd.AccountEdit + dd.AccountEdit { clear: right; }
 dl#AccountInformation dd p, .OrderComments p { margin: 0; }
 
 /* Carts
@@ -1144,6 +1189,10 @@ table button {
 }
 td.CartTotal {
 	font-weight: bold;
+}
+.CartTotal .PriceFrom {
+	display: block; font-size: 11px;
+	color: #444;
 }
 .CartQuantity {
 	text-align: center;
@@ -1377,6 +1426,8 @@ table .CartProduct dt { clear: left; }
 	width: 168px; height: 144px;
 	padding: 0 15px 0 18px; margin: 0 0 18px;
 }
+#CheckoutAddressBook .ShippingAddressWrapper:nth-child(1n) { height: auto; }
+#CheckoutAddressBook .ShippingAddressWrapper:nth-child(4n+1) { clear: left; }
 #CheckoutAddressBook .ShippingAddressWrapper .EditShippingAddress {
 	font-size: 11px;
 }
@@ -1385,6 +1436,9 @@ table .CartProduct dt { clear: left; }
 }
 .NewShippingAddress {
 	margin-left: 126px;
+	margin-top: -27px;
+	margin-bottom: -9px;
+	padding-left: 18px;
 }
 .NewShippingAddress a {
 	font-weight: bold;
@@ -1410,7 +1464,6 @@ table .CartProduct dt { clear: left; }
 #MultiPageCheckout .HeaderItem.NoIndent {
 	padding-left: 15px;
 }
-
 #MultiPageCheckout .HeaderItem h2 {
 	font-size: 20px;
 	font-weight: bold;
@@ -1425,8 +1478,6 @@ table .CartProduct dt { clear: left; }
 #MultiPageCheckout #CheckoutShippingAddressToggle {
 	margin-left: -18px;
 }
-
-
 #MultiPageCheckout .ShippingMethodWrapper,
 #MultiPageCheckout .PaymentMethodWrapper {
 	border-top: 1px dotted #d9d9d9;
@@ -1583,7 +1634,7 @@ table .CartProduct dt { clear: left; }
 }
 .ShippingMethodWrapper input[disabled="disabled"] + .ShippingMethodName,
 .PaymentMethodWrapper input[disabled="disabled"] + .PaymentMethodName {
-	color: #888;
+	color: #999;
 }
 .SelectedMethod .ShippingMethodPrice,
 .SelectedMethod .PaymentMethodPrice {
@@ -1604,7 +1655,7 @@ table .CartProduct dt { clear: left; }
   -moz-border-radius: 3px;
   border-radius: 3px;
 	padding: 5px 8px;
-	margin: 3px 0 21px;
+	margin: 3px 0;
 }
 .SelectedMethod .DefineShippingMethod,
 .SelectedMethod .DefinePaymentMethod {
@@ -1614,6 +1665,11 @@ table .CartProduct dt { clear: left; }
 .DefineShippingMethod select, .DefineShippingMethod .CustomSelectWrap,
 .DefinePaymentMethod select, .DefineShippingMethod .CustomSelectWrap {
 	margin-bottom: 0;
+}
+.DefineShippingMethod + .FormHelp,
+.DefinePaymentMethod + .FormHelp {
+	top: 0;
+	margin: 0;
 }
 
 /* Previewable cart at OnePageCheckout */

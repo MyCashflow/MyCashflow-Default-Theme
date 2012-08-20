@@ -100,11 +100,13 @@ select[multiple] {
   color: #888888;
 }
 input[disabled],
-select[disabled],
 textarea[disabled],
 button[disabled] {
 	color: #999;
 	opacity: 0.5;
+}
+select[disabled] {
+	color: #999;
 }
 
 /* Input states
@@ -194,6 +196,10 @@ button.SubmitButton, .Big .Button {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+.Big .Button {
+	float: none;
+	margin: 9px 0;
+}
 
 /* Groups
 ----------------------------------------------------------- */
@@ -260,10 +266,6 @@ input[type="radio"] {
 .Checks label + .FormHelp {
   top: 0;
   margin: 0;
-}
-.Checks .DefineShippingMethod + .FormHelp {
-	top: 0;
-	margin: -18px 0 0;
 }
 
 /* Notifications about why radiobuttons are disabled */
@@ -433,6 +435,9 @@ input[type="radio"] {
   font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
   font-weight: normal;
   line-height: 16px;
+}
+select[disabled] + .CustomSelect span {
+	opacity: 0.6;
 }
 .CustomSelect .sel_outer {
   padding-right: 18px;

@@ -262,6 +262,21 @@
 						{ContactPhone(after:'<br>')}
 						{ContactBusinessID(before:'{%BusinessID}:&nbsp;')}
 					</td>
+					<td style="color: #666; font-size: 12px;">
+						{Banners(
+							name: 'email',
+							sort: 'random',
+							limit: 1,
+							helper: '{{
+								<div style="border-radius: 10px; background: #FFF; border: 1px solid #d9d9d9; padding: 8px;">
+									<a href="{BannerUrl}">
+										<strong>{BannerName(link:'false')}</strong><br>
+									</a>
+									{BannerText}
+								</div>
+							}}'
+						)}
+					</td>
 				</tr>
 			</table>
 			<!-- Footer table ends -->

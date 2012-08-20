@@ -2,7 +2,7 @@
 
 @page {
 	size: A4;
-	margin: 30mm 15mm;
+	margin: 30mm 15mm 25mm;
 	border-top: 0.5pt solid black;
 	@top {
 		content: flow(head);
@@ -32,6 +32,7 @@ body {
 	height: 20mm;
 	overflow: hidden;
 }
+#Logo .NoLogoImage { display: none; }
 #Logo img {
 	display: block;
 	margin: 0; padding: 0;
@@ -50,20 +51,30 @@ body {
 #ReceiptTitle h1 {
 	font-size: 14pt;
 }
+#ReceiptTitle h4 {
+	height: 16pt; width: 80mm;
+	overflow: hidden; text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
 /* Footer */
 #ReceiptContact {
 	position: relative;
-	height: 25mm;
+	min-height: 25mm;
 	border-top: 1pt solid black;
 	flow: static(foot);
 }
 #PrintContactAddress,
 #PrintContactElectrical,
-#PrintContactOther {
+#PrintBanner {
 	position: relative; float: left;
 	width: 33.30%; padding: 7pt 0;
 }
+#PrintBanner {
+	max-height: 20mm; overflow: hidden; text-overflow: ellipsis;
+}
+#PrintBanner * { margin: 0; text-overflow: ellipsis; }
+
 #InfoWrapper {
 	float: left; width: 100%;
 	overflow: hidden;
