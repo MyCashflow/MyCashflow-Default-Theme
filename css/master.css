@@ -1286,7 +1286,10 @@ table .CartProduct dt { clear: left; }
 #Checkout .FormSubmit {
 	padding: 18px 0 0 126px;
 }
+/* Buttons in blue */
 .CheckoutButton,
+a.Button.PrimaryAction,
+button.PrimaryAction,
 #Checkout .FormSubmit .SubmitButton,
 .BuyForm .FormSubmit .SubmitButton {
 	clear: both; padding: 8px 17px;
@@ -1308,10 +1311,16 @@ table .CartProduct dt { clear: left; }
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+.CheckoutButton,
+a.Button.PrimaryAction {
+	padding: 3px 8px 4px;
+}
 .CheckoutButton {
 	float: right;
 	margin-right: 0;
 }
+.CheckoutButton,
+a.Button.PrimaryAction,
 .CheckoutButton:hover,
 #Checkout .FormSubmit .SubmitButton:hover,
 .BuyForm .FormSubmit .SubmitButton:hover {
@@ -1558,6 +1567,9 @@ table .CartProduct dt { clear: left; }
 	padding: 9px 0 9px 30px;
 	line-height: 36px;
 	border-top: 6px solid #eee;
+}
+#OnePageCheckout h2 .Button {
+	float: right; margin-top: 8px;
 }
 #OnePageCheckout #CheckoutCustomerInformationHeader {
 	border-top: 0;
