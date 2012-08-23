@@ -374,6 +374,13 @@ header .DropdownNavigation ul li a:hover {
 	margin: 0 15px;
 }
 
+/* Campaign Image */
+
+.CampaignImageWrapper {
+	float: right;
+	margin: -9px 6px 9px 30px;
+}
+
 /* Left Column
 -------------------------------------------------------------- */
 
@@ -535,6 +542,7 @@ dl#MiniCartFooter .CheckoutButton {
 -------------------------------------------------------------- */
 
 #PaginationSortForm {
+	clear: both;
 	padding: 0 6px;
 }
 #PaginationSortForm .PaginationStatus {
