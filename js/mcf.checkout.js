@@ -71,6 +71,13 @@ $(function() {
 	
 	// One page checkout
 	if ($("#OnePageCheckout").length) {
+
+		$("#CheckoutLoginButton").colorbox({
+			opacity: 0.5,
+			width: "640px",
+			fixed: true,
+			href: "/interface/Login?on_success=/checkout/proceed/&on_error=/checkout/proceed/&form_info=CheckoutExistingCustomerInfo"
+		});
 		
 		$(".TagWrapper").mcfOnepageCheckout({
 		
