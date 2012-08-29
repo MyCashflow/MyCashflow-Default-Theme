@@ -1,104 +1,165 @@
-{Helper(file:'checkout/header')}
-<div id="SidebarBg" class="OmitSidebars">
-	<div id="Main" class="clearfix">
-		<div id="Primary" class="Column">
+<!doctype html>
+<html lang="{CurrentLanguageCode}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{Title}</title>
+  <meta name="viewport" content="width=device-width">
+	<link rel="shortcut icon" type="image/ico" href="{ThemeUrl}/i/favicon.ico" />
+	{MinifyCSS(files:'css/reset.css|css/base.css|css/forms.css|css/colorbox.css|css/master.css|css/onepagecheckout.css')}
+  <script src="{ThemeUrl}/js/modernizr-2.5.2.min.js"></script>
+	{Analytics(for:'head')}
+</head>
+
+<body class="{BodyClass}" id="Checkout">
+
+	{AdminTools}
+	{Analytics(for:'body')}
+
+	<div id="Container">
+		<header id="Header" class="clearfix">
+			{Logo(
+				width:384,
+				height:126
+			)}
+		</header>
+		<div id="SidebarBg" class="OmitSidebars">
+			<div id="Main" class="clearfix">
+				<div id="Primary" class="Column">
+					<nav id="CheckoutNavigation" class="clearfix">
+						{CheckoutNavigation}
+					</nav>
+					<div class="Content" id="OnePageCheckout">
+						
+						<form action="/checkout/" method="post" class="BlockForm">
+						
+							{Notifications(group:'account')}
+						
+							<h2 id="CheckoutCustomerInformationHeader"><span class="CheckoutStageNumber" id="CheckoutCustomer">1. </span>{%CheckoutCustomerInformation}
+							{Helper(
+								case:'CustomerNotLogged',
+								file:'{{ <a href="/account/login/" class="Button PrimaryAction" id="CheckoutLoginButton">Kirjaudu sisään</a>}}',
+								or: ' <a href="/account/logout/" class="Button">Kirjaudu ulos</a>'
+							)}</h2>
+							<p>Asiakastiedot toimivat laskutusosoitteenasi. Erillinen toimitusosoite on mahdollista määritellä myöhemmin.</p>
+							<fieldset class="TagWrapper" id="CheckoutBillingAddress">
+								{CheckoutBillingAddress(
+									mode: 'form',
+									ajax: 'true'
+								)}
+							</fieldset>
+			
+							<h2><span class="CheckoutStageNumber">2. </span>Toimitusosoite</h2>
+							
+							{Notifications(name:'CustomerShippingAddressError')}
+						
+							<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
+								<div class="Checks">
+									<label>
+										<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
+									</label>
+									<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
+								</div>
+							</div>
+			
+							<fieldset class="TagWrapper" id="CheckoutShippingAddress">
+								{CheckoutShippingAddress(
+									mode: 'form',
+									ajax: 'true'
+								)}
+							</fieldset>
+							
+							<h2><span class="CheckoutStageNumber" id="CheckoutShipping">3. </span>{%CheckoutChooseShippingMethod}</h2>
+							<p>Tilauksesi tuotteet voidaan toimittaa seuraavilla toimitustavoilla.</p>
 		
-			<div class="Content" id="OnePageCheckout">
-				
-				<form action="/checkout/" method="post">
-				
-					{Notifications(group:'account')}
-				
-					<h2 id="CheckoutCustomerInformationHeader"><span class="CheckoutStageNumber" id="CheckoutCustomer">1. </span>{%CheckoutCustomerInformation}
-					{Helper(
-						case:'CustomerNotLogged',
-						file:'{{ <a href="/account/login/" class="Button PrimaryAction" id="CheckoutLoginButton">Kirjaudu sisään</a>}}',
-						or: ' <a href="/account/logout/" class="Button">Kirjaudu ulos</a>'
-					)}</h2>
-					<p>Asiakastiedot toimivat laskutusosoitteenasi. Erillinen toimitusosoite on mahdollista määritellä myöhemmin.</p>
-					<fieldset class="TagWrapper" id="CheckoutBillingAddress">
-						{CheckoutBillingAddress(
-							mode: 'form',
-							ajax: 'true'
-						)}
-					</fieldset>
-	
-					<h2><span class="CheckoutStageNumber">2. </span>Toimitusosoite</h2>
+							<fieldset class="TagWrapper" id="CheckoutShippingMethods">
+								{CheckoutShippingMethods(
+									mode: 'form',
+									ajax: 'true',
+									preselect: 'false'
+								)}
+							</fieldset>
+			
+							<h2><span class="CheckoutStageNumber" id="CheckoutPayment">4. </span>{%CheckoutChoosePaymentMethod}</h2>
+							<p>Voit maksaa tilauksesi seuraavilla maksutavoilla.</p>
+		
+							<fieldset class="TagWrapper" id="CheckoutPaymentMethods">
+								{CheckoutPaymentMethods(
+									mode: 'form',
+									ajax: 'true',
+									preselect: 'false'
+								)}
+							</fieldset>
 					
-					{Notifications(name:'CustomerShippingAddressError')}
-				
-					<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
-						<div class="Checks">
-							<label>
-								<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
-							</label>
-							<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
-						</div>
+							<h2><span class="CheckoutStageNumber" id="CheckoutPreview">5. </span>Lähetä tilaus</h2>
+							<p>Esikatsele tilauksesi ennen lähettämistä. Voit antaa tarvittaessa lisätietoja tilauksen käsittelijälle.</p>
+							
+							<fieldset id="CheckoutAcceptTerms">
+								{CheckoutAcceptTerms}
+							</fieldset>
+							
+						</form>
+						
 					</div>
-	
-					<fieldset class="TagWrapper" id="CheckoutShippingAddress">
-						{CheckoutShippingAddress(
-							mode: 'form',
-							ajax: 'true'
-						)}
-					</fieldset>
-					
-					<h2><span class="CheckoutStageNumber" id="CheckoutShipping">3. </span>{%CheckoutChooseShippingMethod}</h2>
-					<p>Tilauksesi tuotteet voidaan toimittaa seuraavilla toimitustavoilla.</p>
-
-					<fieldset class="TagWrapper" id="CheckoutShippingMethods">
-						{CheckoutShippingMethods(
-							mode: 'form',
-							ajax: 'true',
-							preselect: 'false'
-						)}
-					</fieldset>
-	
-					<h2><span class="CheckoutStageNumber" id="CheckoutPayment">4. </span>{%CheckoutChoosePaymentMethod}</h2>
-					<p>Voit maksaa tilauksesi seuraavilla maksutavoilla.</p>
-
-					<fieldset class="TagWrapper" id="CheckoutPaymentMethods">
-						{CheckoutPaymentMethods(
-							mode: 'form',
-							ajax: 'true',
-							preselect: 'false'
-						)}
-					</fieldset>
-			
-					<h2><span class="CheckoutStageNumber" id="CheckoutPreview">5. </span>Lähetä tilaus</h2>
-					<p>Esikatsele tilauksesi ennen lähettämistä. Voit antaa tarvittaessa lisätietoja tilauksen käsittelijälle.</p>
-					
-					<fieldset id="CheckoutAcceptTerms">
-						{CheckoutAcceptTerms}
-					</fieldset>
-					
-				</form>
+							
+				</div>
 				
-			</div>
+				<div id="CheckoutPreviewCart" class="Column">
 					
-		</div>
+					<div id="PreviewContent">
 		
-		<div id="CheckoutPreviewCart" class="Column">
-			
-			<div id="PreviewContent">
-
-				<h2 class="BoxHeader">Tilauksesi esikatselu</h2>
-
-				{Helper(file:'helpers/preview-cart')}
-				
-				<div id="SubmitCampaignCode" data-helper="preview-cart" data-view="checkout">
-					{CampaignCode(
-						mode: 'auto',
-						action: 'checkout',
-						notifications: 'true',
-						ajax: 'true'
-					)}
+						<h2 class="BoxHeader">Tilauksesi esikatselu</h2>
+		
+						{Helper(file:'helpers/preview-cart')}
+						
+						<div id="SubmitCampaignCode" data-helper="preview-cart" data-view="checkout">
+							{CampaignCode(
+								mode: 'auto',
+								action: 'checkout',
+								notifications: 'true',
+								ajax: 'true'
+							)}
+						</div>
+						
+					</div>
+					
 				</div>
 				
 			</div>
-			
 		</div>
-		
+		<footer id="Footer">
+			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
+		</footer>
 	</div>
-</div>
-{Helper(file:'checkout/footer')}
+	<div id="NotificationCenter"></div>
+	<script type="text/javascript">
+	//<![CDATA[
+		
+		var mcf = {};
+		
+		mcf.ThemePath = "/files/{Theme}";
+		mcf.Lang = {};
+		
+		mcf.Lang.AddingToCart = '{%AddingToCart}';
+		mcf.Lang.ShowSubCategories = '{%ShowSubCategories}';
+		mcf.Lang.HideSubCategories = '{%HideSubCategories}';
+		mcf.Lang.Loading = '{%Loading}';
+		mcf.Lang.Next = '{%Next}';
+		mcf.Lang.Prev = '{%Prev}';
+		mcf.Lang.NextPlural = '{%NextPlural}';
+		mcf.Lang.PrevPlural = '{%PrevPlural}';
+		mcf.Lang.OrderProducts = '{%OrderProducts}';
+		mcf.Lang.Or = '{%Or}';
+		mcf.Lang.HideNotification = '{%HideNotification}';
+		mcf.Lang.ShoppingCartEdit = '{%ShoppingCartEdit}';
+		mcf.Lang.OrderProducts = '{%OrderProducts}';
+
+	//]]>
+	</script>
+	
+	{MinifyJS(
+		files: 'js/jquery-1.7.1.min.js|js/jquery.scroll.js|js/jquery.customselect.js|js/jquery.colorbox.js|js/jquery.typewatch.js|js/jquery.viewport.js|js/mcf.main.js|js/mcf.checkout.js|js/mcf.onepagecheckout.js'
+	)}
+	
+</body>
+</html>

@@ -1,0 +1,193 @@
+/* Single page checkout
+-------------------------------------------------------------- */
+
+#OnePageCheckout {
+	padding-left: 45px;
+}
+#OnePageCheckout .TagWrapper {
+	position: relative;
+}
+#OnePageCheckout h2 {
+	font-size: 24px;
+	width: 100%;
+	margin: 0 0 0 -30px;
+	padding: 9px 0 9px 30px;
+	line-height: 36px;
+	border-top: 6px solid #eee;
+}
+#OnePageCheckout h2 .Button {
+	float: right; margin-top: 8px;
+	margin-bottom: 0;
+}
+#OnePageCheckout .FormSubmit {
+	padding-left: 0;
+}
+#OnePageCheckout #CheckoutCustomerInformationHeader {
+	border-top: 0;
+	margin-top: 0;
+}
+#OnePageCheckout h2 span {
+	float: left; width: 25px;
+	margin-left: -30px;
+	text-align: right;
+	padding-right: 5px;
+}
+#OnePageCheckout h2 + p {
+	font-size: 14px;
+	margin: -4px 0 22px;
+	color: #555;
+}
+
+/* Shipping and payment methods */
+
+#OnePageCheckout #CheckoutShippingMethods .Checks,
+#OnePageCheckout #CheckoutPaymentMethods .Checks {
+	margin: -6px 0 22px;
+	padding: 0;
+	border: 2px solid #d9d9d9;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Checkout navigation on single page checkout */
+
+#CheckoutNavigation {
+	position: relative;
+	z-index: 100;
+	width: 576px;
+	border-top: 1px solid #D9D9D9;
+	border-bottom: 1px solid #CCCCCC;
+	margin-top: -1px;
+  background-color: #E8E8E8;
+  background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
+	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+  -webkit-box-shadow: inset 0 1px 0 #FFF;
+  -moz-box-shadow: inset 0 1px 0 #FFF;
+  box-shadow: inset 0 1px 0 #FFF;
+}
+#CheckoutNavigation.Fixed {
+	position: fixed;
+	top: 0px;
+}
+body.AdminLoggedIn #CheckoutNavigation.Fixed { top: 36px; } /* When admin logged in */
+
+#CheckoutStage {
+	position: relative;
+	float: left;
+	width: auto;
+	z-index: 500;
+	overflow: visible;
+	list-style: none inside;
+	margin: 0;
+	border: 0;
+	padding: 0 1px 0 0;
+	border-right: 1px solid #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+#CheckoutStage li {
+	float: left;
+	position: relative;
+	z-index: 501;
+	padding: 8px 14px 9px;
+	border-right: 1px solid #d9d9d9;
+	border-bottom: 0;
+	margin-right: -1px;
+	color: #888;
+}
+#CheckoutStage li, #CheckoutStage li a {
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+	-o-transition: all 0.25s ease-in-out;
+	-ms-transition: all 0.25s ease-in-out;
+	transition: all 0.25s ease-in-out;
+}
+#CheckoutStage li a {
+	text-decoration: none;
+}
+#CheckoutStage li + li {
+	border-left: 1px solid #FFFFFF;
+	margin-left: 1px;
+}
+#CheckoutStage .CurrentCheckoutStage {
+	background: #FFF;
+	border-bottom: 1px solid #FFF;
+	margin-bottom: -1px;
+}
+#CheckoutStage .CurrentCheckoutStage a {
+	color: #222;
+	font-weight: bold;
+}
+#CheckoutStage .CurrentCheckoutStage + .CurrentCheckoutStage {
+  background-color: #F2F2F2;
+  background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F2F2F2));
+	background-image: linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+	border-bottom: 0;
+	margin-bottom: 0;
+}
+#CheckoutStage .CurrentCheckoutStage + .CurrentCheckoutStage a {
+	color: #035;
+	font-weight: normal;
+}
+
+/* Previewable cart on single page checkout */
+
+#CheckoutPreviewCart,
+#CheckoutThanksOrderInfo {
+	float: right;
+	margin-right: -384px;
+	width: 383px;
+}
+#PreviewContent {
+	width: 383px;
+	max-height: 100%;
+	overflow: hidden;
+}
+#PreviewContent.Fixed {
+	position: fixed;
+	top: 0px;
+	bottom: auto;
+}
+body.AdminLoggedIn #PreviewContent.Fixed {
+	top: 36px; /* When admin logged */
+}
+#PreviewContent.Absolute {
+	position: absolute;
+	bottom: 0px;
+	top: auto !important;
+}
+#PreviewContent .CheckoutLoader {
+	position: absolute; z-index: 999;
+	top: 0; left: 0; padding: 0;
+	width: 100%; height: 100%;
+	background: #fafafa url("../i/checkoutloader.gif") no-repeat 50% 50%;
+	opacity: 0.7;
+}
+#PreviewContent #SubmitCampaignCode {
+	padding: 0 15px;
+}
+#CartTable.PreviewTable {
+	margin: 0 6px 18px;
+	width: auto;
+}
+.PreviewTable thead th {
+	font-size: 12px;
+}
+.PreviewTable .CartProduct h3 {
+	font-size: 12px;
+	margin: 0;
+}
+.PreviewTable .CartProduct dl {
+	font-size: 11px; margin-top: 9px;
+}

@@ -1,4 +1,4 @@
-<table id="CartTable" class="EditableCart">
+<table id="CartTable">
 
 	<thead>
 		<tr>
@@ -27,10 +27,6 @@
 			before:	'<tr><th scope="row" colspan="4">Alennuskoodi: <strong>{CartCouponCode}</strong></td><td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
-		{CartPartPayment(
-			before:	'<tr><th scope="row" colspan="4">Osamaksulla</th><td class="CartTotal">',
-			after:	'</td></tr>'
-		)}
 		{CartTotal(
 			before:	'<tr id="FullTotal"><th scope="row" colspan="4">Yhteensä</th><td class="CartTotal">',
 			after:	'</td></tr>'
@@ -49,15 +45,14 @@
 						)}
 					</td>
 					<th scope="row" class="CartProduct">
-						<h3><a href="{ProductUrl}">{CartProductName}</a></h3>
+						<h3>{CartProductName}</h3>
 						{CartProductDetails}	
 					</th>
 					<td class="CartPrice">{CartProductPrice}</td>
 					<td class="CartQuantity">
 						{CartProductQuantity(
-							mode: 'form'
+							mode: 'preview'
 						)}
-						{CartProductDelete}
 					</td>
 					<td class="CartTotal">{CartProductTotal}</td>
 				</tr>

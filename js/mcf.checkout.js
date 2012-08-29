@@ -71,7 +71,7 @@ $(function() {
 	
 	// One page checkout
 	if ($("#OnePageCheckout").length) {
-
+		
 		$("#CheckoutLoginButton").colorbox({
 			opacity: 0.5,
 			width: "640px",
@@ -79,6 +79,15 @@ $(function() {
 			href: "/interface/Login?on_success=/checkout/proceed/&on_error=/checkout/proceed/&form_info=CheckoutExistingCustomerInfo"
 		});
 		
+		$("#CheckoutStage").localScroll({
+			axis: "y",
+			duration: 350,
+			offset: {
+				left: 0,
+				top: -45
+			}
+		});
+
 		$(".TagWrapper").mcfOnepageCheckout({
 		
 			tagname: "auto", // Detect from hidden input
@@ -105,13 +114,13 @@ $(function() {
 						response_type = response_notification.removeClass("Notification").attr("class");
 					
 					var ScrollToEl = el.prevAll("h2");
-					
+
 					$.scrollTo(ScrollToEl, {
 						axis: "y",
-						duration: 250,
+						duration: 350,
 						offset: {
 							left: 0,
-							top: -18
+							top: -36
 						}
 					});
 					
@@ -159,37 +168,51 @@ $(function() {
 			}
 			
 		});
-
 		(function(){
-		
-			// Scroll the preview cart with checkout
-			var $doc = $(document);
-			var body_height = $(document.body).height();
-			var $CheckoutPreview = $("#CheckoutPreviewCart");
-			var $PreviewContent = $("#PreviewContent");
 			
-			var CheckoutPreviewOffset = $CheckoutPreview.offset().top;
-			var PreviewContentHeight = $PreviewContent.height();
+			var $preview = $("#PreviewContent"),
+				preview_height = $preview.height(),
+				content_height = $("#OnePageCheckout").innerHeight(),
+				$checkout_navigation = $("#CheckoutNavigation"),
+				header_height = $("#Main").offset().top;
+
+			$(window).scroll(function(event) {
 			
-			$(window).resize(function() {
-				if (body_height - 36 > PreviewContentHeight) {
-					$doc.scroll(function(event) {
-						var topScroll = $doc.scrollTop();
-						if (topScroll >= CheckoutPreviewOffset) {
-							$PreviewContent.addClass("Fixed");
-						} else {
-							$PreviewContent.removeClass("Fixed");
-						}
-					});
-				} else {
-					$PreviewContent.find(".CartProductDetails").hide();
-					//$PreviewContent.removeClass("Fixed");
-					//$doc.unbind("scroll");
+				var in_view = $("#Primary").find("h2 > span[id]:in-viewport").map(function() { return "#" + this.id; }).get(),
+					$link = $("#CheckoutStage a").filter(function(index) {
+						var href = $(this).attr("href");
+						return ($.inArray(href, in_view) !== -1) ? true : false;
+					}).parent("li"),
+					scroll_top = $(window).scrollTop();
+				
+				if ($link.length) {
+					$("#CheckoutStage li").removeClass('CurrentCheckoutStage');
+					$link.addClass('CurrentCheckoutStage');
 				}
-			}).trigger("resize");
+				
+				if (scroll_top > $("#Header").outerHeight()) {
+					$checkout_navigation.addClass("Fixed");
+				} else {
+					$checkout_navigation.removeClass("Fixed");
+				}
+				
+				if ($preview.height() <= content_height) {
+				
+					$preview.parent().css("height", $("#Primary").css("height"));
+					
+					if ($(window).scrollTop() + preview_height > $("#Footer").offset().top) {
+						$preview.addClass("Absolute");
+					} else if (scroll_top > header_height) {
+						$preview.removeClass("Absolute").addClass("Fixed");
+					} else {
+						$preview.removeClass("Absolute Fixed");
+					}
+				}
+			
+			});
 
 		})();
-			
+
 	}
 
 	// All Chekcout pages

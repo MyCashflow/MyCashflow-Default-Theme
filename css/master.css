@@ -166,7 +166,7 @@ header .DropdownNavigation:hover .CurrencyIcon {
 header .DropdownNavigation ul {
 	position: absolute; overflow: hidden;
 	top: 35px; left: -9999em;
-	width: 160px; background: #FFF;
+	width: 180px; background: #FFF;
 	margin: 0; padding: 0;
 	border: 1px solid #d9d9d9;
 	border-bottom: 1px solid #CCC;
@@ -1250,18 +1250,15 @@ table .CartProduct dt { clear: left; }
 	display: inline;
 	margin: 0 auto;
 }
-
 .EditableCart tfoot td,
 .EditableCart tfoot th,
 #OrderProducts tfoot td,
 #OrderProducts tfoot th {
 	text-align: right;
 }
-
 #FullTotal td, #FullTotal th {
 	font-size: 125%;
 }
-
 #UpdateCartButton {
 	float: right;
 	margin: -9px 0 9px;
@@ -1282,18 +1279,17 @@ table .CartProduct dt { clear: left; }
 	color: #666;
 }
 
-/* Big and beautiful order button */
-#Checkout .FormSubmit {
-	padding: 18px 0 0 126px;
-}
-/* Buttons in blue */
+/* Chekcout
+-------------------------------------------------------------- */
+
+/* Primary buttons in blue */
 .CheckoutButton,
 a.Button.PrimaryAction,
 button.PrimaryAction,
 #Checkout .FormSubmit .SubmitButton,
 .BuyForm .FormSubmit .SubmitButton {
-	clear: both; padding: 8px 17px;
-	font-size: 15px; font-weight: bold; text-decoration: none;
+	padding: 8px 17px;
+	font-weight: bold; text-decoration: none;
   color: #FFF; background-color: #058; background-repeat: repeat-x;
 	background-image: linear-gradient(top, #08A 0%, #058 100%);
 	background-image: -o-linear-gradient(top, #08A 0%, #058 100%);
@@ -1310,6 +1306,15 @@ button.PrimaryAction,
 	-webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+}
+#Checkout .FormSubmit {
+	padding: 18px 0 0 126px;
+}
+.CheckoutButton,
+#Checkout .FormSubmit .SubmitButton,
+.BuyForm .FormSubmit .SubmitButton {
+	clear: both;
+	font-size: 15px;
 }
 .CheckoutButton,
 a.Button.PrimaryAction {
@@ -1340,32 +1345,8 @@ a.Button.PrimaryAction,
   box-shadow: none;
 }
 
-/* Chekcout
--------------------------------------------------------------- */
+/* Checkout navigation */
 
-/* Multi page checout */
-
-#Header.CheckoutHeader {
-	padding-bottom: 45px;
-}
-#MultiPageCheckout {
-	position: relative;
-	z-index: 100;
-	padding: 0 15px;
-}
-#MultiPageCheckout .Notification {
-	margin: 18px 0;
-	padding: 17px;
-	font-size: 15px;
-}
-#MultiPageCheckout h2 {
-	font-size: 24px;
-	font-weight: normal;
-	width: 100%;
-	margin: 0;
-	padding: 18px 0;
-	line-height: 36px;
-}
 #CheckoutStage {
 	position: relative;
 	float: left;
@@ -1427,8 +1408,58 @@ a.Button.PrimaryAction,
 	color: #444;
 }
 
-#CheckoutAddressBook {
+/* Multi page checout
+-------------------------------------------------------------- */
+
+#MultiPageCheckout {
+	position: relative;
+	z-index: 100;
+	padding: 0 15px;
 }
+#MultiPageCheckout .Notification {
+	margin: 18px 0;
+	padding: 17px;
+	font-size: 15px;
+}
+#MultiPageCheckout h2 {
+	font-size: 24px;
+	font-weight: normal;
+	width: 100%;
+	margin: 0;
+	padding: 18px 0;
+	line-height: 36px;
+}
+#Header.MultipageCheckoutHeader {
+	padding-bottom: 45px;
+}
+
+/* Toggle the shipping address form */
+
+#CheckoutShippingAddressToggle {
+	/* Hide it to be shown with javascript */
+	display: none;
+	font-size: 14px;
+	margin: -4px 0 22px;
+	color: #555;
+}
+#MultiPageCheckout #CheckoutShippingAddressToggle {
+	margin-left: -18px;
+}
+#CheckoutShippingAddressToggle a {
+	color: #900; font-size: 11px;
+}
+#CheckoutShippingAddressToggle .Checks {
+	margin-bottom: 0;
+}
+#CheckoutShippingAddressToggle input { top: 4px; }
+#CheckoutShippingAddress {
+	/* Fixes the overflow clipping issue with effects */
+	margin-top: -9px; padding-top: 9px;
+}
+
+/* Addressbook */
+
+#CheckoutAddressBook {}
 #CheckoutAddressBook p.label {
 	display: none;
 }
@@ -1460,6 +1491,9 @@ a.Button.PrimaryAction,
 .NewShippingAddress a {
 	font-weight: bold;
 }
+
+/* Checkout headers with intro-/helptexts */
+
 #MultiPageCheckout .HeaderItem {
 	position: relative; width: auto; clear: both;
 	margin: -1px -15px 18px; padding: 8px 15px 9px;
@@ -1492,138 +1526,9 @@ a.Button.PrimaryAction,
 	color: #666; padding: 0 0 5px;
 	margin: 0;
 }
-#MultiPageCheckout #CheckoutShippingAddressToggle {
-	margin-left: -18px;
-}
-#MultiPageCheckout .ShippingMethodWrapper,
-#MultiPageCheckout .PaymentMethodWrapper {
-	border-top: 1px dotted #d9d9d9;
-	border-bottom: 1px dotted #d9d9d9;
-	padding: 8px 9px 8px 27px;
-	margin-left: -18px;
-}
-#MultiPageCheckout .ShippingMethodWrapper + .ShippingMethodWrapper,
-#MultiPageCheckout .PaymentMethodWrapper + .PaymentMethodWrapper {
-	border-top: 0; padding-top: 9px;
-}
-#MultiPageCheckout .SelectedMethod {
-  background-color: #fafafa;
-  border: 1px solid #d9d9d9 !important;
-  padding: 8px 11px 8px 29px;
-  margin-left: -21px; margin-right: -3px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-#MultiPageCheckout * + .SelectedMethod  {
-	margin-top: -1px;
-}
-
-#PreviewSplit {
-	width: 384px; overflow: visible;
-	border-bottom: 1px solid #d9d9d9;
-	border-left: 1px solid #d9d9d9;
-	margin: -18px -15px 0 560px;
-	background: #fafafa;
-}
-#PreviewProducts {
-	float: left; width: 546px;
-	margin-left: -576px;
-	padding: 18px 15px 0;
-}
-#PreviewProducts #CartTable {
-	margin-bottom: 36px;
-}
-#PreviewProducts .FormSubmit {
-	padding-left: 0;
-}
-#PreviewProducts label { font-weight: bold; }
-#PreviewProducts .CheckWrap p.label {
-	display: none;
-}
-#PreviewInfo {
-	width: 354px; float: left;
-	padding: 18px 15px 0;
-}
-#PreviewInfo dl {
-	font-size: 15px;
-}
-#PreviewInfo dl dd {
-	margin-bottom: 18px;
-}
-
-/* One page checkout, we have it baby yeah! \o/ */
-
-#OnePageCheckout {
-	padding-left: 45px;
-}
-#OnePageCheckout .TagWrapper {
-	position: relative;
-}
-#OnePageCheckout h2 {
-	font-size: 24px;
-	width: 100%;
-	margin: 0 0 0 -30px;
-	padding: 9px 0 9px 30px;
-	line-height: 36px;
-	border-top: 6px solid #eee;
-}
-#OnePageCheckout h2 .Button {
-	float: right; margin-top: 8px;
-}
-#OnePageCheckout #CheckoutCustomerInformationHeader {
-	border-top: 0;
-	margin-top: 0;
-}
-#OnePageCheckout h2 span {
-	float: left; width: 25px;
-	margin-left: -30px;
-	text-align: right;
-	padding-right: 5px;
-}
-#OnePageCheckout h2 + p {
-	font-size: 14px;
-	margin: -4px 0 22px;
-	color: #555;
-}
-.CheckoutLoader {
-	position: absolute; z-index: 999;
-	top: -9px; left: -9px; padding: 9px 9px 0;
-	width: 100%; height: 100%;
-	background: #FFF url("../i/checkoutloader.gif") no-repeat 50% 50%;
-	opacity: 0.7;
-}
-#CheckoutShippingAddressToggle {
-	/* Hide it to be shown with javascript */
-	display: none;
-	font-size: 14px;
-	margin: -4px 0 22px;
-	color: #555;
-}
-#CheckoutShippingAddressToggle a {
-	color: #900; font-size: 11px;
-}
-#CheckoutShippingAddressToggle .Checks {
-	margin-bottom: 0;
-}
-#CheckoutShippingAddressToggle input { top: 4px; }
-#CheckoutShippingAddress {
-	/* Fixes the overflow clipping issue with effects */
-	margin-top: -9px; padding-top: 9px;
-}
 
 /* Shipping and payment methods */
 
-#OnePageCheckout #CheckoutShippingMethods .Checks,
-#OnePageCheckout #CheckoutPaymentMethods .Checks {
-	margin: -6px 0 22px;
-	padding: 0;
-	border: 2px solid #d9d9d9;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  overflow: hidden;
-}
 #CheckoutShippingMethods .CheckWrap > .label,
 #CheckoutPaymentMethods .CheckWrap > .label {
 	display: none;
@@ -1692,48 +1597,82 @@ a.Button.PrimaryAction,
 	margin: 0;
 }
 
-/* Previewable cart at OnePageCheckout */
+#MultiPageCheckout .ShippingMethodWrapper,
+#MultiPageCheckout .PaymentMethodWrapper {
+	border-top: 1px dotted #d9d9d9;
+	border-bottom: 1px dotted #d9d9d9;
+	padding: 8px 9px 8px 27px;
+	margin-left: -18px;
+}
+#MultiPageCheckout .ShippingMethodWrapper + .ShippingMethodWrapper,
+#MultiPageCheckout .PaymentMethodWrapper + .PaymentMethodWrapper {
+	border-top: 0; padding-top: 9px;
+}
+#MultiPageCheckout .SelectedMethod {
+  background-color: #fafafa;
+  border: 1px solid #d9d9d9 !important;
+  padding: 8px 11px 8px 29px;
+  margin-left: -21px; margin-right: -3px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+#MultiPageCheckout * + .SelectedMethod  {
+	margin-top: -1px;
+}
 
-#CheckoutPreviewCart,
-#CheckoutThanksOrderInfo {
-	float: right;
-	margin-right: -384px;
-	width: 383px;
+/* Preview page split in half */
+#PreviewSplit {
+	width: 384px; overflow: visible;
+	border-bottom: 1px solid #d9d9d9;
+	border-left: 1px solid #d9d9d9;
+	margin: -18px -15px 0 560px;
+	background: #fafafa;
+}
+#PreviewProducts {
+	float: left; width: 546px;
+	margin-left: -576px;
+	padding: 18px 15px 0;
+}
+#PreviewProducts #CartTable {
+	margin-bottom: 18px;
+}
+#PreviewProducts .FormSubmit {
+	padding-left: 0;
+}
+#PreviewProducts label { font-weight: bold; }
+#PreviewProducts .CheckWrap p.label {
+	display: none;
+}
+#PreviewInfo {
+	width: 354px; float: left;
+	padding: 18px 15px 0;
+}
+#PreviewInfo dl {
+	font-size: 15px;
+}
+#PreviewInfo dl dd {
+	margin-bottom: 18px;
 }
 #PreviewContent {
-	width: 383px;
-	max-height: 100%;
-	overflow-y: auto;
+	position: relative;
 }
-#PreviewContent.Fixed {
-	position: fixed; top: 0px;
+#PreviewProducts #SubmitCampaignCode {
+	float: right;
+	margin-bottom: 18px;
 }
-body.AdminLoggedIn #PreviewContent.Fixed { top: 36px; }
-
-#PreviewContent .CheckoutLoader {
+#PreviewProducts #SubmitCampaignCode button {
+	margin-right: 0;
+}
+#PreviewProducts #SubmitCampaignCode + form {
+	clear: both;
+}
+.CheckoutLoader {
 	position: absolute; z-index: 999;
-	top: 0; left: 0; padding: 0;
+	top: -9px; left: -9px; padding: 9px 9px 0;
 	width: 100%; height: 100%;
-	background: #fafafa url("../i/checkoutloader.gif") no-repeat 50% 50%;
+	background: #FFF url("../i/checkoutloader.gif") no-repeat 50% 50%;
 	opacity: 0.7;
-}
-#PreviewContent #SubmitCampaignCode {
-	padding: 0 15px;
-}
-
-#CartTable.PreviewTable {
-	margin: 0 6px 18px;
-	width: auto;
-}
-.PreviewTable thead th {
-	font-size: 12px;
-}
-.PreviewTable .CartProduct h3 {
-	font-size: 12px;
-	margin: 0;
-}
-.PreviewTable .CartProduct dl {
-	font-size: 11px; margin-top: 9px;
 }
 
 /* Accept terms */
@@ -1742,7 +1681,7 @@ body.AdminLoggedIn #PreviewContent.Fixed { top: 36px; }
 	display: none;
 }
 
-/* Transfer to payment (/checkout/process/)
+/* Transfer to payment pages (/checkout/process/)
 -------------------------------------------------------------- */
 
 /* CHECKOUT */
@@ -1807,4 +1746,3 @@ body.AdminLoggedIn #PreviewContent.Fixed { top: 36px; }
 #cboxLoadedContent #CheckoutThanksRegistrationForm { display: block; }
 #NewCustomerPassword .CheckWrap > .label { display: none; }
 #NewCustomerPassword label { font-weight: bold; }
-

@@ -284,13 +284,17 @@ $(function() {
 
 	// Adding products to cart with ajax and refreshing of the minicart-tag
 	$(document).on("submit", ".BuyForm", function(event) {
-	
-		event.preventDefault();
 		
 		var target = $(event.currentTarget),
 			btn = target.find(".AddToCart"),
 			formData = target.serialize() + "&ajax=1",
 			colorboxed = target.closest("#cboxLoadedContent").length;
+			
+		if (!target.find("input[type='file']").length) {
+			event.preventDefault();
+		} else {
+			return true;
+		}
 
 		btn.attr("disabled", "disabled");
 

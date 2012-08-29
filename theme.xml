@@ -17,8 +17,8 @@
 	
 	<Features>
 		<Checkout>
-			<SinglePage supported="true" />
-			<MultiPage supported="false" />
+			<SinglePage supported="true" default="default" />
+			<MultiPage supported="true" />
 		</Checkout>
 	</Features>
 	
