@@ -2,40 +2,40 @@
 
 	<thead>
 		<tr>
-			<th scope="col" class="CartProduct">Tuote</th>
-			<th scope="col" class="CartPrice">Hinta</th>
-			<th scope="col" class="CartQuantity">Määrä</th>
-			<th scope="col" class="CartTotal">Yhteensä</th>
+			<th scope="col" class="CartProduct">{%Product}</th>
+			<th scope="col" class="CartPrice">{%Price}</th>
+			<th scope="col" class="CartQuantity">{%Quantity}</th>
+			<th scope="col" class="CartTotal">{%Total}</th>
 		</tr>
 	</thead>
 	
 	<tfoot>
 		{CartSubTotal(
-			before:	'<tr><th scope="row" colspan="3">Tuotteet yhteensä</th><td class="CartTotal">',
+			before:	'<tr><th scope="row" colspan="3">{%CheckoutProductsTotal}</th><td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
 		{CartShippingCosts(
 			before:	'
 				<tr>
-					<th scope="row" colspan="3">Toimitustapa: <strong>{CartShippingMethod}</strong></td>
+					<th scope="row" colspan="3">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></td>
 					<td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
 		{CartPaymentCosts(
 			before: '
 				<tr>
-					<th scope="row" colspan="3">Maksutapa: <strong>{CartPaymentMethod}</strong></td>
+					<th scope="row" colspan="3">{%PaymentMethod}: <strong>{CartPaymentMethod}</strong></td>
 					<td class="CartTotal">',
 			after: '</td></tr>'
 		)}
 		{CartDiscount(
 			before: '<tr>
-				<th scope="row" colspan="3">Alennuskoodi: <strong>{CartCouponCode}</strong></td>
+				<th scope="row" colspan="3">{%CampaignCode}: <strong>{CartCouponCode}</strong></td>
 				<td class="CartTotal">',
 			after: '</td></tr>'
 		)}
 		{CartTotal(
-			before:	'<tr id="FullTotal"><th scope="row" colspan="3">Yhteensä</th><td class="CartTotal" id="FullTotal">',
+			before:	'<tr id="FullTotal"><th scope="row" colspan="3">{%Total}</th><td class="CartTotal" id="FullTotal">',
 			after:	'</td></tr>'
 		)}
 	</tfoot>
@@ -48,7 +48,7 @@
 						<h3>{CartProductName}</h3>	
 						{CartProductDetails}	
 					</th>
-					<td class="CartPrice">{CartProductPrice}</td>
+					<td class="CartPrice">{CartProductPrice}{CartProductComparePrice(before: '<br><span class="ProductComparePrice">', after: '</span>')}</td>
 					<td class="CartQuantity">
 						{CartProductQuantity(
 							mode: 'preview'

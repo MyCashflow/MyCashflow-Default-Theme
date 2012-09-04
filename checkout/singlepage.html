@@ -38,10 +38,10 @@
 							<h2 id="CheckoutCustomerInformationHeader"><span class="CheckoutStageNumber" id="CheckoutCustomer">1. </span>{%CheckoutCustomerInformation}
 							{Helper(
 								case:'CustomerNotLogged',
-								file:'{{ <a href="/account/login/" class="Button PrimaryAction" id="CheckoutLoginButton">Kirjaudu sisään</a>}}',
-								or: ' <a href="/account/logout/" class="Button">Kirjaudu ulos</a>'
+								file:'{{ <a href="/account/login/" class="Button PrimaryAction" id="CheckoutLoginButton">{%Login}</a>}}',
+								or: ' <a href="/account/logout/" class="Button">{%Logout}</a>'
 							)}</h2>
-							<p>Asiakastiedot toimivat laskutusosoitteenasi. Erillinen toimitusosoite on mahdollista määritellä myöhemmin.</p>
+							<p>{%CheckoutBillingAddressIntro}</p>
 							<fieldset class="TagWrapper" id="CheckoutBillingAddress">
 								{CheckoutBillingAddress(
 									mode: 'form',
@@ -49,14 +49,14 @@
 								)}
 							</fieldset>
 			
-							<h2><span class="CheckoutStageNumber">2. </span>Toimitusosoite</h2>
+							<h2><span class="CheckoutStageNumber">2. </span>{%CheckoutShippingAddress}</h2>
 							
 							{Notifications(name:'CustomerShippingAddressError')}
 						
 							<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
 								<div class="Checks">
 									<label>
-										<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
+										<input type="checkbox" /> {%CheckoutShippingAddressToggle}
 									</label>
 									<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
 								</div>
@@ -70,7 +70,7 @@
 							</fieldset>
 							
 							<h2><span class="CheckoutStageNumber" id="CheckoutShipping">3. </span>{%CheckoutChooseShippingMethod}</h2>
-							<p>Tilauksesi tuotteet voidaan toimittaa seuraavilla toimitustavoilla.</p>
+							<p>{%CheckoutChooseShippingMethodIntro}</p>
 		
 							<fieldset class="TagWrapper" id="CheckoutShippingMethods">
 								{CheckoutShippingMethods(
@@ -81,7 +81,7 @@
 							</fieldset>
 			
 							<h2><span class="CheckoutStageNumber" id="CheckoutPayment">4. </span>{%CheckoutChoosePaymentMethod}</h2>
-							<p>Voit maksaa tilauksesi seuraavilla maksutavoilla.</p>
+							<p>{%CheckoutChoosePaymentMethodIntro}</p>
 		
 							<fieldset class="TagWrapper" id="CheckoutPaymentMethods">
 								{CheckoutPaymentMethods(
@@ -91,8 +91,8 @@
 								)}
 							</fieldset>
 					
-							<h2><span class="CheckoutStageNumber" id="CheckoutPreview">5. </span>Lähetä tilaus</h2>
-							<p>Esikatsele tilauksesi ennen lähettämistä. Voit antaa tarvittaessa lisätietoja tilauksen käsittelijälle.</p>
+							<h2><span class="CheckoutStageNumber" id="CheckoutPreview">5. </span>{%CheckoutSendOrder}</h2>
+							<p>{%CheckoutAcceptTermsIntro}</p>
 							
 							<fieldset id="CheckoutAcceptTerms">
 								{CheckoutAcceptTerms}
@@ -108,7 +108,7 @@
 					
 					<div id="PreviewContent">
 		
-						<h2 class="BoxHeader">Tilauksesi esikatselu</h2>
+						<h2 class="BoxHeader">{%CheckoutPreview}</h2>
 		
 						{Helper(file:'helpers/preview-cart')}
 						

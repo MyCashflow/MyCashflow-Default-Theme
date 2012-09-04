@@ -4,7 +4,7 @@
 		{Helper(file:'helpers/sidebar-left')}
 		<div id="Primary" class="Column">
 			<div id="PageHeader">
-				<a class="Button CheckoutButton" href="/checkout/">Tilaa tuotteet</a>
+				<a class="Button CheckoutButton" href="/checkout/">{%OrderProducts}</a>
 				{Path}
 				<h1>{PageTitle}</h1>
 			</div>
@@ -14,7 +14,7 @@
 
 				<form action="/cart/update/" method="post" id="CartForm">
 					{Helper(file:'helpers/full-cart')}
-					<button type="submit" id="UpdateCartButton">Päivitä ostoskori</button>
+					<button type="submit" id="UpdateCartButton">{%ShoppingCartUpdateSubtotal}</button>
 				</form>
 
 				<div id="SubmitCampaignCode" data-helper="full-cart" data-view="cart">
@@ -26,7 +26,7 @@
 					)}
 				</div>
 				
-				<a class="Button CheckoutButton" href="/checkout/">Tilaa tuotteet</a>
+				<a class="Button CheckoutButton" href="/checkout/">{%OrderProducts}</a>
 				
 			</div>
 

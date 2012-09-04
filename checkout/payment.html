@@ -7,8 +7,8 @@
 		<fieldset id="CheckoutPaymentMethods">
 		
 			<div class="FormItem HeaderItem">
-				<h2>Valitse maksutapa</h2>
-				<p>Valitse maksutapa, jolla tilauksesi haluat maksaa.</p>
+				<h2>{%CheckoutChoosePaymentMethod}</h2>
+				<p>{%CheckoutChoosePaymentMethodIntro}</p>
 			</div>
 			
 			{CheckoutPaymentMethods(
@@ -18,7 +18,7 @@
 		</fieldset>
 		
 		<div class="FormItem FormSubmit">
-			<button type="submit" class="SubmitButton">Jatka tilaamista</button>
+			<button type="submit" class="SubmitButton">{%CheckoutContinue}</button>
 		</div>
 		
 	</form>

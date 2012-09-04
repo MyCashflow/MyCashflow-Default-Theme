@@ -15,8 +15,8 @@
 					notifications: 'false',
 					before:	'
 						<div class="FormItem HeaderItem">
-							<h2>Asiakastiedot</h2>
-							<p>Asiakastiedot toimivat myös laskutusosoitteenasi.</p>
+							<h2>{%CheckoutCustomerInformation}</h2>
+							<p>{%CheckoutBillingAddressIntro}</p>
 						</div>
 						<fieldset id="CheckoutBillingAddress">
 					',
@@ -28,8 +28,8 @@
 					notifications: 'false',
 					before: '
 						<div class="FormItem HeaderItem">
-							<h2>Toimitusosoite</h2>
-							<p>Anna erillinen toimitusosoite mikäli se poikkeaa asiakastiedoistasi.</p>
+							<h2>{%CheckoutShippingAddress}</h2>
+							<p>{%CheckoutShippingAddressIntro}</p>
 						</div>
 
 						{Notifications(name:'CustomerShippingAddressError')}
@@ -37,7 +37,7 @@
 						<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
 							<div class="Checks">
 								<label>
-									<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
+									<input type="checkbox" /> {%CheckoutShippingAddressToggle}
 								</label>
 								<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
 							</div>
@@ -60,21 +60,21 @@
 				{CheckoutBillingAddress(
 					before:	'
 						<div class="FormItem HeaderItem">
-							<h2>Asiakastiedot</h2>
-							<p>Asiakastiedot toimivat myös laskutusosoitteenasi.</p>
+							<h2>{%CheckoutCustomerInformation}</h2>
+							<p>{%CheckoutBillingAddressIntro}</p>
 						</div>
 						<div class="FormItem">
 						<p>
 					',
-					after: '<br><a href="/checkout/customer_information">Muokkaa</a></p></div>'
+					after: '<br><a href="/checkout/customer_information">{%Edit}</a></p></div>'
 				)}
 
 				{CheckoutShippingAddress(
 					mode: 'select',
 					before: '
 						<div class="FormItem HeaderItem">
-							<h2>Valitse toimitusosoite</h2>
-							<p>Valitse mihin osoitteeseen haluat tilauksesi toimitettavan tai <a href="/checkout/shipping_information/new/">lisää uusi toimitusosoite</a>.</p>
+							<h2>{%CheckoutChooseShippingAddress}</h2>
+							<p>{%CheckoutChooseShippingAddressIntro}</p>
 						</div>
 						<fieldset id="CheckoutAddressBook">',
 					after: '</fieldset>'
@@ -84,7 +84,7 @@
 		}
 
 		<div class="FormItem FormSubmit">
-			<button type="submit" class="SubmitButton">Jatka tilaamista</button>
+			<button type="submit" class="SubmitButton">{%CheckoutContinue}</button>
 		</div>
 		
 	</form>

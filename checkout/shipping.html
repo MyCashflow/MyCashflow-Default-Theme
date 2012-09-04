@@ -5,8 +5,8 @@
 	<form action="/checkout/" method="post">
 
 		<div class="FormItem HeaderItem">
-			<h2>Toimitustapa</h2>
-			<p>Valitse sinulle sopivin toimitustapa.</p>
+			<h2>{%CheckoutChooseShippingMethod}</h2>
+			<p>{%CheckoutChooseShippingMethodIntro}</p>
 		</div>
 
 		<fieldset id="CheckoutShippingMethods">
@@ -16,7 +16,7 @@
 		</fieldset>
 
 		<div class="FormItem FormSubmit">
-			<button type="submit" class="SubmitButton">Jatka tilaamista</button>
+			<button type="submit" class="SubmitButton">{%CheckoutContinue}</button>
 		</div>
 		
 	</form>

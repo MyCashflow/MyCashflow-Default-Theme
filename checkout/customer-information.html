@@ -6,8 +6,8 @@
 		
 		<fieldset>
 			<div class="FormItem HeaderItem">
-				<h2>Asiakastiedot</h2>
-				<p>Asiakastiedot toimivat myös laskutusosoitteenasi.</p>
+				<h2>{%CheckoutCustomerInformation}</h2>
+				<p>{%CheckoutBillingAddressIntro}</p>
 			</div>
 			{CheckoutBillingAddress(
 				mode: 'form'
@@ -21,8 +21,8 @@
 				<!-- If user is not logged, ask for shipping address -->
 
 				<div class="FormItem HeaderItem">
-					<h2>Toimitusosoite</h2>
-					<p>Anna erillinen toimitusosoite mikäli se poikkeaa asiakastiedoistasi.</p>
+					<h2>{%CheckoutShippingAddress}</h2>
+					<p>{%CheckoutShippingAddressIntro}</p>
 				</div>
 				
 				{Notifications(name:'CustomerShippingAddressError')}
@@ -30,7 +30,7 @@
 				<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
 					<div class="Checks">
 						<label>
-							<input type="checkbox" /> Haluan tuotteeni toimitettavaksi asiakastiedoista poikkeavaan osoitteesen
+							<input type="checkbox" /> {%CheckoutShippingAddressToggle}
 						</label>
 						<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
 					</div>
@@ -47,7 +47,7 @@
 		}
 
 		<div class="FormItem FormSubmit">
-			<button type="submit" class="SubmitButton">Jatka tilaamista</button>
+			<button type="submit" class="SubmitButton">{%CheckoutContinue}</button>
 		</div>
 		
 	</form>

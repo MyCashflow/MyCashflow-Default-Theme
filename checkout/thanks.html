@@ -8,7 +8,7 @@
 				<h1>{%CheckoutThanksForOrder}</h1>
 					{CheckoutRegistrationForm(
 						before: '
-							<p class="Big">Halutessasi voit vielä luoda tunnuksen kauppaamme tilauksesi tiedoilla, jolloin tilaamisesi jatkossa meiltä helpottuu.<br><a class="Button" title="Luo tunnus" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">Luo tunnus</a></p>
+							<p class="Big">{%CheckoutThanksRegistration}<br><a class="Button" title="Luo tunnus" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">{%SignUp}</a></p>
 							<form action="/account/register/" method="post" id="CheckoutThanksRegistrationForm" class="BlockForm">
 							<p>{%CheckoutCreateAccountInfo}</p>
 						',
@@ -98,8 +98,10 @@
 							</th>
 							<td class="CartPrice">
 								{OrderProductPrice(
-									after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>'
+									after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>',
+									before: '{OrderProductComparePrice(before: '<span class="ProductComparePrice">', after: '</span>')}&ensp;'
 								)}
+								
 							</td>
 							<td class="CartQuantity">{OrderProductQuantity}</td>
 							<td class="CartTotal">

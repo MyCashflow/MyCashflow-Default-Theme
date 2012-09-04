@@ -59,7 +59,7 @@ $(function() {
 				}
 			});
 		}).find("form:has('input[type='text']')").hide()
-		.before('<a href="#coupon" id="CouponCodeReveal">Onko sinulla alennukseen oikeuttava koodi?</a>').prev()
+		.before('<a href="#coupon" id="CouponCodeReveal">' + mcf.Lang.CampaignCodeInquiry + '</a>').prev()
 		.click(function(event) {
 			event.preventDefault();
 			$(this).fadeOut(200, function() {

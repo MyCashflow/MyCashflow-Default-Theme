@@ -65,7 +65,8 @@
 				<td>{OrderProductQuantity}</td>
 				<td>
 					{OrderProductPrice(
-						after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>'
+						after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>',
+						before: '{OrderProductComparePrice(before: '<span style="color: #888; text-decoration: line-through;">', after: '</span>')}&ensp;'
 					)}
 				</td>
 				<td class="CartTotal">

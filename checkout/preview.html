@@ -3,8 +3,8 @@
 <div id="MultiPageCheckout" class="clearfix">
 
 	<div class="FormItem HeaderItem NoIndent">
-		<h2>Tilauksen esikatselu</h2>
-		<p>Tarkista vielä ettei tilauksesi tiedoissa ole virheitä ja hyväksy tilaus.</p>
+		<h2>{%CheckoutPreview}</h2>
+		<p>{%CheckoutPreviewIntro}</p>
 	</div>
 	
 	<div id="PreviewSplit" class="clearfix">
@@ -36,22 +36,22 @@
 			
 			<dl>
 			{CartShippingMethod(
-				before: '<dt>Toimitustapa</dt><dd>',
-				after: '&nbsp;<a href="/checkout/shipping/">Muuta</a></dd>'
+				before: '<dt>{%CheckoutShipping}</dt><dd>',
+				after: '&nbsp;<a href="/checkout/shipping/">{%Edit}</a></dd>'
 			)}
 			{CartPaymentMethod(
-				before: '<dt>Maksutapa</dt><dd>',
-				after: '&nbsp;<a href="/checkout/payment/">Muuta</a></dd>'
+				before: '<dt>{%PaymentMethod}</dt><dd>',
+				after: '&nbsp;<a href="/checkout/payment/">{%Edit}</a></dd>'
 			)}
 			{CheckoutBillingAddress(
 				mode:'preview',
-				before: '<dt>Laskutusosoite</dt><dd>',
-				after: '<br><a href="/checkout/customer_information/">Muuta</a></dd>'
+				before: '<dt>{%CheckoutCustomerInformation}</dt><dd>',
+				after: '<br><a href="/checkout/customer_information/">{%Edit}</a></dd>'
 			)}
 			{CheckoutShippingAddress(
 				mode:'preview',
-				before: '<dt>Toimitusosoite</dt><dd>',
-				after: '<br><a href="/checkout/shipping_information/">Muuta</a></dd>'
+				before: '<dt>{%CheckoutShippingAddress}</dt><dd>',
+				after: '<br><a href="/checkout/shipping_information/">{%Edit}</a></dd>'
 			)}
 			</dl>
 		</div>
