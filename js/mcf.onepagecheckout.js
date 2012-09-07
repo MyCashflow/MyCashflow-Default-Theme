@@ -76,6 +76,7 @@
 		}
 
 		function saveData(from_event, verbose) {
+		
 			// shortcuts
 			var that = this;
 			var el = $(that.element);
@@ -249,7 +250,7 @@
 
 				// Delay a bit to new focus to register
 				window.setTimeout(function() {
-					var isFocused = el.find("input, select, textarea").filter(":focus").length;
+					var isFocused = el.find("input, select, textarea, label").filter(":focus").length;
 					if (isFocused <= 0) {
 						saveData.call(that, event.type);
 						// Clear the keyUpTimer so that the keyup event doesn't trigger after blur

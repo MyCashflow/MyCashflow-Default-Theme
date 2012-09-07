@@ -8,13 +8,13 @@
 	<link rel="shortcut icon" type="image/ico" href="{ThemeUrl}/i/favicon.ico" />
 	{MinifyCSS(files:'css/reset.css|css/base.css|css/forms.css|css/colorbox.css|css/master.css|css/onepagecheckout.css')}
   <script src="{ThemeUrl}/js/modernizr-2.5.2.min.js"></script>
-	{Analytics(for:'head')}
+	{Extensions(for:'head')}
 </head>
 
 <body class="{BodyClass}" id="Checkout">
 
 	{AdminTools}
-	{Analytics(for:'body')}
+	{Extensions(for:'body')}
 
 	<div id="Container">
 		<header id="Header" class="clearfix">
@@ -135,25 +135,11 @@
 	<script type="text/javascript">
 	//<![CDATA[
 		
-		var mcf = {};
-		
+		var mcf = mcf || {};
 		mcf.ThemePath = "/files/{Theme}";
-		mcf.Lang = {};
 		
-		mcf.Lang.AddingToCart = '{%AddingToCart}';
-		mcf.Lang.ShowSubCategories = '{%ShowSubCategories}';
-		mcf.Lang.HideSubCategories = '{%HideSubCategories}';
-		mcf.Lang.Loading = '{%Loading}';
-		mcf.Lang.Next = '{%Next}';
-		mcf.Lang.Prev = '{%Prev}';
-		mcf.Lang.NextPlural = '{%NextPlural}';
-		mcf.Lang.PrevPlural = '{%PrevPlural}';
-		mcf.Lang.OrderProducts = '{%OrderProducts}';
-		mcf.Lang.Or = '{%Or}';
-		mcf.Lang.HideNotification = '{%HideNotification}';
-		mcf.Lang.ShoppingCartEdit = '{%ShoppingCartEdit}';
-		mcf.Lang.OrderProducts = '{%OrderProducts}';
-
+		{Helper(file: 'helpers/mcf.Lang')}
+	
 	//]]>
 	</script>
 	

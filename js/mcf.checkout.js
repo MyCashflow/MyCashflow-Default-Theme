@@ -106,8 +106,8 @@ $(function() {
 			post_success: function(el, response, verbose) {
 			
 				var tagname = el.attr("id");
-			
-				if (response.notifications && response.notifications.length > 0) {
+				
+				if (verbose === true && response.notifications && response.notifications.length > 0) {
 				
 					var response_notification = $(response.notifications),
 						response_text = response_notification.text(),
