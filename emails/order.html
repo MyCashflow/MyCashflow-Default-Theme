@@ -220,7 +220,40 @@
 												<div style="width: 204px; overflow: hidden;">
 												
 													<h3 style="font-size: 20px; color: #444; margin: 0 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%OrderInformation}</h3>
-													{OrderInfo}
+													<p style="font-size: 15px; font-weight: normal; margin: 0 0 1em;">
+														{OrderDate(
+															before: '<strong>{%Date}</strong><br /><span style="margin-left: 25px">',
+															after: '</span><br />'
+														)}
+														{OrderNumber(
+															before: '<strong>{%Ordernumber}</strong><br /><span style="margin-left: 25px">',
+															after: '</span><br />'
+														)}
+														{OrderCustomerNumber(
+															before: '<strong>{%CustomerNumber}</strong><br /><span style="margin-left: 25px">',
+															after: '</span><br />'
+														)}
+														{OrderPaymentReference(
+															before: '<strong>{%PaymentReference}</strong><br /><span style="margin-left: 25px">',
+															after: '</span><br />'
+														)}
+														{OrderPaymentMethod(
+															before: '<strong>{%PaymentMethod}</strong><br /><span style="margin-left: 25px">',
+															after: ', {OrderPaymentStatus}</span><br />'
+														)} 
+														{OrderShippingMethod(
+															before: '<strong>{%CheckoutShipping}</strong><br /><span style="margin-left: 25px">',
+															after: '</span><br />'
+														)}
+														{OrderTrackingCode(
+															before: '<strong>{%TrackingCode}</strong><br /><span style="margin-left: 25px">',
+															after: '</span><br />'
+														)}
+														{OrderComments(
+															before: '<strong>{%CheckoutOrderComments}</strong><br /><span style="margin-left: 25px">',
+															after: '</span><br />'
+														)}
+													</p>
 												
 													{OrderShippingInformation(
 														before: '<h3 style="font-size: 20px; color: #444; margin: 1.5em 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%CheckoutShippingInformation}</h3>'
