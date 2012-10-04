@@ -27,7 +27,7 @@
 			<div id="Main" class="clearfix">
 				<div id="Primary" class="Column">
 					<nav id="CheckoutNavigation" class="clearfix">
-						{CheckoutNavigation}
+						{CheckoutNavigation(hiding:'false')}
 					</nav>
 					<div class="Content" id="OnePageCheckout">
 						
@@ -74,7 +74,6 @@
 		
 							<fieldset class="TagWrapper" id="CheckoutShippingMethods">
 								{CheckoutShippingMethods(
-									mode: 'form',
 									ajax: 'true',
 									preselect: 'false'
 								)}
@@ -85,7 +84,6 @@
 		
 							<fieldset class="TagWrapper" id="CheckoutPaymentMethods">
 								{CheckoutPaymentMethods(
-									mode: 'form',
 									ajax: 'true',
 									preselect: 'false'
 								)}

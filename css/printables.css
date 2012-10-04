@@ -17,7 +17,7 @@ body {
   color: #000; background: #FFF;
   font-family: sans-serif;
   font-size: 9pt; line-height: 12pt;
-	text-align: left;
+  text-align: left;
 }
 
 /* Header */
@@ -82,7 +82,9 @@ body {
 }
 #ShippingAddress {
 	position: relative;
+	padding: 24pt 0 0 36pt;
 	float: left; width: 100mm;
+	box-sizing: border-box;
 	overflow: hidden;
 }
 #ShippingAddress p {

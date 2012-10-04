@@ -22,7 +22,12 @@
 
 	<div id="InfoWrapper">
 		<div id="ShippingAddress">
-			{OrderShippingInformation}
+			{OrderShippingCompany(after:'<br />')}
+			{OrderShippingName(after:'<br />')}
+			{OrderShippingAddress(after:'<br />')}
+			{OrderShippingZip}
+			{OrderShippingCity(after:'<br />')}
+			{OrderShippingCountry}
 		</div>
 		<div id="OrderInfo">
 			<dl>
