@@ -1,22 +1,15 @@
-    <footer id="Footer">
+		<footer id="Footer">
 			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
-    </footer>
+		</footer>
 	</div>
 	<div id="NotificationCenter"></div>
 	<script type="text/javascript">
 	//<![CDATA[
-		
 		var mcf = mcf || {};
 		mcf.ThemePath = "/files/{Theme}";
-		
 		{Helper(file: 'helpers/mcf.Lang')}
-	
 	//]]>
 	</script>
-	
-	{MinifyJS(
-		files: 'js/jquery-1.7.1.min.js|js/jquery.scroll.js|js/jquery.customselect.js|js/jquery.colorbox.js|js/jquery.typewatch.js|js/jquery.viewport.js|js/mcf.main.js|js/mcf.checkout.js'
-	)}
-	
+	{Helper(file: 'helpers/scripts')}
 </body>
 </html>

@@ -1,24 +1,17 @@
-    <footer id="Footer">
-			{BrandsNavigation(showlogo:'true',width:162,height:72)}
-			{Banners(name:'footer',helper:'helpers/footer-banners')}
+		<footer id="Footer">
+			{BrandsNavigation(showlogo: 'true', width: 162, height: 72)}
+			{Banners(name: 'footer', helper: 'helpers/footer-banners')}
 			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
-    </footer>
+		</footer>
 	</div>
 	<div id="NotificationCenter"></div>
 	<script type="text/javascript">
 	//<![CDATA[
-		
 		var mcf = mcf || {};
 		mcf.ThemePath = "/files/{Theme}";
-		
 		{Helper(file: 'helpers/mcf.Lang')}
-	
 	//]]>
 	</script>
-	
-	{MinifyJS(
-		files: 'js/jquery-1.7.1.min.js|js/jquery.scroll.js|js/jquery.customselect.js|js/jquery.colorbox.js|js/jquery.typewatch.js|js/mcf.main.js|js/mcf.imageswapper.js|js/mcf.productimages.js|js/mcf.checkout.js'
-	)}
-	
+	{Helper(file: 'helpers/scripts')}
 </body>
 </html>

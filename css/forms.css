@@ -376,7 +376,6 @@ input[type="radio"] {
 	display: none !important;
 }
 
-
 /* Helps
 ----------------------------------------------------------- */
 
@@ -407,10 +406,12 @@ input[type="radio"] {
 .ReplacedSelect {
   position: relative;
   z-index: 10;
-  width: 100%;
+  width: auto;
   border: 0;
   padding-right: 31px;
   padding-left: 4px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
   -khtml-opacity: 0;
   -moz-opacity: 0;
   opacity: 0;
@@ -424,17 +425,17 @@ input[type="radio"] {
   width: 100%;
 }
 .CustomSelect span {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
   display: block;
-  width: 100%;
+  width: auto;
   height: 22px;
   color: #333333;
   font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
   font-weight: normal;
   line-height: 16px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 select[disabled] + .CustomSelect span {
 	opacity: 0.6;
@@ -483,4 +484,29 @@ select[disabled] + .CustomSelect span {
   -webkit-box-shadow: 0 0 5px #6cf;
   -moz-box-shadow: 0 0 5px #6cf;
   box-shadow: 0 0 5px #6cf;
+}
+
+/* IE7 fixes
+----------------------------------------------------------- */
+
+* + html .FormItem {
+	padding-bottom: 18px;
+}
+* + html label,
+* + html .label {
+	margin-bottom: 0;
+}
+* + html input,
+* + html select,
+* + html textarea {
+	margin-bottom: -4px;
+}
+* + html .GroupItem {
+	padding-bottom: 0;
+}
+* + html .GroupItem > div {
+	padding-bottom: 36px;
+}
+* + html .FormHelp {
+	margin-top: 0;
 }

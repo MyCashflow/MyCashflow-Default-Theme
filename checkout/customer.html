@@ -1,15 +1,15 @@
 {Helper(file:'checkout/header')}
 {CheckoutNavigation}
 <div id="MultiPageCheckout" class="clearfix">
-			
+
 	<form action="/checkout/" method="post">
 
 		{Helper(
 			case: 'CustomerNotLogged',
 			file: '{{
-			
+
 				<!-- User is not logged, use forms to input addresses -->
-				
+
 				{CheckoutBillingAddress(
 					mode: 'form',
 					notifications: 'false',
@@ -22,7 +22,7 @@
 					',
 					after: '</fieldset>'
 				)}
-				
+
 				{CheckoutShippingAddress(
 					mode: 'form',
 					notifications: 'false',
@@ -33,7 +33,7 @@
 						</div>
 
 						{Notifications(name:'CustomerShippingAddressError')}
-			
+
 						<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
 							<div class="Checks">
 								<label>
@@ -42,12 +42,12 @@
 								<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
 							</div>
 						</div>
-		
+
 						<fieldset id="CheckoutShippingAddress">
 					',
 					after: '</fieldset>'
 				)}
-				
+
 			}}'
 		}
 
@@ -79,15 +79,15 @@
 						<fieldset id="CheckoutAddressBook">',
 					after: '</fieldset>'
 				)}
-				
+
 			}}'
 		}
 
 		<div class="FormItem FormSubmit">
 			<button type="submit" class="SubmitButton">{%CheckoutContinue}</button>
 		</div>
-		
+
 	</form>
-	
+
 </div>
 {Helper(file:'checkout/footer')}

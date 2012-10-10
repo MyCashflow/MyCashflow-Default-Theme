@@ -8,7 +8,7 @@
 				<h1>{PageTitle}</h1>
 			</div>
 			{CategoryDescription(before:'<div class="CategoryDescription">',after:'</div>')}
-			
+
 			{Products(
 				pagination: 'true',
 				classes: 'first||',
@@ -36,8 +36,7 @@
 				after: '{PaginationPages}',
 				helper: 'helpers/listproduct'
 			)}
-			
-			
+
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

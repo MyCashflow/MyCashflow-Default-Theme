@@ -60,7 +60,7 @@ ul,ol,dl,h1,h2,h3,h4,h5,h6,table,pre,p,blockquote,blockcode,address { margin: 0 
 
 /* Headers */
 
-h1,h2,h3,h4,h5,h6 { 
+h1,h2,h3,h4,h5,h6 {
   font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
   color: #444; font-weight: bold;
 }
@@ -196,6 +196,10 @@ ol {
 /* Some padding around currency symbol */
 .Currency { padding: 0 2px; }
 
+/* Vertical Separators */
+.Separator { *margin: 0 5px; }
+.Separator + .Separator:before { content: '|'; margin: 0 5px; }
+
 /* Notifications
 -------------------------------------------------------------- */
 
@@ -228,14 +232,14 @@ ol {
 
 .Success {
 	border-color: #d5decc;
-	background: #ebf5e1; 
+	background: #ebf5e1;
 }
 .Error {
 	border-color: #decccc;
 	background: #f5e1e1;
 }
 .Notification span.Close {
-	display: block; position: absolute;
+	cursor: pointer; display: block; position: absolute;
 	top: 8px; right: 8px;
 	width: 16px; height: 16px;
 	background: url(../i/close.png) no-repeat 50% 50%;
@@ -297,7 +301,7 @@ ol {
 /* Banners at sidebar */
 
 .SidebarBanner {
-	clear: both; 
+	clear: both;
 	margin: 6px;
 }
 
@@ -316,7 +320,7 @@ caption {
 	font-size: 12px; padding: 0;
 	font-weight: normal; border: 0;
 	font-style: italic; color: #888;
-}	
+}
 th, td {
 	border-bottom: 1px solid #D9D9D9;
 	padding: 8px 9px 9px;

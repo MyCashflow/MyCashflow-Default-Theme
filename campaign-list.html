@@ -7,16 +7,16 @@
 				{Path}
 				<h1>{PageTitle}</h1>
 			</div>
-			
+
 			{CampaignImage(
 				before: '<div class="CampaignImageWrapper">',
 				after: '</div>',
 				width: '258',
 				height: '258'
 			)}
-			
+
 			{CampaignDescription(before:'<div class="CategoryDescription">',after:'</div>')}
-			
+
 			{CampaignProducts(
 				pagination: 'true',
 				classes: 'first||',
@@ -44,8 +44,7 @@
 				after: '{PaginationPages(items: 7)}',
 				helper: 'helpers/listproduct'
 			)}
-			
-			
+
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

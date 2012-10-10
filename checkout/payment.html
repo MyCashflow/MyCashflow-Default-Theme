@@ -1,25 +1,25 @@
 {Helper(file:'checkout/header')}
 {CheckoutNavigation}
 <div id="MultiPageCheckout" class="clearfix">
-			
+
 	<form action="/checkout/" method="post">
-	
+
 		<fieldset id="CheckoutPaymentMethods">
-		
+
 			<div class="FormItem HeaderItem">
 				<h2>{%CheckoutChoosePaymentMethod}</h2>
 				<p>{%CheckoutChoosePaymentMethodIntro}</p>
 			</div>
-			
+
 			{CheckoutPaymentMethods}
-		
+
 		</fieldset>
-		
+
 		<div class="FormItem FormSubmit">
 			<button type="submit" class="SubmitButton">{%CheckoutContinue}</button>
 		</div>
-		
+
 	</form>
-	
+
 </div>
 {Helper(file:'checkout/footer')}

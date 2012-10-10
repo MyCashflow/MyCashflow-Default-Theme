@@ -2,9 +2,9 @@
 <div id="SidebarBg" class="OmitSidebars">
 	<div id="Main" class="clearfix">
 		<div id="Primary" class="Column">
-		
+
 			<div class="Content">
-				
+
 				<h1>{%CheckoutThanksForOrder}</h1>
 					{CheckoutRegistrationForm(
 						before: '
@@ -17,9 +17,9 @@
 							</div>
 						</form>'
 					)}
-				
+
 				<p class="Big">{OrderPaymentInstructions}</p>
-				
+
 				{OrderProducts(
 					before: '
 						<div id="OrderProducts">
@@ -33,7 +33,7 @@
 									</tr>
 								</thead>
 								<tfoot>
-								
+
 									<tr class="CartTotal">
 										<th scope="row" colspan="4">{%CheckoutProductsTotal}<br>
 										<small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
@@ -42,7 +42,7 @@
 											<small>{OrderSubtotalTax}</small>
 										</td>
 									</tr>
-									
+
 									{OrderShippingCosts(
 										before: '<tr class="CartTotal">
 											<th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br>
@@ -51,7 +51,7 @@
 										<td class="CartTotal">',
 										after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
 									)}
-									
+
 									{OrderPaymentCosts(
 										force: 'false',
 										before: '<tr class="CartTotal">
@@ -61,7 +61,7 @@
 										<td class="CartTotal">',
 										after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
 									)}
-									
+
 									<tr class="CartTotal" id="FullTotal">
 										<th scope="row" colspan="4">{%Total}<br>
 										<small>{%VAT}</small>
@@ -71,7 +71,7 @@
 										<small>{OrderTax}</small>
 									</td>
 								</tr>
-									
+
 							</tfoot>
 							<tbody>
 					',
@@ -101,7 +101,7 @@
 									after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>',
 									before: '{OrderProductComparePrice(before: '<span class="ProductComparePrice">', after: '</span>')}&ensp;'
 								)}
-								
+
 							</td>
 							<td class="CartQuantity">{OrderProductQuantity}</td>
 							<td class="CartTotal">
@@ -119,10 +119,9 @@
 
 			</div>
 		</div>
-	
-		
+
 		<div id="CheckoutThanksOrderInfo" class="Column">
-			
+
 			<div class="Content">
 
 				<h2 class="BoxHeader">{%OrderInformation}</h2>
@@ -132,10 +131,9 @@
 				{OrderShippingInformation(before: '<h2 class="BoxHeader">{%CheckoutShippingInformation}</h2><p>', after: '</p>')}
 
 				{OrderCustomerInformation(before: '<h2 class="BoxHeader">{%CheckoutCustomerInformation}</h2><p>', after: '</p>')}
-				
-				
+
 			</div>
-			
+
 		</div>
 
 	</div>

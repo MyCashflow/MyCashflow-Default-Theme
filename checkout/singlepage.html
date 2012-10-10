@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width">
 	<link rel="shortcut icon" type="image/ico" href="{ThemeUrl}/i/favicon.ico" />
 	{MinifyCSS(files:'css/reset.css|css/base.css|css/forms.css|css/colorbox.css|css/master.css|css/onepagecheckout.css')}
-  <script src="{ThemeUrl}/js/modernizr-2.5.2.min.js"></script>
+  <script src="{ThemeUrl}/js/vendor/modernizr-2.5.2.min.js"></script>
 	{Extensions(for:'head')}
 </head>
 
@@ -30,11 +30,11 @@
 						{CheckoutNavigation(hiding:'false')}
 					</nav>
 					<div class="Content" id="OnePageCheckout">
-						
+
 						<form action="/checkout/" method="post" class="BlockForm">
-						
+
 							{Notifications(group:'account')}
-						
+
 							<h2 id="CheckoutCustomerInformationHeader"><span class="CheckoutStageNumber" id="CheckoutCustomer">1. </span>{%CheckoutCustomerInformation}
 							{Helper(
 								case:'CustomerNotLogged',
@@ -48,11 +48,11 @@
 									ajax: 'true'
 								)}
 							</fieldset>
-			
+
 							<h2><span class="CheckoutStageNumber">2. </span>{%CheckoutShippingAddress}</h2>
-							
+
 							{Notifications(name:'CustomerShippingAddressError')}
-						
+
 							<div class="FormItem CheckWrap" id="CheckoutShippingAddressToggle">
 								<div class="Checks">
 									<label>
@@ -61,55 +61,57 @@
 									<p class="FormHelp" id="RemoveShippingAddress"><a href="#">{%RemoveShippingAddress}</a></p>
 								</div>
 							</div>
-			
+
 							<fieldset class="TagWrapper" id="CheckoutShippingAddress">
 								{CheckoutShippingAddress(
 									mode: 'form',
 									ajax: 'true'
 								)}
 							</fieldset>
-							
+
 							<h2><span class="CheckoutStageNumber" id="CheckoutShipping">3. </span>{%CheckoutChooseShippingMethod}</h2>
 							<p>{%CheckoutChooseShippingMethodIntro}</p>
-		
+
 							<fieldset class="TagWrapper" id="CheckoutShippingMethods">
 								{CheckoutShippingMethods(
 									ajax: 'true',
 									preselect: 'false'
 								)}
 							</fieldset>
-			
+
 							<h2><span class="CheckoutStageNumber" id="CheckoutPayment">4. </span>{%CheckoutChoosePaymentMethod}</h2>
 							<p>{%CheckoutChoosePaymentMethodIntro}</p>
-		
+
 							<fieldset class="TagWrapper" id="CheckoutPaymentMethods">
 								{CheckoutPaymentMethods(
 									ajax: 'true',
 									preselect: 'false'
 								)}
 							</fieldset>
-					
+
 							<h2><span class="CheckoutStageNumber" id="CheckoutPreview">5. </span>{%CheckoutSendOrder}</h2>
 							<p>{%CheckoutAcceptTermsIntro}</p>
-							
+
+
 							<fieldset id="CheckoutAcceptTerms">
+								{CurrencyNotification}
 								{CheckoutAcceptTerms}
 							</fieldset>
-							
+
 						</form>
-						
+
 					</div>
-							
+
 				</div>
-				
+
 				<div id="CheckoutPreviewCart" class="Column">
-					
+
 					<div id="PreviewContent">
-		
+
 						<h2 class="BoxHeader">{%CheckoutPreview}</h2>
-		
+
 						{Helper(file:'helpers/preview-cart')}
-						
+
 						<div id="SubmitCampaignCode" data-helper="preview-cart" data-view="checkout">
 							{CampaignCode(
 								mode: 'auto',
@@ -118,11 +120,11 @@
 								ajax: 'true'
 							)}
 						</div>
-						
+
 					</div>
-					
+
 				</div>
-				
+
 			</div>
 		</div>
 		<footer id="Footer">
@@ -132,18 +134,11 @@
 	<div id="NotificationCenter"></div>
 	<script type="text/javascript">
 	//<![CDATA[
-		
 		var mcf = mcf || {};
 		mcf.ThemePath = "/files/{Theme}";
-		
 		{Helper(file: 'helpers/mcf.Lang')}
-	
 	//]]>
 	</script>
-	
-	{MinifyJS(
-		files: 'js/jquery-1.7.1.min.js|js/jquery.scroll.js|js/jquery.customselect.js|js/jquery.colorbox.js|js/jquery.typewatch.js|js/jquery.viewport.js|js/mcf.main.js|js/mcf.checkout.js|js/mcf.onepagecheckout.js'
-	)}
-	
+	{Helper(file: 'helpers/scripts')}
 </body>
 </html>

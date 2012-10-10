@@ -138,7 +138,7 @@ table {
 th, td {
 	text-align: left;
 	padding: 5pt 3pt;
-	border-bottom: 0.25pt dashed black; 
+	border-bottom: 0.25pt dashed black;
 	font-weight: normal;
 	vertical-align: top;
 }

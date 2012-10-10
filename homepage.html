@@ -6,12 +6,17 @@
 			{Notifications(group: 'account')}
 			<div id="BannerScroller">
 				<div id="ScrollableBanners">
-					<div class="FrontBanner" id="FrontpageCategoryImage">
-						{CategoryImage(width:576)}
-						<div class="BannerInfo">
-							<h3>{PageTitle}</h3>
-						</div>
-					</div>
+					{CategoryImage(
+						width: 576,
+						before: '
+							<div class="FrontBanner" id="FrontpageCategoryImage">
+						',
+						after: '
+							<div class="BannerInfo">
+								<h3>{PageTitle}</h3>
+							</div>
+						</div>'
+					)}
 					{Banners(name:'frontpage',helper:'helpers/homepage-banners')}
 				</div>
 			</div>

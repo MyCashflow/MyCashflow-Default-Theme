@@ -6,14 +6,14 @@
 		<h2>{%CheckoutPreview}</h2>
 		<p>{%CheckoutPreviewIntro}</p>
 	</div>
-	
+
 	<div id="PreviewSplit" class="clearfix">
 		<div id="PreviewProducts" class="BlockForm">
-			
+
 			<div id="PreviewContent">
 				{Helper(file:'helpers/full-preview')}
 			</div>
-			
+
 			<div id="SubmitCampaignCode" data-helper="full-preview" data-view="preview">
 				{CampaignCode(
 					mode: 'auto',
@@ -23,17 +23,14 @@
 				)}
 			</div>
 
-			{CurrencyNotification}
-		
 			<form action="/checkout/process/" method="post">
-
+				{CurrencyNotification}
 				{CheckoutAcceptTerms}
-				
 			</form>
-		
+
 		</div>
 		<div id="PreviewInfo">
-			
+
 			<dl>
 			{CartShippingMethod(
 				before: '<dt>{%CheckoutShipping}</dt><dd>',
@@ -56,6 +53,6 @@
 			</dl>
 		</div>
 	</div>
-	
+
 </div>
 {Helper(file:'checkout/footer')}

@@ -8,7 +8,7 @@
 			<th scope="col" class="CartTotal">{%Total}</th>
 		</tr>
 	</thead>
-	
+
 	<tfoot>
 		{CartSubTotal(
 			before:	'<tr><th scope="row" colspan="4">{%CheckoutProductsTotal}</th><td class="CartTotal">',
@@ -36,7 +36,7 @@
 			after:	'</td></tr>'
 		)}
 	</tfoot>
-	
+
 	<tbody>
 		{CartProducts(
 			helper:	'{{
@@ -50,7 +50,7 @@
 					</td>
 					<th scope="row" class="CartProduct">
 						<h3><a href="{ProductUrl}">{CartProductName}</a></h3>
-						{CartProductDetails}	
+						{CartProductDetails}
 					</th>
 					<td class="CartPrice">{CartProductPrice}{CartProductComparePrice(before: '<br><span class="ProductComparePrice">', after: '</span>')}</td>
 					<td class="CartQuantity">
@@ -64,5 +64,5 @@
 			}}'
 		)}
 	</tbody>
-	
+
 </table>

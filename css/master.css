@@ -5,7 +5,7 @@ html, body { height: 100%; }
 html { overflow-y: scroll; }
 body {
 	text-align: center;
-  background-color: #F2F2F2;
+	background-color: #F2F2F2;
 }
 
 /* Add these lines if you want your AdminTools to be fixed on the top of the page */
@@ -18,9 +18,9 @@ body.AdminLoggedIn #Container { z-index: 1; }
 	position: fixed; z-index: 999; display: none; text-align: center;
 	top: 0px; left: 50%; width: 360px; margin: 0 -189px; padding: 13px 18px;
 	background: #FFC; border: 1px solid #e5e58a; border-top: 0;
-  -moz-border-radius-bottomleft: 3px; -webkit-border-bottom-left-radius:  3px;
-	border-bottom-left-radius:  3px; -moz-border-radius-bottomright:  3px;
-	-webkit-border-bottom-right-radius:  3px; border-bottom-right-radius:  3px;
+	-moz-border-radius-bottomleft: 3px; -webkit-border-bottom-left-radius:	3px;
+	border-bottom-left-radius:	3px; -moz-border-radius-bottomright:	3px;
+	-webkit-border-bottom-right-radius:	3px; border-bottom-right-radius:	3px;
 }
 #AjaxMsg a { font-weight: bold; }
 body.adminLoggedIn #AjaxMsg { top: 36px; }
@@ -91,33 +91,33 @@ header .NavigationList {
 	position: relative; float: right;
 	margin: 0 6px 63px 0; list-style: none outside;
 }
-header .CustomerNavigation  { margin-left: 6px; }
+header .CustomerNavigation	{ margin-left: 6px; }
 header .NavigationList li { position: relative; float: left; margin: 0 0 0 3px; }
 header .NavigationList li a {
 	position: relative; float: left; width: auto;
 	padding: 9px 8px 8px; margin: -1px 0 0;
 	font-size: 11px; font-weight: bold;
 	white-space: nowrap; text-decoration: none;
-  background-color: #E8E8E8;
-  background-repeat: repeat-x;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
 	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid #D9D9D9;
-  border-bottom-color: #CCC;
-  -moz-border-bottom-left-radius: 3px;
-  -moz-border-bottom-right-radius: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  -webkit-border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	border: 1px solid #D9D9D9;
+	border-bottom-color: #CCC;
+	-moz-border-bottom-left-radius: 3px;
+	-moz-border-bottom-right-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 header .NavigationList li a:hover {
 	background-image: -o-linear-gradient(top, #FFF 0%, #F2F2F2 100%);
@@ -155,10 +155,10 @@ header .DropdownNavigation .Icon {
 	background: url("../i/icons.png") no-repeat left top;
 }
 header .DropdownNavigation:hover .Icon {
-	background-position: left -36px; 
+	background-position: left -36px;
 }
 header .DropdownNavigation .CurrencyIcon {
-	background-position: left -72px; 
+	background-position: left -72px;
 }
 header .DropdownNavigation:hover .CurrencyIcon {
 	background-position: left -108px;
@@ -213,12 +213,12 @@ header .DropdownNavigation ul li a:hover {
 	border-radius: 5px;
 }
 #SearchForm.SearchActive {
-  -moz-border-bottom-left-radius: 0;
-  -moz-border-bottom-right-radius: 0;
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+	-moz-border-bottom-left-radius: 0;
+	-moz-border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 #SearchForm .FormItem { border: 0; padding: 0; background: none; }
 #SearchForm label { display: none; }
@@ -229,14 +229,14 @@ header .DropdownNavigation ul li a:hover {
 	display: none; margin: 0; list-style: none outside;
 	position: absolute; top: 35px; left: -1px;
 	z-index: 100; background: #F8F8F8; padding: 0 8px;
-  -moz-border-bottom-left-radius: 5px;
-  -moz-border-bottom-right-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border: 1px solid #D9D9D9;
-  border-top: 0;
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border: 1px solid #D9D9D9;
+	border-top: 0;
 }
 .SearchActive #LiveSearchResults {
 	display: block;
@@ -278,17 +278,17 @@ header .DropdownNavigation ul li a:hover {
 	text-align: center; font-size: 0px;
 	word-spacing: -1em;
 	border-bottom: 1px solid #CCCCCC;
-  background-color: #E8E8E8;
-  background-repeat: repeat-x;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
 	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
-  -webkit-box-shadow: inset 0 1px 0 #FFF;
-  -moz-box-shadow: inset 0 1px 0 #FFF;
-  box-shadow: inset 0 1px 0 #FFF;
+	-webkit-box-shadow: inset 0 1px 0 #FFF;
+	-moz-box-shadow: inset 0 1px 0 #FFF;
+	box-shadow: inset 0 1px 0 #FFF;
 }
 #Footer .BrandsNavigation li {
 	margin: 0 0 9px;
@@ -317,9 +317,9 @@ header .DropdownNavigation ul li a:hover {
 #Footer .BrandsNavigation li a img { display: block; margin: 0; padding: 0; }
 #Footer .BrandsNavigation li a:hover {
 	border-color: #09f; color: #069;
-  -webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
 }
 
 #Copyrights { clear: both; width: 960px; margin: 0; padding: 18px 0; }
@@ -330,8 +330,8 @@ header .DropdownNavigation ul li a:hover {
 #PageHeader {
 	padding: 8px 15px 9px; margin: 0;
 	border-top: 1px solid #FFFFFF;
-  background-color: #FFF;
-  background-repeat: repeat-x;
+	background-color: #FFF;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #F8F8F8 0%, #FFFFFF 100%);
 	background-image: -moz-linear-gradient(top, #F8F8F8 0%, #FFFFFF 100%);
 	background-image: -webkit-linear-gradient(top, #F8F8F8 0%, #FFFFFF 100%);
@@ -428,7 +428,7 @@ header .DropdownNavigation ul li a:hover {
 #MainNavigation ul.Categories li ul li span.Opened:hover { background-position: -26px -28px; }
 #MainNavigation ul.Categories li ul li ul li span.NavOpener { top: 2px; left: -18px; width: 13px; height: 13px; line-height: 13px; background-position: -5px -5px; }
 #MainNavigation ul.Categories li ul li ul li span.NavOpener:hover { background-position: -5px -28px; }
-#MainNavigation ul.Categories li ul li ul li span.Opened {  background-position: -27px -6px; }
+#MainNavigation ul.Categories li ul li ul li span.Opened {	background-position: -27px -6px; }
 #MainNavigation ul.Categories li ul li ul li span.Opened:hover { background-position: -27px -29px; }
 
 /* Info & News navigation */
@@ -568,18 +568,18 @@ dl#MiniCartFooter .CheckoutButton {
 	position: relative; width: auto; clear: both;
 	margin: 18px 6px; padding: 8px;
 	border: 1px solid #D9D9D9; border-bottom: 1px solid #CCCCCC;
-  background-color: #E8E8E8;
-  background-repeat: repeat-x;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
 	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
-  -webkit-box-shadow: inset 0 1px 0 #FFF;
-  -moz-box-shadow: inset 0 1px 0 #FFF;
-  box-shadow: inset 0 1px 0 #FFF;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	-webkit-box-shadow: inset 0 1px 0 #FFF;
+	-moz-box-shadow: inset 0 1px 0 #FFF;
+	box-shadow: inset 0 1px 0 #FFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
@@ -640,6 +640,9 @@ dl#MiniCartFooter .CheckoutButton {
 	position: relative; float: left;
 	width: 162px; margin: 0 6px; padding: 9px 9px 27px;
 }
+* + html .Product {
+	height: 360px;
+}
 .Product.Unavailable {
 	opacity: 0.5;
 	-webkit-transition: all 0.25s ease-in-out;
@@ -677,9 +680,9 @@ dl#MiniCartFooter .CheckoutButton {
 }
 .Product .ProductImage:hover {
 	border-color: #09f;
-  -webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
 }
 .Product h2 {
 	font-size: 12px;
@@ -794,9 +797,9 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 }
 .ProductList li a:hover .ListImage {
 	border-color: #09f;
-  -webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
 }
 
 /* Product
@@ -833,13 +836,13 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 }
 #CurrentProductImage:hover {
 	border-color: #09f;
-  -webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
 }
 #CurrentProductImage img {
 	display: inline;
-	vertical-align: middle; 
+	vertical-align: middle;
 	margin: 0 auto;
 }
 #ImgLoader {
@@ -861,7 +864,7 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 #ProductThumbnails li { position: relative; float: left; }
 #ProductThumbnails li a {
 	position: relative; display: block; float: left;
-	width: 34px; height: 34px; line-height: 32px;  text-align: center;
+	width: 34px; height: 34px; line-height: 32px;	text-align: center;
 	padding: 8px; margin: 0 4px 2px 0;
 	border: 1px solid #d9d9d9;
 	border-bottom: 1px solid #cccccc;
@@ -877,9 +880,9 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 }
 #ProductThumbnails li a:hover {
 	border-color: #09f;
-  -webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-  box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	-moz-box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+	box-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
 }
 #ProductThumbnails li a img {
 	vertical-align: middle;
@@ -921,19 +924,19 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	position: relative; width: 100%; clear: both;
 	margin: 8px -8px 9px; padding: 8px 8px 9px;
 	border-bottom: 1px solid #CCCCCC; border-top: 1px solid #D9D9D9;
-  background-color: #E8E8E8;
-  background-repeat: repeat-x;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
 	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
-  -webkit-box-shadow: inset 0 1px 0 #FFF;
-  -moz-box-shadow: inset 0 1px 0 #FFF;
-  box-shadow: inset 0 1px 0 #FFF;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
-  cursor: default;
+	-webkit-box-shadow: inset 0 1px 0 #FFF;
+	-moz-box-shadow: inset 0 1px 0 #FFF;
+	box-shadow: inset 0 1px 0 #FFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	cursor: default;
 }
 /* If first one is header, pull it to top */
 #ProductBuy .BuyForm .HiddenInput + .HeaderItem {
@@ -957,6 +960,18 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	background: #F2F2F2; border-top: 1px solid #D9D9D9;
 }
 .BuyForm .FormSubmit button { margin-left: 0; }
+
+.BuyForm .VariationInfo {
+	color: #444;
+	margin: -9px 0 18px;
+	font-size: 11px;
+}
+#ModalBuying .BuyForm .VariationInfo {
+	margin-top: -18px;
+}
+.BuyForm .VariationInfo strong {
+	display: none;
+}
 
 /* Buying from modal */
 
@@ -1045,6 +1060,7 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 #PrevBanner .Icon, #NextBanner .Icon {
 	background-position: -1px -1px;
 }
+#PrevBanner .Icon { background-position: -47px -1px; }
 #NextBanner:hover .Icon { background-position: -1px -24px; }
 #PrevBanner:hover .Icon { background-position: -47px -24px; }
 
@@ -1094,19 +1110,19 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	border-top-right-radius: 5px;
 	margin: 0; padding: 8px 8px 9px;
 	border-bottom: 1px solid #CCCCCC;
-  background-color: #E8E8E8;
-  background-repeat: repeat-x;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
 	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
-  -webkit-box-shadow: inset 0 1px 0 #FFF;
-  -moz-box-shadow: inset 0 1px 0 #FFF;
-  box-shadow: inset 0 1px 0 #FFF;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
-  cursor: default;
+	-webkit-box-shadow: inset 0 1px 0 #FFF;
+	-moz-box-shadow: inset 0 1px 0 #FFF;
+	box-shadow: inset 0 1px 0 #FFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	cursor: default;
 }
 #SubPageNavigation .NavigationList,
 #SubPageNavigation .NavigationList li { font-size: 12px; }
@@ -1290,22 +1306,22 @@ button.PrimaryAction,
 .BuyForm .FormSubmit .SubmitButton {
 	padding: 8px 17px;
 	font-weight: bold; text-decoration: none;
-  color: #FFF; background-color: #058; background-repeat: repeat-x;
+	color: #FFF; background-color: #058; background-repeat: repeat-x;
 	background-image: linear-gradient(top, #08A 0%, #058 100%);
 	background-image: -o-linear-gradient(top, #08A 0%, #058 100%);
 	background-image: -moz-linear-gradient(top, #08A 0%, #058 100%);
 	background-image: -webkit-linear-gradient(top, #08A 0%, #058 100%);
 	background-image: -ms-linear-gradient(top, #08A 0%, #058 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #08A), color-stop(1, #058));
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.66), 0 1px 0 rgba(255, 255, 255, 0.33);
-  border: 1px solid #058;
-  border-bottom-color: #037;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.33);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.66), 0 1px 0 rgba(255, 255, 255, 0.33);
+	border: 1px solid #058;
+	border-bottom-color: #037;
 	-webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 #Checkout .FormSubmit {
 	padding: 18px 0 0 126px;
@@ -1330,19 +1346,19 @@ a.Button.PrimaryAction,
 #Checkout .FormSubmit .SubmitButton:hover,
 .BuyForm .FormSubmit .SubmitButton:hover {
 	color: #FFF;
-  background-color: #069;
-  background-repeat: repeat-x;
+	background-color: #069;
+	background-repeat: repeat-x;
 	background-image: linear-gradient(top, #0AE 0%, #07B 100%);
 	background-image: -o-linear-gradient(top, #0AE 0%, #07B 100%);
 	background-image: -moz-linear-gradient(top, #0AE 0%, #07B 100%);
 	background-image: -webkit-linear-gradient(top, #0AE 0%, #07B 100%);
 	background-image: -ms-linear-gradient(top, #0AE 0%, #07B 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0AE), color-stop(1, #07B));
-  border: 1px solid #07B;
-  border-bottom-color: #049;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+	border: 1px solid #07B;
+	border-bottom-color: #049;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 /* Checkout navigation */
@@ -1359,21 +1375,21 @@ a.Button.PrimaryAction,
 	border: 1px solid #D2D2D2;
 	border-top: 1px solid #D9D9D9;
 	border-bottom: 0;
-  background-color: #E8E8E8;
-  background-repeat: repeat-x;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
 	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
-  -webkit-box-shadow: inset 0 1px 0 #FFF;
-  -moz-box-shadow: inset 0 1px 0 #FFF;
-  box-shadow: inset 0 1px 0 #FFF;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
-  -webkit-border-radius: 5px 5px 0px 0px;
-  -moz-border-radius: 5px 5px 0px 0px;
-  border-radius: 5px 5px 0px 0px;
+	-webkit-box-shadow: inset 0 1px 0 #FFF;
+	-moz-box-shadow: inset 0 1px 0 #FFF;
+	box-shadow: inset 0 1px 0 #FFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
 }
 #CheckoutStage li {
 	float: left;
@@ -1395,8 +1411,8 @@ a.Button.PrimaryAction,
 	background: #FAFAFA;
 	border-bottom: 1px solid #FAFAFA;
 	margin-bottom: -1px;
-  background-color: #FAFAFA;
-  background-repeat: repeat-x;
+	background-color: #FAFAFA;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
 	background-image: -moz-linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
 	background-image: -webkit-linear-gradient(top, #F2F2F2 0%, #FAFAFA 100%);
@@ -1464,7 +1480,7 @@ a.Button.PrimaryAction,
 	display: none;
 }
 #CheckoutAddressBook .CheckWrap {
-	
+
 }
 #CheckoutAddressBook .CheckWrap .Checks {
 	padding-left: 0;
@@ -1485,7 +1501,7 @@ a.Button.PrimaryAction,
 .NewShippingAddress {
 	margin-left: 126px;
 	margin-top: -27px;
-	margin-bottom: -9px;
+	margin-bottom: 9px;
 	padding-left: 18px;
 }
 .NewShippingAddress a {
@@ -1498,16 +1514,16 @@ a.Button.PrimaryAction,
 	position: relative; width: auto; clear: both;
 	margin: -1px -15px 18px; padding: 8px 15px 9px;
 	border-bottom: 1px solid #CCCCCC; border-top: 1px solid #D9D9D9;
-  background-color: #E8E8E8;
-  background-repeat: repeat-x;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
 	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
 	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
-  cursor: default;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	cursor: default;
 }
 #MultiPageCheckout .HeaderItem {
 	padding-left: 141px;
@@ -1576,9 +1592,9 @@ a.Button.PrimaryAction,
 	clear: both;
 	background: #F2F2F2;
 	border: 1px solid #D9D9D9;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 	padding: 5px 8px;
 	margin: 3px 0;
 }
@@ -1609,15 +1625,15 @@ a.Button.PrimaryAction,
 	border-top: 0; padding-top: 9px;
 }
 #MultiPageCheckout .SelectedMethod {
-  background-color: #fafafa;
-  border: 1px solid #d9d9d9 !important;
-  padding: 8px 11px 8px 29px;
-  margin-left: -21px; margin-right: -3px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+	background-color: #fafafa;
+	border: 1px solid #d9d9d9 !important;
+	padding: 8px 11px 8px 29px;
+	margin-left: -21px; margin-right: -3px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
-#MultiPageCheckout * + .SelectedMethod  {
+#MultiPageCheckout * + .SelectedMethod	{
 	margin-top: -1px;
 }
 
@@ -1695,7 +1711,7 @@ a.Button.PrimaryAction,
 	width: 180px; float: left;
 	height: 117px; clear: none;
 	text-align: center;
-	padding: 0; margin:  0 6px 9px;
+	padding: 0; margin:	0 6px 9px;
 }
 .CheckoutTransferToPayment button {
 	display: block; float: none;

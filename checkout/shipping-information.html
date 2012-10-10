@@ -1,24 +1,24 @@
 {Helper(file:'checkout/header')}
 {CheckoutNavigation}
 <div id="MultiPageCheckout" class="clearfix">
-			
+
 	<form action="/checkout/" method="post">
 		<div class="FormItem HeaderItem">
 			<h2>{%CheckoutShippingAddress}</h2>
 			<p>{%CheckoutShippingAddressIntro}</p>
 		</div>
-		
+
 		{CheckoutShippingAddress(
 			mode: 'form',
 			before: '<fieldset>',
 			after: '</fieldset>'
 		)}
-		
+
 		<div class="FormItem FormSubmit">
 			<button type="submit" class="SubmitButton">{%CheckoutContinue}</button>
 		</div>
 
 	</form>
-	
+
 </div>
 {Helper(file:'checkout/footer')}
