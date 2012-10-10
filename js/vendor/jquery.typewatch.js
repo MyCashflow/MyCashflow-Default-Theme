@@ -3,12 +3,12 @@
  *
  *	Examples/Docs: www.dennydotnet.com
  *
- *  Copyright(c) 2007 Denny Ferrassoli - DennyDotNet.com
- *  Coprright(c) 2008 Charles Christolini - BinaryPie.com
+ *	Copyright(c) 2007 Denny Ferrassoli - DennyDotNet.com
+ *	Coprright(c) 2008 Charles Christolini - BinaryPie.com
  *
- *  Dual licensed under the MIT and GPL licenses:
- *  http://www.opensource.org/licenses/mit-license.php
- *  http://www.gnu.org/licenses/gpl.html
+ *	Dual licensed under the MIT and GPL licenses:
+ *	http://www.opensource.org/licenses/mit-license.php
+ *	http://www.gnu.org/licenses/gpl.html
 */
 
 (function(jQuery) {

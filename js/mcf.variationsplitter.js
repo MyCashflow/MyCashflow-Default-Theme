@@ -81,7 +81,7 @@ $(function() {
 
 	Plugin.prototype.renderVariationGroups = function(variations, filters, level) {
 		var groups = [],
-			uniqs  = [],
+			uniqs = [],
 			labels = [],
 			markup = [];
 
