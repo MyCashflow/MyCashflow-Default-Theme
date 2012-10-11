@@ -85,7 +85,11 @@
 								)}
 							</td>
 							<th class="CartProduct">
-								<h3>{OrderProductName}{OrderProductVariation(before:':<br><em class="ProductVariation">',after:'</em>')}</h3>
+								<h3>
+									{OrderProductName}
+									{OrderProductVariation(before: ' <br /><em class="ProductVariation">',after:'</em>')}
+									{OrderProductDownloadLink(before: ' <br /><span style="font-weight: normal;">{%DownloadFile}: </span><strong class="ProductDownloadLink">',after:'</strong>')}
+								</h3>
 								{OrderProductCode(
 									before: '<dl><dt>{%ProductCode}</dt><dd>',
 									after: '</dd></dl>'
@@ -138,4 +142,3 @@
 
 	</div>
 </div>
-{Helper(file:'checkout/footer')}

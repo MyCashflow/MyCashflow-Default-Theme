@@ -99,7 +99,11 @@
 													helper: '{{
 														<tr valign="top">
 															<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 11px; text-align: left;">
-																<h3 style="font-size: 15px; margin: 0 0 9px;">{OrderProductName}{OrderProductVariation(before:': <em style="font-weight: normal;">',after:'</em>')}</h3>
+																<h3 style="font-size: 15px; margin: 0 0 9px;">
+																	{OrderProductName}
+																	{OrderProductVariation(before:' <em style="font-weight: normal;">',after:'</em>')}
+																	{OrderProductDownloadLink(before:'<br><span style="font-weight: normal;">{%DownloadFile}: </span><strong>',after:'</strong>')}
+																</h3>
 																{OrderProductCode(
 																	before: '<dl><dt>{%ProductCode}</dt><dd>',
 																	after: '</dd></dl>'
@@ -321,4 +325,3 @@
 
 </body>
 </html>
-

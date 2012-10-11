@@ -27,25 +27,29 @@
 			max-height: 60mm;
 			max-width: 60mm;
 		}
-		#AddressInformation {
+		#SenderInformation {
 			float: left;
 			height: 100%;
-			width: 61.8%;
-			border-right: 0.5pt solid black;
+			width: 38%;
+			border-right: 0.5pt solid #888;
 		}
-		#SenderInfo {
-			border-bottom: 0.5pt solid black;
-		}
-		#OrderInformation {
+		#ReceiverAddress {
 			float: left;
-			width: 38.2%;
+			height: 100%;
+			width: 61%;
 			margin-left: -0.5pt;
+		}
+		#ReceiverAddress .Content {
+			padding-top: 40mm;
+			text-align: right;
+			font-size: 16pt;
+			line-height: 24pt;
 		}
 		.Content {
 			padding: 10mm;
 		}
 		h2 {
-			font-size: 16pt;
+			font-size: 12pt;
 			margin: 0 0 18pt;
 		}
 		.NoLogoImage {
@@ -65,9 +69,10 @@
 </head>
 <body>
 
-	<div id="AddressInformation">
-		<div id="SenderInfo" class="Content">
-			<h2>Lähettäjä:</h2>
+	<div id="SenderInformation">
+		<div class="Content">
+			{Logo}
+			<h2>{%Sender}</h2>
 			<p>
 				{ContactCompany(after:'<br>')}
 				{ContactStreetAddress1(after:'{ContactStreetAddress2(before:',&nbsp;')}<br>')}
@@ -75,8 +80,10 @@
 				{ContactCountry}
 			</p>
 		</div>
-		<div id="ReceiverInfo" class="Content">
-			<h2>Vastaanottaja:</h2>
+	</div>
+
+	<div id="ReceiverAddress">
+		<div class="Content">
 			<p>
 				{OrderShippingCompany(after:',&nbsp;')}
 				{OrderShippingName}
@@ -84,30 +91,8 @@
 				{OrderShippingZip(before:'<br>')} {OrderShippingCity}
 				{OrderShippingCountry(before:'<br>')}
 				{OrderShippingPhone(before:'<br>')}
-				{OrderShippingEmail(before:'<br>')}
 			</p>
-		</div>
-	</div>
-
-	<div id="OrderInformation">
 		<div class="Content">
-			{Logo}
-			<dl>
-
-				<dt>Toimitustapa</dt>
-				<dd>{OrderShippingMethod}</dd>
-
-				<dt>Maksutapa</dt>
-				<dd>{OrderPaymentMethod}</dd>
-
-				<dt>{%Ordernumber}</dt>
-				<dd>{OrderNumber}</dd>
-
-				<dt>{%OrderDate}</dt>
-				<dd>{OrderDate}</dd>
-
-			</dl>
-		</div>
 	</div>
 
 </body>

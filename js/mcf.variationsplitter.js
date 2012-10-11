@@ -145,7 +145,18 @@ $(function() {
 			hasVariationSplits = $buyFormFieldset.find('label:contains(|), select:contains(|)').length;
 
 		if (hasVariationSplits) {
-			var variationGroups = plugin.parseVariationGroups($buyFormFieldset);
+			var variationGroups = plugin.parseVariationGroups($buyFormFieldset),
+				groupedByTriggers = _.groupBy(variationGroups, 'triggers'),
+				groupedByTriggers = _.toArray(groupedByTriggers),
+				isAValidSplit = true;
+
+			_.each(groupedByTriggers, function(groups) {
+				var uniqGroups = _.pluck(groups, 'group');
+				uniqGroups = _.uniq(uniqGroups);
+				if (uniqGroups.length > 1) isAValidSplit = false;
+			});
+
+			if (!isAValidSplit) return;
 			$variationGroupsWrap.insertAfter($buyFormFieldset);
 			$variationGroupsWrap.html(plugin.renderVariationGroups(variationGroups, null, 0));
 
