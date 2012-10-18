@@ -11,7 +11,13 @@
 				<p>{%CheckoutChooseShippingMethodIntro}</p>
 			</div>
 
-			{CheckoutShippingMethods}
+			{CheckoutShippingMethods(
+				or: '
+					<div class="Notification Error">
+						<p>{%ErrorNoShippingMethods}</p>
+					</div>
+				'
+			)}
 
 		</fieldset>
 

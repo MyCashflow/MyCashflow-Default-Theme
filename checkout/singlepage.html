@@ -75,7 +75,8 @@
 							<fieldset class="TagWrapper" id="CheckoutShippingMethods">
 								{CheckoutShippingMethods(
 									ajax: 'true',
-									preselect: 'false'
+									preselect: 'false',
+									or: '<div class="Notification Error"><p>{%ErrorNoShippingMethods}</p></div>'
 								)}
 							</fieldset>
 
@@ -85,7 +86,8 @@
 							<fieldset class="TagWrapper" id="CheckoutPaymentMethods">
 								{CheckoutPaymentMethods(
 									ajax: 'true',
-									preselect: 'false'
+									preselect: 'false',
+									or: '<div class="Notification Error"><p>{%ErrorNoPaymentMethods}</p></div>'
 								)}
 							</fieldset>
 
@@ -128,7 +130,7 @@
 			</div>
 		</div>
 		<footer id="Footer">
-			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
+			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/" class="TermsLink">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
 		</footer>
 	</div>
 	<div id="NotificationCenter"></div>

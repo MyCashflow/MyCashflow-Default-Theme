@@ -274,7 +274,7 @@ $(function() {
 		var $product = $(this).closest('.Product'),
 			productId = $(this).attr('href').split('/')[2];
 
-		if ($product.hasClass('ProductVariations') || $product.hasClass('ProductTailorings')) {
+		if ($product.hasClass('ProductVariations') || $product.hasClass('ProductTailorings') || $product.hasClass('ProductDownloads')) {
 			$.colorbox({
 				title: mcf.Lang.AddToCart,
 				fixed: true,
@@ -283,10 +283,19 @@ $(function() {
 				initialHeight: 100,
 				href: '/interface/Helper?file=helpers/colorbox-buyform&setProduct=' + productId,
 				onComplete: function() {
+
+					// Bind custom selects and variationsplitter to modal
 					$("#cboxContent").mcfVariationSplitter().find('select').customSelect();
+
+					// Make variationsplitter-made selects pretty too
 					$("#cboxContent").on('change', 'select', function(evt) {
 						$(evt.delegateTarget).find('select').customSelect();
 					});
+				},
+				onClosed: function() {
+					// Cleanup traces of the colorbox
+					// so that next time it's made from scratch
+					$(this).colorbox.remove();
 				}
 			});
 		}
@@ -297,10 +306,6 @@ $(function() {
 		}
 
 		evt.preventDefault();
-	});
-
-	$(document).bind('cbox_closed', function() {
-		$.colorbox.remove();
 	});
 
 	//--------------------------------------------------------------------------

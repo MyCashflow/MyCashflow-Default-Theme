@@ -93,12 +93,21 @@ $(function() {
 				el.append('<div class="CheckoutLoader"></div>'); // Append loading indicator
 			},
 
-			getSuccess: function(el) {
+			getSuccess: function(el, response) {
 				$('.CheckoutLoader', el).remove();
 				$('select', el).customSelect();
 
 				// Add SelectedMethod class to selected method's wrapper
 				var selectedMethodClass = 'SelectedMethod';
+
+				// If response is empty when getting shipping or payment methods
+				// notify the customer about the situation
+				if (el.is('#CheckoutShippingMethods') && response === "") {
+					el.html('<div class="Notification Error"><p>' + mcf.Lang.ErrorNoShippingMethods + '</p></div>');
+				} else if (el.is('#CheckoutPaymentMethods') && response === "") {
+					el.html('<div class="Notification Error"><p>' + mcf.Lang.ErrorNoPaymentMethods + '</p></div>');
+				}
+
 				if (el.is('#CheckoutShippingMethods, #CheckoutPaymentMethods')) {
 					// Get the method selection inputs.
 					var $inputs = $('input:radio', el);
@@ -137,9 +146,10 @@ $(function() {
 			$checkoutNavigation = $('#CheckoutNavigation'),
 			previewHeight = $preview.height(),
 			contentHeight = $('#OnePageCheckout').innerHeight(),
-			headerHeight = $('#Main').offset().top;
+			headerHeight;
 
 		$(window).scroll(function() {
+			headerHeight = headerHeight || $('#Header').outerHeight();
 			var inView = $('h2 > span[id]:in-viewport', '#Primary').map(function() {
 				return '#' + this.id;
 			}).get();
@@ -158,8 +168,11 @@ $(function() {
 				$link.addClass('CurrentCheckoutStage');
 			}
 
-			if (scrollTop > $('#Header').outerHeight()) $checkoutNavigation.addClass('Fixed');
-			else $checkoutNavigation.removeClass('Fixed');
+			if (scrollTop > headerHeight) {
+				$checkoutNavigation.addClass('Fixed');
+			} else {
+				$checkoutNavigation.removeClass('Fixed');
+			}
 
 			if ($preview.height() <= contentHeight) {
 				$preview.parent().css('height', $('#Primary').css('height'));

@@ -157,17 +157,6 @@
 		return $('input, select, textarea, button', $wrapper).serialize();
 	};
 
-	var reqFilled = function(el) {
-		var allInputs = $('input[type=text]', el),
-			reqInputs = $('.FormItem.required input[type=text]', el),
-			filledInputs = allInputs.filter(function() { return $.trim($(this).val()).length; }),
-			filledReqInputs = reqInputs.filter(function() { return $.trim($(this).val()).length; });
-
-		if (filledInputs.length === allInputs.length) return 'ALL';
-		else if (filledReqInputs.length >= reqInputs.length) return 'REQ';
-		else return false;
-	};
-
 	var getDependencies = function(id) {
 		var that = this,
 			complete = that.options.complete,
@@ -199,11 +188,11 @@
 			success: function(html, textStatus, jqXHR) {
 				that._depsCounter--;
 
+				$el.html(html);
+
 				if (typeof getSuccess === 'function') {
 					getSuccess($el, html, textStatus, jqXHR);
 				}
-
-				$el.html(html);
 			},
 
 			complete: function(jqXHR, textStatus) {
