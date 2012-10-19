@@ -25,12 +25,14 @@ $(function() {
 		var variations = [],
 			$select = $(selector).find('select'),
 			$radios = $(selector).find('input[type=radio]'),
-			$options = $radios.length
+			isRadio = ($radios.length) ? true : false,
+			$options = (isRadio)
 				? $(selector).find('label')
 				: $select.find('option');
 
 		$options.each(function(i, el) {
-			var text = $(el).text().split('|'),
+			var $el = $(el),
+				text = $el.text().split('|'),
 				temp = [];
 
 			$.each(text, function(level, group) {
@@ -38,8 +40,10 @@ $(function() {
 					isLast = level === (text.length) - 1;
 
 				if (keyValue.length == 1) keyValue.unshift(mcf.Lang.Variation);
-				var availability = keyValue[1].match(/\(([^\)]+)\)/, '');
-				if (availability) keyValue[1] = keyValue[1].replace(' (' + availability[1] + ')', '');
+				if (!isRadio) {
+					var availability = keyValue[1].match(/\(([^\)]+)\)/, '');
+					if (availability) keyValue[1] = keyValue[1].replace(' (' + availability[1] + ')', '');
+				}
 
 				var group = {
 					last: isLast,
@@ -51,12 +55,12 @@ $(function() {
 				};
 
 				var price = keyValue[1].match(/(\d+\,\d+\€)/),
-					availability = availability
+					availability = (availability)
 						? availability[1]
-						: $(el).next('.FormHelp').text(),
-					$option = $(el).is('option')
-						? $(el)
-						: $(el).find('input');
+						: $el.next('.FormHelp').text(),
+					$option = $el.is('option')
+						? $el
+						: $el.find('input');
 
 				price = price
 					? price[1]

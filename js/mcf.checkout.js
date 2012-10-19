@@ -100,14 +100,6 @@ $(function() {
 				// Add SelectedMethod class to selected method's wrapper
 				var selectedMethodClass = 'SelectedMethod';
 
-				// If response is empty when getting shipping or payment methods
-				// notify the customer about the situation
-				if (el.is('#CheckoutShippingMethods') && response === "") {
-					el.html('<div class="Notification Error"><p>' + mcf.Lang.ErrorNoShippingMethods + '</p></div>');
-				} else if (el.is('#CheckoutPaymentMethods') && response === "") {
-					el.html('<div class="Notification Error"><p>' + mcf.Lang.ErrorNoPaymentMethods + '</p></div>');
-				}
-
 				if (el.is('#CheckoutShippingMethods, #CheckoutPaymentMethods')) {
 					// Get the method selection inputs.
 					var $inputs = $('input:radio', el);

@@ -11,13 +11,7 @@
 				<p>{%CheckoutChoosePaymentMethodIntro}</p>
 			</div>
 
-			{CheckoutPaymentMethods(
-				or: '
-					<div class="Notification Error">
-						<p>{%ErrorNoPaymentMethods}</p>
-					</div>
-				'
-			)}
+			{CheckoutPaymentMethods}
 
 		</fieldset>
 

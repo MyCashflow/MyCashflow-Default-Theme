@@ -402,6 +402,7 @@ input[type="radio"] {
 .CustomSelectWrap {
 	position: relative;
 	float: left;
+	max-width: 458px;
 }
 .ReplacedSelect {
 	position: relative;
