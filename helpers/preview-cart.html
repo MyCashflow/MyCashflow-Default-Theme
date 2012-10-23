@@ -12,14 +12,14 @@
 	<tfoot>
 		{CartSubTotal(
 			before:	'<tr><th scope="row" colspan="3">{%CheckoutProductsTotal}</th><td class="CartTotal">',
-			after:	'</td></tr>'
+			after: '</td></tr>'
 		)}
 		{CartShippingCosts(
 			before:	'
 				<tr>
 					<th scope="row" colspan="3">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></td>
 					<td class="CartTotal">',
-			after:	'</td></tr>'
+			after: '</td></tr>'
 		)}
 		{CartPaymentCosts(
 			before: '
@@ -36,7 +36,7 @@
 		)}
 		{CartTotal(
 			before:	'<tr id="FullTotal"><th scope="row" colspan="3">{%Total}</th><td class="CartTotal" id="FullTotal">',
-			after:	'</td></tr>'
+			after: '</td></tr>'
 		)}
 	</tfoot>
 
