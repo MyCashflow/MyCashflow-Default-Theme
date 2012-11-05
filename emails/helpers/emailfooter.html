@@ -1,0 +1,36 @@
+			<!-- Footer table starts -->
+			<table width="100%" cellpadding="12" cellspacing="0" border="0" id="Footer" style="text-align: left;">
+				<tr valign="top">
+					<td>
+						<table width="400" align="left" cellpadding="6">
+							<tr valign="top">
+								<td style="color: #666; font-size: 13px; line-height: 18px;">
+									{ContactCompany(after:'<br>')}
+									{ContactStreetAddress1(after:'{ContactStreetAddress2(before:',&nbsp;')}<br>')}
+									{ContactZip} {ContactCity(after:'<br>')}
+									{ContactCountry}
+								</td>
+							</tr>
+						</table>
+						<table width="400" align="left" cellpadding="6">
+							<tr>
+								<td style="color: #666; font-size: 13px; line-height: 18px;">
+									{ContactEmail(after:'<br>')}
+									{ContactInternet(after:'<br>')}
+									{ContactPhone(after:'<br>')}
+									{ContactBusinessID(before:'{%BusinessID}:&nbsp;')}
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<!-- Footer table ends -->
+
+		</td>
+	</tr>
+</table>
+<!-- Body table ends -->
+
+</body>
+</html>

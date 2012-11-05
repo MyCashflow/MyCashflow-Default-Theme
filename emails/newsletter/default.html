@@ -1,0 +1,130 @@
+{Helper(file:'emails/helpers/emailheader')}
+
+<!-- Shop table starts -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td width="100%">
+			<table align="left" style="margin-right: 10px; max-width: 320px;">
+				<tr>
+					<td>
+						{Logo(width: 320, height: 80)}
+					</td>
+				</tr>
+			</table>
+			<table align="right">
+				<tr>
+					<td align="right" style="font-size: 16px; line-height: 20px;">
+						<p style="text-align: right; margin: 0 20px 20px 0;">
+							{%UnsubscribeIntro} {NewsletterUnsubscribe}.<br>
+							{%WebversionIntro} {NewsletterWebversion}.
+						</p>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<!-- Shop table ends -->
+
+<!-- Container table starts -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="background: #FFFFFF; border: 2px solid #b5b5b5; overflow: hidden; text-align: left; border-radius: 10px; box-shadow: 0 10px 25px #CCCCCC;" class="ContainerTable">
+	<tr>
+		<td>
+
+			<!-- Header table starts -->
+			<table width="100%" cellpadding="20" cellspacing="0" border="0" bgcolor="#cacaca" style="background: #cacaca url({ShopUrl}{ThemeUrl}/i/email-header-bg.gif) repeat-x left top; border-bottom: 1px solid #b5b5b5;">
+				<tr>
+					<td>
+
+						<h2 style="margin: 0; padding: 0; font-size: 20px; color: #555; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%Hi} {NewsletterName}</h2>
+						<h1 style="margin: 0; padding: 0; font-size: 30px; color: #333; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{NewsletterSubject}</h1>
+
+					</td>
+				</tr>
+			</table>
+			<!-- Header table ends -->
+
+			<!-- Inner container table starts -->
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff;">
+				<tr>
+
+					<!-- Content wrapping td starts -->
+					<td valign="top" width="100%">
+
+						<!-- Content table starts -->
+						<table cellpadding="18" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-content-top.gif) repeat-x left top;" width="100%">
+							<tr>
+								<td class="ContentCell" style="font-size: 16px; line-height: 24px;">
+
+									{NewsletterMessage}
+
+								</td>
+							</tr>
+						</table>
+
+						<!-- Stylish header table -->
+						<table width="100%" cellpadding="18" cellspacing="0" border="0" bgcolor="#cacaca" style="background: #cacaca url({ShopUrl}{ThemeUrl}/i/email-header-bg.gif) repeat-x left top; border-bottom: 1px solid #b5b5b5; border-top: 1px solid #b5b5b5;">
+							<tr>
+								<td style="line-height: 18px;">
+									<h3 style="font-size: 20px; color: #444; margin: 0; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%PicksFromShop}</h3>
+								</td>
+							</tr>
+						</table>
+						<!-- Stylish header table ends -->
+
+						<!-- Product table starts -->
+						<table cellpadding="0" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-content-top.gif) repeat-x left top;" width="100%">
+							<tr>
+								<td width="100%" align="center" style="padding: 18px 0;">
+									<table cellpadding="6" cellspacing="0" border="0" align="center" class="ProductTable">
+										<tr valign="top">
+											{HotPicks(
+												limit: 3,
+												classes: '||LastProduct',
+												sort: 'released_asc',
+												helper: 'emails/helpers/emailproduct'
+											)}
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!-- Product table ends -->
+
+						<!-- Stylish header table -->
+						<table width="100%" cellpadding="18" cellspacing="0" border="0" bgcolor="#cacaca" style="background: #cacaca url({ShopUrl}{ThemeUrl}/i/email-header-bg.gif) repeat-x left top; border-bottom: 1px solid #b5b5b5; border-top: 1px solid #b5b5b5;">
+							<tr>
+								<td style="line-height: 18px;">
+									<h3 style="font-size: 20px; color: #444; margin: 0; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%NewsletterSharing}</h3>
+								</td>
+							</tr>
+						</table>
+						<!-- Stylish header table ends -->
+
+						<table cellpadding="18" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-content-top.gif) repeat-x left top; font-weight: bold;" width="100%">
+							<tr valign="top">
+								<td>
+									{NewsletterLike}
+								</td>
+								<td>
+									{NewsletterForward}
+								</td>
+								<td >
+									{NewsletterTweet}
+								</td>
+							</tr>
+						</table>
+
+					</td>
+					<!-- Content wrapping td ends -->
+
+				</tr>
+			</table>
+			<!-- Inner container table ends -->
+
+		</td>
+	</tr>
+</table>
+<!-- Container table ends -->
+
+{Helper(file:'emails/helpers/emailfooter')}
