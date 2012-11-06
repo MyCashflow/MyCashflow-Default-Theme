@@ -33,7 +33,13 @@ $(function() {
 		$options.each(function(i, el) {
 			var $el = $(el),
 				text = $el.text().split('|'),
-				temp = [];
+				temp = [],
+				discontinued = false;
+
+			if (isRadio && $el.find("input").is("[disabled]")) discontinued = true;
+			else if (!isRadio && $el.is("[disabled]")) discontinued = true;
+
+			if (discontinued) return false;
 
 			$.each(text, function(level, group) {
 				var keyValue = group.split(':'),
