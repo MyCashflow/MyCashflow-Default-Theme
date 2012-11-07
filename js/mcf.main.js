@@ -150,7 +150,6 @@ $(function() {
 			force: true,
 			cycle: true,
 			duration: 500,
-			interval: 7500,
 			items: '.FrontBanner',
 			prev: '#PrevBanner',
 			next: '#NextBanner',
@@ -189,7 +188,6 @@ $(function() {
 		exclude: 2,
 		cycle: false,
 		duration: 500,
-		interval: 5000,
 		items: '.Product',
 		prev: '#ScrollToPrev',
 		next: '#ScrollToNext',
@@ -260,6 +258,9 @@ $(function() {
 			data: $form.serializeObject(),
 			success: function() {
 				$submit.removeAttr('disabled');
+
+				// If we're at the cart, update it after adding products
+				if ($('#CartForm').length) mcf.publish('UpdateCart');
 			}
 		});
 
@@ -285,10 +286,10 @@ $(function() {
 				onComplete: function() {
 
 					// Bind custom selects and variationsplitter to modal
-					$("#cboxContent").mcfVariationSplitter().find('select').customSelect();
+					$('#cboxContent').mcfVariationSplitter().find('select').customSelect();
 
 					// Make variationsplitter-made selects pretty too
-					$("#cboxContent").on('change', 'select', function(evt) {
+					$('#cboxContent').on('change', 'select', function(evt) {
 						$(evt.delegateTarget).find('select').customSelect();
 					});
 				},
@@ -301,7 +302,11 @@ $(function() {
 		}
 		else {
 			mcf.publish('AddProducts', {
-				data: { products: [{ product_id: productId }] }
+				data: { products: [{ product_id: productId }] },
+				success: function() {
+					// If we're at the cart, update it after adding products
+					if ($('#CartForm').length) mcf.publish('UpdateCart');
+				}
 			});
 		}
 
@@ -333,6 +338,12 @@ $(function() {
 	//--------------------------------------------------------------------------
 
 	var $cartForm = $('#CartForm');
+
+	// At page load, hide the order buttons and campaign code submit if there's nothing at cart
+	if ($cartForm.length > 0 && $('#CartTable', $cartForm).length === 0) {
+		$('.CheckoutButton').hide();
+		$('#SubmitCampaignCode').hide();
+	}
 
 	$cartForm.on('change', 'input', function(evt) {
 		$cartForm.trigger('submit');

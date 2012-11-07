@@ -64,22 +64,25 @@ $(function() {
 			return_self: 'auto', // Detect from tagname
 			response_type: 'json', // We want to have notifications as separate so we ask for json back
 
-			postStart: function(el, fromEvent, verbose) {
+			post_start: function(el, fromEvent, verbose) {
 				// If the post updates the sent element it's verbose
 				if (verbose) el.append('<div class="CheckoutLoader"></div>');
 			},
 
-			postSuccess: function(el, response, verbose) {
-				var $scrollToEl = el.prevAll('h2');
+			post_success: function(el, response, verbose) {
+				var errs = response.notifications,
+					$scrollToEl = el.prevAll('h2');
 
-				$.scrollTo($scrollToEl, {
-					axis: 'y',
-					duration: 350,
-					offset: {
-						left: 0,
-						top: -36
-					}
-				});
+				if (errs && errs.length > 0) {
+					$.scrollTo($scrollToEl, {
+						axis: 'y',
+						duration: 350,
+						offset: {
+							left: 0,
+							top: -36
+						}
+					});
+				}
 
 				if (verbose) {
 					$('.CheckoutLoader', el).remove();
@@ -89,11 +92,11 @@ $(function() {
 				mcf.handleResponse({ response: response });
 			},
 
-			getStart: function(el) {
+			get_start: function(el) {
 				el.append('<div class="CheckoutLoader"></div>'); // Append loading indicator
 			},
 
-			getSuccess: function(el, response) {
+			get_success: function(el, response) {
 				$('.CheckoutLoader', el).remove();
 				$('select', el).customSelect();
 

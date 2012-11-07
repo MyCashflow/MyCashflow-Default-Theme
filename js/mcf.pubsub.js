@@ -14,7 +14,7 @@ $(function() {
 
 	mcf.subscribe = function(name, func) {
 		if (typeof $.subscribe === 'undefined') {
-			console.warn("MyCashflow Pub/Sub: Plugin not loaded!");
+			console.warn('MyCashflow Pub/Sub: Plugin not loaded!');
 			return false;
 		}
 
@@ -24,7 +24,7 @@ $(function() {
 
 	mcf.publish = function(name, opts) {
 		if (typeof $.publish === 'undefined') {
-			console.warn("MyCashflow Pub/Sub: Plugin not loaded!");
+			console.warn('MyCashflow Pub/Sub: Plugin not loaded!');
 			return false;
 		}
 
@@ -113,11 +113,15 @@ $(function() {
 		var $notifications = null,
 			notificationClass = '.Notification';
 
-		if (mcf.isJSON(opts.response)) {
+		if (typeof opts.response === 'string' && mcf.isJSON(opts.response)) {
 			// If the response is in JSON format,
 			// we'll just grab the notifications.
 			$notifications = $($.parseJSON(opts.response).notifications);
+		} else if (typeof opts === 'object') {
+			// The JSON seems to be already parsed
+			$notifications = $(opts.response.notifications);
 		} else {
+			// It must mean that we're getting HTML back
 			// If the response is a notification
 			// element, $.filter will do the job.
 			$notifications = $(opts.response).filter(notificationClass);
@@ -150,7 +154,7 @@ $(function() {
 			}
 
 			var klass = $(this).attr('class');
-			mcf.raiseNotification($(this).text(), opts.category, klass, opts.showTools);
+			mcf.raiseNotification($(this).html(), opts.category, klass, opts.showTools);
 		});
 
 		return false;
@@ -166,7 +170,9 @@ $(function() {
 
 	mcf.subscribe('UpdateCampaignCode', function(evt, opts) {
 		var $campaignCodeWrapper = $('#SubmitCampaignCode'),
-			$cartWrapper = $('#CartForm, #PreviewContent');
+			$cartWrapper = ($('#PreviewContent').length)
+				? $('#CartTable')
+				: $('#CartForm');
 
 		$cartWrapper.append('<div class="CheckoutLoader"></div>');
 
@@ -186,7 +192,7 @@ $(function() {
 					url: '/interface/Helper/',
 					data: { file: 'helpers/' + $campaignCodeWrapper.data('helper') },
 					success: function(response) {
-						$('#CartTable').html(response);
+						$cartWrapper.html(response);
 						$('.CheckoutLoader', $cartWrapper).remove();
 					}
 				});
@@ -225,28 +231,41 @@ $(function() {
 		});
 	});
 
+	mcf.updateFullCartContent = function(response, $cart) {
+		if (response !== undefined && $cart !== undefined) {
+			$.ajax({
+				type: 'GET',
+				url: '/interface/Helper',
+				data: { file: 'helpers/full-cart' },
+				success: function(response) {
+					$cart.html(response);
+					if (!$('#CartTable', $cart).length) {
+						$('.CheckoutButton').hide();
+						$('#SubmitCampaignCode').hide();
+					} else {
+						$('.CheckoutButton').show();
+						$('#SubmitCampaignCode').show();
+					}
+				}
+			});
+		}
+	}
+
 	mcf.subscribe('RemoveProduct', function(evt, opts) {
+		var $cartFormWrapper = $('#CartForm'),
+			$cartFormLoader = $('<div class="CheckoutLoader"></div>');
+
+		$cartFormLoader.appendTo($cartFormWrapper);
+
 		$.ajax({
 			type: 'GET',
 			url: '/cart/delete/' + opts.data,
-
-			custom: $.extend(opts, { notifyClass: '' }),
 			data: { ajax: 1 },
 			dataType: 'html',
-
+			custom: $.extend(opts, { notifyClass: '' }),
 			success: function(response) {
-				$.ajax({
-					type: 'GET',
-					url: '/interface/CartSubTotal',
-					success: function(response) { $('.SubTotal').html(response); }
-				});
-
-				$.ajax({
-					type: 'GET',
-					url: '/interface/Helper',
-					data: { file: 'helpers/full-cart' },
-					success: function(response) { $('#CartTable').html(response); }
-				});
+				$cartFormLoader.remove();
+				mcf.updateFullCartContent(response, $cartFormWrapper);
 			}
 		});
 	});
@@ -262,18 +281,12 @@ $(function() {
 			url: '/cart/update/',
 
 			custom: opts,
-			data: $.extend(opts.data, { ajax: 1 }),
+			data: (opts && opts.data) ? $.extend(opts.data, { ajax: 1 }) : { ajax: 1 },
 			dataType: 'html',
 
 			success: function(response) {
 				$cartFormLoader.remove();
-
-				$.ajax({
-					type: 'GET',
-					url: '/interface/Helper',
-					data: { file: 'helpers/full-cart' },
-					success: function(response) { $('#CartTable').html(response); }
-				});
+				mcf.updateFullCartContent(response, $cartFormWrapper);
 			}
 		});
 	});
@@ -292,7 +305,7 @@ $(function() {
 					type: 'GET',
 					url: '/interface/Helper/',
 					data: { file: 'helpers/preview-cart' },
-					success: function(response) { $('#CartTable').html(response); }
+					success: function(response) { $('#CartTable').replaceWith(response); }
 				});
 			}
 		});

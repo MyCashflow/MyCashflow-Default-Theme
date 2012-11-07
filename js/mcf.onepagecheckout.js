@@ -13,14 +13,14 @@
 		defaults = {
 			tagname: 'auto',
 			dependencies: 'auto',
-			returnSelf: 'auto',
-			responseType: 'html',
-			updateSelf: false,
+			return_self: 'auto',
+			response_type: 'html',
+			update_self: false,
 
-			postStart: function(el, fromEvent, verbose, jqXHR, settings) {},
-			postSuccess: function($el, response, verbose, textStatus, jqXHR) {},
-			getStart: function($el, jqXHR, settings) {},
-			getSuccess: function($el, response, textStatus, jqXHR) {},
+			post_start: function(el, fromEvent, verbose, jqXHR, settings) {},
+			post_success: function($el, response, verbose, textStatus, jqXHR) {},
+			get_start: function($el, jqXHR, settings) {},
+			get_success: function($el, response, textStatus, jqXHR) {},
 			complete: function($el) {}
 		};
 
@@ -54,9 +54,9 @@
 					? defaultDependencies
 					: opts.dependencies;
 
-				opts.returnSelf = (opts.returnSelf === 'auto')
+				opts.return_self = (opts.return_self === 'auto')
 					? true
-					: opts.returnSelf;
+					: opts.return_self;
 
 				break;
 
@@ -65,9 +65,9 @@
 					? defaultDependencies
 					: opts.dependencies;
 
-				opts.returnSelf = (opts.returnSelf === 'auto')
+				opts.return_self = (opts.return_self === 'auto')
 					? true
-					: opts.returnSelf;
+					: opts.return_self;
 
 				break;
 
@@ -76,9 +76,9 @@
 					? 'CheckoutPaymentMethods'
 					: opts.dependencies;
 
-				opts.returnSelf = (opts.returnSelf === 'auto')
+				opts.return_self = (opts.return_self === 'auto')
 					? false
-					: opts.returnSelf;
+					: opts.return_self;
 
 				break;
 
@@ -87,9 +87,9 @@
 					? false
 					: opts.dependencies;
 
-				opts.returnSelf = (opts.returnSelf === 'auto')
+				opts.return_self = (opts.return_self === 'auto')
 					? false
-					: opts.returnSelf;
+					: opts.return_self;
 
 				break;
 
@@ -98,9 +98,9 @@
 					? false
 					: opts.dependencies;
 
-				opts.returnSelf = (opts.returnSelf === 'auto')
+				opts.return_self = (opts.return_self === 'auto')
 					? false
-					: opts.returnSelf;
+					: opts.return_self;
 
 				break;
 
@@ -109,9 +109,9 @@
 					? defaultDependencies
 					: opts.dependencies;
 
-				opts.returnSelf = (opts.returnSelf === 'auto')
+				opts.return_self = (opts.return_self === 'auto')
 					? true
-					: opts.returnSelf;
+					: opts.return_self;
 
 				break;
 		}
@@ -160,14 +160,14 @@
 	var getDependencies = function(id) {
 		var that = this,
 			complete = that.options.complete,
-			getSuccess = that.options.getSuccess,
-			getStart = that.options.getStart,
+			get_success = that.options.get_success,
+			get_start = that.options.get_start,
 			url = '/interface/' + id,
 			$el = $('#' + id),
 			opts = {
 				mode: 'form',
 				ajax: 'true',
-				responseType: that.options.responseType
+				response_type: that.options.response_type
 			};
 
 		if (id === 'CheckoutShippingMethods' || id === 'CheckoutPaymentMethods') {
@@ -180,8 +180,8 @@
 			data: opts,
 
 			beforeSend: function(jqXHR, settings) {
-				if (typeof getStart === 'function') {
-					getStart($el, jqXHR, settings);
+				if (typeof get_start === 'function') {
+					get_start($el, jqXHR, settings);
 				}
 			},
 
@@ -190,8 +190,8 @@
 
 				$el.html(html);
 
-				if (typeof getSuccess === 'function') {
-					getSuccess($el, html, textStatus, jqXHR);
+				if (typeof get_success === 'function') {
+					get_success($el, html, textStatus, jqXHR);
 				}
 			},
 
@@ -219,13 +219,13 @@
 			$.ajax({
 				type: 'POST',
 				url: '/checkout/',
-				data: data + '&ajax=1&responseType=' + opts.responseType,
+				data: data + '&ajax=1&response_type=' + opts.response_type,
 
 				beforeSend: function(jqXHR, settings) {
-					verbose = (isFocused > 0 || opts.returnSelf === false) ? false : true;
+					verbose = (isFocused > 0 || opts.return_self === false) ? false : true;
 
-					if (typeof opts.postStart === "function") {
-						var sendData = opts.postStart($el, fromEvent, verbose, jqXHR, settings);
+					if (typeof opts.post_start === "function") {
+						var sendData = opts.post_start($el, fromEvent, verbose, jqXHR, settings);
 
 						if (sendData === false) {
 							return false;
@@ -237,7 +237,7 @@
 				},
 
 				success: function(response, textStatus, jqXHR) {
-					var html = (opts.responseType === 'json')
+					var html = (opts.response_type === 'json')
 						? response.content
 						: response;
 
@@ -260,14 +260,14 @@
 						}
 					}
 
-					if (opts.returnSelf && isFocused <= 0 && verbose) {
+					if (opts.return_self && isFocused <= 0 && verbose) {
 						$el.html(html).hide();
 						$el.find('.Notification').remove();
 						$el.show();
 					}
 
-					if (typeof opts.postSuccess === 'function') {
-						opts.postSuccess($el, response, verbose, textStatus, jqXHR);
+					if (typeof opts.post_success === 'function') {
+						opts.post_success($el, response, verbose, textStatus, jqXHR);
 					}
 				}
 			});

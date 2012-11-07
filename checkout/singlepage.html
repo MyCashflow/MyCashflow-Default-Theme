@@ -110,7 +110,9 @@
 
 						<h2 class="BoxHeader">{%CheckoutPreview}</h2>
 
-						{Helper(file:'helpers/preview-cart')}
+						<table id="CartTable" class="PreviewTable">
+							{Helper(file:'helpers/preview-cart')}
+						</table>
 
 						<div id="SubmitCampaignCode" data-helper="preview-cart" data-view="checkout">
 							{CampaignCode(

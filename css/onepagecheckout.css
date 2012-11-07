@@ -176,6 +176,7 @@ body.AdminLoggedIn #PreviewContent.Fixed {
 }
 #PreviewContent #SubmitCampaignCode {
 	padding: 0 15px;
+	margin: -9px 0px 9px;
 }
 #CartTable.PreviewTable {
 	margin: 0 6px 18px;

@@ -1197,6 +1197,15 @@ dl#AccountInformation dd p, .OrderComments p { margin: 0; }
 
 #CartForm {
 	position: relative;
+	width: 100%;
+	min-height: 36px;
+	overflow: hidden;
+}
+#CartForm .Notification {
+	margin-bottom: 54px;
+}
+#CartForm .Notification + #CartTable {
+	margin-top: -36px;
 }
 table input,
 table button {
@@ -1277,10 +1286,12 @@ table .CartProduct dt { clear: left; }
 }
 #UpdateCartButton {
 	float: right;
-	margin: -9px 0 9px;
+	margin-left: 0;
+	margin-right: 0;
 }
 #SubmitCampaignCode {
-	float: left; margin: -9px 0 9px;
+	position: relative; z-index: 99;
+	float: left; margin: -36px 0 0;
 }
 #SubmitCampaignCode .FormItem {
 	padding-left: 0;
@@ -1293,6 +1304,8 @@ table .CartProduct dt { clear: left; }
 }
 #SubmitCampaignCode a {
 	color: #666;
+	display: block;
+	margin: 0 0 18px;
 }
 
 /* Chekcout
@@ -1676,6 +1689,7 @@ a.Button.PrimaryAction,
 #PreviewProducts #SubmitCampaignCode {
 	float: right;
 	margin-bottom: 18px;
+	margin-top: 0;
 }
 #PreviewProducts #SubmitCampaignCode button {
 	margin-right: 0;

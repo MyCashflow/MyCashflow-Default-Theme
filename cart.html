@@ -10,11 +10,8 @@
 			</div>
 			<div class="Content">
 
-				{Notifications(group:'cart')}
-
 				<form action="/cart/update/" method="post" id="CartForm">
 					{Helper(file:'helpers/full-cart')}
-					<button type="submit" id="UpdateCartButton">{%ShoppingCartUpdateSubtotal}</button>
 				</form>
 
 				<div id="SubmitCampaignCode" data-helper="full-cart" data-view="cart">
@@ -38,7 +35,20 @@
 					<div id="CrossSaleScroller">
 						<div id="CrossSaleProducts">',
 				after: '</div></div>',
-				helper: 'helpers/listproduct'
+				helper: 'helpers/listproduct',
+				or: '
+					{NewProducts(
+						type: 'normal',
+						timelimit: '-2 years',
+						limit: 12,
+						before: '
+							<h2 class="BoxHeader Center">{%NewProducts}</h2>
+							<div id="CrossSaleScroller">
+								<div id="CrossSaleProducts">',
+						after: '</div></div>',
+						helper: 'helpers/listproduct'
+					)}
+				'
 			)}
 
 		</div>
