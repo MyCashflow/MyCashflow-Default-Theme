@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="{CurrentLanguageCode}">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{Title}</title>
+	<meta name="description" content="{MetaDescription}">
+
+	<meta name="viewport" content="width=device-width">
+
+	<!-- OpenGraph for Facebook -->
+	{OpenGraph}
+
+	<link rel="shortcut icon" type="image/ico" href="{ThemeUrl}/i/favicon.ico" />
+
+	{MinifyCSS(files:'css/reset.css|css/base.css|css/forms.css|css/colorbox.css|css/master.css')}
+
+	<script src="{ThemeUrl}/js/vendor/modernizr-2.5.2.min.js"></script>
+
+	<style type="text/css" media="all">
+		{BannerText(name:'head-styles')}
+	</style>
+
+	{Extensions(for:'head')}
+
+</head>
+
+<body class="{BodyClass} BlockForm">
+
+	{AdminTools}
+	{Extensions(for:'body')}
+
+	<div id="Container">
+
+		<header id="Header" class="clearfix">
+			{Logo(
+				width:384,
+				height:126
+			)}
+			{CustomerNavigation}
+
+			{CurrencyNavigation(
+				before: '
+					<ul class="NavigationList DropdownNavigation" id="CurrencyNavigation">
+						<li><a><span class="Icon CurrencyIcon"></span>{Currency}</a>',
+				after: '
+						</li>
+					</ul>'
+			)}
+
+			{LanguageNavigation(
+				before: '
+					<ul class="NavigationList DropdownNavigation" id="LanguageNavigation">
+						<li><a><span class="Icon LanguageIcon"></span>{CurrentLanguage}</a>',
+				after: '
+						</li>
+					</ul>'
+			)}
+		</header>
+
+		<div id="PageHeader">
+			{Path}
+			<h1>{PageTitle}</h1>
+		</div>
+
+		<div class="Content">
+			{Notifications(group: 'account')}
+			{Content}
+		</div>
+
+		<footer id="Footer">
+			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
+		</footer>
+
+	</div>
+	<div id="NotificationCenter"></div>
+	<script type="text/javascript">
+	//<![CDATA[
+		var mcf = mcf || {};
+		mcf.ThemePath = "/files/{Theme}";
+		{Helper(file: 'helpers/mcf.Lang')}
+	//]]>
+	</script>
+	{Helper(file: 'helpers/scripts')}
+
+</body>
+</html>

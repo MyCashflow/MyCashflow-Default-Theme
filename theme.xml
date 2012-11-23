@@ -22,4 +22,13 @@
 		</Checkout>
 	</Features>
 
+	<Settings>
+		<!--
+		<Images>
+			<NoImage file="i/noImage.jpg" />
+		</Images>
+		-->
+	</Settings>
+
+
 </Theme>

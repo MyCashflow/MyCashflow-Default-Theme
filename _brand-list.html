@@ -46,14 +46,6 @@
 						width: 161,
 						id: 'BrandLogo'
 					)}
-					{Categories(
-						brand: 'current',
-						before: '<h2 class="BoxHeader">Tuoteryhmät</h2><ul class="NavigationList CategoryNavigation">',
-						after: '</ul>',
-						helper: '{{
-							<li><a href="{CurrentUrl}&amp;cid={CategoryId}" title="{CategoryName}">{CategoryName}</a></li>
-						}}'
-					)}
 					{BrandTopSellers(
 						limit: 5,
 						type: 'normal',

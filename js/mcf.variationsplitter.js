@@ -39,7 +39,7 @@ $(function() {
 			if (isRadio && $el.find("input").is("[disabled]")) discontinued = true;
 			else if (!isRadio && $el.is("[disabled]")) discontinued = true;
 
-			if (discontinued) return false;
+			if (discontinued) return true;
 
 			$.each(text, function(level, group) {
 				var keyValue = group.split(':'),
