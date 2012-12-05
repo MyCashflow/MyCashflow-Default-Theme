@@ -51,6 +51,7 @@
 							<th scope="col" class="CartTotal">{%Total}</th>
 						</tr>
 					</thead>
+					<tbody>
 		',
 		helper: '{{
 			<tr>
@@ -86,28 +87,31 @@
 			</tr>
 		}}',
 		after: '
-					<tr class="CartTotal">
-						<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
-						<td class="CartTotal">
-							{OrderSubTotal}<br>
-							<small>{OrderSubtotalTax}</small>
-						</td>
-					</tr>
-					{OrderShippingCosts(
-						before: '<tr class="CartTotal"><th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br><small>{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
-						after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
-					)}
-					{OrderPaymentCosts(
-						before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
-						after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
-					)}
-					<tr class="CartTotal" id="FullTotal">
-						<th scope="row" colspan="4">{%Total} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
-						<td class="CartTotal">
-							{OrderTotal}<br>
-							<small>{OrderTax}</small>
-						</td>
-					</tr>
+					</tbody>
+					<tfoot>
+						<tr class="CartTotal">
+							<th scope="row" colspan="4">{%CheckoutProductsTotal} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+							<td class="CartTotal">
+								{OrderSubTotal}<br>
+								<small>{OrderSubtotalTax}</small>
+							</td>
+						</tr>
+						{OrderShippingCosts(
+							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%ShippingCosts}: {OrderShippingMethod}<br><small>{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+							after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
+						)}
+						{OrderPaymentCosts(
+							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+							after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
+						)}
+						<tr class="CartTotal" id="FullTotal">
+							<th scope="row" colspan="4">{%Total} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+							<td class="CartTotal">
+								{OrderTotal}<br>
+								<small>{OrderTax}</small>
+							</td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		'
@@ -128,9 +132,7 @@
 			<br>
 			{ContactStreetAddress1(
 				after: '
-					{ContactStreetAddress2(
-						before: ',&nbsp;'
-					)}
+					{ContactStreetAddress2(before: '<br>')}
 				'
 			)}
 			<br>

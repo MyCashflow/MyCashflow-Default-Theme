@@ -45,12 +45,12 @@
 					<thead>
 						<tr>
 							<th scope="col" class="CartProduct">{%Product}</th>
-							<th scope="col">{%Storage}</th>
-							<th scope="col">{%ShippingDate}</th>
+							<th scope="col">{%ProductCode}</th>
 							<th scope="col">{%Quantity}</th>
-							<th scope="col">{%Price}</th>
+							<th scope="col">{%ShippingDate}</th>
 						</tr>
 					</thead>
+					<tbody>
 		',
 		helper: '{{
 			<tr>
@@ -60,21 +60,18 @@
 						{OrderProductVariation(before: ' <br /><em class="ProductVariation">',after:'</em>')}
 						{OrderProductDownloadLink(before: ' <br /><span style="font-weight: normal;">{%ProductDownload}: </span><strong class="ProductDownloadLink">',after:'</strong>')}
 					</h3>
-					{OrderProductCode(
-						before: '<dl><dt>{%ProductCode}</dt><dd>',
+					{ProductStockPlace(
+						before: '<dl><dt>{%Storage}</dt><dd>',
 						after: '</dd></dl>'
 					)}
 					{OrderProductChoices}
 				</th>
-				<td>{ProductStockPlace}</td>
-				<td>{OrderProductShippingStatus}</td>
+				<td>{OrderProductCode}</td>
 				<td>{OrderProductQuantity}</td>
-				<td>
-					{OrderProductPrice}
-				</td>
+				<td>{OrderProductShippingStatus}</td>
 			</tr>
 		}}',
-		after: '</table></div>'
+		after: '</tbody></table></div>'
 	)}
 
 	<div id="ReceiptContact">
@@ -87,9 +84,7 @@
 			<br>
 			{ContactStreetAddress1(
 				after: '
-					{ContactStreetAddress2(
-						before: ',&nbsp;'
-					)}
+					{ContactStreetAddress2(before: '<br>')}
 				'
 			)}
 			<br>

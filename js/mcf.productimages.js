@@ -26,7 +26,7 @@ $(function() {
 
 		var $oldImage = $('img', $productCurrentImage),
 			$newImage = $('img', $self),
-			imageText = $newImage.attr('alt'),
+			imageText = $.trim($newImage.attr('alt')),
 			imageSize = $oldImage.attr('src').split('/')[2];
 
 		// Show the image loader.
@@ -52,17 +52,16 @@ $(function() {
 		if (!triggered) {
 			$('option, :radio', $productBuyForm).each(function() {
 				var inputValue = $(this).is(':radio')
-					? $(this).parent('label').text()
-					: $(this).text();
+					? $.trim($(this).parent('label').text())
+					: $.trim($(this).text());
 
-				var regexp = /^[\t]+|[\t]+$/,
-					matchA = inputValue.replace(regexp, '').toLowerCase(),
-					matchB = imageText.replace(regexp, '').toLowerCase(),
+				var matchA = inputValue.toLowerCase(),
+					matchB = imageText.toLowerCase(),
 					matches = matchA.length > matchB.length
-						? matchA.match(matchB)
-						: matchB.match(matchA);
+						? matchA.indexOf(matchB)
+						: matchB.indexOf(matchA);
 
-				if (matches !== null) {
+				if (matches > -1) {
 					if ($(this).is(':radio')) {
 						// Handler for radio inputs.
 						$(':radio', $productBuyForm).attr('checked', false);
@@ -92,14 +91,13 @@ $(function() {
 				: $changedEl.find(':selected').text();
 
 		$('li a', $productThumbnails).each(function() {
-			var regexp = /^[\t]+|[\t]+$/,
-				matchA = $(this).attr('title').replace(regexp, '').toLowerCase(),
-				matchB = inputValue.replace(regexp, '').toLowerCase(),
+			var matchA = $.trim($(this).attr('title').toLowerCase()),
+				matchB = $.trim(inputValue.toLowerCase()),
 				matches = matchA.length > matchB.length
-					? matchA.match(matchB)
-					: matchB.match(matchA);
+					? matchA.indexOf(matchB)
+					: matchB.indexOf(matchA);
 
-			if (matches !== null) {
+			if (matches > -1) {
 				$(this).trigger('click', [true]);
 				return false;
 			}

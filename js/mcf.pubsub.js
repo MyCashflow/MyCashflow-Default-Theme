@@ -104,7 +104,7 @@ $(function() {
 
 		mcf.NotificationTimer = window.setTimeout(function() {
 			$('.Notification', '#NotificationCenter').fadeOut(250);
-		}, 5000);
+		}, 6000);
 
 		return $notification;
 	};
@@ -117,7 +117,7 @@ $(function() {
 			// If the response is in JSON format,
 			// we'll just grab the notifications.
 			$notifications = $($.parseJSON(opts.response).notifications);
-		} else if (typeof opts === 'object') {
+		} else if (typeof opts.response === 'object') {
 			// The JSON seems to be already parsed
 			$notifications = $(opts.response.notifications);
 		} else {
@@ -253,9 +253,10 @@ $(function() {
 
 	mcf.subscribe('RemoveProduct', function(evt, opts) {
 		var $cartFormWrapper = $('#CartForm'),
+			isFullCart = ($cartFormWrapper.length) ? true : false,
 			$cartFormLoader = $('<div class="CheckoutLoader"></div>');
 
-		$cartFormLoader.appendTo($cartFormWrapper);
+		if (isFullCart) $cartFormLoader.appendTo($cartFormWrapper);
 
 		$.ajax({
 			type: 'GET',
@@ -264,8 +265,18 @@ $(function() {
 			dataType: 'html',
 			custom: $.extend(opts, { notifyClass: '' }),
 			success: function(response) {
-				$cartFormLoader.remove();
-				mcf.updateFullCartContent(response, $cartFormWrapper);
+				if (isFullCart) {
+					$cartFormLoader.remove();
+					mcf.updateFullCartContent(response, $cartFormWrapper);
+				} else {
+					$.ajax({
+						type: "GET",
+						url: "/interface/CartSubTotal",
+						success: function(price) {
+							$("#MiniCartFooter").find(".SubTotal").html(price);
+						}
+					});
+				}
 			}
 		});
 	});
