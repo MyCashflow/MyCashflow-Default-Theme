@@ -69,8 +69,7 @@ $(function() {
 					} else {
 						// Handler for option inputs.
 						$('option', $productBuyForm).attr('selected', false);
-						$(this).attr('selected', true);
-						$('.sel_inner', $productBuyForm).text($(':selected', $(this)).text());
+						$(this).attr('selected', true).parent("select").trigger("change");
 					}
 
 					return false;
