@@ -1,0 +1,90 @@
+<h3>{%CheckoutOrderContents}</h3>
+
+{OrderProducts(
+	before: '
+		<table style="text-align: left;" cellpadding="0" cellspacing="0" style="" id="EmailProducts" width="100%">
+			<thead>
+				<tr valign="top">
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: left;">{%Product}</th>
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: center;">{%Quantity}</th>
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: right;">{%Price}</th>
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 0 4px 0; font-size: 15px; text-align: right;">{%Total}</th>
+				</tr>
+			</thead>
+	',
+	helper: 'emails/helpers/orderproduct',
+	after: '
+			<tfoot>
+				<tr valign="top">
+					<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
+						{%CheckoutProductsTotal} 
+						<br><small style="color: #666;">{%VAT}&nbsp;{OrderTaxRate(after:'%')}</small>
+					</th>
+					<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;">
+						<strong>{OrderSubTotal}</strong><br>
+						<small style="color: #666;">{OrderSubtotalTax}</small>
+					</td>
+				</tr>
+				{OrderShippingCosts(
+					before: '<tr valign="top">
+						<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">{%ShippingCosts}: {OrderShippingMethod}
+						<br><small style="color: #666;">{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small>
+					</th>
+					<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;"><strong>',
+					after: '</strong><br><small style="color: #666;">{OrderShippingCostsTax}</small></td></tr>'
+				)}
+				{OrderPaymentCosts(
+					before: '<tr valign="top">
+						<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
+							{%PaymentCosts}: {OrderPaymentMethod}<br>
+							<small style="color: #666;">{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small>
+						</th>
+						<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;"><strong>',
+					after: '</strong><br><small style="color: #666;">{OrderPaymentCostsTax}</small></td></tr>'
+				)}
+				<tr valign="top">
+					<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
+						{%Total}
+						<br><small style="color: #666;">{%VAT}&nbsp;{OrderTaxRate(after:'%')}</small>
+					</th>
+					<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;">
+						<strong style="font-size: 15px;">{OrderTotal}</strong><br>
+						<small style="color: #666;">{OrderTax}</small>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	'
+)}
+
+<div id="VatInfo" style="font-size: 12px; margin: 18px auto; text-align: center;">
+	{TaxSummary(
+		before: '
+			<table id="OrderTotalsByTaxRate" cellpadding="0" cellspacing="0" style="font-size: 12px; text-align: left; margin: 0 auto;">
+				<tr>
+					<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0; text-align: left;">{%TaxRate}</th>
+					<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%TotalWithoutTax}</th>
+					<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%TotalTax}</th>
+					<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%TotalWithTax}</th>
+				</tr>														
+		',
+		after: '
+				<tr>
+					<th scope="row" style="border-bottom: 1px solid #D9D9D9; padding: 4px 0; text-align: left;">{%Total}</th>
+					<th style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{OrderTotalWithoutTax}</th>
+					<th style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{OrderTax}</th>
+					<th style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{OrderTotal}</th>
+				</tr>
+			</table>
+		',
+		helper: {{
+			<tr>
+				<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0; text-align: left; font-weight: bold;">{TaxSummaryRowTaxRate(after:'%')}</td>
+				<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TaxSummaryRowWithoutTax}</td>
+				<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TaxSummaryRowTax}</td>
+				<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TaxSummaryRowTotal}</td>
+			</tr>
+		}}
+	)}
+	{OrderVATDescription}
+</div>

@@ -1,0 +1,17 @@
+<table align="left" style="margin-right: 10px; max-width: 320px;">
+	<tr>
+		<td>
+			{Logo(width: 320, height: 80)}
+		</td>
+	</tr>
+</table>
+<table align="right">
+	<tr>
+		<td align="right" style="font-size: 16px; line-height: 20px;">
+			<p style="text-align: right; margin: 0 20px 10px 0; padding: 9px 19px; border: 1px solid #d9d9d9; background: #f2f2f2; border-radius: 3px;">
+				{OrderTrackingCode(before:'<span style="font-size: 16px;">{%TrackOrder}:&nbsp;<strong>',after:'</strong></span><br>')}
+				<span style="font-size: 13px; font-weight: bold;">{OrderDownloadReceipt(after:'&nbsp;|&nbsp;')}{OrderDownloadInvoice(after:'&nbsp;|&nbsp;')}<a href="{ShopUrl}/orderstatus/">{%Ordertracking}</a>
+			</p>
+		</td>
+	</tr>
+</table>

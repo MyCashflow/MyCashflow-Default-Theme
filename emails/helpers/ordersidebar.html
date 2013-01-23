@@ -1,0 +1,61 @@
+<!-- Downloadables -->
+{Helper(
+	file: 'emails/helpers/emaildownloads',
+	before: '<h3 style="font-size: 20px; color: #444; margin: 0 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">Ladattavat tiedostot</h3><ul>',
+	after: '</ul>'
+)}
+
+<!-- Order documents -->
+{Helper(
+	file: 'emails/helpers/emaildocuments',
+	before: '<h3 style="font-size: 20px; color: #444; margin: 0 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">Tilausdokumentit</h3><ul>',
+	after: '</ul>'
+)}
+
+<!-- Order information -->
+<h3 style="font-size: 20px; color: #444; margin: 0 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%OrderInformation}</h3>
+<div style="font-size: 15px; font-weight: normal; margin: 0 0 1em;">
+		{OrderDate(
+			before: '<strong>{%Date}</strong><br /><span style="margin-left: 25px">',
+			after: '</span><br />'
+		)}
+		{OrderNumber(
+			before: '<strong>{%Ordernumber}</strong><br /><span style="margin-left: 25px">',
+			after: '</span><br />'
+		)}
+		{OrderCustomerNumber(
+			before: '<strong>{%CustomerNumber}</strong><br /><span style="margin-left: 25px">',
+			after: '</span><br />'
+		)}
+		{OrderPaymentReference(
+			before: '<strong>{%PaymentReference}</strong><br /><span style="margin-left: 25px">',
+			after: '</span><br />'
+		)}
+		{OrderOpenTotal(
+			before: '<strong>{%OrderOpenTotal}</strong><br /><span style="margin-left: 25px">',
+			after: '</span><br />'
+		)}
+		{OrderPaymentMethod(
+			before: '<strong>{%PaymentMethod}</strong><br /><span style="margin-left: 25px">',
+			after: ', {OrderPaymentStatus}</span><br />'
+		)} 
+		{OrderShippingMethod(
+			before: '<strong>{%CheckoutShipping}</strong><br /><span style="margin-left: 25px">',
+			after: '</span><br />'
+		)}
+		{OrderTrackingCode(
+			before: '<strong>{%TrackingCode}</strong><br /><span style="margin-left: 25px">',
+			after: '</span><br />'
+		)}
+	{OrderComments(
+		before: '<strong>{%CheckoutOrderComments}</strong><div style="padding-left: 25px" class="CommentsWrapper">',
+		after: '</div>'
+	)}
+</div>
+
+{OrderShippingInformation(
+	before: '<h3 style="font-size: 20px; color: #444; margin: 1.5em 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%CheckoutShippingInformation}</h3>'
+)}
+
+<h3 style="font-size: 20px; color: #444; margin: 1.5em 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%CheckoutCustomerInformation}</h3>
+{OrderCustomerInformation}
