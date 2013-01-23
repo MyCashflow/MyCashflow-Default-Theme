@@ -251,6 +251,9 @@ $(function() {
 		var $form = $(evt.currentTarget),
 			$submit = $('.AddToCart', $form);
 
+		// If buying requires uploading of file, return here
+		if ($form.find('input[type="file"]').length) { return true; }
+
 		$.colorbox.close();
 		$submit.attr('disabled', 'disabled');
 
