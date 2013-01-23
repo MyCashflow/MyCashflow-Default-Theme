@@ -41,9 +41,10 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 	background: #FAFAFA; /* Sidepanel bg */
 }
 #Main {
-	position: relative; overflow: visible; z-index: 1;
+	position: relative; overflow: visible; z-index: 2;
 	width: 576px; margin: 0 191px; padding: 0; background: #FFFFFF; /* Main-bg */
 	border-left: 1px solid #D9D9D9; border-right: 1px solid #D9D9D9;
+	border-bottom: 1px solid #D9D9D9;
 }
 .OmitSidebars #Main {
 	border-left: 0;
@@ -268,7 +269,7 @@ header .DropdownNavigation ul li a:hover {
 #Footer {
 	position: relative; margin: -1px 0 0;
 	padding: 0; text-align: center;
-	border-top: 1px solid #D9D9D9; z-index: 2;
+	border-top: 1px solid #D9D9D9; z-index: 1;
 }
 #Footer .BrandsNavigation {
 	width: 954px; overflow: hidden;
@@ -831,6 +832,8 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 -------------------------------------------------------------- */
 
 #ProductLikes {
+	position: relative;
+	z-index: 1001;
 	width: 276px;
 	margin: 9px -9px;
 }
@@ -1229,7 +1232,8 @@ dl#AccountInformation dd p, .OrderComments p { margin: 0; }
 #CartForm .Notification {
 	margin-bottom: 54px;
 }
-#CartForm .Notification + #CartTable {
+#CartForm .Notification + #CartTable,
+#CartForm .Notification + .Notification {
 	margin-top: -36px;
 }
 table input,
