@@ -142,7 +142,7 @@
 
 			self._isChanged = true;
 
-			if (target.is('input:radio, #country, #shipping_country')) {
+			if (target.is('input:radio, #country, #shipping_country, .DefineShippingMethod select')) {
 				saveData.call(self, evt.type, false);
 			}
 		});
