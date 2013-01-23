@@ -199,11 +199,25 @@ tr#FullTotal td.CartTotal { font-size: 12pt; }
 #PaymentDetails {
 	width: 100%; border-collapse: collapse;
 	border: 0.5pt solid black;
-	caption-side: top; height: 6cm;
+	caption-side: top; min-height: 6cm;
 	margin: 0 auto 1em;
 }
-#PaymentDetails td {
+#PaymentDetails td, #PaymentDetails th {
 	border: 0.5pt solid black;
 	padding: 3pt; text-align: left !important;
 }
-
+#OrderPaymentTransactions p { margin-bottom: 1em; }
+#OrderPaymentTransactions h4 { text-transform: uppercase; }
+#OrderPaymentTransactions table,
+#OrderPaymentTransactions table td,
+#OrderPaymentTransactions table th {
+	border: 0; padding: 0; margin: 0;
+	text-align: left !important; font-size: 7.5pt;
+}
+#PaymentDetails td#OrderOpenTotal {
+	font-size: 12pt;
+	font-weight: bold;
+	height: 1cm;
+	line-height: 1cm;
+	text-align: right !important;
+}

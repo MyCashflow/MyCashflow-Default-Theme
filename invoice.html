@@ -124,26 +124,32 @@
 
 	<table id="PaymentDetails">
 		<tr>
-			<td style="width:2cm;">{%InvoiceRecipientAccountNumber}</td>
-			<td style="width:8cm;">{ContactBankAccount}</td>
-			<td style="width:10cm;" colspan="3" rowspan="3"><h4>{%InvoiceBankTransfer}</h4><p>{%InvoicePaymentReferenceInfo}</p></td>
+			<td width="10%">{%InvoiceRecipientAccountNumber}</td>
+			<td width="30%">{ContactBankAccount}</td>
+			<td width="60%" colspan="3" rowspan="3" id="OrderPaymentTransactions">
+				<h4>{%InvoiceBankTransfer}</h4>
+				<p>{%InvoicePaymentReferenceInfo}</p>
+
+				<h4>{%OrderPaymentTransactions}</h4>
+				{OrderPaymentTransactions}
+			</td>
 		</tr>
 		<tr>
-			<td>{%InvoiceRecipientName}</td>
-			<td>{ContactCompany}</td>
+			<td width="10%">{%InvoiceRecipientName}</td>
+			<td width="30%">{ContactCompany}</td>
 		</tr>
 		<tr>
 			<td rowspan="3">{%InvoicePayer}</td>
 			<td rowspan="3">{OrderCustomerInformation}</td>
 		</tr>
 		<tr>
-			<td style="width: 2cm;">{%PaymentReference}</td>
-			<td style="width: 8cm;" colspan="2">{OrderPaymentReference}</td>
+			<td width="10%">{%PaymentReference}</td>
+			<td width="50%" colspan="2">{OrderPaymentReference}</td>
 		</tr>
 		<tr>
-			<td style="width: 2cm;">{%InvoiceDueDate}</td>
-			<td style="width: 4cm;">{OrderDueDate(expiry:'14')}</td>
-			<td style="width: 4cm;" id="OrderOpenTotal">{OrderOpenTotal}</td>
+			<td width="10%">{%InvoiceDueDate}</td>
+			<td width="25%">{OrderDueDate(expiry:'14')}</td>
+			<td width="25%" id="OrderOpenTotal">{OrderOpenTotal}</td>
 		</tr>
 	</table>
 
