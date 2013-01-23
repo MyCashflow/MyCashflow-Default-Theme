@@ -1276,6 +1276,16 @@ td.CartTotal {
 table .CartProduct {
 	width: 100%;
 }
+table tr.AvailabilityOutOfStock td,
+table tr.AvailabilityOutOfStock th {
+	border-color: #decccc;
+	background: #faf0f0;
+}
+table tr.AvailabilityPartiallyInStock td,
+table tr.AvailabilityPartiallyInStock th {
+	background: #fffff2;
+}
+
 table .CartProduct h3 {
 	font-size: 15px;
 	margin: 0 0 9px;
