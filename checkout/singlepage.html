@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width">
 	<link rel="canonical" href="{ShopUrl}{CanonicalURL}" />
 	<link rel="shortcut icon" type="image/ico" href="{ThemeUrl}/i/favicon.ico" />
+	<!-- Attention! MinifyCSS caches the files so you need to bypass the caching.
+		 This is done with mode: 'development' attribute: http://www.mycashflow.fi/english/interface/Minify -->
 	{MinifyCSS(files:'css/reset.css|css/base.css|css/forms.css|css/colorbox.css|css/master.css|css/onepagecheckout.css')}
 	<script src="{ThemeUrl}/js/vendor/modernizr-2.5.2.min.js"></script>
 	{Extensions(for:'head')}
