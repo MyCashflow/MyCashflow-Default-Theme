@@ -201,6 +201,7 @@ tr#FullTotal td.CartTotal { font-size: 12pt; }
 	border: 0.5pt solid black;
 	caption-side: top; min-height: 6cm;
 	margin: 0 auto 1em;
+	page-break-inside: avoid;
 }
 #PaymentDetails td, #PaymentDetails th {
 	border: 0.5pt solid black;
