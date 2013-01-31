@@ -8,12 +8,12 @@
 				<h1>{%CheckoutThanksForOrder}</h1>
 					{CheckoutRegistrationForm(
 						before: '
-							<p class="Big">{%CheckoutThanksRegistration}<br><a class="Button" title="Luo tunnus" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">{%SignUp}</a></p>
+							<p class="Big">{%CheckoutThanksRegistration}<br><a class="Button" title="{%CheckoutCreateAccount}" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">{%CheckoutCreateAccount}</a></p>
 							<form action="/account/register/" method="post" id="CheckoutThanksRegistrationForm" class="BlockForm">
 							<p>{%CheckoutCreateAccountInfo}</p>
 						',
 						after: '<div class="FormItem FormSubmit">
-							<button type="submit" class="SubmitButton">Luo tunnus</button>
+							<button type="submit" class="SubmitButton">{%CheckoutCreateAccount}</button>
 							</div>
 						</form>'
 					)}
