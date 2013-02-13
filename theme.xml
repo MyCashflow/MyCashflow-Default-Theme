@@ -28,7 +28,7 @@
 			<NoImage file="i/noImage.jpg" />
 		</Images>
 		-->
-		<!-- Doctype can be HTML5 (default) or XHTML -->
+		<!-- Doctype can be HTML5 or XHTML (default) -->
 		<Doctype standard="HTML5" />
 	</Settings>
 

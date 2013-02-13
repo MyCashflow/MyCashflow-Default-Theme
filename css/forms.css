@@ -82,6 +82,7 @@ input, select, textarea {
 	-webkit-box-shadow: inset 0 1px 0 #f2f2f2;
 	-moz-box-shadow: inset 0 1px 0 #f2f2f2;
 	box-shadow: inset 0 1px 0 #f2f2f2;
+	max-width: 100%;
 }
 textarea {
 	height: auto;

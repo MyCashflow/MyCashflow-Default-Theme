@@ -17,6 +17,23 @@ $(function() {
 			: true;
 	};
 
+	// Colorbox options under the global mcf
+	// Extended on the call basis
+	mcf.colorboxOpts = {
+		fixed: false,
+		maxWidth: '90%',
+		maxHeight: '95%',
+		current: '{current} / {total}',
+		opacity: 0.5,
+		initialWidth: 100,
+		initialHeight: 100,
+		onClosed: function() {
+			// Cleanup traces of the colorbox
+			// so that next time it's made from scratch
+			$(this).colorbox.remove();
+		}
+	}
+
 	// Variation names are split from "|"
 	// and made as chained select boxes
 	$('.BuyForm').mcfVariationSplitter();
@@ -235,8 +252,8 @@ $(function() {
 	var $dropdownNavs = $('.DropdownNavigation', '#Header');
 
 	$dropdownNavs.hover(
-		function() { $('ul', this).stop(true, true).animate({ height: 'show', opacity: 'show' }, 125); },
-		function() { $('ul', this).stop(true, true).animate({ height: 'hide', opacity: 'hide' }, 125); }
+		function(evt) { $('ul', this).stop(true, true).animate({ height: 'show', opacity: 'show' }, 125); },
+		function(evt) { $('ul', this).stop(true, true).animate({ height: 'hide', opacity: 'hide' }, 125); }
 	);
 
 	$dropdownNavs.find('ul').css({ left: 0 }).hide();
@@ -259,6 +276,7 @@ $(function() {
 
 		mcf.publish('AddProducts', {
 			data: $form.serializeObject(),
+			trigger: $submit,
 			success: function() {
 				$submit.removeAttr('disabled');
 
@@ -275,16 +293,13 @@ $(function() {
 	//--------------------------------------------------------------------------
 
 	$(document).on('click', 'a.AddToCart', function(evt) {
-		var $product = $(this).closest('.Product'),
-			productId = $(this).attr('href').split('/')[2];
+		var $link = $(evt.currentTarget),
+			$product = $link.closest('.Product'),
+			productId = $link.attr('href').split('/')[2];
 
 		if ($product.hasClass('ProductVariations') || $product.hasClass('ProductTailorings') || $product.hasClass('ProductDownloads')) {
-			$.colorbox({
+			$.colorbox($.extend({}, {
 				title: mcf.Lang.AddToCart,
-				fixed: true,
-				opacity: 0.5,
-				initialWidth: 100,
-				initialHeight: 100,
 				href: '/interface/Helper?file=helpers/colorbox-buyform&setProduct=' + productId,
 				onComplete: function() {
 
@@ -295,17 +310,13 @@ $(function() {
 					$('#cboxContent').on('change', 'select', function(evt) {
 						$(evt.delegateTarget).find('select').customSelect();
 					});
-				},
-				onClosed: function() {
-					// Cleanup traces of the colorbox
-					// so that next time it's made from scratch
-					$(this).colorbox.remove();
 				}
-			});
+			}, mcf.colorboxOpts));
 		}
 		else {
 			mcf.publish('AddProducts', {
 				data: { products: [{ product_id: productId }] },
+				trigger: $link,
 				success: function() {
 					// If we're at the cart, update it after adding products
 					if ($('#CartForm').length) mcf.publish('UpdateCart');

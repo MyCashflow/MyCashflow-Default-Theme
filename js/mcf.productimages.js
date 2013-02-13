@@ -11,9 +11,7 @@ $(function() {
 
 	var $productCurrentImage = $('#CurrentProductImage'),
 		$productThumbnails = $('#ProductThumbnails'),
-		$productBuyForm = $('.BuyForm'),
-		colorboxCurrent = '{current} / {total}',
-		colorboxOpacity = 0.5;
+		$productBuyForm = $('.BuyForm');
 
 	// Create the spinning image loader.
 	var $imageLoader = $('<span id="ImgLoader">' + mcf.Lang.Loading + '</span>');
@@ -115,27 +113,13 @@ $(function() {
 				: 0;
 
 			// Initialize the ColorBox for product images.
-			$('li a', $productThumbnails).colorbox({
-				open: false,
-				current: colorboxCurrent,
-				opacity: colorboxOpacity,
-				onClosed: function() {
-					$(this).colorbox.remove();
-				}
-			});
+			$('li a', $productThumbnails).colorbox($.extend({}, { open: false }, mcf.colorboxOpts));
 
 			// Open the currently active product image.
-			$('li:eq(' + index + ') a', $productThumbnails).colorbox({ open: true });
+			$('li:eq(' + index + ') a', $productThumbnails).colorbox($.extend({}, { open: true }, mcf.colorboxOpts));
 
 		} else {
-			$(this).colorbox({
-				open: true,
-				current: colorboxCurrent,
-				opacity: colorboxOpacity,
-				onClosed: function() {
-					$(this).colorbox.remove();
-				}
-			});
+			$(this).colorbox($.extend({}, { open: true }, mcf.colorboxOpts));
 		}
 
 		evt.preventDefault();

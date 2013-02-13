@@ -201,8 +201,11 @@ $(function() {
 	});
 
 	mcf.subscribe('AddProducts', function(evt, opts) {
-		var $miniCartWrapper = $('#MiniCartWrapper'),
-			$miniCartLoader = $('<div class="CheckoutLoader"></div>');
+		// If the resposive layout's link is there, use it as wrapper
+		var $miniCartWrapper = ($('#ResponsiveCartLink').length) ? $('#ResponsiveCartLink') : $('#MiniCartWrapper'),
+			$miniCartLoader = $('<div class="CheckoutLoader"></div>'),
+			$trigger = opts.trigger,
+			origTrigger = $trigger.html();
 
 		$miniCartLoader.appendTo($miniCartWrapper);
 
@@ -216,9 +219,12 @@ $(function() {
 
 			beforeSend: function() {
 				var $notification = mcf.raiseNotification(mcf.Lang.AddingToCart, 'AddProducts');
+				$trigger.html('<span class="Icon Adding"></span> ' + mcf.Lang.AddingButtonText).addClass('AddingToCart');
 			},
 
 			success: function(response) {
+				$trigger.html('<span class="Icon Added"></span> ' + mcf.Lang.AddedButtonText).addClass('AddedToCart');
+
 				$miniCartLoader.remove();
 
 				$.ajax({
@@ -227,10 +233,15 @@ $(function() {
 					data: { file: 'helpers/minicart' },
 					success: function(response) { $miniCartWrapper.html(response); }
 				});
+			},
+
+			error: function() {
+				$trigger.html(origTrigger);
 			}
 		});
 	});
 
+	// Helper function for updating the full cart content via ajax
 	mcf.updateFullCartContent = function(response, $cart) {
 		if (response !== undefined && $cart !== undefined) {
 			$.ajax({
@@ -270,10 +281,10 @@ $(function() {
 					mcf.updateFullCartContent(response, $cartFormWrapper);
 				} else {
 					$.ajax({
-						type: "GET",
-						url: "/interface/CartSubTotal",
+						type: 'GET',
+						url: '/interface/CartSubTotal',
 						success: function(price) {
-							$("#MiniCartFooter").find(".SubTotal").html(price);
+							$('#MiniCartFooter').find('.SubTotal').html(price);
 						}
 					});
 				}

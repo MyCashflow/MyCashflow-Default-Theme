@@ -1,6 +1,28 @@
+<script type="text/javascript">
+//<![CDATA[
+
+	var mcf = mcf || {};
+	mcf.ThemePath = "/files/{Theme}";
+	{Helper(file: 'helpers/mcf.Lang')}
+
+	Modernizr.load([
+		// We'll test if matchMedia is supported and load a shim if not
+		{
+			test: window.matchMedia,
+			nope: "{ThemeUrl}/js/vendor/matchMedia.js"
+		},
+
+		// ...and then load enquire
+		"{ThemeUrl}/js/vendor/enquire.js"
+	]);
+
+//]]>
+</script>
+
 <!-- Attention! MinifyJS caches the files so you need to bypass the caching.
 	 This is done with mode: 'development' attribute: http://www.mycashflow.fi/english/interface/Minify -->
 {MinifyJS(
+	mode: 'production',
 	files: 'js/vendor/jquery-1.7.1.min.js|
 		js/vendor/underscore.min.js|
 		js/vendor/jquery.serializeobject.js|
@@ -10,10 +32,12 @@
 		js/vendor/jquery.colorbox.js|
 		js/vendor/jquery.typewatch.js|
 		js/vendor/jquery.viewport.js|
+		js/vendor/enquire.js|
 		js/mcf.pubsub.js|
 		js/mcf.variationsplitter.js|
 		js/mcf.productimages.js|
 		js/mcf.main.js|
+		js/mcf.responsive.js|
 		js/mcf.onepagecheckout.js|
 		js/mcf.checkout.js'
 )}
