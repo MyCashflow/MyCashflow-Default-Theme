@@ -29,7 +29,8 @@
 	#Main{
 		margin: 0;
 		width: 100%;
-		border: none;
+		border-left: 0;
+		border-right: 0;
 	}
 	#MainNavigation{
 		margin: 0;
@@ -85,7 +86,7 @@
 		padding: 18px 8px;
 	}
 	.Notification span.Close{
-		background: url(../i/close.png) no-repeat 50% 50%;
+		background: url(../i/close_responsive.png) no-repeat 50% 50%;
 		height: 28px;
 		width: 28px;
 		background-size: 26px 26px;
@@ -191,7 +192,7 @@
 		display: block;
 		height: 35px;
 		line-height: 35px;
-		padding: 0 9px;
+		padding: 0 12px 0 6px;
 		color: #069;
 		font-size: 15px;
 		font-weight: bold;
@@ -604,7 +605,8 @@
 	/* Structure */
 
 	#Main{
-		border: none;
+		border-left: 0;
+		border-right: 0;
 	}
 	#Primary{
 		width: 100%;
@@ -908,7 +910,7 @@
 		display: block;
 		height: 35px;
 		line-height: 35px;
-		padding: 2px 9px;
+		padding: 2px 12px 2px 6px;
 		color: #069;
 		font-size: 15px;
 		font-weight: bold;
@@ -924,43 +926,6 @@
 		background: url(../i/cart.png) no-repeat right center;
 		padding: 0 35px 0 0; color: #069;
 	}
-
-/*
-	dl#MiniCartFooter .CheckoutLink{ display: none;}
-	dl#MiniCartFooter .CartLink{
-		position: absolute;
-		width: 100%;
-	}
-	#MiniCartWrapper dl#MiniCartFooter .CartLink a{
-		margin: 3px 10px 3px 0 !important;
-		float: right;
-	}
-
-	dl#MiniCartFooter .SubTotal, .CartLink a{
-		background-color: transparent !important; border: none !important;
-		box-shadow: none !important; -moz-box-shadow: none !important; -webkit-box-shadow: none !important;
-		margin-right: 47px !important;
-		padding: 0;
-		font-size: 14px;
-	}
-	#MiniCartWrapper .CartEmpty{
-		opacity: 0.6;
-		float: right;
-		margin: 3px 10px 3px 2px !important;
-		box-shadow: none !important; -moz-box-shadow: none !important; -webkit-box-shadow: none !important;
-		border: none;
-		background-color: transparent !important;
-	}
-	dl#MiniCartFooter .SubTotal{
-		float: right;
-		position: relative;
-		z-index: 1;
-	}
-	#MiniCartWrapper .CartEmpty .CartEmptyPrice{
-		border: none;
-		margin-left: 7px !important;
-	}
-	.SubTotal a{ padding: 0;}*/
 
 	/* Checkout */
 	#CheckoutStage{
@@ -1106,14 +1071,43 @@
 	}
 
 	/* News */
-	#SubPageNavigation{	display: none;	}
+
 	#PageHeader #NewsDate{ margin: 0 -10% 6px 12px; }
 
-	/**/
-
-	#Container{
+	/* Infopage subnavigation */
+	#SubPageNavigation, #SubPageNavigation h3 {
+		float: none;
+		margin: 0;
+		width: auto;
+		background: none;
+		border: 0;
+		padding: 0;
 	}
-	#Header, #SidebarBg, #Footer{
+	#SubPageNavigation {
+		margin-top: -18px;
+	}
+	#SubPageNavigation h3 {
+		color: #888;
+		text-shadow: none;
+	}
+	#SubPageNavigation .NavigationList {
+		margin: 4px 0 23px !important; padding: 0 !important;
+		list-style: none outside; width: 100%; overflow: hidden;
+	}
+	#SubPageNavigation .NavigationList li {
+		float: left; margin: 0; padding: 0;
+	}
+	#SubPageNavigation .NavigationList li + li {
+		border-left: 1px solid #888;
+		border-top: 0 !important;
+	}
+	#SubPageNavigation .NavigationList li a {
+		float: left; width: auto;
+		padding: 3px 9px 3px 0 !important;
+		font-weight: bold; font-size: 14px;
+	}
+	#SubPageNavigation .NavigationList li + li a {
+		padding: 3px 9px !important;
 	}
 }
 
@@ -1128,9 +1122,9 @@
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) { 
 
-	#MiniCartWrapper dl#MiniCartFooter .CartLink a, 
-	p.CartEmpty{
-		background: url(../i/cart2x.png) no-repeat center center #f5f5f5;
+	#ResponsiveCartLink .SubTotal,
+	#ResponsiveCartLink .CartEmpty{
+		background: url(../i/cart2x.png) no-repeat right center;
 		background-size: 27px 27px;
 	}
 	#MainNavigation h2.MobileMenu:before{

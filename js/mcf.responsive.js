@@ -5,6 +5,7 @@ $(function() {
 
 	// Listen for matchMedia changes with enquire: http://wicky.nillia.ms/enquire.js/ <3
 	enquire.register('screen and (max-width: 980px)', {
+
 		match: function() {
 
 			// Wait the document to load before calculating any offsets before images have loaded
@@ -42,7 +43,9 @@ $(function() {
 			// Remove the link by replacing it with it's own content. Clever us.
 			$('#ResponsiveCartLink').replaceWith($('#ResponsiveCartLink').contents());
 		}
+
 	}).register('screen and (max-width: 680px)', {
+
 		match: function() {
 
 			// Create header for mobile navigation
@@ -67,6 +70,7 @@ $(function() {
 			);
 
 		}
+
 	}).listen();
 
 });

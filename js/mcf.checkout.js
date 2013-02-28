@@ -18,21 +18,21 @@ $(function() {
 		}
 	}); */
 
-	$('.TermsLink').attr('href', '/interface/TermsAndConditions').colorbox({
-		width: '62%',
-		height: '80%',
-		opacity: 0.5,
-		fixed: true,
-		title: $('.TermsLink').text()
-	});
+	$('.TermsLink').attr('href', '/interface/TermsAndConditions').colorbox(
+		$.extend({}, mcf.colorboxOpts, {
+			width: '80%',
+			height: '80%',
+			title: $('.TermsLink').text()
+		})
+	);
 
-	$('#DisplayCheckoutForm').colorbox({
-		opacity: 0.5,
-		width: '640px',
-		fixed: true,
-		inline: true,
-		href: '#CheckoutThanksRegistrationForm'
-	});
+	$('#DisplayCheckoutForm').colorbox(
+		$.extend({}, mcf.colorboxOpts, {
+			width: '640px',
+			inline: true,
+			href: '#CheckoutThanksRegistrationForm'
+		})
+	);
 
 	//--------------------------------------------------------------------------
 	// One-Page Checkout

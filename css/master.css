@@ -1365,7 +1365,8 @@ table .CartProduct dt { clear: left; }
 a.Button.PrimaryAction,
 button.PrimaryAction,
 #Checkout .FormSubmit .SubmitButton,
-.BuyForm .FormSubmit .SubmitButton {
+.BuyForm .FormSubmit .SubmitButton,
+#Checkout p.Big a.Button {
 	padding: 8px 17px;
 	font-weight: bold; text-decoration: none;
 	color: #FFF; background-color: #058; background-repeat: repeat-x;
@@ -1406,7 +1407,8 @@ a.Button.PrimaryAction {
 a.Button.PrimaryAction,
 .CheckoutButton:hover,
 #Checkout .FormSubmit .SubmitButton:hover,
-.BuyForm .FormSubmit .SubmitButton:hover {
+.BuyForm .FormSubmit .SubmitButton:hover,
+#Checkout p.Big a.Button:hover {
 	color: #FFF;
 	background-color: #069;
 	background-repeat: repeat-x;
@@ -1509,6 +1511,29 @@ a.Button.PrimaryAction,
 }
 #Header.MultipageCheckoutHeader {
 	padding-bottom: 45px;
+}
+
+/* Login page */
+
+#Checkout #SubmitAccountLogin {
+	padding-top: 0;
+}
+#Checkout #SubmitAccountLogin .SubmitButton {
+	border: 1px solid #c8c8c8;
+	color: #333333;
+	border-bottom-color: #a8a8a8;
+	background-color: #dbdbdb;
+	background-repeat: repeat-x;
+	background-image: linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -o-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -moz-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -webkit-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -ms-linear-gradient(top, #F4F4F4 0%, #DBDBDB 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F4F4F4), color-stop(1, #DBDBDB));
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Toggle the shipping address form */

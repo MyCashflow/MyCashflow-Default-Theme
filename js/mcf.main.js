@@ -18,7 +18,7 @@ $(function() {
 	};
 
 	// Colorbox options under the global mcf
-	// Extended on the call basis
+	// Extended on call by call basis
 	mcf.colorboxOpts = {
 		fixed: false,
 		maxWidth: '90%',
@@ -204,12 +204,14 @@ $(function() {
 		step: 3,
 		exclude: 2,
 		cycle: false,
+		force: true,
 		duration: 500,
 		items: '.Product',
 		prev: '#ScrollToPrev',
 		next: '#ScrollToNext',
 
 		onBefore: function(evt, elem, $pane, $items, pos) {
+			console.log(pos, $items.length);
 			$crossSalePrev.add($crossSaleNext).fadeIn(250);
 			if (pos === 0) $crossSalePrev.fadeOut(250);
 			else if (pos === $items.length - 3) $crossSaleNext.fadeOut(250);
