@@ -1022,7 +1022,8 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	padding: 0;
 }
 #ModalBuying form {
-	width: 384px; float: left;
+	width: auto; float: left;
+	padding-right: 30px;
 }
 
 /* Scroller styles for crosssales */
