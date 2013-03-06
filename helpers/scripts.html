@@ -1,20 +1,10 @@
 <script type="text/javascript">
 //<![CDATA[
 
+	// Initialize mcf and get some needed words from the dictionary
 	var mcf = mcf || {};
 	mcf.ThemePath = "/files/{Theme}";
 	{Helper(file: 'helpers/mcf.Lang')}
-
-	Modernizr.load([
-		// We'll test if matchMedia is supported and load a shim if not
-		{
-			test: window.matchMedia,
-			nope: "{ThemeUrl}/js/vendor/matchMedia.js"
-		},
-
-		// ...and then load enquire
-		"{ThemeUrl}/js/vendor/enquire.js"
-	]);
 
 //]]>
 </script>
@@ -32,12 +22,30 @@
 		js/vendor/jquery.colorbox.js|
 		js/vendor/jquery.typewatch.js|
 		js/vendor/jquery.viewport.js|
-		js/vendor/enquire.js|
 		js/mcf.pubsub.js|
 		js/mcf.variationsplitter.js|
 		js/mcf.productimages.js|
 		js/mcf.main.js|
-		js/mcf.responsive.js|
 		js/mcf.onepagecheckout.js|
 		js/mcf.checkout.js'
 )}
+
+<script type="text/javascript">
+//<![CDATA[
+
+	Modernizr.load([
+		// We'll test if matchMedia is supported and load a shim if not
+		{
+			test: window.matchMedia,
+			nope: "{ThemeUrl}/js/vendor/matchMedia.js"
+		},
+
+		// ...and then load enquire
+		"{ThemeUrl}/js/vendor/enquire.js",
+
+		// And the responsive scripts for MCF
+		"{ThemeUrl}/js//mcf.responsive.js"
+	]);
+
+//]]>
+</script>
