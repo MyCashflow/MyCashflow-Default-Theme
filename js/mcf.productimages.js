@@ -48,7 +48,20 @@ $(function() {
 			.next('#ProductImageCaption').text($self.attr('title'));
 
 		if (!triggered) {
-			$('option, :radio', $productBuyForm).each(function() {
+			var $bestMatch = null;
+			var $inputs = $('option, :radio', $productBuyForm).sort(function(a, b) {
+				var labelA = $(a).is(':radio')
+					? $(a).parent('label').text()
+					: $(a).find(':selected').text();
+
+				var labelB = $(b).is(':radio')
+					? $(b).parent('label').text()
+					: $(b).find(':selected').text();
+
+				return labelA.length > labelB.length;
+			});
+
+			$inputs.each(function() {
 				var inputValue = $(this).is(':radio')
 					? $.trim($(this).parent('label').text())
 					: $.trim($(this).text());
@@ -59,20 +72,25 @@ $(function() {
 						? matchA.indexOf(matchB)
 						: matchB.indexOf(matchA);
 
-				if (matches > -1) {
-					if ($(this).is(':radio')) {
-						// Handler for radio inputs.
-						$(':radio', $productBuyForm).attr('checked', false);
-						$(this).attr('checked', true);
-					} else {
-						// Handler for option inputs.
-						$('option', $productBuyForm).attr('selected', false);
-						$(this).attr('selected', true).parent("select").trigger("change");
-					}
-
+				if (matchA === matchB) {
+					$bestMatch = $(this);
 					return false;
 				}
+
+				if (matches > -1) {
+					$bestMatch = $(this);
+				}
 			});
+
+			if ($bestMatch) {
+				if ($bestMatch.is(':radio')) {
+					$(':radio', $productBuyForm).attr('checked', false);
+					$bestMatch.attr('checked', true);
+				} else {
+					$('option', $productBuyForm).attr('selected', false);
+					$bestMatch.attr('selected', true).parent("select").trigger("change");
+				}
+			}
 		}
 
 		evt.preventDefault();
@@ -83,22 +101,37 @@ $(function() {
 	// the variant's name against the image titles.
 	$productBuyForm.on('change', function (evt) {
 		var $changedEl = $(evt.target),
+			$bestMatch = null,
 			inputValue = $changedEl.is(':radio')
 				? $changedEl.parent('label').text()
 				: $changedEl.find(':selected').text();
 
-		$('li a', $productThumbnails).each(function() {
+		var $thumbnails = $('li a', $productThumbnails).sort(function(a, b) {
+			var labelA = $(a).attr('title');
+			var labelB = $(b).attr('title');
+			return labelA.length > labelB.length;
+		});
+
+		$thumbnails.each(function() {
 			var matchA = $.trim($(this).attr('title').toLowerCase()),
 				matchB = $.trim(inputValue.toLowerCase()),
 				matches = matchA.length > matchB.length
 					? matchA.indexOf(matchB)
 					: matchB.indexOf(matchA);
 
-			if (matches > -1) {
-				$(this).trigger('click', [true]);
+			if (matchA === matchB) {
+				$bestMatch = $(this);
 				return false;
 			}
+
+			if (matches > -1) {
+				$bestMatch = $(this);
+			}
 		});
+
+		if ($bestMatch) {
+			$bestMatch.trigger('click', [true]);
+		}
 	});
 
 	// Open the current preview image into a modal window
