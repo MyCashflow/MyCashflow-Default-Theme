@@ -51,7 +51,7 @@
 
 body { /* The base of all typographic rules */
 	font-family: Arial, Helvetica, "Lucida Grande", "Bitstream Vera Sans", Verdana, sans-serif;
-	font-size: 12px; line-height: 18px; color: #222;
+	font-size: 12px; line-height: 18px; color: #222; background: #000;
 }
 
 /* Basic margins on block elements */
