@@ -123,7 +123,7 @@
 				var isFocused = $el.find('input, select, textarea').filter(':focus').length;
 				if (!isFocused) saveData.call(self, evt.type);
 				clearTimeout(keyUpTimer);
-			}, 200);
+			}, 1500);
 		});
 
 		$el.on('keyup.mcfCheckout', 'input:not(:radio, :checkbox), select:not(#country, #shipping_country), textarea', function(evt) {
@@ -133,7 +133,7 @@
 			keyUpTimer = setTimeout(function() {
 				self._isChanged = true;
 				saveData.call(self, evt.type);
-			}, 1250);
+			}, 5000);
 		});
 
 		$el.on('change.mcfCheckout', 'input, select, textarea', function(evt) {

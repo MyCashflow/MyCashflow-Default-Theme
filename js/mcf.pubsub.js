@@ -113,6 +113,11 @@ $(function() {
 		var $notifications = null,
 			notificationClass = '.Notification';
 
+		// Skip the notifications?
+		if (typeof opts.disableNotifications !== 'undefined') {
+			if (opts.disableNotifications) return false;
+		}
+
 		if (typeof opts.response === 'string' && mcf.isJSON(opts.response)) {
 			// If the response is in JSON format,
 			// we'll just grab the notifications.
