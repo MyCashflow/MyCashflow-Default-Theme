@@ -73,7 +73,7 @@ $(function() {
 				var errs = response.notifications,
 					$scrollToEl = el.prevAll('h2');
 
-				if (errs && errs.length > 0) {
+				if (verbose && errs && errs.length > 0) {
 					$.scrollTo($scrollToEl, {
 						axis: 'y',
 						duration: 350,
@@ -89,7 +89,11 @@ $(function() {
 					$('select', el).customSelect();
 				}
 
-				mcf.handleResponse({ response: response });
+				if (el.attr('id') === 'CheckoutShippingAddress') {
+					shippingAddressToggler(el);
+				}
+
+				mcf.handleResponse({ response: response, disableNotifications: !verbose });
 			},
 
 			get_start: function(el) {
@@ -136,6 +140,16 @@ $(function() {
 				});
 			}
 		});
+
+		$('#OnePageCheckout form').submit(function(event) {
+			if ($('#CheckoutShippingAddressToggle').find('input').length && $('#CheckoutShippingAddressToggle').find('input').prop('checked') === false) {
+				$('#CheckoutShippingAddress').find('input[type!="hidden"]').val('');
+				return true;
+			} else {
+				return true;
+			}
+		});
+		
 
 		var $preview = $('#PreviewContent'),
 			$checkoutNavigation = $('#CheckoutNavigation'),
@@ -184,71 +198,79 @@ $(function() {
 	// All Checkout Types
 	//--------------------------------------------------------------------------
 
-	var $shippingAddress = $('#CheckoutShippingAddress'),
-		$shippingMethods = $('#CheckoutShippingMethods'),
-		$paymentMethods = $('#CheckoutPaymentMethods');
+	function shippingAddressToggler(element) {
 
-	// Add SelectedMethod classname to selected method
-	var $methodSelectors = $shippingMethods.add($paymentMethods).find('input:radio');
-
-	$methodSelectors.click(function() {
-		var $methodDiv = $(this).closest('div');
-		$methodDiv.addClass('SelectedMethod');
-		$methodDiv.siblings('div').removeClass('SelectedMethod');
-	});
-
-	// Hide and show shipping address wrapper and delete shipping address
-	var $shippingAddressToggleWrap = $('#CheckoutShippingAddressToggle'),
-		$shippingAddressToggler = $('input', $shippingAddressToggleWrap),
-		$shippingAddressRemover = $('#RemoveShippingAddress');
-
-	$shippingAddressToggleWrap.show();
-	$shippingAddressRemover.hide();
-
-	var shouldBeShown = function() {
-		var rtrn = false;
-		var req = $shippingAddress.find('.FormItem.required input[type="text"]');
-		if ($shippingAddressToggler.attr('checked') === 'checked') {
-			rtrn = true;
-		}
-		req.each(function() {
-			if ($(this).val() !== '') {
+		var $shippingAddress = element || $('#CheckoutShippingAddress'),
+			$shippingMethods = $('#CheckoutShippingMethods'),
+			$paymentMethods = $('#CheckoutPaymentMethods');
+	
+		// Add SelectedMethod classname to selected method
+		var $methodSelectors = $shippingMethods.add($paymentMethods).find('input:radio');
+	
+		$methodSelectors.click(function() {
+			var $methodDiv = $(this).closest('div');
+			$methodDiv.addClass('SelectedMethod');
+			$methodDiv.siblings('div').removeClass('SelectedMethod');
+		});
+	
+		// Hide and show shipping address wrapper and delete shipping address
+		var $shippingAddressToggleWrap = $('#CheckoutShippingAddressToggle'),
+			$shippingAddressToggler = $('input', $shippingAddressToggleWrap),
+			$shippingAddressRemover = $('#RemoveShippingAddress');
+	
+		$shippingAddressToggleWrap.show();
+		$shippingAddressRemover.hide();
+	
+		var shouldBeShown = function() {
+			var rtrn = false;
+			var inputs = $shippingAddress.find('.FormItem input[type="text"]');
+			if ($shippingAddressToggler.prop('checked') === true) {
 				rtrn = true;
-				return;
+			}
+			inputs.each(function() {
+				if ($(this).val() !== '') {
+					rtrn = true;
+					return;
+				}
+			});
+			return rtrn;
+		}
+	
+		if (shouldBeShown()) {
+			$shippingAddressToggler.prop('checked', true);
+			$shippingAddressToggleWrap.next().show();
+			$shippingAddressRemover.show();
+		} else {
+			$shippingAddressToggler.prop('checked', false);
+			$shippingAddressToggleWrap.next().hide();
+			$shippingAddressRemover.hide();
+		}
+	
+		$shippingAddressToggler.click(function() {
+			var $wrapper = $shippingAddressToggleWrap.next();
+	
+			if ($(this).prop('checked') === true) {
+				$wrapper.fadeIn(125);
+				$shippingAddressRemover.fadeIn(125);
+			} else {
+				$wrapper.fadeOut(125);
+				$shippingAddressRemover.fadeOut(125);
 			}
 		});
-		return rtrn;
+	
+		$('a', $shippingAddressRemover).click(function(evt) {
+			evt.preventDefault();
+			$shippingAddress.find('input').not(':hidden').val('');
+			if ($('body').hasClass('SinglePageCheckout')) {
+				$shippingAddress.trigger('post.mcfCheckout');
+			}
+			$shippingAddressToggler.prop('checked',false);
+			$shippingAddressToggleWrap.next().hide();
+			$shippingAddressRemover.hide();
+		});
+
 	}
 
-	if (shouldBeShown()) {
-		$shippingAddressToggler.attr('checked', true);
-		$shippingAddressToggleWrap.next().show();
-		$shippingAddressRemover.show();
-	} else {
-		$shippingAddressToggler.attr('checked', false);
-		$shippingAddressToggleWrap.next().hide();
-		$shippingAddressRemover.hide();
-	}
+	shippingAddressToggler();
 
-	$shippingAddressToggler.click(function() {
-		var $wrapper = $shippingAddressToggleWrap.next();
-
-		if ($(this).attr('checked') === 'checked') {
-			$wrapper.fadeIn(125);
-			$shippingAddressRemover.fadeIn(125);
-		} else {
-			$wrapper.fadeOut(125);
-			$shippingAddressRemover.fadeOut(125);
-		}
-	});
-
-	$('a', $shippingAddressRemover).click(function(evt) {
-		$shippingAddress.find('input').not(':hidden').val('');
-		$shippingAddress.trigger('post.mcfCheckout');
-		$shippingAddressToggler.attr('checked',false);
-		$shippingAddressToggleWrap.next().hide();
-		$shippingAddressRemover.hide();
-
-		evt.preventDefault();
-	});
 });
