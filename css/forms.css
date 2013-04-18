@@ -491,6 +491,14 @@ select[disabled] + .CustomSelect span {
 /* IE7 fixes
 ----------------------------------------------------------- */
 
+.lt-ie8 .GroupItem > div {
+	*width: 180px;
+}
+.lt-ie8 .GroupItem > div > input,
+.lt-ie8 .GroupItem > div > select {
+	*width: 95%;
+}
+
 * + html .FormItem {
 	padding-bottom: 18px;
 }

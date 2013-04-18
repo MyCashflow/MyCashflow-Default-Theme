@@ -211,6 +211,10 @@ header .DropdownNavigation ul li a:hover {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+	zoom: 1;
+}
+.lt-ie9 #SearchForm {
+	width: 290px;
 }
 #SearchForm.SearchActive {
 	-moz-border-bottom-left-radius: 0;
@@ -220,7 +224,7 @@ header .DropdownNavigation ul li a:hover {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 }
-#SearchForm .FormItem { border: 0; padding: 0; background: none; }
+#SearchForm .FormItem { border: 0; padding: 0; background: none; zoom: 1; }
 #SearchForm label { display: none; }
 #SearchForm input { width: 240px; float: left; }
 #SearchForm button { margin-right: 0; }
@@ -236,7 +240,7 @@ header .DropdownNavigation ul li a:hover {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border: 1px solid #D9D9D9;
-	border-top: 0;
+	border-top: 0; zoom: 1;
 }
 .SearchActive #LiveSearchResults {
 	display: block;
@@ -410,10 +414,10 @@ header .DropdownNavigation ul li a:hover {
 /* Left Column
 -------------------------------------------------------------- */
 
-#MainNavigation ul.Categories, #MainNavigation ul.Categories ul { position: relative; margin: 0; padding: 0; list-style: none outside; }
-#MainNavigation ul.Categories li { position: relative; border-bottom: 1px solid #D9D9D9; background: #F8F8F8; }
+#MainNavigation ul.Categories, #MainNavigation ul.Categories ul { position: relative; margin: 0; padding: 0; list-style: none outside; zoom: 1; }
+#MainNavigation ul.Categories li { position: relative; border-bottom: 1px solid #D9D9D9; background: #F8F8F8; zoom: 1; }
 #MainNavigation ul.Categories li a {
-	position: relative; display: block; padding: 8px 15px 9px;
+	position: relative; display: block; padding: 8px 15px 9px; zoom: 1;
 	font-size: 15px; font-weight: bold; line-height: 18px; text-decoration: none;
 }
 #MainNavigation ul.Categories li ul { padding: 0 15px 9px 36px; }
@@ -437,9 +441,10 @@ header .DropdownNavigation ul li a:hover {
 	overflow: hidden; text-indent: -1000em;
 	border: 1px solid #D9D9D9;
 	border-bottom-color: #CCCCCC;
-	border-top-color: #F2F2F2
+	border-top-color: #F2F2F2;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px; border-radius: 3px;
+	zoom: 1;
 }
 #MainNavigation ul.Categories li span.NavOpener:hover {
 	background-color: #069; color: #FFF;
@@ -1483,7 +1488,6 @@ a.Button.PrimaryAction,
 	position: relative;
 	float: left;
 	z-index: 500;
-	overflow: hidden;
 	list-style: decimal inside;
 	overflow: hidden;
 	padding: 0;
@@ -1508,7 +1512,8 @@ a.Button.PrimaryAction,
 	border-radius: 5px 5px 0px 0px;
 }
 #CheckoutStage li {
-	float: left;
+	float: left !important;
+	display: block;
 	position: relative;
 	z-index: 501;
 	padding: 8px 14px;
