@@ -48,6 +48,10 @@
 		.Content {
 			padding: 10mm;
 		}
+		.Content p {
+			width: 100%; overflow: hidden;
+			word-break: break-all; margin: 0;
+		}
 		h2 {
 			font-size: 12pt;
 			margin: 0 0 18pt;
@@ -85,14 +89,14 @@
 	<div id="ReceiverAddress">
 		<div class="Content">
 			<p>
-				{OrderShippingCompany(after:',&nbsp;')}
+				{OrderShippingCompany(after:'<br />')}
 				{OrderShippingName}
 				{OrderShippingAddress(before:'<br>')}
 				{OrderShippingZip(before:'<br>')} {OrderShippingCity}
 				{OrderShippingCountry(before:'<br>')}
 				{OrderShippingPhone(before:'<br>')}
 			</p>
-		<div class="Content">
+		</div>
 	</div>
 
 </body>
