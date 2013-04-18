@@ -100,7 +100,7 @@
 	}
 	#Primary #ScrollableBanners{
 		width: 100%;
-	
+
 	}
 	#FrontpageCategoryImage, .CategoryImage, .BrandImage{
 		width: 100%;
@@ -163,8 +163,8 @@
 		position: absolute;
 		bottom: auto;
 		padding: 0;
-		box-shadow: none !important; 
-		-moz-box-shadow: none !important; 
+		box-shadow: none !important;
+		-moz-box-shadow: none !important;
 		-webkit-box-shadow: none !important;
 		right: 0px;
 		margin: 9px 0 0;
@@ -335,7 +335,7 @@
 	#Primary{
 		width: 75%;
 	}
-	
+
 	/* Notifications */
 	#NotificationCenter{
 		margin: 0 7%;
@@ -376,13 +376,13 @@
 		text-decoration: none;
 	}
 	#SearchForm button{height: 26px;}
-	
+
 	/* Product page */
 	.Product .AddToCart{
 		margin: 0px 0 9px -5%;
 		text-align: center;
 		width: 110%;
-		padding: 5px 2px; 
+		padding: 5px 2px;
 	}
 
 	#ProductBuy{
@@ -425,7 +425,7 @@
 
 	/* MainMenu */
 
-	#MainNavigation ul.Categories li ul{ 
+	#MainNavigation ul.Categories li ul{
 		padding: 0px 15px 9px 36px;
 		border: none;
 	}
@@ -624,6 +624,9 @@
 		float: none;
 		display: block;
 	}
+	.NoLogoImage {
+		margin-left: 20px;
+	}
 	.LogoLink img{
 		margin-left: 20px;
 		width: auto;
@@ -641,7 +644,7 @@
 		right: 0;
 		width: 33%;
 		margin: 0 30px 0;
-	} 
+	}
 	header .NavigationList li{
 		float: right;
 		margin: 0;
@@ -668,7 +671,7 @@
 	header .DropdownNavigation.NavigationList{ float: none !important; }
 	header .DropdownNavigation{
 		display: inline-block;
-	
+
 		margin: 0 0 5px;
 		padding: 0 !important;
 		position: relative;
@@ -699,18 +702,18 @@
 	#CurrencyNavigation{
 	}
 
-	#LanguageNavigation{ 
+	#LanguageNavigation{
 	}
-	#LanguageNavigation li{ 
+	#LanguageNavigation li{
 	}
-	#LanguageNavigation li a{ 
+	#LanguageNavigation li a{
 	}
-	#LanguageNavigation ul { 
+	#LanguageNavigation ul {
 		 position: relative;
 	}
-	#LanguageNavigation ul li{ 
+	#LanguageNavigation ul li{
 	}
-	#LanguageNavigation ul li a{ 
+	#LanguageNavigation ul li a{
 	}
 
 	/* Search */
@@ -771,7 +774,7 @@
 	.SearchActive #LiveSearchResults li a{
 	}
 
-	/* Main Menu */	
+	/* Main Menu */
 	#MainNavigation{
 		float: none;
 		width: 100%;
@@ -808,13 +811,13 @@
 		-webkit-transition: all 0.5s ease-in-out;
 		-moz-transition: all 0.5s ease-in-out;
 		-o-transition: all 0.5s ease-in-out;
-		transition: all 0.5s ease-in-out; 
+		transition: all 0.5s ease-in-out;
 	}
 	#MainNavigation .NavigationList.show-the-menu{
 		max-height: 2000px;
 	}
-	#MainNavigation ul.InfoNavigation, 
-	#MainNavigation ul.NewsList, 
+	#MainNavigation ul.InfoNavigation,
+	#MainNavigation ul.NewsList,
 	#MainNavigation ul.Campaigns{
 		padding: 0 !important;
 		border-bottom: none;
@@ -824,8 +827,8 @@
 		background: #F8F8F8;
 		border-bottom: 1px solid #D9D9D9;
 	}
-	#MainNavigation ul.InfoNavigation li a, 
-	#MainNavigation ul.NewsList li a, 
+	#MainNavigation ul.InfoNavigation li a,
+	#MainNavigation ul.NewsList li a,
 	#MainNavigation ul.Campaigns li a{
 		display: block;
 		font-size: 15px;
@@ -841,7 +844,7 @@
 		margin: 0 0 -1px;
 	}
 
-	/* Content */	
+	/* Content */
 	#PageHeader{
 		padding: 15px 16% 9px 15px;
 		word-break: break-all;
@@ -1008,7 +1011,7 @@
 	.Cart .CheckoutButton{
 		padding: 8px 17px;
 	}
-	
+
 	/* Forms */
 	#MultiPageCheckout .HeaderItem, .FormItem, #Checkout .FormSubmit{
 		padding-left: 0px;
@@ -1109,6 +1112,13 @@
 	#SubPageNavigation .NavigationList li + li a {
 		padding: 3px 9px !important;
 	}
+
+	/* Restricted Login */
+	.RestrictedLogin #SearchForm,
+	.RestrictedLogin #CurrencyNavigation,
+	.RestrictedLogin .Breadcrumb {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 280px) {
@@ -1120,7 +1130,7 @@
 
 /* Hires images */
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
 
 	#ResponsiveCartLink .SubTotal,
 	#ResponsiveCartLink .CartEmpty{
