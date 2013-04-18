@@ -57,6 +57,45 @@ $(function() {
 	$('select', $paginationForms).change(function() { $(this).closest($paginationForms).submit(); });
 
 	//--------------------------------------------------------------------------
+	// Advanced search
+	//--------------------------------------------------------------------------
+
+	// To use advaced search just uncomment these next lines and
+	// call js/vendor/jquery.hashchange.js and js/mcf.advancedsearch.js in the helpers/scripts.html file.
+	// Also from helpers/sidebar-left.html change {Categories(show:'all')} to {Categories(show:'active')}
+
+	// There must be subcategories under each main category which then act as facets for the search.
+	// I.e. if you have main category named "Shoes", you could then have subcategory called "Color" and
+	// under that category subcategories called "Blue", "Green", "Yellow" etc. where the product would be.
+
+	// The plugin would make an advanced search form this data and
+	// the user can then select all the properties of the shoes that she wants and search for applicable products.
+
+	/* $('ul.Categories > li.Current', '#MainNavigation').each(function(index) {
+
+		var $that = $(this),
+			categoryRegex = /CategoryID-([\d]+)/,
+			categoryID = parseInt($that.attr('class').match(categoryRegex)[1], 10),
+			$subCategories = $that.find('> ul'),
+			$wrapper = $('<div class="FacetedNavigation" id="FacetedNav-' + categoryID + '"></div>');
+
+		$that.addClass('AdvancedSearchItem');
+		$subCategories.hide();
+		$subCategories.before($wrapper);
+
+		$wrapper.mcfAdvancedSearch({
+			id: categoryID,
+			mode: 'navigation',
+			results: '#Primary',
+			brands: 'checkbox',
+			get_form: function(el) {
+				el.find('select').customSelect();
+			}
+		});
+
+	}); */
+
+	//--------------------------------------------------------------------------
 	// Ajax Live Search
 	//--------------------------------------------------------------------------
 
@@ -211,7 +250,6 @@ $(function() {
 		next: '#ScrollToNext',
 
 		onBefore: function(evt, elem, $pane, $items, pos) {
-			console.log(pos, $items.length);
 			$crossSalePrev.add($crossSaleNext).fadeIn(250);
 			if (pos === 0) $crossSalePrev.fadeOut(250);
 			else if (pos === $items.length - 3) $crossSaleNext.fadeOut(250);
@@ -227,7 +265,7 @@ $(function() {
 	// Category Navigation Openers
 	//--------------------------------------------------------------------------
 
-	var $categoryNavs = $('.Categories li:has(> ul)');
+	var $categoryNavs = $('.Categories li:not(.AdvancedSearchItem):has(> ul)');
 
 	$categoryNavs.addClass('Openable').each(function() {
 		var $navOpener = $('<span class="NavOpener"></span>').prependTo(this);

@@ -483,6 +483,57 @@ header .DropdownNavigation ul li a:hover {
 #MainNavigation ul ul { display: none; }
 #MainNavigation ul li.Current > ul { display: block; }
 
+/* Faceted navigation */
+
+#MainNavigation .AdvancedSearchForm {
+	margin: 0 15px;
+}
+#MainNavigation .AdvancedSearchForm .FormItem {
+	border-top: 1px solid #d9d9d9;
+	padding: 0; margin:  9px 0 0;
+	text-align: center;
+}
+#MainNavigation .AdvancedSearchForm p.label {
+	top: 0; width: auto; height: auto;
+	text-shadow: 0px 1px 0px #FFF;
+	display: -moz-inline-stack;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 11px;
+	color: #777;
+	background: #FAFAFA;
+	padding: 0 6px;
+	margin: -9px 0 9px;
+}
+#MainNavigation .AdvancedSearchForm .Checks {
+	text-align: left;
+	padding: 0;
+	margin: -6px 0 12px;
+}
+#MainNavigation .AdvancedSearchForm .Checks label {
+	clear: none;
+	width: auto;
+	float: left;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	min-width: 49.9%;
+	margin-left: 0;
+	margin-right: 0;
+	font-size: 11px;
+}
+#MainNavigation .AdvancedSearchForm select { width: 161px; }
+#MainNavigation .AdvancedSearchForm .CustomSelectWrap {
+	text-align: left !important;
+}
+#MainNavigation .AdvancedSearchForm button {
+	clear: both; float: none; display: block;
+}
+
 /* Right Column
 -------------------------------------------------------------- */
 
