@@ -9,6 +9,10 @@
 $(function() {
 	'use strict';
 
+	// Minimum variation image
+	// filter length.
+	var filterLengthLimit = 4;
+
 	var $productCurrentImage = $('#CurrentProductImage'),
 		$productThumbnails = $('#ProductThumbnails'),
 		$productBuyForm = $('.BuyForm');
@@ -47,7 +51,7 @@ $(function() {
 			.data('eq', $(this).parent().index())
 			.next('#ProductImageCaption').text($self.attr('title'));
 
-		if (!triggered) {
+		if (!triggered && imageText.length >= filterLengthLimit) {
 			var $bestMatch = null;
 			var $inputs = $('option, :radio', $productBuyForm).sort(function(a, b) {
 				var labelA = $(a).is(':radio')
@@ -103,34 +107,36 @@ $(function() {
 		var $changedEl = $(evt.target),
 			$bestMatch = null,
 			inputValue = $changedEl.is(':radio')
-				? $changedEl.parent('label').text()
-				: $changedEl.find(':selected').text();
+				? $.trim($changedEl.parent('label').text())
+				: $.trim($changedEl.find(':selected').text());
 
-		var $thumbnails = $('li a', $productThumbnails).sort(function(a, b) {
-			var labelA = $(a).attr('title');
-			var labelB = $(b).attr('title');
-			return labelA.length > labelB.length;
-		});
+		if (inputValue.length >= filterLengthLimit) {
+			var $thumbnails = $('li a', $productThumbnails).sort(function(a, b) {
+				var labelA = $(a).attr('title'),
+					labelB = $(b).attr('title');
+				return labelA.length > labelB.length;
+			});
 
-		$thumbnails.each(function() {
-			var matchA = $.trim($(this).attr('title').toLowerCase()),
-				matchB = $.trim(inputValue.toLowerCase()),
-				matches = matchA.length > matchB.length
-					? matchA.indexOf(matchB)
-					: matchB.indexOf(matchA);
+			$thumbnails.each(function() {
+				var matchA = $.trim($(this).attr('title').toLowerCase()),
+					matchB = inputValue.toLowerCase(),
+					matches = matchA.length > matchB.length
+						? matchA.indexOf(matchB)
+						: matchB.indexOf(matchA);
 
-			if (matchA === matchB) {
-				$bestMatch = $(this);
-				return false;
+				if (matchA === matchB) {
+					$bestMatch = $(this);
+					return false;
+				}
+
+				if (matches > -1) {
+					$bestMatch = $(this);
+				}
+			});
+
+			if ($bestMatch) {
+				$bestMatch.trigger('click', [true]);
 			}
-
-			if (matches > -1) {
-				$bestMatch = $(this);
-			}
-		});
-
-		if ($bestMatch) {
-			$bestMatch.trigger('click', [true]);
 		}
 	});
 
