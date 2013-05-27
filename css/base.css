@@ -305,6 +305,12 @@ ol {
 	margin: 6px;
 }
 
+/* Hide extra span with bannername if no bannerimage */
+
+.SideBanner span.Banner {
+	display: none;
+}
+
 /* Tables
 -------------------------------------------------------------- */
 
