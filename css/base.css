@@ -183,7 +183,8 @@ ol {
 	color: #888;
 }
 .Prices dd.DiscountPrice,
-.DiscountProduct .ProductPrice {
+.DiscountProduct .ProductPrice,
+.ProductCampaignPrice {
 	font-size: 15px;
 	color: #e55f05;
 }
@@ -303,12 +304,6 @@ ol {
 .SidebarBanner {
 	clear: both;
 	margin: 6px;
-}
-
-/* Hide extra span with bannername if no bannerimage */
-
-.SideBanner span.Banner {
-	display: none;
 }
 
 /* Tables
