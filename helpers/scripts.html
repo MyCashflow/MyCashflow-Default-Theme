@@ -33,19 +33,21 @@
 <script type="text/javascript">
 //<![CDATA[
 
-	Modernizr.load([
-		// We'll test if matchMedia is supported and load a shim if not
-		{
-			test: window.matchMedia,
-			nope: "{ThemeUrl}/js/vendor/matchMedia.js"
-		},
+	if (typeof Modernizr !== 'undefined') {
+		Modernizr.load([
+			// We'll test if matchMedia is supported and load a shim if not
+			{
+				test: window.matchMedia,
+				nope: "{ThemeUrl}/js/vendor/matchMedia.js"
+			},
 
-		// ...and then load enquire
-		"{ThemeUrl}/js/vendor/enquire.js",
+			// ...and then load enquire
+			"{ThemeUrl}/js/vendor/enquire.js",
 
-		// And the responsive scripts for MCF
-		"{ThemeUrl}/js/mcf.responsive.js"
-	]);
+			// And the responsive scripts for MCF
+			"{ThemeUrl}/js/mcf.responsive.js"
+		]);
+	}
 
 //]]>
 </script>
