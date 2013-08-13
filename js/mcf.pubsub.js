@@ -285,13 +285,23 @@ $(function() {
 					$cartFormLoader.remove();
 					mcf.updateFullCartContent(response, $cartFormWrapper);
 				} else {
-					$.ajax({
-						type: 'GET',
-						url: '/interface/CartSubTotal',
-						success: function(price) {
-							$('#MiniCartFooter').find('.SubTotal').html(price);
-						}
-					});
+					if ($('#MiniCartWrapper ul li:visible').length > 1) {
+						$.ajax({
+							type: 'GET',
+							url: '/interface/CartSubTotal',
+							success: function(price) {
+								$('#MiniCartFooter').find('.SubTotal').html(price);
+							}
+						});
+					} else {
+						$.ajax({
+							type: 'GET',
+							url: '/interface/Helper?file=helpers%2Fminicart',
+							success: function(html) {
+								$('#MiniCartWrapper').html(html);
+							}
+						});
+					}
 				}
 			}
 		});

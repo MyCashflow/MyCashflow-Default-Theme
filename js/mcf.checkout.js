@@ -22,7 +22,7 @@ $(function() {
 		$.extend({}, mcf.colorboxOpts, {
 			width: '80%',
 			height: '80%',
-			title: $('.TermsLink').text()
+			title: mcf.Lang.TermsAndConditions
 		})
 	);
 
@@ -67,6 +67,8 @@ $(function() {
 			post_start: function(el, fromEvent, verbose) {
 				// If the post updates the sent element it's verbose
 				if (verbose) el.append('<div class="CheckoutLoader"></div>');
+				// If the post is still pending, disable the submit button
+				el.closest('form').find('button.SubmitButton').prop('disabled', true);
 			},
 
 			post_success: function(el, response, verbose) {
@@ -131,7 +133,10 @@ $(function() {
 				}
 			},
 
-			complete: function(response) {
+			complete: function(el) {
+				// When we're complete, enable the submit again
+				el.closest('form').find('button.SubmitButton').prop('disabled', false);
+				// Then get the preview cart with updated data
 				$.ajax({
 					type: 'GET',
 					url: '/interface/Helper/',
@@ -149,7 +154,7 @@ $(function() {
 				return true;
 			}
 		});
-		
+
 
 		var $preview = $('#PreviewContent'),
 			$checkoutNavigation = $('#CheckoutNavigation'),
@@ -203,24 +208,24 @@ $(function() {
 		var $shippingAddress = element || $('#CheckoutShippingAddress'),
 			$shippingMethods = $('#CheckoutShippingMethods'),
 			$paymentMethods = $('#CheckoutPaymentMethods');
-	
+
 		// Add SelectedMethod classname to selected method
 		var $methodSelectors = $shippingMethods.add($paymentMethods).find('input:radio');
-	
+
 		$methodSelectors.click(function() {
 			var $methodDiv = $(this).closest('div');
 			$methodDiv.addClass('SelectedMethod');
 			$methodDiv.siblings('div').removeClass('SelectedMethod');
 		});
-	
+
 		// Hide and show shipping address wrapper and delete shipping address
 		var $shippingAddressToggleWrap = $('#CheckoutShippingAddressToggle'),
 			$shippingAddressToggler = $('input', $shippingAddressToggleWrap),
 			$shippingAddressRemover = $('#RemoveShippingAddress');
-	
+
 		$shippingAddressToggleWrap.show();
 		$shippingAddressRemover.hide();
-	
+
 		var shouldBeShown = function() {
 			var rtrn = false;
 			var inputs = $shippingAddress.find('.FormItem input[type="text"]');
@@ -235,7 +240,7 @@ $(function() {
 			});
 			return rtrn;
 		}
-	
+
 		if (shouldBeShown()) {
 			$shippingAddressToggler.prop('checked', true);
 			$shippingAddressToggleWrap.next().show();
@@ -245,10 +250,10 @@ $(function() {
 			$shippingAddressToggleWrap.next().hide();
 			$shippingAddressRemover.hide();
 		}
-	
+
 		$shippingAddressToggler.click(function() {
 			var $wrapper = $shippingAddressToggleWrap.next();
-	
+
 			if ($(this).prop('checked') === true) {
 				$wrapper.fadeIn(125);
 				$shippingAddressRemover.fadeIn(125);
@@ -257,7 +262,7 @@ $(function() {
 				$shippingAddressRemover.fadeOut(125);
 			}
 		});
-	
+
 		$('a', $shippingAddressRemover).click(function(evt) {
 			evt.preventDefault();
 			$shippingAddress.find('input').not(':hidden').val('');
