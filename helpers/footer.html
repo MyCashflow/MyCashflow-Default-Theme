@@ -4,7 +4,9 @@
 			<p id="Copyrights">&copy; {ShopName} | <a href="/terms/">{%TermsAndConditions}</a> | {MyCashflowTextAd}</p>
 		</footer>
 	</div>
-	<div id="NotificationCenter"></div>
+	<div id="NotificationCenter">
+		{Notifications(group: 'account')}
+	</div>
 	{Helper(file: 'helpers/scripts')}
 </body>
 </html>
