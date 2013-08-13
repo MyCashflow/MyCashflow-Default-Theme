@@ -4,25 +4,35 @@
 		<a href="{ProductUrl}">{ProductName}</a>
 	</h2>
 
-	<p class="ListProductPrices">
-		{ProductPrice(
-			html: 'true',
-			currencysymbol: 'true',
-			before: '<strong class="ProductPrice">',
-			after: '</strong>'
-		)}
-		{ProductComparePrice(
-			html: 'true',
-			currencysymbol: 'true',
-			before: '<span class="ProductComparePrice">',
-			after: '</span>'
-		)}
-	</p>
+	{ProductPrice(
+		html: 'true',
+		currencysymbol: 'true',
+		before: '
+			<p class="ListProductPrices">
+				<strong class="ProductPrice">',
+		after: '
+				</strong>
+				{ProductComparePrice(
+					html: 'true',
+					currencysymbol: 'true',
+					before: '<span class="ProductComparePrice">',
+					after: '</span>'
+				)}
+			</p>
 
-	{ProductAvailability(
-		html: 'false',
-		before: '<p class="ListProductAvailability">',
-		after: '</p>'
+			{ProductAvailability(
+				html: 'false',
+				before: '<p class="ListProductAvailability">',
+				after: '</p>'
+			)}
+
+			<a href="{ProductUrl}#BuyForm-{ProductId}" class="Button AddToCart">{%AddToCart}</a>',
+		else: '
+			{ProductAvailability(
+				html: 'false',
+				before: '<p class="ListProductAvailability">',
+				after: '</p>'
+			)}
+		'
 	)}
-	<a href="{ProductUrl}#BuyForm-{ProductId}" class="Button AddToCart">{%AddToCart}</a>
 </div>
