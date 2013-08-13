@@ -52,7 +52,10 @@
 	}
 	#PageHeader{
 		padding: 15px 30% 9px 15px;
-		word-break: break-all;
+		word-wrap: break-word;
+		white-space: normal;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		margin-left: 1px;
 	}
 	#PaginationSortForm{
@@ -96,19 +99,25 @@
 
 	/* Banners */
 	#BannerScroller{
-		width: auto;
+		width: 100%;
 	}
 	#Primary #ScrollableBanners{
-		width: 100%;
+		width: 2000%;
 
 	}
-	#FrontpageCategoryImage, .CategoryImage, .BrandImage{
-		width: 100%;
+	.FrontBanner {
+		width: 5% !important;
+		overflow: hidden;
 	}
-	.FrontBanner img{
-		width: 100%;
+	.FrontBanner img {
+		width: 100% !important;
+		max-width: 100% !important;
 		height: auto;
 		border: none;
+	}
+	#FrontpageCategoryImage,
+	.CategoryImage, .BrandImage {
+		width: 100%;
 	}
 
 	/* Frontpage */
@@ -847,7 +856,10 @@
 	/* Content */
 	#PageHeader{
 		padding: 15px 16% 9px 15px;
-		word-break: break-all;
+		word-wrap: break-word;
+		white-space: normal;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	#PageHeader h1{
 		font-size: 28px;
@@ -1178,6 +1190,31 @@
 	header .DropdownNavigation .Icon {
 		background-image: url(../i/icons2x.png);
 		background-size: 54px 144px;
+	}
+}
+
+@media only screen and (min-device-width: 980px) and (-webkit-min-device-pixel-ratio: 2) {
+	#MainNavigation ul.Categories li span.NavOpener{
+		background: url(../i/arrows2x.png) no-repeat -1px -1px;
+		background-size: 69px 69px;
+	}
+	#MainNavigation ul.Categories li span.NavOpener:hover{
+		background: url(../i/arrows2x.png) no-repeat -1px -24px;
+		background-size: 69px 69px;
+	}
+	#MainNavigation ul.Categories li ul li span.NavOpener:hover{
+		background: url(../i/arrows2x.png) no-repeat -4px -4px;
+		background-size: 69px 69px;
+	}
+	#MainNavigation ul.Categories li span.NavOpener.Opened{
+		background: url(../i/arrows2x.png) no-repeat -23px -2px;
+		background-size: 69px 69px;
+	}
+	#MainNavigation ul.Categories ul li span.NavOpener:hover,
+	#MainNavigation ul.Categories ul li span.NavOpener.Opened,
+	#MainNavigation ul.Categories ul li span.NavOpener.Opened:hover{
+		background: transparent url(../i/arrows2x.png) no-repeat -23px -25px;
+		background-size: 69px 69px;
 	}
 }
 

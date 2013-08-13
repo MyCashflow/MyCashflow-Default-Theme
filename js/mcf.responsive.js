@@ -4,7 +4,12 @@ $(function() {
 	var mcf = mcf || {};
 
 	// Listen for matchMedia changes with enquire: http://wicky.nillia.ms/enquire.js/ <3
-	enquire.register('screen and (max-width: 980px)', {
+	enquire.register('screen and (min-width: 981px)', {
+		match: function() {
+			// If we go above the 980px width, return the single page checkout
+			$.get('/checkout/?SinglePageCheckout');
+		}
+	}).register('screen and (max-width: 980px)', {
 
 		match: function() {
 
@@ -49,7 +54,7 @@ $(function() {
 		match: function() {
 
 			// Create header for mobile navigation
-			$('#MainNavigation').find('.Categories').before('<h2 class="MobileMenu BoxHeader">Tuotteet</h2>');
+			$('#MainNavigation').find('.Categories').before('<h2 class="MobileMenu BoxHeader">' + mcf.Lang.BrowseCategories + '</h2>');
 
 			// Show/hide mobile navigation
 			$('#MainNavigation h2').click(function() {
