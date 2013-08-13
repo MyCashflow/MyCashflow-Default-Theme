@@ -1084,18 +1084,18 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 
 /* Scroller styles for crosssales */
 
-#CrossSaleScroller { position: relative; width: 100%; height: 360px; overflow: auto; }
-#CrossSaleProducts { position: relative; width: auto; height: 360px; overflow: visible; }
-#CrossSaleProducts .Product { padding-left: 15px; padding-right: 15px; margin: 0; }
+.CrossSaleScroller { position: relative; width: 100%; height: 360px; overflow: auto; }
+.CrossSaleProducts { position: relative; width: auto; height: 360px; overflow: visible; }
+.CrossSaleProducts .Product { padding-left: 15px; padding-right: 15px; margin: 0; }
 
-#ScrollToPrev, #ScrollToNext {
+.ScrollToPrev, .ScrollToNext {
 	cursor: pointer; position: relative; z-index: 3; float: left; margin-top: -36px; padding: 9px 9px 9px 36px;
 	color: #069; text-decoration: underline; font-size: 11px; font-weight: bold; text-decoration: none;
 }
-#ScrollToNext { float: right; padding: 9px 36px 9px 9px; }
-#ScrollToPrev:hover, #ScrollToNext:hover { color: #09F; }
+.ScrollToNext { float: right; padding: 9px 36px 9px 9px; }
+.ScrollToPrev:hover, .ScrollToNext:hover { color: #09F; }
 
-#ScrollToPrev span.Icon, #ScrollToNext span.Icon,
+.ScrollToPrev span.Icon, .ScrollToNext span.Icon,
 #PrevBanner .Icon, #NextBanner .Icon {
 	position: absolute; display: block; margin: 0;
 	top: 6px; width: 21px; height: 21px;
@@ -1105,14 +1105,14 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	border: 1px solid #D9D9D9; -moz-border-radius: 2px;
 	-webkit-border-radius: 2px; border-radius: 2px;
 }
-#ScrollToPrev span.Icon, #PrevBanner .Icon { left: 6px; background-position: -47px -47px; }
-#ScrollToNext span.Icon, #NextBanner .Icon { right: 6px; }
-#ScrollToPrev:hover span.Icon, #ScrollToNext:hover span.Icon,
+.ScrollToPrev span.Icon, #PrevBanner .Icon { left: 6px; background-position: -47px -47px; }
+.ScrollToNext span.Icon, #NextBanner .Icon { right: 6px; }
+.ScrollToPrev:hover span.Icon, .ScrollToNext:hover span.Icon,
 #PrevBanner:hover .Icon, #NextBanner:hover .Icon {
 	background-color: #069; color: #FFF;
 	border-color: #057; background-position: -1px -24px;
 }
-#ScrollToPrev:hover span.Icon, #PrevBanner:hover .Icon { background-position: -47px -24px; }
+.ScrollToPrev:hover span.Icon, #PrevBanner:hover .Icon { background-position: -47px -24px; }
 
 /* Category Frontpage
 -------------------------------------------------------------- */

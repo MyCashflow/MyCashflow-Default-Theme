@@ -30,7 +30,7 @@ $(function() {
 		onClosed: function() {
 			// Cleanup traces of the colorbox
 			// so that next time it's made from scratch
-			$(this).colorbox.remove();
+			// $(this).colorbox.remove();
 		}
 	}
 
@@ -102,7 +102,8 @@ $(function() {
 	var $searchForm = $('#SearchForm'),
 		$searchInput = $('#SearchInput'),
 		$searchResults = $('<ul id="LiveSearchResults"></ul>'),
-		$searchIndicator = $('<span class="SearchIndicator"></span>');
+		$searchIndicator = $('<span class="SearchIndicator"></span>'),
+		html5inputTypes = (typeof Modernizr === 'undefined') ? false : Modernizr.inputtypes.search;
 
 	// Create the search results element.
 	$searchResults.appendTo($searchForm);
@@ -117,7 +118,7 @@ $(function() {
 		if ($searchInput.val() === '') {
 			$searchResults.html('');
 			$searchForm.removeClass('SearchActive');
-			$searchIndicator.hide().removeClass('CloseSearchResults');
+			if (!html5inputTypes) $searchIndicator.hide().removeClass('CloseSearchResults');
 		}
 	});
 
@@ -142,13 +143,22 @@ $(function() {
 
 				success: function(results) {
 					$searchResults.html(results).fadeTo(500, 0.9);
-					$searchIndicator.addClass('CloseSearchResults');
+
+					// Test if we're dealing with HTML5 search input type and react accordingly
+					if (html5inputTypes) {
+						$searchIndicator.hide();
+						$searchInput[0].addEventListener("search", function(e) {
+							$searchIndicator.trigger('click');
+						}, false);
+					} else {
+						$searchIndicator.addClass('CloseSearchResults');
+					}
 
 					$searchIndicator.click(function() {
 						$searchInput.val('').blur();
 						$searchResults.html('');
 						$searchForm.removeClass('SearchActive');
-						$searchIndicator.hide().removeClass('CloseSearchResults');
+						if (!html5inputTypes) $searchIndicator.hide().removeClass('CloseSearchResults');
 					});
 				}
 			});
@@ -226,40 +236,62 @@ $(function() {
 	// Cross-Sale Products
 	//--------------------------------------------------------------------------
 
-	var $crossSaleScroller = $('#CrossSaleScroller'),
-		$crossSaleProducts = $('#CrossSaleProducts'),
-		$crossSalePrev = $('<span id="ScrollToPrev"><span class="Icon"></span>' + mcf.Lang.PrevPlural + '</span>'),
-		$crossSaleNext = $('<span id="ScrollToNext"><span class="Icon"></span>' + mcf.Lang.NextPlural + '</span>');
+	var $crossSaleScrollers = $('.CrossSaleScroller');
 
-	$crossSaleScroller
-		.css('overflow', 'hidden')
-		.before($crossSalePrev)
-		.before($crossSaleNext);
+	$crossSaleScrollers.each(function() {
+		var $crossSaleScroller = $(this),
+			$crossSaleProducts = $('.CrossSaleProducts', $crossSaleScroller),
+			$crossSalePrev = $('<span class="ScrollToPrev"><span class="Icon"></span>' + mcf.Lang.PrevPlural + '</span>'),
+			$crossSaleNext = $('<span class="ScrollToNext"><span class="Icon"></span>' + mcf.Lang.NextPlural + '</span>');
 
-	$crossSalePrev.hide();
-	$crossSaleProducts.css('width', '9999px');
-	$crossSaleScroller.serialScroll({
-		axis: 'x',
-		step: 3,
-		exclude: 2,
-		cycle: false,
-		force: true,
-		duration: 500,
-		items: '.Product',
-		prev: '#ScrollToPrev',
-		next: '#ScrollToNext',
+		$crossSaleScroller
+			.css('overflow', 'hidden')
+			.before($crossSalePrev)
+			.before($crossSaleNext);
 
-		onBefore: function(evt, elem, $pane, $items, pos) {
-			$crossSalePrev.add($crossSaleNext).fadeIn(250);
-			if (pos === 0) $crossSalePrev.fadeOut(250);
-			else if (pos === $items.length - 3) $crossSaleNext.fadeOut(250);
-		}
+		$crossSalePrev.hide();
+		$crossSaleProducts.css('width', '9999px');
+		$crossSaleScroller.serialScroll({
+			axis: 'x',
+			step: 3,
+			exclude: 2,
+			cycle: false,
+			force: true,
+			duration: 500,
+			items: '.Product',
+			prev: null,
+			next: null,
+
+			onBefore: function(evt, elem, $pane, $items, pos) {
+				$crossSalePrev.add($crossSaleNext).fadeIn(250);
+				if (pos === 0) $crossSalePrev.fadeOut(250);
+				else if (pos === $items.length - 3) $crossSaleNext.fadeOut(250);
+			}
+		});
+
+		$crossSalePrev.on('click', function() { $crossSaleScroller.trigger('prev'); });
+		$crossSaleNext.on('click', function() { $crossSaleScroller.trigger('next'); });
+
+		$crossSaleScroller.on('mouseenter', function() { $(this).addClass('mouseover'); });
+		$crossSaleScroller.on('mouseleave', function() { $(this).removeClass('mouseover'); });
+
+		$(document).keydown(function(evt) {
+			if ($crossSaleScroller.hasClass('mouseover')) {
+				if (evt.keyCode === 37) $crossSaleScroller.trigger('prev');
+				if (evt.keyCode === 39) $crossSaleScroller.trigger('next');
+			}
+		});
 	});
 
-	$(document).keydown(function(evt) {
-		if (evt.keyCode === 37) $crossSaleScroller.trigger('prev');
-		if (evt.keyCode === 39) $crossSaleScroller.trigger('next');
-	});
+	//--------------------------------------------------------------------------
+	// Fade Static Notifications
+	//--------------------------------------------------------------------------
+
+	setTimeout(function() {
+		$('#NotificationCenter .Notification').fadeOut(250, function() {
+			$(this).remove();
+		});
+	}, 5000);
 
 	//--------------------------------------------------------------------------
 	// Category Navigation Openers
@@ -399,9 +431,8 @@ $(function() {
 		$('#SubmitCampaignCode').hide();
 	}
 
-	$cartForm.on('change', 'input', function(evt) {
+	$('.CheckoutButton').on('click', function(evt) {
 		$cartForm.trigger('submit');
-		evt.preventDefault();
 	});
 
 	$cartForm.on('submit', function(evt) {
