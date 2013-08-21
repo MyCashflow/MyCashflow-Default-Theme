@@ -1,8 +1,5 @@
 $(function() {
 
-	// Just to be safe
-	var mcf = mcf || {};
-
 	// Listen for matchMedia changes with enquire: http://wicky.nillia.ms/enquire.js/ <3
 	enquire.register('screen and (min-width: 981px)', {
 		match: function() {
