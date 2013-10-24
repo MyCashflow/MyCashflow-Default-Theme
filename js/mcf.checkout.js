@@ -203,20 +203,31 @@ $(function() {
 	// All Checkout Types
 	//--------------------------------------------------------------------------
 
-	function shippingAddressToggler(element) {
+  function updatePickupMethod() {
+    var $selectedMethod = $('[name="shipping_method[id]"]:checked').closest('.ShippingMethodWrapper');
+		$selectedMethod.addClass('SelectedMethod');
+		$selectedMethod.siblings().removeClass('SelectedMethod');
+  }
 
+	function shippingAddressToggler(element) {
 		var $shippingAddress = element || $('#CheckoutShippingAddress'),
 			$shippingMethods = $('#CheckoutShippingMethods'),
-			$paymentMethods = $('#CheckoutPaymentMethods');
+			$paymentMethods = $('#CheckoutPaymentMethods'),
+			$shippingMethodWrappers = $('.ShippingMethodWrapper');
 
 		// Add SelectedMethod classname to selected method
 		var $methodSelectors = $shippingMethods.add($paymentMethods).find('input:radio');
+    var $pickupSelects = $shippingMethods.find('.ReplacedSelect');
 
-		$methodSelectors.click(function() {
-			var $methodDiv = $(this).closest('div');
-			$methodDiv.addClass('SelectedMethod');
-			$methodDiv.siblings('div').removeClass('SelectedMethod');
-		});
+    $shippingMethods.on('click', 'input:radio', function() {
+      updatePickupMethod();
+    });
+
+    $pickupSelects.change(function() {
+		  var $methodRadio = $(this).closest('.ShippingMethodWrapper').find('input:radio'); 
+		  $methodRadio.attr('checked', true);
+      updatePickupMethod();
+    });
 
 		// Hide and show shipping address wrapper and delete shipping address
 		var $shippingAddressToggleWrap = $('#CheckoutShippingAddressToggle'),
@@ -273,9 +284,8 @@ $(function() {
 			$shippingAddressToggleWrap.next().hide();
 			$shippingAddressRemover.hide();
 		});
-
 	}
 
 	shippingAddressToggler();
-
+	updatePickupMethod();
 });
