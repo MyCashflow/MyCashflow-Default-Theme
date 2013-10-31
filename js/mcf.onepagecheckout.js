@@ -171,7 +171,10 @@
 			};
 
 		if (id === 'CheckoutShippingMethods' || id === 'CheckoutPaymentMethods') {
-			opts.preselect = 'false';
+			var $responseTag = $el.find('[name=response_tag]');
+			var preselect = $responseTag.val().match(/preselect:(\'|#039;)(true|false)(\'|#039;)/);
+			preselect = (preselect && preselect[2] === "true");
+			opts.preselect = preselect;
 		}
 
 		$.ajax({
