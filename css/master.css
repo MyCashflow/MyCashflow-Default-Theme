@@ -725,7 +725,8 @@ dl#MiniCartFooter .CheckoutButton {
 * + html .Product {
 	height: 360px;
 }
-.Product.Unavailable {
+.Product.Unavailable,
+.Product.AvailabilityPast {
 	opacity: 0.5;
 	-webkit-transition: all 0.25s ease-in-out;
 	-moz-transition: all 0.25s ease-in-out;
@@ -733,7 +734,8 @@ dl#MiniCartFooter .CheckoutButton {
 	-ms-transition: all 0.25s ease-in-out;
 	transition: all 0.25s ease-in-out;
 }
-.Product.Unavailable:hover {
+.Product.Unavailable:hover,
+.Product.AvailabilityPast {
 	opacity: 1;
 }
 .first { clear: left; }
@@ -795,10 +797,12 @@ dl#MiniCartFooter .CheckoutButton {
 	text-decoration: none;
 }
 .Unavailable .AddToCart,
-.Available .ListProductAvailability {
+.Available .ListProductAvailability,
+.AvailabilityPast .AddToCart {
 	display: none;
 }
-.Unavailable .ListProductAvailability {
+.Unavailable .ListProductAvailability,
+.AvailabilityPast .ListProductAvailability {
 	display: block;
 	margin: 9px 0;
 	color: #C33;
@@ -1344,7 +1348,9 @@ table .CartProduct {
 	width: 100%;
 }
 table tr.AvailabilityOutOfStock td,
-table tr.AvailabilityOutOfStock th {
+table tr.AvailabilityOutOfStock th,
+table tr.AvailabilityPast td,
+table tr.AvailabilityPast th {
 	border-color: #decccc;
 	background: #faf0f0;
 }
