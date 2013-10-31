@@ -131,12 +131,10 @@
 			)}
 			<br>
 			{ContactStreetAddress1(
-				after: '
-					{ContactStreetAddress2(before: '<br>')}
-				'
+				after: '{ContactStreetAddress2(before: ',&ensp;')}'
 			)}
 			<br>
-			{ContactZip} {ContactCity(after:',&nbsp;')} {ContactCountry}
+			{ContactZip} {ContactCity(after:',&ensp;')} {ContactCountry}
 		</p>
 		<p id="PrintContactElectrical">
 			{ContactEmail(after:'<br>')}
