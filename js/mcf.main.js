@@ -287,11 +287,14 @@ $(function() {
 	// Fade Static Notifications
 	//--------------------------------------------------------------------------
 
-	setTimeout(function() {
-		$('#NotificationCenter .Notification').fadeOut(250, function() {
-			$(this).remove();
-		});
-	}, 5000);
+	var $notifications = $('#NotificationCenter .Notification');
+	if ($notifications.length) {
+		setTimeout(function() {
+			$('#NotificationCenter .Notification').fadeOut(250, function() {
+				$(this).remove();
+			});
+		}, 5000);
+	}
 
 	//--------------------------------------------------------------------------
 	// Category Navigation Openers
