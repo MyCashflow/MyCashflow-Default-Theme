@@ -56,7 +56,6 @@ body {
 	overflow: hidden; text-overflow: ellipsis;
 	white-space: nowrap;
 }
-
 /* Footer */
 #ReceiptContact {
 	position: relative;
@@ -69,12 +68,16 @@ body {
 #PrintContactElectrical,
 #PrintBanner {
 	position: relative; float: left;
-	width: 33.30%; padding: 7pt 0;
+	padding: 7pt 0;
 }
+#PrintContactAddress { width: 40%;}
+#PrintContactElectrical { width: 40%; }
+#PrintBanner { width: 20%; }
+
 #PrintBanner {
 	max-height: 20mm; overflow: hidden; text-overflow: ellipsis;
 }
-#PrintBanner * { margin: 0; text-overflow: ellipsis; }
+#PrintBanner * { margin: 0; text-overflow: ellipsis; max-width: 100%; height: auto; }
 
 #InfoWrapper {
 	float: left; width: 100%;
@@ -106,7 +109,7 @@ body {
 }
 
 dl { padding: 0 0 0 35mm; box-sizing: border-box; width: 100% !important; }
-dt { float: left; clear: left; margin: 0 0 0 -35mm; width: 33mm; height: auto; font-weight: normal; color: #666; white-space: nowrap; }
+dt { float: left; clear: left; margin: 0 0 0 -35mm; width: 33mm; height: auto; font-weight: normal; color: #666; }
 dd { width: 99%; float: left; margin: 0; padding: 0; }
 
 small { font-size: 7.5pt; font-weight: normal !important; }
