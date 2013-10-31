@@ -1,10 +1,41 @@
 $(function() {
 
+	// Change the checkout type either to 'SinglePageCheckout' or 'MultiPageCheckout'
+	// Saves it's state into a cookie
+	mcf.changeCheckoutType = function(type) {
+
+		var readCookie = function(name) {
+			name = name.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
+			var regex = new RegExp('(?:^|;)\\s?' + name + '=(.*?)(?:;|$)','i'),
+				match = document.cookie.match(regex);
+			return match && unescape(match[1]);
+		};
+
+		var checkoutType = readCookie('jsCheckoutType');
+
+		if (checkoutType !== 'static' && checkoutType !== type) {
+			$.ajax({
+				type: 'GET',
+				url: '/checkout/?' + type,
+				data: { ajax: true },
+				success: function(data, textStatus, jqXHR) {
+					document.cookie = "jsCheckoutType=" + type + "; path=/";
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					if (jqXHR.status === 400) {
+						document.cookie = 'jsCheckoutType=static';
+					}
+				}
+			});
+		}
+
+	}
+
 	// Listen for matchMedia changes with enquire: http://wicky.nillia.ms/enquire.js/ <3
 	enquire.register('screen and (min-width: 981px)', {
 		match: function() {
-			// If we go above the 980px width, return the single page checkout
-			$.get('/checkout/?SinglePageCheckout');
+			// If we're bigger, go back to single page checkout
+			mcf.changeCheckoutType('SinglePageCheckout');
 		}
 	}).register('screen and (max-width: 980px)', {
 
@@ -31,8 +62,8 @@ $(function() {
 				$(window).on('scroll.responsiveEvents', _.throttle(throttledScroll, 100));
 			});
 
-			// If we go below the 980px width, change the checkout type for good
-			$.get('/checkout/?MultiPageCheckout');
+			// If we go below the 980px width, change the checkout type
+			mcf.changeCheckoutType('MultiPageCheckout');
 
 			// Wrap the whole cart as one big link
 			$('#MiniCartWrapper').wrapInner('<a href="/cart/" id="ResponsiveCartLink"></a>')
@@ -42,8 +73,10 @@ $(function() {
 
 		},
 		unmatch: function() {
+
 			// Remove the link by replacing it with it's own content. Clever us.
 			$('#ResponsiveCartLink').replaceWith($('#ResponsiveCartLink').contents());
+
 		}
 
 	}).register('screen and (max-width: 680px)', {
