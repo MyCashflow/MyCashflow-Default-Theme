@@ -121,7 +121,7 @@ $(function() {
 		if (typeof opts.response === 'string' && mcf.isJSON(opts.response)) {
 			// If the response is in JSON format,
 			// we'll just grab the notifications.
-			$notifications = $($.parseJSON(opts.response).notifications);
+			$notifications = (opts.response !== '') ? $($.parseJSON(opts.response).notifications) : $();
 		} else if (typeof opts.response === 'object') {
 			// The JSON seems to be already parsed
 			$notifications = $(opts.response.notifications);
@@ -228,7 +228,14 @@ $(function() {
 			},
 
 			success: function(response) {
-				$trigger.html('<span class="Icon Added"></span> ' + mcf.Lang.AddedButtonText).addClass('AddedToCart');
+				if (typeof response === 'object' && response.notifications.length) {
+					var errors = $(response.notifications).wrap('<div />').parent().find('.Error').length;
+					if (errors > 0) {
+						$trigger.text(mcf.Lang.AddToCart);
+					} else {
+						$trigger.html('<span class="Icon Added"></span> ' + mcf.Lang.AddedButtonText).addClass('AddedToCart');
+					}
+				}
 
 				$miniCartLoader.remove();
 
@@ -241,7 +248,7 @@ $(function() {
 			},
 
 			error: function() {
-				$trigger.html(origTrigger);
+				$trigger.text(mcf.Lang.AddToCart);
 			}
 		});
 	});
