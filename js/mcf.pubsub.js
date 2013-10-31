@@ -308,10 +308,10 @@ $(function() {
 	});
 
 	mcf.subscribe('UpdateCart', function(evt, opts) {
-		var $cartFormWrapper = $('#CartForm'),
+		var $cartForm = $('#CartForm'),
 			$cartFormLoader = $('<div class="CheckoutLoader"></div>');
 
-		$cartFormLoader.appendTo($cartFormWrapper);
+		$cartFormLoader.appendTo($cartForm);
 
 		$.ajax({
 			type: 'POST',
@@ -322,8 +322,13 @@ $(function() {
 			dataType: 'html',
 
 			success: function(response) {
+				var cart_target = $cartForm.data('cart_target');
 				$cartFormLoader.remove();
-				mcf.updateFullCartContent(response, $cartFormWrapper);
+				if (cart_target === 'checkout') {
+					window.location.replace("/" + cart_target + "/");
+				} else {
+					mcf.updateFullCartContent(response, $cartForm);
+				}
 			}
 		});
 	});

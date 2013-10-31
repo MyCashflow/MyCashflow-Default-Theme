@@ -426,7 +426,7 @@ $(function() {
 	// Full cart updating via Ajax
 	//--------------------------------------------------------------------------
 
-	var $cartForm = $('#CartForm');
+	var $cartForm = $('#CartForm').data('dirty', false);
 
 	// At page load, hide the order buttons and campaign code submit if there's nothing at cart
 	if ($cartForm.length > 0 && $('#CartTable', $cartForm).length === 0) {
@@ -434,12 +434,21 @@ $(function() {
 		$('#SubmitCampaignCode').hide();
 	}
 
-	$('.CheckoutButton').on('click', function(evt) {
-		$cartForm.trigger('submit');
+	$cartForm.on('change', 'input', function(evt) {
+		$cartForm.data('dirty', true);
+	});
+
+	$('body.Cart .CheckoutButton').on('click', function(evt) {
+		if ($cartForm.data('dirty')) {
+			$cartForm.data('cart_target','checkout');
+			$cartForm.trigger('submit');
+			evt.preventDefault();
+		}
 	});
 
 	$cartForm.on('submit', function(evt) {
 		mcf.publish('UpdateCart', { data: $cartForm.serializeObject() });
+		$cartForm.data('dirty', false);
 		evt.preventDefault();
 	});
 
