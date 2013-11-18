@@ -377,8 +377,8 @@ $(function() {
 				title: mcf.Lang.AddToCart,
 				href: '/interface/Helper?file=helpers/colorbox-buyform&setProduct=' + productId,
 				onComplete: function() {
-
 					// Bind custom selects and variationsplitter to modal
+					$('#cboxContent').removeData('plugin_mcfVariationSplitter');
 					$('#cboxContent').mcfVariationSplitter().find('select').customSelect();
 
 					// Make variationsplitter-made selects pretty too
