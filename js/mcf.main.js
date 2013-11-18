@@ -96,6 +96,18 @@ $(function() {
 	}); */
 
 	//--------------------------------------------------------------------------
+	// Lazy-loading navigation
+	//--------------------------------------------------------------------------
+
+	// Sometimes rendering a really complex navigation chokes on server-side.
+	// Don't activate unless you have _THOUSANDS_ of nested product categories.
+
+	// To activate lazy-loading just set the next variable to true and edit the sidebar
+	// helpers to use {Categories(show:'active')} instead of {Categories(show:'all')}
+
+	mcf.lazyLoadingNavs = true;
+
+	//--------------------------------------------------------------------------
 	// Ajax Live Search
 	//--------------------------------------------------------------------------
 
@@ -300,25 +312,47 @@ $(function() {
 	// Category Navigation Openers
 	//--------------------------------------------------------------------------
 
-	var $categoryNavs = $('.Categories li:not(.AdvancedSearchItem):has(> ul)');
-
-	$categoryNavs.addClass('Openable').each(function() {
-		var $navOpener = $('<span class="NavOpener"></span>').prependTo(this);
-
-		$(this).hasClass('Current')
+	function toggleNavOpener($navOpener, state) {
+		state
 			? $navOpener.text('-').attr('title', mcf.Lang.HideSubCategories).addClass('Opened')
 			: $navOpener.text('+').attr('title', mcf.Lang.ShowSubCategories);
+	}
 
-		$navOpener.click(function() {
-			$(this).next('a').next('ul').slideToggle(300);
+	function setUpCategoryNavs() {
+		var $categoryNavs = $('.Categories li.HasSubCategories:not(.AdvancedSearchItem)');
 
-			$(this).hasClass('Opened')
-				? $(this).text('+').attr('title', mcf.Lang.ShowSubCategories)
-				: $(this).text('-').attr('title', mcf.Lang.HideSubCategories);
+		$categoryNavs.addClass('Openable').each(function() {
+			var $navItem = $(this);
+			var $navOpener = $('<span class="NavOpener"></span>').prependTo(this);
+			toggleNavOpener($navOpener, $navItem.hasClass('Current'));
 
-			$(this).toggleClass('Opened');
+			$navOpener.click(function() {
+				var dfd = $.Deferred();
+
+				if (!$navItem.children('ul').length && mcf.lazyLoadingNavs) {
+					var parent = $navItem.attr('class').match(/CategoryID-(\d+)/)[1];
+					$.get('/interface/Categories', {
+						show: 'active',
+						parent: parent
+					}, function(res) {
+						$(res).appendTo($navItem);
+						setUpCategoryNavs();
+						dfd.resolve();
+					});
+				} else {
+					dfd.resolve();
+				}
+
+				dfd.done(function() {
+					$navOpener.next('a').next('ul').slideToggle(300);
+					toggleNavOpener($navOpener, $navOpener.hasClass('Opened'));
+					$navOpener.toggleClass('Opened');
+				});
+			});
 		});
-	});
+	}
+
+	setUpCategoryNavs();
 
 	//--------------------------------------------------------------------------
 	// Header Dropdowns
