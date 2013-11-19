@@ -319,7 +319,7 @@ $(function() {
 	}
 
 	function setUpCategoryNavs() {
-		var $categoryNavs = $('.Categories li.HasSubCategories:not(.AdvancedSearchItem)');
+		var $categoryNavs = $('#MainNavigation .Categories .HasSubCategories:not(.AdvancedSearchItem, .Openable)');
 
 		$categoryNavs.addClass('Openable').each(function() {
 			var $navItem = $(this);
@@ -328,14 +328,15 @@ $(function() {
 
 			$navOpener.click(function() {
 				var dfd = $.Deferred();
-
 				if (!$navItem.children('ul').length && mcf.lazyLoadingNavs) {
 					var parent = $navItem.attr('class').match(/CategoryID-(\d+)/)[1];
 					$.get('/interface/Categories', {
 						show: 'active',
 						parent: parent
 					}, function(res) {
-						$(res).appendTo($navItem);
+						var $subNav = $(res);
+						$subNav.removeClass('Categories NavigationList');
+						$subNav.appendTo($navItem);
 						setUpCategoryNavs();
 						dfd.resolve();
 					});
