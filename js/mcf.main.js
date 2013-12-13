@@ -38,6 +38,9 @@ $(function() {
 	// and made as chained select boxes
 	$('.BuyForm').mcfVariationSplitter();
 
+	// Bypass IE caching.
+	$.ajaxSetup({ cache: false });
+
 	//--------------------------------------------------------------------------
 	// Pagination & Forms
 	//--------------------------------------------------------------------------
