@@ -24,7 +24,7 @@
 					after: '</td></tr>'
 				)}
 				{CartDiscount(
-					before: '<tr><th scope="row" colspan="4">{%CampaignCode}: <strong>{CartCouponCode}</strong></td><td class="CartTotal">-',
+					before: '<tr><th scope="row" colspan="4">{%CampaignCode}: <strong>{CartCouponCode}</strong></td><td class="CartTotal CartDiscount">-',
 					after: '</td></tr>'
 				)}
 				{CartPartPayment(
@@ -51,7 +51,16 @@
 				<h3><a href="{ProductUrl}">{CartProductName}</a></h3>
 				{CartProductDetails}
 			</th>
-			<td class="CartPrice">{CartProductPrice}{CartProductComparePrice(before: '<br><span class="ProductComparePrice">', after: '</span>')}</td>
+			<td class="CartPrice">
+				{CartProductComparePrice(
+					before: '
+						<span class="CartDiscount">{CartProductPrice}</span><br>
+						<span class="ProductComparePrice">',
+					after: '
+						</span>',
+					or: '{CartProductPrice}'
+				)}
+			</td>
 			<td class="CartQuantity">
 				{CartProductQuantity(
 					mode: 'form'

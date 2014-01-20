@@ -188,6 +188,11 @@ ol {
 	font-size: 15px;
 	color: #e55f05;
 }
+.CartDiscount {
+	color: #e55f05;
+	font-weight: bold;
+}
+#CartTable .CartDiscount { font-size: 15px; }
 
 /* Part payment's prefix */
 .PriceFrom {
