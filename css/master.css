@@ -1046,6 +1046,9 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 .BuyFormQuantity input[type="number"] {
 	width: 50px;
 }
+.BuyForm select.ReplacedSelect {
+	max-width: 258px;
+}
 #ProductBuy .BuyForm .FormSubmit {
 	margin: 8px -8px -8px; padding: 17px 8px 0; width: 100%;
 	background: #F2F2F2; border-top: 1px solid #D9D9D9;
