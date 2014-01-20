@@ -263,16 +263,18 @@ $(function() {
 			}
 		});
 
-		$('a', $shippingAddressRemover).click(function(evt) {
-			evt.preventDefault();
-			$shippingAddress.find('input').not(':hidden').val('');
-			if ($('body').hasClass('SinglePageCheckout')) {
-				$shippingAddress.trigger('post.mcfCheckout');
-			}
-			$shippingAddressToggler.prop('checked',false);
-			$shippingAddressToggleWrap.next().hide();
-			$shippingAddressRemover.hide();
-		});
+		if (typeof element === 'undefined') {
+			$('a', $shippingAddressRemover).click(function(evt) {
+				evt.preventDefault();
+				$shippingAddress.find('input').not(':hidden').val('');
+				if ($('body').hasClass('SinglePageCheckout')) {
+					$shippingAddress.trigger('post.mcfCheckout');
+				}
+				$shippingAddressToggler.prop('checked',false);
+				$shippingAddressToggleWrap.next().hide();
+				$shippingAddressRemover.hide();
+			});
+		}
 
 	}
 

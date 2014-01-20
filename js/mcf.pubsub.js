@@ -103,7 +103,7 @@ $(function() {
 		window.clearTimeout(mcf.NotificationTimer);
 
 		mcf.NotificationTimer = window.setTimeout(function() {
-			$('.Notification:not(.Error)', '#NotificationCenter').fadeOut(250);
+			$('.Notification', '#NotificationCenter').fadeOut(250);
 		}, 6000);
 
 		return $notification;
