@@ -456,6 +456,36 @@ $(function() {
 	});
 
 	//--------------------------------------------------------------------------
+	// Shopping cart sharing
+	//--------------------------------------------------------------------------
+
+	var $shareButtons = $('#CartShareButtons');
+	if ($shareButtons.length) {
+		$shareButtons.on('click', '.ShareButton', function(evt) {
+			var $that = $(evt.target),
+				file = $that.data('file'),
+				title = $that.attr('title');
+
+			$.colorbox($.extend({}, {
+				href: '/interface/Helper?file=helpers/' + file,
+				title: title
+			}, mcf.colorboxOpts));
+
+			evt.preventDefault();
+		});
+
+		// Select all of the textbox's text on focus
+		$(document).on('focus', '#CartShareLinkTextBox', function(evt) {
+			var $that = $(evt.target);
+			$that.select();
+			$that.mouseup(function() {
+				$that.unbind('mouseup');
+				return false;
+			});
+		});
+	}
+
+	//--------------------------------------------------------------------------
 	// Adding & removing campaign codes via Ajax
 	//--------------------------------------------------------------------------
 

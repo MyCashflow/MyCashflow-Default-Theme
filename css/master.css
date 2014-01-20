@@ -1416,8 +1416,63 @@ table .CartProduct dt { clear: left; }
 }
 #SubmitCampaignCode a {
 	color: #666;
-	display: block;
+	float: left;
 	margin: 0 0 18px;
+}
+
+/* Cart sharing */
+
+#CartShareButtons {
+	width: 450px;
+	float: left;
+	padding-top: 2px;
+}
+#CartShareLinkSelect {
+	top: auto;
+	margin: 3px 0 5px;
+}
+.ShareButton {
+	position: relative;
+	height: 20px;
+	color: #333;
+	float: left;
+	top: auto;
+	margin: 0 3px 9px 0;
+	padding: 0 3px 0 18px;
+	line-height: 18px;
+	font-size: 11px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	background-image: linear-gradient(#fff,#dedede);
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.ShareButton i {
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	margin-top: -6px;
+	width: 12px;
+	height: 12px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+}
+#ShowSendCart i { background-image: url(../i/send_email_icon.png); }
+#ShowShareLink i { background-image: url(../i/share_icon.png); }
+.ShareButton:hover {
+	border-color: #bbb;
+	background-color: #d9d9d9;
+	background-image: -webkit-linear-gradient(#f8f8f8,#d9d9d9);
+	background-image: linear-gradient(#f8f8f8,#d9d9d9);
+}
+#CartFbShare {
+	position: relative;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+#SubmitCampaignCode a:hover,
+#ShowSendCart:hover {
+	color: #222;
 }
 
 /* Chekcout
