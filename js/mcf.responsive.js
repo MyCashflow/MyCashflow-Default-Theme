@@ -1,34 +1,33 @@
 $(function() {
 
-	// Change the checkout type either to 'SinglePageCheckout' or 'MultiPageCheckout'
-	// Saves it's state into a cookie
-	mcf.changeCheckoutType = function(type) {
+	// Change the checkout type 'MultiPageCheckout' if it's supported and we're using mobile resolutions
+	// Saves it's state into local storage
+	mcf.changeCheckoutType = function(changeToType) {
+		if (typeof Modernizr !== 'undefined' && Modernizr.localstorage) {
 
-		var readCookie = function(name) {
-			name = name.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
-			var regex = new RegExp('(?:^|;)\\s?' + name + '=(.*?)(?:;|$)','i'),
-				match = document.cookie.match(regex);
-			return match && unescape(match[1]);
-		};
+			var switchableCheckout = localStorage.getItem('switchableCheckout'),
+				currentCheckoutType = ($('body').hasClass('SinglePageCheckout')) ? 'SinglePageCheckout' : 'MultiPageCheckout';
 
-		var checkoutType = readCookie('jsCheckoutType');
+			if (!switchableCheckout) {
+				switchableCheckout = (currentCheckoutType === 'SinglePageCheckout') ? 'true' : 'false';
+				localStorage.setItem('switchableCheckout', switchableCheckout);
+			}
 
-		if (checkoutType !== 'static' && checkoutType !== type) {
-			$.ajax({
-				type: 'GET',
-				url: '/checkout/?' + type,
-				data: { ajax: true },
-				success: function(data, textStatus, jqXHR) {
-					document.cookie = "jsCheckoutType=" + type + "; path=/";
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					if (jqXHR.status === 400) {
-						document.cookie = 'jsCheckoutType=static';
+			if (switchableCheckout === 'true' && changeToType !== currentCheckoutType) {
+				$.ajax({
+					type: 'GET',
+					url: '/checkout/?' + changeToType,
+					data: { ajax: true },
+					error: function(jqXHR, textStatus, errorThrown) {
+						if (jqXHR.status === 400) {
+							// We get error if the other checkout type isn't supported and stop switching
+							localStorage.setItem('switchableCheckout', 'false');
+						}
 					}
-				}
-			});
-		}
+				});
+			}
 
+		}
 	}
 
 	// Listen for matchMedia changes with enquire: http://wicky.nillia.ms/enquire.js/ <3
