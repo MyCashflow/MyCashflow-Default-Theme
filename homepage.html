@@ -28,7 +28,13 @@
 					<div id="ShopLikes" class="fb-like" data-send="true" data-width="354" data-show-faces="true" data-font="arial"></div>
 					{Products(
 						classes:'first|',
-						helper: 'helpers/listproduct'
+						helper:'helpers/listproduct'
+					)}
+					{NostoProducts(
+					  slot:'nosto-frontpage-2',
+					  classes:'first|',
+					  helper:'helpers/listproduct',
+					  before:'<h2 class="BoxHeader">Nosto Test</h2>'
 					)}
 					{NewProducts(
 						limit:6,

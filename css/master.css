@@ -1971,3 +1971,9 @@ a.Button.PrimaryAction,
 #cboxLoadedContent #CheckoutThanksRegistrationForm { display: block; }
 #NewCustomerPassword .CheckWrap > .label { display: none; }
 #NewCustomerPassword label { font-weight: bold; }
+
+/* Nosto */
+
+.nosto_element {
+  display: none;
+}
