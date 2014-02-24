@@ -21,15 +21,24 @@ $(function() {
     $elem.children().each(function() {
       ids.push($(this).attr('data-nosto-id'));
     });
-    // No IDs? Cancel.
     if (!ids) {
       return false;
     }
+    
+    // Read the Nosto ref.
+    var ref = $elem.children().first().attr('data-nosto-url');
+    ref = ref.match(/nosto=(.+)/i);
+    ref = ref.length ? ref[1] : '';
+    
     // Replace with /interface/.
     ids = ids.join('|');
     var params = $elem.attr('data-nosto-params');
     $.get('/interface/Products?id=' + ids + (params ? '&' + params : ''), function(res) {
       $elem.html(res);
+      $elem.find('a[href*="/product/"]').each(function() {
+				var href = $(this).attr('href');
+	      $(this).attr('href', href + '?nosto=' + ref);
+      });
     });
   }
   
@@ -38,6 +47,7 @@ $(function() {
     if (!$nostoElems.length) {
       clearInterval(checkTimer); 
     }
+    
     // Check each element's state.
     $nostoElems.each(function() {
       var $elem = $(this);
