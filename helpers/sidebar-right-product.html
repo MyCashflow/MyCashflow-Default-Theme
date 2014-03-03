@@ -17,10 +17,12 @@
 		before: '<h2 class="BoxHeader">{%SimilarProducts}</h2><ul class="ProductList">',
 		after: '</ul>'
 	)}
-	{HotPicks(
-		limit: 1,
-		before: '<h2 class="BoxHeader">{%RecommendedProducts}</h2>',
-		helper: 'helpers/listproduct'
+	{NostoProducts(
+	  slot: 'nosto-productpage-3',
+		limit: 5,
+		helper: 'helpers/listproduct-small',
+		before: '<h2 class="BoxHeader">{%MostPopularCategoryProducts}</h2><ul class="ProductList">',
+		after: '</ul>'
 	)}
 	{Banners(
 		name: 'sidebar-right',

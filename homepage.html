@@ -30,12 +30,6 @@
 						classes:'first|',
 						helper:'helpers/listproduct'
 					)}
-					{NostoProducts(
-					  slot:'nosto-frontpage-2',
-					  classes:'first|',
-					  helper:'helpers/listproduct',
-					  before:'<h2 class="BoxHeader">Nosto Test</h2>'
-					)}
 					{NewProducts(
 						limit:6,
 						classes:'first|',
@@ -46,19 +40,29 @@
 					)}
 				</div>
 				<div id="SecondaryFeatures">
-					{TopSellers(
-						limit:10,
+					{NostoProducts(
+					  slot:'nosto-frontpage-1',
+						limit:5,
 						type:'normal',
-						helper:'helpers/listproduct-small',
-						before:'<h2 class="BoxHeader">{%BestsellingProducts}</h2><ol class="ProductList">',
-						after:'</ol>'
+					  helper:'helpers/listproduct-small',
+					  before:'<h2 class="BoxHeader">{%ProductsOfInterest}</h2><ol class="ProductList">',
+					  after:'</ol>'
 					)}
-					{HotPicks(
-						limit:10,
+					{NostoProducts(
+					  slot:'nosto-frontpage-2',
+						limit:5,
 						type:'normal',
-						helper:'helpers/listproduct-small',
-						before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2><ul class="ProductList">',
-						after:'</ul>'
+					  helper:'helpers/listproduct-small',
+					  before:'<h2 class="BoxHeader">{%ProductsConsidered}</h2><ol class="ProductList">',
+					  after:'</ol>'
+					)}
+					{NostoProducts(
+					  slot:'nosto-frontpage-3',
+						limit:5,
+						type:'normal',
+					  helper:'helpers/listproduct-small',
+					  before:'<h2 class="BoxHeader">{%MostPopularProducts}</h2><ol class="ProductList">',
+					  after:'</ol>'
 					)}
 					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
 				</div>

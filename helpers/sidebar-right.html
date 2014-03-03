@@ -3,10 +3,13 @@
 	<article id="MiniCartWrapper">
 		{Helper(file: 'helpers/minicart')}
 	</article>
-	{HotPicks(
-		limit: 1,
-		before: '<h2 class="BoxHeader">{%RecommendedProducts}</h2>',
-		helper: 'helpers/listproduct'
+	{NostoProducts(
+	  slot: 'nosto-navigation-2',
+	  limit: 5,
+		type: 'normal',
+	  helper: 'helpers/listproduct-small',
+	  before: '<h2 class="BoxHeader">{%ProductsBasedOnHistory}</h2><ul class="ProductList">',
+		after: '</ul>'
 	)}
 	{Banners(
 		name: 'sidebar-right',

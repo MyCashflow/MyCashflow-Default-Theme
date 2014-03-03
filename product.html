@@ -22,15 +22,26 @@
 			<div id="ProductFullDesc">
 				{ProductFullDesc}
 			</div>
-			{CrossSaleProducts(
-				type: 'normal',
+			{NostoProducts(
+			  slot: 'nosto-productpage-1',
 				limit: 12,
-				before: '
-					<h2 class="BoxHeader Center">{%CrossSalesForProduct}</h2>
-					<div class="CrossSaleScroller">
+			  before: '
+			  	<h2 class="BoxHeader Center">{%BuyersProductsOfInterest}</h2>
+			  	<div class="CrossSaleScroller">
 						<div class="CrossSaleProducts">',
 				after: '</div></div>',
-				helper: 'helpers/listproduct'
+			  helper: 'helpers/listproduct'
+			)}
+			{NostoProducts(
+			  slot: 'nosto-productpage-2',
+				limit: 12,
+			  helper: 'helpers/listproduct-small',
+			  before: '
+			  	<h2 class="BoxHeader Center">{%ProductsOfInterest}</h2><ul class="ProductList">
+			  		<div class="CrossSaleScroller">
+							<div class="CrossSaleProducts">',
+				after: '</div></div>',
+			  helper: 'helpers/listproduct'
 			)}
 		</div>
 		{Helper(file:'helpers/sidebar-right-product')}

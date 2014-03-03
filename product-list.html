@@ -37,7 +37,17 @@
 				after: '{PaginationPages(items: 7)}',
 				helper: 'helpers/listproduct'
 			)}
-
+			{NostoProducts(
+			  slot: 'nosto-subcategory-1',
+				limit: 12,
+			  helper: 'helpers/listproduct-small',
+			  before: '
+			  	<h2 class="BoxHeader Center">{%MostPopularCategoryProducts}</h2><ul class="ProductList">
+			  		<div class="CrossSaleScroller">
+							<div class="CrossSaleProducts">',
+				after: '</div></div>',
+			  helper: 'helpers/listproduct'
+			)}
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

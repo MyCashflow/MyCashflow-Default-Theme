@@ -4,4 +4,12 @@
 	{InfoNavigation(before: '<h2 class="BoxHeader">{%AboutUs}</h2>')}
 	{News(before: '<h2 class="BoxHeader">{%News}</h2>', limit: 10)}
 	{Banners(name: 'sidebar-left', helper: 'helpers/sidebar-banners')}
+	{NostoProducts(
+	  slot: 'nosto-navigation-1',
+	  limit: 5,
+		type: 'normal',
+	  helper: 'helpers/listproduct-small',
+	  before: '<h2 class="BoxHeader">{%PreviouslyBrowsedProducts}</h2><ul class="ProductList">',
+		after: '</ul>'
+	)}
 </nav>

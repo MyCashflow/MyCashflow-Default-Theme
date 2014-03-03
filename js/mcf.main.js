@@ -242,10 +242,31 @@ $(function() {
 	var $crossSaleScrollers = $('.CrossSaleScroller');
 
 	$crossSaleScrollers.each(function() {
-		var $crossSaleScroller = $(this),
+		initCrossSaleScroller($(this));
+	});
+	
+	function initCrossSaleScroller($elem) {
+		var $crossSaleScroller = $elem,
 			$crossSaleProducts = $('.CrossSaleProducts', $crossSaleScroller),
 			$crossSalePrev = $('<span class="ScrollToPrev"><span class="Icon"></span>' + mcf.Lang.PrevPlural + '</span>'),
-			$crossSaleNext = $('<span class="ScrollToNext"><span class="Icon"></span>' + mcf.Lang.NextPlural + '</span>');
+			$crossSaleNext = $('<span class="ScrollToNext"><span class="Icon"></span>' + mcf.Lang.NextPlural + '</span>'),
+			crossSaleScrollerOpts = {
+				axis: 'x',
+				step: 3,
+				exclude: 2,
+				cycle: false,
+				force: true,
+				duration: 500,
+				items: '.Product',
+				prev: null,
+				next: null,
+				onBefore: function(evt, elem, $pane, $items, pos) {
+					$crossSalePrev.add($crossSaleNext).fadeIn(250);
+					if (pos === 0) $crossSalePrev.fadeOut(250);
+					else if (pos === $items.length - 3) $crossSaleNext.fadeOut(250);
+				}
+			};
+			
 
 		$crossSaleScroller
 			.css('overflow', 'hidden')
@@ -253,24 +274,9 @@ $(function() {
 			.before($crossSaleNext);
 
 		$crossSalePrev.hide();
+		if ($crossSaleProducts.children().length < 5) $crossSaleNext.fadeOut(250);
 		$crossSaleProducts.css('width', '9999px');
-		$crossSaleScroller.serialScroll({
-			axis: 'x',
-			step: 3,
-			exclude: 2,
-			cycle: false,
-			force: true,
-			duration: 500,
-			items: '.Product',
-			prev: null,
-			next: null,
-
-			onBefore: function(evt, elem, $pane, $items, pos) {
-				$crossSalePrev.add($crossSaleNext).fadeIn(250);
-				if (pos === 0) $crossSalePrev.fadeOut(250);
-				else if (pos === $items.length - 3) $crossSaleNext.fadeOut(250);
-			}
-		});
+		$crossSaleScroller.serialScroll(crossSaleScrollerOpts);
 
 		$crossSalePrev.on('click', function() { $crossSaleScroller.trigger('prev'); });
 		$crossSaleNext.on('click', function() { $crossSaleScroller.trigger('next'); });
@@ -284,7 +290,7 @@ $(function() {
 				if (evt.keyCode === 39) $crossSaleScroller.trigger('next');
 			}
 		});
-	});
+	}
 
 	//--------------------------------------------------------------------------
 	// Fade Static Notifications
@@ -510,4 +516,24 @@ $(function() {
 			$campaignCodeForm.fadeIn(200);
 		});
 	});
+	
+	//--------------------------------------------------------------------------
+	// Nosto support
+	//--------------------------------------------------------------------------
+	
+	if (typeof $.fn.mcfNosto !== 'undefined') {
+		$('.nosto_element').mcfNosto({
+			success: function() {
+				var $crossSaleScroller = this.$elem.find('.CrossSaleScroller');
+				if ($crossSaleScroller.length) {
+					initCrossSaleScroller($crossSaleScroller);
+				}
+			},
+			error: function(msg) {
+				if (typeof console === 'object') {
+				  console.log(msg);
+				}
+			}
+		});
+	}
 });

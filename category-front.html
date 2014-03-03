@@ -5,37 +5,63 @@
 		<div id="Primary" class="Column">
 			<div id="LandingPageWrapper" class="clearfix">
 				<div id="PrimaryFeatures">		
-					{CategoryImage(width:384,link:'true')}
+					{CategoryImage(width:384, link:'true')}
 					<div id="PageHeader">
 						{Path}
 						<h1>{PageTitle}</h1>
 					</div>
 					<div class="CategoryDescription">{CategoryDescription}</div>
-					{CategoryHotPicks(
-						limit: 6,
-						classes:'first|',
-						helper: 'helpers/listproduct'
-					)}
 					{Products(
 						classes:'first|',
-						helper: 'helpers/listproduct'
+						helper:'helpers/listproduct'
+					)}
+					{NostoProducts(
+					  slot:'nosto-productcategory-1',
+					  limit:6,
+					  classes:'first|',
+					  helper:'helpers/listproduct',
+						before:'<h2 class="BoxHeader">{%ProductsOfInterest}</h2><ul class="ProductList">',
+						after:'</ul>'
 					)}
 				</div>
 				<div id="SecondaryFeatures">
 					{CategoryNewProducts(
-						limit: 10,
-						type: 'normal',
-						helper: 'helpers/listproduct-small',
-						before: '<h2 class="BoxHeader">{%NewProducts}</h2><ul class="ProductList">',
-						after: '</ul>'
+						limit:10,
+						type:'normal',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%NewProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+					{CategoryHotPicks(
+						limit:5,
+						classes:'first|',
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
+					)}
+					{NostoProducts(
+					  slot:'nosto-productcategory-1',
+						limit:5,
+						type:'normal',
+					  helper:'helpers/listproduct-small',
+					  before:'<h2 class="BoxHeader">{%ProductsOfInterest}</h2><ul class="ProductList">',
+					  after:'</ul>'
+					)}
+					{NostoProducts(
+					  slot:'nosto-productcategory-2',
+					  limit:6,
+						type:'normal',
+					  helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%MostPopularCategoryProducts}</h2><ul class="ProductList">',
+						after:'</ul>'
 					)}
 					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
 					{Brands(
-						category: 'current',
-						before: '<h2 class="BoxHeader">Tuotemerkit</h2><ul class="NavigationList BrandsNavigation">',
-						after: '</ul>',
-						helper: '{{
-							<li><a href="{SearchUrl(category:'current',brand:'current')}" title="{BrandName}">{BrandName}</a></li>
+						category:'current',
+						before:'<h2 class="BoxHeader">Tuotemerkit</h2><ul class="NavigationList BrandsNavigation">',
+						after:'</ul>',
+						helper:'{{
+							<li><a href="{SearchUrl(category:'current', brand:'current')}" title="{BrandName}">{BrandName}</a></li>
 						}}'
 					)}
 				</div>
