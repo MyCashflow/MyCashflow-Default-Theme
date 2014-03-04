@@ -41,28 +41,28 @@
 				</div>
 				<div id="SecondaryFeatures">
 					{NostoProducts(
-					  slot:'nosto-frontpage-1',
+						slot:'nosto-frontpage-1',
 						limit:5,
 						type:'normal',
-					  helper:'helpers/listproduct-small',
-					  before:'<h2 class="BoxHeader">{%ProductsOfInterest}</h2><ol class="ProductList">',
-					  after:'</ol>'
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%ProductsOfInterest}</h2><ul class="ProductList">',
+						after:'</ul>'
 					)}
 					{NostoProducts(
-					  slot:'nosto-frontpage-2',
+						slot:'nosto-frontpage-2',
 						limit:5,
 						type:'normal',
-					  helper:'helpers/listproduct-small',
-					  before:'<h2 class="BoxHeader">{%ProductsConsidered}</h2><ol class="ProductList">',
-					  after:'</ol>'
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%ProductsConsidered}</h2><ul class="ProductList">',
+						after:'</ul>'
 					)}
 					{NostoProducts(
-					  slot:'nosto-frontpage-3',
+						slot:'nosto-frontpage-3',
 						limit:5,
 						type:'normal',
-					  helper:'helpers/listproduct-small',
-					  before:'<h2 class="BoxHeader">{%MostPopularProducts}</h2><ol class="ProductList">',
-					  after:'</ol>'
+						helper:'helpers/listproduct-small',
+						before:'<h2 class="BoxHeader">{%MostPopularProducts}</h2><ol class="ProductList">',
+						after:'</ol>'
 					)}
 					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
 				</div>

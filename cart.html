@@ -53,24 +53,24 @@
 			</div>
 
 			{NostoProducts(
-			  slot: 'nosto-cartpage-1',
+				slot: 'nosto-cartpage-1',
 				limit: 12,
-			  before: '
-			  	<h2 class="BoxHeader Center">{%BuyersProductsOfInterest}</h2>
-			  	<div class="CrossSaleScroller">
+				before: '
+					<h2 class="BoxHeader Center">{%BuyersProductsOfInterest}</h2>
+					<div class="CrossSaleScroller">
 						<div class="CrossSaleProducts">',
 				after: '</div></div>',
-			  helper: 'helpers/listproduct'
+				helper: 'helpers/listproduct'
 			)}
 			{NostoProducts(
-			  slot: 'nosto-cartpage-2',
+				slot: 'nosto-cartpage-2',
 				limit: 12,
-			  before: '
-			  	<h2 class="BoxHeader Center">{%ProductsStillInterested}</h2>
-			  	<div class="CrossSaleScroller">
+				before: '
+					<h2 class="BoxHeader Center">{%ProductsStillInterested}</h2>
+					<div class="CrossSaleScroller">
 						<div class="CrossSaleProducts">',
 				after: '</div></div>',
-			  helper: 'helpers/listproduct'
+				helper: 'helpers/listproduct'
 			)}
 			
 		</div>
