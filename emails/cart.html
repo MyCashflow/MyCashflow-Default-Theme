@@ -1,0 +1,67 @@
+{Helper(file:'emails/helpers/emailheader')}
+
+<!-- Shop table starts -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td width="100%">
+
+			<table align="left" style="margin-right: 10px; max-width: 320px;">
+				<tr>
+					<td>
+						{Logo(width: 320, height: 80)}
+					</td>
+				</tr>
+			</table>
+
+		</td>
+	</tr>
+</table>
+<!-- Shop table ends -->
+
+<!-- Container table starts -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="background: #FFFFFF; border: 2px solid #b5b5b5; overflow: hidden; text-align: left; border-radius: 10px; box-shadow: 0 10px 25px #CCCCCC;" class="ContainerTable">
+	<tr>
+		<td style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-sidebar-bg.gif) repeat-y right top;" height="100%">
+
+			<!-- Header table starts -->
+			<table width="100%" cellpadding="20" cellspacing="0" border="0" bgcolor="#cacaca" style="background: #cacaca url({ShopUrl}{ThemeUrl}/i/email-header-bg.gif) repeat-x left top; border-bottom: 1px solid #b5b5b5;">
+				<tr>
+					<td>
+
+						<h2 style="margin: 0; padding: 0; font-size: 15px; color: #555; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%Hi},</h2>
+						<h1 style="margin: 0; padding: 0; font-size: 25px; color: #333; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%CartEmailHtmlHeader}</h1>
+
+					</td>
+				</tr>
+			</table>
+			<!-- Header table ends -->
+
+			<!-- Inner container table starts -->
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff;">
+				<tr>
+					<!-- Content wrapping td starts -->
+					<td valign="top" width="100%" height="100%">
+						<!-- Content table starts -->
+						<table cellpadding="18" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-content-top.gif) repeat-x left top;" width="100%">
+							<tr>
+								<td class="ContentCell" style="font-size: 16px; line-height: 24px;" height="100%">
+									<p>{%CartEmailHtmlMessage}</p>
+									<p>{CartShareMessage(before: '<strong>{%CartEmailHtmlMessageLeft}</strong><br>')}</p>
+									{Helper(file: 'emails/helpers/cartcontents')}
+									<p><a href="{CartShareLink}" style="font-weight: bold;">{%CartEmailHtmlLink}</a></p>
+								</td>
+							</tr>
+						</table>
+						<!-- Content table ends -->
+					</td>
+					<!-- Content wrapping td ends -->
+				</tr>
+			</table>
+			<!-- Inner container table ends -->
+
+		</td>
+	</tr>
+</table>
+<!-- Container table ends -->
+
+{Helper(file:'emails/helpers/emailfooter')}

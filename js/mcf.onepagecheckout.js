@@ -181,6 +181,7 @@
 			type: 'GET',
 			url: url,
 			data: opts,
+			cache: false,
 
 			beforeSend: function(jqXHR, settings) {
 				if (typeof get_start === 'function') {
@@ -223,6 +224,7 @@
 				type: 'POST',
 				url: '/checkout/',
 				data: data + '&ajax=1&response_type=' + opts.response_type,
+				cache: false,
 
 				beforeSend: function(jqXHR, settings) {
 					verbose = (isFocused > 0 || opts.return_self === false) ? false : true;

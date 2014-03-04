@@ -409,9 +409,13 @@ input[type="radio"] {
 	max-width: 458px;
 }
 .ReplacedSelect {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 	position: relative;
 	z-index: 10;
-	width: auto;
+	width: 100%;
 	border: 0;
 	padding-right: 31px;
 	padding-left: 4px;

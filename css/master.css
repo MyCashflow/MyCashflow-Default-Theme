@@ -1046,6 +1046,9 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 .BuyFormQuantity input[type="number"] {
 	width: 50px;
 }
+.BuyForm select.ReplacedSelect {
+	max-width: 258px;
+}
 #ProductBuy .BuyForm .FormSubmit {
 	margin: 8px -8px -8px; padding: 17px 8px 0; width: 100%;
 	background: #F2F2F2; border-top: 1px solid #D9D9D9;
@@ -1416,8 +1419,63 @@ table .CartProduct dt { clear: left; }
 }
 #SubmitCampaignCode a {
 	color: #666;
-	display: block;
+	float: left;
 	margin: 0 0 18px;
+}
+
+/* Cart sharing */
+
+#CartShareButtons {
+	width: 450px;
+	float: left;
+	padding-top: 2px;
+}
+#CartShareLinkSelect {
+	top: auto;
+	margin: 3px 0 5px;
+}
+.ShareButton {
+	position: relative;
+	height: 20px;
+	color: #333;
+	float: left;
+	top: auto;
+	margin: 0 3px 9px 0;
+	padding: 0 3px 0 18px;
+	line-height: 18px;
+	font-size: 11px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	background-image: linear-gradient(#fff,#dedede);
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.ShareButton i {
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	margin-top: -6px;
+	width: 12px;
+	height: 12px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+}
+#ShowSendCart i { background-image: url(../i/send_email_icon.png); }
+#ShowShareLink i { background-image: url(../i/share_icon.png); }
+.ShareButton:hover {
+	border-color: #bbb;
+	background-color: #d9d9d9;
+	background-image: -webkit-linear-gradient(#f8f8f8,#d9d9d9);
+	background-image: linear-gradient(#f8f8f8,#d9d9d9);
+}
+#CartFbShare {
+	position: relative;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+#SubmitCampaignCode a:hover,
+#ShowSendCart:hover {
+	color: #222;
 }
 
 /* Chekcout
@@ -1730,6 +1788,17 @@ a.Button.PrimaryAction,
 .SelectedMethod .ShippingMethodPrice,
 .SelectedMethod .PaymentMethodPrice {
 	color: #222;
+}
+
+.ShippingMethodWrapper .CustomSelect {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+.ShippingMethodWrapper.SelectedMethod .CustomSelect {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
 }
 
 .ShippingMethodPrice,

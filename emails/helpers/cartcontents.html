@@ -1,0 +1,27 @@
+{CartProducts(
+	before: '
+		<table style="text-align: left;" cellpadding="0" cellspacing="0" style="" id="EmailProducts" width="100%">
+			<thead>
+				<tr valign="top">
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: left;">{%Product}</th>
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: center;">{%Quantity}</th>
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: right;">{%Price}</th>
+					<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 0 4px 0; font-size: 15px; text-align: right;">{%Total}</th>
+				</tr>
+			</thead>
+	',
+	helper: 'emails/helpers/cartproduct',
+	after: '
+			<tfoot>
+				<tr valign="top">
+					<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
+						{%Total}
+					</th>
+					<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;">
+						<strong style="font-size: 15px;">{CartSubTotal}</strong><br>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	'
+)}

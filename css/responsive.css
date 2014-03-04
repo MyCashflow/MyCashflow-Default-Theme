@@ -1191,6 +1191,8 @@
 		background-image: url(../i/icons2x.png);
 		background-size: 54px 144px;
 	}
+	#ShowSendCart i { background-image: url(../i/send_email_icon2x.png); background-size: 12px 12px; }
+	#ShowShareLink i { background-image: url(../i/share_icon2x.png); background-size: 12px 12px; }
 }
 
 @media only screen and (min-device-width: 980px) and (-webkit-min-device-pixel-ratio: 2) {
