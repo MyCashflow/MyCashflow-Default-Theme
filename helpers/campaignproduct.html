@@ -9,13 +9,13 @@
 			html: 'true',
 			currencysymbol: 'true',
 			before: '<strong class="ProductCampaignPrice">',
-			after: '</strong>'
-		)}
-		{ProductListPrice(
-			html: 'true',
-			currencysymbol: 'true',
-			before: '<span class="ProductComparePrice">',
-			after: '</span>'
+			after: '</strong>{ProductListPrice(
+				html: 'true',
+				currencysymbol: 'true',
+				before: '<span class="ProductComparePrice">',
+				after: '</span>'
+			)}',
+			or: '{ProductPrice}'
 		)}
 	</p>
 

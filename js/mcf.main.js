@@ -38,6 +38,9 @@ $(function() {
 	// and made as chained select boxes
 	$('.BuyForm').mcfVariationSplitter();
 
+	// Bypass IE caching.
+	$.ajaxSetup({ cache: false });
+
 	//--------------------------------------------------------------------------
 	// Pagination & Forms
 	//--------------------------------------------------------------------------
@@ -287,11 +290,14 @@ $(function() {
 	// Fade Static Notifications
 	//--------------------------------------------------------------------------
 
-	setTimeout(function() {
-		$('#NotificationCenter .Notification').fadeOut(250, function() {
-			$(this).remove();
-		});
-	}, 5000);
+	var $notifications = $('#NotificationCenter .Notification');
+	if ($notifications.length) {
+		setTimeout(function() {
+			$('#NotificationCenter .Notification').fadeOut(250, function() {
+				$(this).remove();
+			});
+		}, 5000);
+	}
 
 	//--------------------------------------------------------------------------
 	// Category Navigation Openers
@@ -374,8 +380,8 @@ $(function() {
 				title: mcf.Lang.AddToCart,
 				href: '/interface/Helper?file=helpers/colorbox-buyform&setProduct=' + productId,
 				onComplete: function() {
-
 					// Bind custom selects and variationsplitter to modal
+					$('#cboxContent').removeData('plugin_mcfVariationSplitter');
 					$('#cboxContent').mcfVariationSplitter().find('select').customSelect();
 
 					// Make variationsplitter-made selects pretty too
@@ -423,7 +429,7 @@ $(function() {
 	// Full cart updating via Ajax
 	//--------------------------------------------------------------------------
 
-	var $cartForm = $('#CartForm');
+	var $cartForm = $('#CartForm').data('dirty', false);
 
 	// At page load, hide the order buttons and campaign code submit if there's nothing at cart
 	if ($cartForm.length > 0 && $('#CartTable', $cartForm).length === 0) {
@@ -431,14 +437,53 @@ $(function() {
 		$('#SubmitCampaignCode').hide();
 	}
 
-	$('.CheckoutButton').on('click', function(evt) {
-		$cartForm.trigger('submit');
+	$cartForm.on('change', 'input', function(evt) {
+		$cartForm.data('dirty', true);
+	});
+
+	$('body.Cart .CheckoutButton').on('click', function(evt) {
+		if ($cartForm.data('dirty')) {
+			$cartForm.data('cart_target','checkout');
+			$cartForm.trigger('submit');
+			evt.preventDefault();
+		}
 	});
 
 	$cartForm.on('submit', function(evt) {
 		mcf.publish('UpdateCart', { data: $cartForm.serializeObject() });
+		$cartForm.data('dirty', false);
 		evt.preventDefault();
 	});
+
+	//--------------------------------------------------------------------------
+	// Shopping cart sharing
+	//--------------------------------------------------------------------------
+
+	var $shareButtons = $('#CartShareButtons');
+	if ($shareButtons.length) {
+		$shareButtons.on('click', '.ShareButton', function(evt) {
+			var $that = $(evt.target),
+				file = $that.data('file'),
+				title = $that.attr('title');
+
+			$.colorbox($.extend({}, {
+				href: '/interface/Helper?file=helpers/' + file,
+				title: title
+			}, mcf.colorboxOpts));
+
+			evt.preventDefault();
+		});
+
+		// Select all of the textbox's text on focus
+		$(document).on('focus', '#CartShareLinkTextBox', function(evt) {
+			var $that = $(evt.target);
+			$that.select();
+			$that.mouseup(function() {
+				$that.unbind('mouseup');
+				return false;
+			});
+		});
+	}
 
 	//--------------------------------------------------------------------------
 	// Adding & removing campaign codes via Ajax

@@ -97,11 +97,11 @@ $(function() {
 
 		// Find the matching groups.
 		groups = _.filter(variations, function(obj) { return obj.level === level && _.isEqual(obj.triggers, filters); });
-		
+
 		// Get unique group names.
 		uniqs = _.pluck(groups, 'group');
 		uniqs = _.uniq(uniqs);
-		
+
 		// Get unique group labels.
 		labels = _.pluck(groups, 'label');
 		labels = _.uniq(labels);
@@ -135,7 +135,7 @@ $(function() {
 	Plugin.prototype.getActiveFilters = function(maxGroupLevel) {
 		var activeFilters = [];
 
-		$('.VariationGroup', '#VariationGroups').each(function() {
+		$(this.element).find('.VariationGroup', '#VariationGroups').each(function() {
 			$(this).data('level') > maxGroupLevel
 				? $(this).remove()
 				: activeFilters.push($(this).find(':selected').val());

@@ -5,7 +5,14 @@
 			<h3><a href="{ProductUrl}">{ProductName}</a></h3>
 			<dl>
 				<dt>{%Price}</dt>
-				<dd>{CartProductPrice}{CartProductComparePrice(before: '&ensp;<span class="ProductComparePrice">', after: '</span>')}</dd>
+				<dd>
+					{CartProductComparePrice(
+						before: '
+							<span class="CartDiscount">{CartProductPrice}</span>&ensp;<span class="ProductComparePrice">',
+						after: '
+							</span>',
+						or: '{CartProductPrice}'
+					)}
 				<dt>{%Quantity}</dt>
 				<dd>{CartProductQuantity(mode:'preview')}</dd>
 				<dd class="CartProductRemove">{CartProductDelete}</dd>

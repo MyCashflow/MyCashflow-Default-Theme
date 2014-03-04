@@ -171,13 +171,17 @@
 			};
 
 		if (id === 'CheckoutShippingMethods' || id === 'CheckoutPaymentMethods') {
-			opts.preselect = 'false';
+			var $responseTag = $el.find('[name=response_tag]');
+			var preselect = $responseTag.val().match(/preselect:(\'|#039;)(true|false)(\'|#039;)/);
+			preselect = (preselect && preselect[2] === "true");
+			opts.preselect = preselect;
 		}
 
 		$.ajax({
 			type: 'GET',
 			url: url,
 			data: opts,
+			cache: false,
 
 			beforeSend: function(jqXHR, settings) {
 				if (typeof get_start === 'function') {
@@ -220,6 +224,7 @@
 				type: 'POST',
 				url: '/checkout/',
 				data: data + '&ajax=1&response_type=' + opts.response_type,
+				cache: false,
 
 				beforeSend: function(jqXHR, settings) {
 					verbose = (isFocused > 0 || opts.return_self === false) ? false : true;

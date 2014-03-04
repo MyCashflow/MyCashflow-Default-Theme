@@ -163,4 +163,9 @@ $(function() {
 
 		evt.preventDefault();
 	});
+
+	// Prevent Colorbox from opening when clicking thumbs.
+	$productThumbnails.on('click', function(evt) {
+		return false;
+	});
 });

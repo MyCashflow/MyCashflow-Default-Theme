@@ -229,14 +229,17 @@ button.SubmitButton, .Big .Button {
 
 input[type="checkbox"],
 input[type="radio"] {
-	top: 3px;
+	top: 1px;
+	width: 18px;
+	height: 18px;
 	cursor: pointer;
-	width: auto;
-	height: auto;
 	padding: 0;
 	margin: 0;
 	margin-right: 5px;
 	border: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 .Checks {
 	-moz-box-sizing: border-box;
@@ -245,7 +248,7 @@ input[type="radio"] {
 	box-sizing: border-box;
 	float: left;
 	width: 100%;
-	padding-left: 18px;
+	padding-left: 23px;
 	margin-bottom: 18px;
 }
 .Checks.InlineCheck {
@@ -261,7 +264,7 @@ input[type="radio"] {
 }
 .Checks label input[type="checkbox"],
 .Checks label input[type="radio"] {
-	margin-left: -18px;
+	margin-left: -23px;
 	margin-right: 0;
 }
 .Checks label + .FormHelp {
@@ -406,9 +409,13 @@ input[type="radio"] {
 	max-width: 458px;
 }
 .ReplacedSelect {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 	position: relative;
 	z-index: 10;
-	width: auto;
+	width: 100%;
 	border: 0;
 	padding-right: 31px;
 	padding-left: 4px;
@@ -511,6 +518,12 @@ select[disabled] + .CustomSelect span {
 * + html textarea {
 	margin-bottom: -4px;
 }
+.lt-ie9 input[type="checkbox"],
+.lt-ie9 input[type="radio"] {
+	width: auto;
+	height: auto;
+}
+
 * + html .GroupItem {
 	padding-bottom: 0;
 }
