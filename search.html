@@ -5,6 +5,8 @@
 		<div id="Primary" class="Column">
 			<div id="PageHeader">
 				{Path}
+				
+			<h2>{%NostoSearchRecommendations}</h2>
 				<h1>{PageTitle}</h1>
 			</div>
 
@@ -36,7 +38,26 @@
 				helper: 'helpers/listproduct',
 				or: '<p class="NoResults">{%SearchNoResults}</p>'
 			)}
-
+			{NostoProducts(
+			  slot: 'nosto-searchpage-1',
+				limit: 12,
+			  before: '
+			  	<h2 class="BoxHeader Center">{%NostoSearchRecommendations}</h2>
+			  	<div class="CrossSaleScroller">
+						<div class="CrossSaleProducts">',
+				after: '</div></div>',
+			  helper: 'helpers/listproduct'
+			)}
+			{NostoProducts(
+			  slot: 'nosto-searchpage-2',
+				limit: 12,
+			  before: '
+			  	<h2 class="BoxHeader Center">{%MostPopularProducts}</h2>
+			  	<div class="CrossSaleScroller">
+						<div class="CrossSaleProducts">',
+				after: '</div></div>',
+			  helper: 'helpers/listproduct'
+			)}
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

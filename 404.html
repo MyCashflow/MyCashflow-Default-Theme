@@ -13,6 +13,27 @@
 				</div>
 				<div id="ContentSearch">{Search}</div>
 			</div>
+			
+			{NostoProducts(
+			  slot: 'nosto-404page-1',
+				limit: 12,
+			  before: '
+			  	<h2 class="BoxHeader Center">{%BuyersProductsOfInterest}</h2>
+			  	<div class="CrossSaleScroller">
+						<div class="CrossSaleProducts">',
+				after: '</div></div>',
+			  helper: 'helpers/listproduct'
+			)}
+			{NostoProducts(
+			  slot: 'nosto-404page-2',
+				limit: 12,
+			  before: '
+			  	<h2 class="BoxHeader Center">{%MostPopularProducts}</h2>
+			  	<div class="CrossSaleScroller">
+						<div class="CrossSaleProducts">',
+				after: '</div></div>',
+			  helper: 'helpers/listproduct'
+			)}
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>
