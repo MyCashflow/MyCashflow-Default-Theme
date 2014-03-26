@@ -1,0 +1,13 @@
+{Helper(file:'checkout/header')}
+<div id="MultiPageCheckout" class="clearfix">
+
+	{KlarnaCheckout(
+		before: '
+			<div id="KlarnaCheckoutWrapper">
+		',
+		after: '<p>Tilaus on vahvistettu jne...</p>
+			</div>'
+	)}
+
+</div>
+{Helper(file:'checkout/footer')}

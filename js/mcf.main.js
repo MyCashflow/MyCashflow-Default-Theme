@@ -505,7 +505,8 @@ $(function() {
 
 	// Show the campaign code input when
 	// the campaign code link is clicked.
-	$campaignCodeWrap.on('click', $campaignCodeLink, function() {
+	$campaignCodeWrap.on('click', 'a', function(evt) {
+		evt.preventDefault();
 		$campaignCodeLink.fadeOut(200, function() {
 			$campaignCodeForm.fadeIn(200);
 		});

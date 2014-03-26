@@ -407,6 +407,7 @@ input[type="radio"] {
 	position: relative;
 	float: left;
 	max-width: 458px;
+	margin-right: 5px;
 }
 .ReplacedSelect {
 	-moz-box-sizing: border-box;

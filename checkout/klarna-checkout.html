@@ -1,0 +1,56 @@
+{Helper(file:'checkout/header')}
+<div id="MultiPageCheckout" class="clearfix BlockForm">
+
+	<div id="KlarnaCheckoutWrapper">
+
+		<h2><span class="KlarnaStages">1. </span>Anna tilaajatiedot</h2>
+
+		{KlarnaCheckoutShippingInformation(before: '<h2><span class="KlarnaStages">2. </span>Valitse toimitustapa</h2>')}
+
+		<h2><span class="KlarnaStages">3. </span>Esikatsele vielä tilauksesi</h2>
+		<div id="PreviewContent">
+			{Helper(file:'helpers/klarna-preview')}
+		</div>
+		<div id="SubmitCampaignCode" data-helper="klarna-preview" data-view="checkout">
+			{CampaignCode(
+				mode: 'auto',
+				action: 'checkout',
+				notifications: 'true',
+				ajax: 'true'
+			)}
+		</div>
+		<p id="CommentFieldReveal"><a href="#comment">Haluatko jättää kommentin tilauksen käsittelijälle?</a></p>
+		<div class="FormItem" id="SubmitOrderComment">
+			<label for="OrderComments">Jätä kommentti</label>
+			<textarea name="details" id="OrderComments" rows="5" cols="72">{CartComment}</textarea>
+		</div>
+
+		<h2><span class="KlarnaStages">4. </span>Viimeistele ja maksa</h2>
+		<ul id="KlarnaOtherPaymentMethods" class="clearfix">
+			<li class="Current"><a href="#KlarnaCheckoutTab">Klarna Checkout</a></li>
+			<li><a href="#SelectOtherPaymentMethodTab">Valitse joku muu maksutavoistamme</a></li>
+		</ul>
+
+		<div id="SelectOtherPaymentMethodTab" class="PaymentTab">
+
+			<form action="/checkout/" method="post">
+
+				<fieldset id="CheckoutPaymentMethods">
+					<p>Voit maksaa tilauksesi myös jollain seuraavista maksutavoistamme.</p>
+					{CheckoutPaymentMethods(exclude: 'current')}
+				</fieldset>
+				<div class="FormItem FormSubmit">
+					<button type="submit" class="SubmitButton">Vaihda maksutapa</button>
+				</div>
+
+			</form>
+
+		</div>
+		<div id="KlarnaCheckoutTab" class="PaymentTab">
+			<p>Klarna Checkout maksutavalla tilaat vaivattomasti ja maksat tilauksesi helposti laskulla, osamaksulla tai verkkopankissa.</p>
+			{KlarnaCheckout}
+		</div>
+	</div>
+
+</div>
+{Helper(file:'checkout/footer')}
