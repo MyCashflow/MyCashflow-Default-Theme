@@ -494,7 +494,15 @@ $(function() {
 		$campaignCodeLink = $('<a href="#coupon" id="CouponCodeReveal">' + mcf.Lang.CampaignCodeInquiry + '</a>');
 
 	$campaignCodeWrap.on('submit', $campaignCodeForm, function(evt) {
-		mcf.publish('UpdateCampaignCode', { data: $(evt.target).serializeObject() });
+		mcf.publish('UpdateCampaignCode', {
+			data: $(evt.target).serializeObject(),
+			success: function() {
+				// If we're on Klarna Checkout page
+				if (typeof mcf !== 'undefined' && typeof mcf.updateKlarnaCheckoutFrame === 'function') {
+					mcf.updateKlarnaCheckoutFrame();
+				}
+			}
+		});
 		evt.preventDefault();
 	});
 

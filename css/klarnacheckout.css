@@ -1,7 +1,9 @@
 #KlarnaCheckoutWrapper {
-	width: 750px; margin: 0 auto;
+	width: 750px;
+	margin: 36px auto 18px;
 	padding: 0;
 }
+* + #KlarnaCheckoutWrapper { margin-top: 0; }
 #KlarnaCheckoutWrapper h2 { clear: both; }
 #KlarnaCheckoutWrapper .CartProduct h3 {
 	margin-bottom: 0;
@@ -94,4 +96,18 @@
 }
 #SubmitOrderCommentButton {
 	clear: both;
+}
+
+@media screen and (max-width: 768px) {
+	#klarna-checkout-container,
+	#KlarnaCheckoutWrapper {
+		width: auto;
+	}
+	.KlarnaStages {
+		display: none;
+	}
+	#KlarnaOtherPaymentMethods li a {
+		font-size: 12px;
+		padding: 8px;
+	}
 }

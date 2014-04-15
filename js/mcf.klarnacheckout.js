@@ -9,21 +9,28 @@
 $(function() {
 	'use strict';
 
+	var loc = window.location.href;
+	var thanksHash = loc.substr(loc.lastIndexOf('/'));
+	$('#KlarnaCheckoutThanksLink').attr('href', '/checkout/thanks' + thanksHash);
+
+	console.log(mcf);
+	if (typeof mcf === 'undefined') {
+		mcf = mcf || {};
+		console.log(mcf);
+		if (typeof mcf.isSubscribed === 'undefined' || !mcf.isSubscribed('UpdateCampaignCode')) {
+			$('#SubmitCampaignCode').hide();
+		}
+	}
+
 	var $kcoShippingInfo = $('#KlarnaCheckoutShippingInformation');
 
-	function updateKlarnaCheckoutFrame() {
+	mcf.updateKlarnaCheckoutFrame = function() {
 		var $kco = $('#KlarnaCheckout');
+		var mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
 		if ($kco.length) {
 			$.ajax({
 				url: '/interface/KlarnaCheckout',
-				beforeSend: function() {
-					//$kco.css({
-					//	'width': $kco.width(),
-					//	'height':  $kco.height()
-					//});
-					//$kco.append('<div class="CheckoutLoader"></div>');
-					//debugger;
-				},
+				data: (mobile) ? { layout: 'mobile' } : { layout: 'desktop' },
 				success: function(response) {
 					$kco.html(response);
 				}
@@ -31,32 +38,50 @@ $(function() {
 		}
 	}
 
-	updateKlarnaCheckoutFrame();
+	mcf.updateKlarnaCheckoutFrame();
 
 	// Handle the shipping information that are asked to determine shipping costs with Klarna Checkout
 	$kcoShippingInfo.on('change', function(evt) {
 		var data = $kcoShippingInfo.find('input, select').serialize();
+		var $changedEl = $(evt.target);
+		var isCountry = $changedEl.is('#country');
 		$.ajax({
 			type: 'POST',
 			url: '/checkout/klarna/',
 			data: data + '&ajax=1',
 			cache: false,
 			beforeSend: function() {
-				window._klarnaCheckout(function (api) {
-					api.suspend();
-				});
-				//$kcoShippingInfo.append('<div class="CheckoutLoader"></div>');
-				//$('#KlarnaCheckout').append('<div class="CheckoutLoader"></div>');
+				/*if (!isCountry && typeof window._klarnaCheckout === 'function') {
+					window._klarnaCheckout(function (api) {
+						api.suspend();
+					});
+				}*/
 			},
 			success: function(response) {
 				$kcoShippingInfo.html($(response).html());
-				$kcoShippingInfo.find('select').customSelect();
-				//updateKlarnaCheckoutFrame();
-				window._klarnaCheckout(function (api) {
-					api.resume();
+
+				$.ajax({
+					type: 'GET',
+					url: '/interface/Helper',
+					data: { file: 'helpers/klarna-preview' },
+					success: function(response) {
+						$('#PreviewContent').html(response);
+					}
 				});
 
-				if ($('#CartForm').length && typeof mcf.publish === 'function') mcf.publish('UpdateCart');
+				if (typeof $.fn.customSelect === 'function') $kcoShippingInfo.find('select').customSelect();
+
+				mcf.updateKlarnaCheckoutFrame();
+
+				/*
+				if (isCountry) {
+					mcf.updateKlarnaCheckoutFrame();
+				} else if (typeof window._klarnaCheckout === 'function') {
+					window._klarnaCheckout(function (api) {
+						api.resume();
+					});
+				}*/
+
 			}
 		});
 	});
@@ -66,7 +91,7 @@ $(function() {
 		evt.preventDefault();
 		var clicked = $(this).attr('href');
 		$('.PaymentTab').hide();
-		$('' + clicked).show();
+		$(clicked).show();
 		$(this).parent('li').addClass('Current').siblings().removeClass('Current');
 	});
 
@@ -85,6 +110,7 @@ $(function() {
 	});
 
 	$('#OrderComments').change(function(evt) {
+		var $that = $(this);
 		evt.preventDefault();
 		$.ajax({
 			type: 'POST',
@@ -92,7 +118,8 @@ $(function() {
 			data: $('#OrderComments').serialize() + '&ajax=1',
 			cache: false,
 			success: function(response) {
-				mcf.raiseNotification(mcf.Lang.CommentSaved, 'KlarnaCommentSaved', 'Success', false);
+				$that.next('.FormHelp').remove();
+				$that.after($('<p class="FormHelp Success">' + mcf.Lang.CommentSaved + '</p>').hide()).next().fadeIn(125);
 			}
 		});
 	});

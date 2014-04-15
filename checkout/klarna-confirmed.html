@@ -1,13 +1,13 @@
 {Helper(file:'checkout/header')}
 <div id="MultiPageCheckout" class="clearfix">
 
-	{KlarnaCheckout(
-		before: '
-			<div id="KlarnaCheckoutWrapper">
-		',
-		after: '<p>Tilaus on vahvistettu jne...</p>
-			</div>'
-	)}
+	<div id="KlarnaCheckoutWrapper">
+
+		<h1>{%Hi} {OrderFirstName},</h1>
+		<p>{%KlarnaCheckoutThanks} <a id="KlarnaCheckoutThanksLink" href="/checkout/thanks/"><strong>{%KlarnaCheckoutGoToSummary}</strong></a>.</p>
+
+		{KlarnaCheckout}
+	</div>
 
 </div>
 {Helper(file:'checkout/footer')}

@@ -393,6 +393,16 @@ input[type="radio"] {
 	float: left;
 	margin: -18px 0 18px;
 }
+/* When the help is used as success message */
+.FormHelp.Success {
+	border: 1px solid #d9d9d9;
+	margin-left: -1px;
+	margin-right: -1px;
+	border-radius: 3px;
+	color: #222;
+	text-align: center;
+	padding: 3px 0;
+}
 /* Helptext in header as an intro */
 .HeaderItem .FormHelp {
 	top: 0px;
