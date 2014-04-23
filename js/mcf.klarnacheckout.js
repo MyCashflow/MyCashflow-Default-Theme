@@ -1,7 +1,6 @@
 /*!
  * File: mcf.klarnacheckout.js
  * Part of MyCashFlow's default theme.
- * Please don't edit this file unless necessary!
  */
 
 /*jshint browser: true, jquery: true, laxbreak: true, curly: false, expr: true */
@@ -13,10 +12,8 @@ $(function() {
 	var thanksHash = loc.substr(loc.lastIndexOf('/'));
 	$('#KlarnaCheckoutThanksLink').attr('href', '/checkout/thanks' + thanksHash);
 
-	console.log(mcf);
 	if (typeof mcf === 'undefined') {
 		mcf = mcf || {};
-		console.log(mcf);
 		if (typeof mcf.isSubscribed === 'undefined' || !mcf.isSubscribed('UpdateCampaignCode')) {
 			$('#SubmitCampaignCode').hide();
 		}
@@ -51,36 +48,28 @@ $(function() {
 			data: data + '&ajax=1',
 			cache: false,
 			beforeSend: function() {
-				/*if (!isCountry && typeof window._klarnaCheckout === 'function') {
-					window._klarnaCheckout(function (api) {
-						api.suspend();
-					});
-				}*/
+				$kcoShippingInfo.append('<div class="CheckoutLoader"></div>');
 			},
 			success: function(response) {
+				var $previewContent = $('#PreviewContent');
 				$kcoShippingInfo.html($(response).html());
-
+				$('.CheckoutLoader', $kcoShippingInfo).remove();
 				$.ajax({
 					type: 'GET',
 					url: '/interface/Helper',
 					data: { file: 'helpers/klarna-preview' },
+					beforeSend: function() {
+						$previewContent.append('<div class="CheckoutLoader"></div>');
+					},
 					success: function(response) {
-						$('#PreviewContent').html(response);
+						$previewContent.html(response);
+						$('.CheckoutLoader', $previewContent).remove();
 					}
 				});
 
 				if (typeof $.fn.customSelect === 'function') $kcoShippingInfo.find('select').customSelect();
 
 				mcf.updateKlarnaCheckoutFrame();
-
-				/*
-				if (isCountry) {
-					mcf.updateKlarnaCheckoutFrame();
-				} else if (typeof window._klarnaCheckout === 'function') {
-					window._klarnaCheckout(function (api) {
-						api.resume();
-					});
-				}*/
 
 			}
 		});
