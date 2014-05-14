@@ -13,7 +13,7 @@ $(function() {
 
 		// If the mcf.pubsub.js isn't loaded, don't even show the campaign code field
 		if (typeof mcf === 'undefined') {
-			mcf = mcf || {};
+			window.mcf = window.mcf || {};
 			if (typeof mcf.isSubscribed === 'undefined' || !mcf.isSubscribed('UpdateCampaignCode')) {
 				$('#SubmitCampaignCode').hide();
 			}
@@ -30,6 +30,7 @@ $(function() {
 			var mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
 			if ($kco.length) {
 				$.ajax({
+					type: 'GET',
 					url: '/interface/KlarnaCheckout',
 					data: (mobile) ? { layout: 'mobile' } : { layout: 'desktop' },
 					success: function(response) {
@@ -60,7 +61,7 @@ $(function() {
 				success: function(response) {
 					// Once changed and updated to backend, refresh preview and Klarna Checkout frame
 					var $previewContent = $('#PreviewContent');
-					$kcoShippingInfo.html($(response).html());
+					$kcoShippingInfo.html(response);
 					$('.CheckoutLoader', $kcoShippingInfo).remove();
 					$.ajax({
 						type: 'GET',
