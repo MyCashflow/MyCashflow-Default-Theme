@@ -27,7 +27,10 @@ $(function() {
 		// Function that updates the Klarna Checkout frame when called
 		mcf.updateKlarnaCheckoutFrame = function() {
 			var $kco = $('#KlarnaCheckout');
-			var mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
+			var mobile = false;
+			if (typeof window.matchMedia !== 'undefined') {
+				mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
+			}
 			if ($kco.length) {
 				$.ajax({
 					type: 'GET',
