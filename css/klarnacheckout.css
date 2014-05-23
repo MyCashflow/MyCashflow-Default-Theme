@@ -1,0 +1,113 @@
+#KlarnaCheckoutWrapper {
+	width: 750px;
+	margin: 36px auto 18px;
+	padding: 0;
+}
+* + #KlarnaCheckoutWrapper { margin-top: 0; }
+#KlarnaCheckoutWrapper h2 { clear: both; }
+#KlarnaCheckoutWrapper .CartProduct h3 {
+	margin-bottom: 0;
+}
+#KlarnaCheckoutWrapper table tfoot th { text-align: right; }
+#KlarnaCheckoutWrapper h2 {
+	font-size: 26px; font-weight: normal;
+}
+#KlarnaCheckoutShippingInformation {
+	position: relative;
+}
+#SelectOtherPaymentMethodTab .FormSubmit {
+	padding: 0 0 18px;
+}
+#KlarnaOtherPaymentMethods {
+	position: relative;
+	list-style: none outside;
+	width: 100%;
+	margin: 0 -9px 18px; padding: 0 9px;
+}
+#KlarnaCheckout { position: relative; }
+.KlarnaStages {
+	float: left;
+	margin-left: -36px;
+	width: 36px;
+}
+#KlarnaOtherPaymentMethods:before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: #d9d9d9;
+	position: absolute;
+	bottom: 0px; left: 0px;
+	padding: 0;
+	z-index: 1;
+}
+#KlarnaOtherPaymentMethods li {
+	position: relative; z-index: 2;
+	float: left; width: auto;
+	border: 1px solid #d9d9d9;
+	margin-right: 5px;
+	padding: 0;
+	border-radius: 5px 5px 0 0;
+}
+#KlarnaOtherPaymentMethods li.Current {
+	border-bottom-color: #fff;
+}
+#KlarnaOtherPaymentMethods li a {
+	display: block;
+	padding: 8px 15px;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+#KlarnaOtherPaymentMethods li.Current a {
+	color: #444;
+	cursor: default;
+}
+#klarna-checkout-container {
+	width: 750px;
+	margin: 0 -6px;
+}
+
+.PaymentTab { display: none; }
+#KlarnaCheckoutTab { display: block; }
+
+#KlarnaCheckoutWrapper #SubmitCampaignCode {
+	float: right;
+	margin-top: 0;
+}
+#CommentFieldReveal, #SubmitOrderComment {
+	float: left;
+	margin-right: 10px;
+}
+#CommentFieldReveal a {
+	color: #666;
+	display: block;
+	margin: 0 0 18px;
+}
+#SubmitOrderComment {
+	
+}
+#SubmitOrderComment label {
+	margin-right: 0;
+	padding-right: 0;
+}
+#SubmitOrderComment textarea {
+	margin-right: 0;
+}
+#SubmitOrderCommentButton {
+	clear: both;
+}
+
+@media screen and (max-width: 768px) {
+	#klarna-checkout-container,
+	#KlarnaCheckoutWrapper {
+		width: auto;
+	}
+	.KlarnaStages {
+		display: none;
+	}
+	#KlarnaOtherPaymentMethods li a {
+		font-size: 12px;
+		padding: 8px;
+	}
+}

@@ -444,9 +444,7 @@ $(function() {
 	// Removing products via Ajax
 	//--------------------------------------------------------------------------
 
-	var $cartRemoveButtons = $('a.CartRemove');
-
-	$cartRemoveButtons.live('click', function(evt) {
+	$('#CartForm').on('click', 'a.CartRemove', function(evt) {
 		var $self = $(this),
 			productId = $self.attr('href').split('/')[3];
 
@@ -529,7 +527,15 @@ $(function() {
 		$campaignCodeLink = $('<a href="#coupon" id="CouponCodeReveal">' + mcf.Lang.CampaignCodeInquiry + '</a>');
 
 	$campaignCodeWrap.on('submit', $campaignCodeForm, function(evt) {
-		mcf.publish('UpdateCampaignCode', { data: $(evt.target).serializeObject() });
+		mcf.publish('UpdateCampaignCode', {
+			data: $(evt.target).serializeObject(),
+			success: function() {
+				// If we're on Klarna Checkout page
+				if (typeof mcf !== 'undefined' && typeof mcf.updateKlarnaCheckoutFrame === 'function') {
+					mcf.updateKlarnaCheckoutFrame();
+				}
+			}
+		});
 		evt.preventDefault();
 	});
 
@@ -540,7 +546,8 @@ $(function() {
 
 	// Show the campaign code input when
 	// the campaign code link is clicked.
-	$campaignCodeWrap.on('click', $campaignCodeLink, function() {
+	$campaignCodeWrap.on('click', 'a', function(evt) {
+		evt.preventDefault();
 		$campaignCodeLink.fadeOut(200, function() {
 			$campaignCodeForm.fadeIn(200);
 		});

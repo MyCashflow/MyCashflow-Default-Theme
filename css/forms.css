@@ -393,6 +393,16 @@ input[type="radio"] {
 	float: left;
 	margin: -18px 0 18px;
 }
+/* When the help is used as success message */
+.FormHelp.Success {
+	border: 1px solid #d9d9d9;
+	margin-left: -1px;
+	margin-right: -1px;
+	border-radius: 3px;
+	color: #222;
+	text-align: center;
+	padding: 3px 0;
+}
 /* Helptext in header as an intro */
 .HeaderItem .FormHelp {
 	top: 0px;
@@ -406,16 +416,21 @@ input[type="radio"] {
 .CustomSelectWrap {
 	position: relative;
 	float: left;
+	width: auto;
+	zoom: 1;
 	max-width: 458px;
+	margin-right: 5px;
 }
 .ReplacedSelect {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-ms-box-sizing: content-box;
+	box-sizing: content-box;
 	position: relative;
+	margin-right: 0px;
 	z-index: 10;
-	width: 100%;
+	width: auto;
+	zoom: 1;
 	border: 0;
 	padding-right: 31px;
 	padding-left: 4px;
@@ -432,6 +447,8 @@ input[type="radio"] {
 	top: -2px;
 	left: 0;
 	width: 100%;
+	padding-right: 31px;
+	padding-left: 4px;
 }
 .CustomSelect span {
 	display: block;
@@ -523,7 +540,6 @@ select[disabled] + .CustomSelect span {
 	width: auto;
 	height: auto;
 }
-
 * + html .GroupItem {
 	padding-bottom: 0;
 }

@@ -1,0 +1,60 @@
+<table id="CartTable">
+
+	<thead>
+		<tr>
+			<th scope="col" class="CartProduct">{%Product}</th>
+			<th scope="col" class="CartPrice">{%Price}</th>
+			<th scope="col" class="CartQuantity">{%Quantity}</th>
+			<th scope="col" class="CartTotal">{%Total}</th>
+		</tr>
+	</thead>
+
+	<tfoot>
+		{CartShippingCosts(
+			before:	'<tr><th scope="row" colspan="3">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></td><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+		{CartPaymentCosts(
+			before:	'<tr><th scope="row" colspan="3">{%PaymentMethod}: <strong>{CartPaymentMethod}</strong></td><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+		{CartDiscount(
+			before:	'<tr><th scope="row" colspan="3">{%CampaignCode}: <strong>{CartCouponCode}</strong></td><td class="CartTotal CartDiscount">-',
+			after:	'</td></tr>'
+		)}
+		{CartTotal(
+			before:	'<tr id="FullTotal"><th scope="row" colspan="3">{%Total}</th><td class="CartTotal">',
+			after:	'</td></tr>'
+		)}
+	</tfoot>
+
+	<tbody>
+		{CartProducts(
+			helper:	'{{
+				<tr>
+					<th scope="row" class="CartProduct">
+						<h3>{CartProductName}</h3>
+						{CartProductDetails}
+					</th>
+					<td class="CartPrice">
+						{CartProductComparePrice(
+							before: '
+								<span class="CartDiscount">{CartProductPrice}</span><br>
+								<span class="ProductComparePrice">',
+							after: '
+								</span>',
+							or: '{CartProductPrice}'
+						)}
+					</td>
+					<td class="CartQuantity">
+						{CartProductQuantity(
+							mode: 'preview'
+						)}
+					</td>
+					<td class="CartTotal">{CartProductTotal}</td>
+				</tr>
+			}}'
+		)}
+	</tbody>
+
+</table>
