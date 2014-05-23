@@ -254,15 +254,16 @@ $(function() {
 	});
 
 	// Helper function for updating the full cart content via ajax
-	mcf.updateFullCartContent = function(response, $cart) {
-		if (response !== undefined && $cart !== undefined) {
+	mcf.updateFullCartContent = function($el, helper) {
+		var helperFile = (typeof helper !== 'undefined') ? helper : 'full-cart';
+		if (helperFile !== undefined && $el !== undefined) {
 			$.ajax({
 				type: 'GET',
 				url: '/interface/Helper',
-				data: { file: 'helpers/full-cart' },
+				data: { file: 'helpers/' + helperFile },
 				success: function(response) {
-					$cart.html(response);
-					if (!$('#CartTable', $cart).length) {
+					$el.html(response);
+					if (!$('#CartTable', $el).length) {
 						$('.CheckoutButton').hide();
 						$('#SubmitCampaignCode').hide();
 					} else {
@@ -290,7 +291,7 @@ $(function() {
 			success: function(response) {
 				if (isFullCart) {
 					$cartFormLoader.remove();
-					mcf.updateFullCartContent(response, $cartFormWrapper);
+					mcf.updateFullCartContent($cartFormWrapper);
 				} else {
 					if ($('#MiniCartWrapper ul li:visible').length > 1) {
 						$.ajax({
@@ -334,7 +335,7 @@ $(function() {
 				if (cart_target === 'checkout') {
 					window.location.replace("/" + cart_target + "/");
 				} else {
-					mcf.updateFullCartContent(response, $cartForm);
+					mcf.updateFullCartContent($cartForm);
 				}
 			}
 		});

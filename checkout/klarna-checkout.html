@@ -1,0 +1,103 @@
+{Helper(
+	file: 'checkout/header',
+	or: '<h1>Header not found. Add header to "/checkout/header.html"</h1>'
+)}
+<div id="MultiPageCheckout" class="clearfix BlockForm">
+
+	<div id="KlarnaCheckoutWrapper">
+
+		{KlarnaCheckoutShippingInformation(before: '<h2><span class="KlarnaStages">1. </span>{%CheckoutChooseShippingMethod}</h2>')}
+
+		<h2><span class="KlarnaStages">2. </span>{%CheckoutPreviewOrder}</h2>
+		<div id="PreviewContent">
+			{Helper(file:'helpers/klarna-preview')}
+		</div>
+		<div id="SubmitCampaignCode" data-helper="klarna-preview" data-view="checkout">
+			{CampaignCode(
+				mode: 'auto',
+				action: 'checkout',
+				notifications: 'true',
+				ajax: 'true'
+			)}
+		</div>
+		<p id="CommentFieldReveal"><a href="#comment">{%KlarnaCheckoutAddComments}</a></p>
+		<div class="FormItem" id="SubmitOrderComment">
+			<label for="OrderComments">{%AddComment}</label>
+			<textarea name="details" id="OrderComments" rows="5" cols="72">{CartComment}</textarea>
+		</div>
+
+		<h2><span class="KlarnaStages">3. </span>{%KlarnaCheckoutFinishAndPay}</h2>
+
+		{CheckoutPaymentMethods(
+			exclude: 'current',
+			before: '
+				<ul id="KlarnaOtherPaymentMethods" class="clearfix">
+					<li class="Current"><a href="#KlarnaCheckoutTab">{CartPaymentMethod}</a></li>
+					<li><a href="#SelectOtherPaymentMethodTab">{%KlarnaCheckoutChooseOtherPaymentMethod}</a></li>
+				</ul>
+
+				<div id="SelectOtherPaymentMethodTab" class="PaymentTab">
+
+					<form action="/checkout/" method="post">
+
+						<fieldset id="CheckoutPaymentMethods">
+							<p>{%KlarnaCheckoutOtherPaymentMethodIntro}</p>
+			',
+			after: '
+						</fieldset>
+						<div class="FormItem FormSubmit">
+							<button type="submit" class="SubmitButton">{%KlarnaCheckoutChangePaymentMethod}</button>
+						</div>
+
+					</form>
+
+				</div>
+				<div id="KlarnaCheckoutTab" class="PaymentTab">
+					<p>{CheckoutPaymentMethodDescription}</p>
+					{KlarnaCheckout}
+				</div>
+			',
+			or: '
+				<p>{CheckoutPaymentMethodDescription}</p>
+				{KlarnaCheckout}
+			'
+		)}
+
+	</div>
+
+</div>
+<script type="text/javascript">
+
+	window.onload = function() {
+		// Making the Klarna Checkout more plug and play.
+		// Adding of essential scripts and dictionary variables.
+
+		var mcf = window.mcf || {};
+		mcf.Lang = mcf.Lang || {};
+		mcf.Lang.CommentSaved = '{\%CheckoutSuccessCommentSaved}';
+
+		mcf.addScriptToPage = function(scriptSrc) {
+			var script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = scriptSrc;
+			document.getElementsByTagName('head')[0].appendChild(script);
+		};
+
+		if (typeof jQuery !== 'undefined') {
+			if (parseFloat(jQuery.fn.jquery) < 1.7) {
+				mcf.addScriptToPage('//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+			}
+		} else {
+			mcf.addScriptToPage('//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+		}
+
+		if (typeof mcf.updateKlarnaCheckoutFrame !== 'function') {
+			mcf.addScriptToPage('{ThemeUrl}/js/mcf.klarnacheckout.js');
+		}
+
+	}
+</script>
+{Helper(
+	file:'checkout/footer',
+	or: '<h1>Footer not found. Add footer to "/checkout/footer.html"</h1>'
+)}

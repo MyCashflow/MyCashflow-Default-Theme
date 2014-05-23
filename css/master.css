@@ -1441,7 +1441,7 @@ table .CartProduct dt { clear: left; }
 	float: left;
 	top: auto;
 	margin: 0 3px 9px 0;
-	padding: 0 3px 0 18px;
+	padding: 0 3px 0 18px !important;
 	line-height: 18px;
 	font-size: 11px;
 	font-weight: bold;
@@ -1555,7 +1555,7 @@ a.Button.PrimaryAction,
 	list-style: decimal inside;
 	overflow: hidden;
 	padding: 0;
-	margin: -36px 0 0 15px;
+	margin: 0 0 -1px 15px;
 	border: 1px solid #D2D2D2;
 	border-top: 1px solid #D9D9D9;
 	border-bottom: 0;
@@ -1574,6 +1574,10 @@ a.Button.PrimaryAction,
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
+}
+#CheckoutStage + * {
+	position: relative; z-index: 100;
+	background: #FFF; margin-top: -1px;
 }
 #CheckoutStage li {
 	float: left !important;
@@ -1788,6 +1792,17 @@ a.Button.PrimaryAction,
 .SelectedMethod .ShippingMethodPrice,
 .SelectedMethod .PaymentMethodPrice {
 	color: #222;
+}
+
+.ShippingMethodWrapper .CustomSelect {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+.ShippingMethodWrapper.SelectedMethod .CustomSelect {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
 }
 
 .ShippingMethodPrice,
