@@ -225,3 +225,67 @@ tr#FullTotal td.CartTotal { font-size: 12pt; }
 	line-height: 1cm;
 	text-align: right !important;
 }
+
+/* Return document */
+
+#ReturnIntro {
+	padding: 1em 0;
+	font-size: 9pt;
+	font-style: italic;
+}
+#ReturnAddressInfo {
+	width: 100%;
+	overflow: hidden;
+}
+.AddressColumn {
+	box-sizing: border-box;
+	width: 49.9%;
+	float: left;
+	padding-right: 2em;
+}
+.AddressColumn + .AddressColumn {
+	padding-left: 2em; padding-right: 0;
+}
+.AddressColumn dl {
+	width: 100%; overflow: hidden;
+	margin-bottom: 1em;
+}
+#ReturnedProducts, #ReturnedProducts td, #ReturnedProducts th {
+	border: 0; width: auto;
+	text-align: left !important;
+}
+#ReturnedProducts thead th {
+	padding: 0;
+	border-bottom: 0.25pt solid #000;
+}
+#ReturnedProducts th {
+	font-weight: bold;
+}
+#ReturnedProducts th em {
+	font-weight: normal;
+}
+#ReturnedProducts th small {
+	font-weight: normal;
+	font-size: 7.5pt;
+}
+#ReturnedProducts td {
+	padding: 0 6pt; vertical-align: middle;
+}
+#ReturnedProducts .checkbox {
+	padding-left: 0;
+}
+#ReturnedProducts .checkbox div {
+	border: 1pt solid #000;
+	width: 18pt; height: 18pt;
+	padding: 0; margin: 3pt 3pt 3pt 0;
+}
+#Signature {
+	width: 75%;
+	margin-top: 4em;
+	border-bottom: 0.25pt solid #000;
+}
+#Signature h4 {
+	font-size: 9pt;
+	font-weight: normal;
+	margin-bottom: 4em;
+}

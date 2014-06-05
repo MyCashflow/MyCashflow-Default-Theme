@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%Receipt} {OrderNumber}</title>
+
+<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css" />
+
+</head>
+
+<body>
+
+	<div id="ReceiptHeader">
+		<div id="Logo">
+			{Logo}
+		</div>
+		<div id="ReceiptTitle">
+			<h4>{%Ordernumber} {OrderNumber}</h4>
+			<h1>{%ReturnDocument}</h1>
+		</div>
+	</div>
+
+	<p id="ReturnIntro">{%ReturnDocumentHelpText}</p>
+
+	<div id="ReturnAddressInfo">
+		<div class="AddressColumn">
+			<h3>{%ReturnReceiver}</h3>
+			<p>
+				{ContactCompany}
+				{ContactBusinessID(
+					before: ' (',
+					after: ')'
+				)}
+				<br>
+				{ContactStreetAddress1(
+					after: '{ContactStreetAddress2(before: ',&ensp;')}'
+				)}
+				<br>
+				{ContactZip} {ContactCity(after:',&ensp;')} {ContactCountry}
+			</p>
+			<p>
+				{ContactEmail(after:'<br>')}
+				{ContactInternet(after:'<br>')}
+				{ContactPhone(after:'<br>')}
+			</p>
+		</div>
+		<div class="AddressColumn">
+			<h3>{%OrderInformation}</h3>
+			{OrderInfo}
+			<h3>{%Returner}</h3>
+			<p>
+				{OrderCustomerInformation}
+			</p>
+		</div>
+	</div>
+
+	<h3>{%ReturnedProducts}</h3>
+	<p>{%ReturnedProductsLegalText}</p>
+
+	{OrderProducts(
+		before: '
+			<table id="ReturnedProducts">
+				<tbody>
+		',
+		helper: '{{
+			<tr>
+				<td class="checkbox">
+					<div></div>
+				</td>
+				<th>
+					{OrderProductName}
+					{OrderProductVariation(before: ' <br /><em class="ProductVariation">',after:'</em>')}
+					{OrderProductCode(
+						before: '&nbsp;<small>({%ProductCode}:&nbsp;',
+						after: ')</small>'
+					)}
+				</th>
+			</tr>
+		}}',
+		after: '
+				</tbody>
+			</table>
+		'
+	)}
+
+	<div id="Signature">
+		<h4>{%CustomerSignature}</h4> 
+	</div>
+
+</body>
+</html>
