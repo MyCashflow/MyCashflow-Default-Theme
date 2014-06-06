@@ -17,6 +17,8 @@
 }
 #KlarnaCheckoutShippingInformation {
 	position: relative;
+	margin-left: -36px;
+	padding-left: 36px;
 }
 #SelectOtherPaymentMethodTab .FormSubmit {
 	padding: 0 0 18px;
