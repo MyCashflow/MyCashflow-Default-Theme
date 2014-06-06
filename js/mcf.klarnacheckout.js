@@ -24,6 +24,10 @@ $(function() {
 		var thanksHash = loc.substr(loc.lastIndexOf('/'));
 		$('#KlarnaCheckoutThanksLink').attr('href', '/checkout/thanks' + thanksHash);
 
+		// Disable selecting the shipping method if no zip code is given
+		if ($.trim($('#postal_code').val()) === '') $('#shipping_method').prop('disabled', true);
+		else $('#shipping_method').prop('disabled', false);
+
 		// Function that updates the Klarna Checkout frame when called
 		mcf.updateKlarnaCheckoutFrame = function() {
 			var $kco = $('#KlarnaCheckout');
@@ -53,6 +57,7 @@ $(function() {
 			var data = $kcoShippingInfo.find('input, select').serialize();
 			var $changedEl = $(evt.target);
 			var isCountry = $changedEl.is('#country');
+
 			$.ajax({
 				type: 'POST',
 				url: '/checkout/klarna/',
@@ -65,7 +70,13 @@ $(function() {
 					// Once changed and updated to backend, refresh preview and Klarna Checkout frame
 					var $previewContent = $('#PreviewContent');
 					$kcoShippingInfo.html(response);
+
+					// Disable selecting the shipping method if no zip code is given
+					if ($.trim($('#postal_code').val()) === '') $('#shipping_method').prop('disabled', true);
+					else $('#shipping_method').prop('disabled', false);
+
 					$('.CheckoutLoader', $kcoShippingInfo).remove();
+
 					$.ajax({
 						type: 'GET',
 						url: '/interface/Helper',

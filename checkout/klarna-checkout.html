@@ -6,7 +6,11 @@
 
 	<div id="KlarnaCheckoutWrapper">
 
-		{KlarnaCheckoutShippingInformation(before: '<h2><span class="KlarnaStages">1. </span>{%CheckoutChooseShippingMethod}</h2>')}
+		{KlarnaCheckoutShippingInformation(
+			before: '
+				<h2><span class="KlarnaStages">1. </span>{%CheckoutChooseShippingMethod}</h2>
+				<p>{%KlarnaCheckoutShippingHelp}</p>'
+		)}
 
 		<h2><span class="KlarnaStages">2. </span>{%CheckoutPreviewOrder}</h2>
 		<div id="PreviewContent">
