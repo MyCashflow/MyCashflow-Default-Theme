@@ -4,11 +4,32 @@
 )}
 <div id="MultiPageCheckout" class="clearfix">
 
-	<div id="KlarnaCheckoutWrapper">
-
+	<div id="KlarnaThanksHeader" class="clearfix">
 		<h1>{%Hi} {OrderFirstName},</h1>
-		<p>{%KlarnaCheckoutThanks} <a id="KlarnaCheckoutThanksLink" href="/checkout/thanks/"><strong>{%KlarnaCheckoutGoToSummary}</strong></a>.</p>
 
+		<p class="Big">{%KlarnaCheckoutThanks} <a id="KlarnaCheckoutThanksLink" href="/checkout/thanks/"><strong>{%KlarnaCheckoutGoToSummary}</strong></a>.</p>
+
+		{CheckoutRegistrationForm(
+			before: '
+				<p class="Big">
+					{%CheckoutThanksRegistration} {%CheckoutThanksRegistrationSubscriptions}
+				</p>
+				<p class="Big">
+					<a class="Button" title="{%CheckoutCreateAccount}" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">{%CheckoutCreateAccount}</a>
+				</p>
+				<div id="MarketingPermissions">{MarketingPermissions}</div>
+				<form action="/account/register/" method="post" id="CheckoutThanksRegistrationForm" class="BlockForm">
+					<p>{%CheckoutCreateAccountInfo}</p>
+			',
+			after: '<div class="FormItem FormSubmit">
+						<button type="submit" class="SubmitButton">{%CheckoutCreateAccount}</button>
+					</div>
+				</form>'
+		)}
+	</div>
+
+
+	<div id="KlarnaCheckoutWrapper">
 		{KlarnaCheckout}
 	</div>
 

@@ -28,6 +28,28 @@ $(function() {
 		if ($.trim($('#postal_code').val()) === '') $('#shipping_method').prop('disabled', true);
 		else $('#shipping_method').prop('disabled', false);
 
+		// Subscribe to marketing lists via ajax
+		$('#MarketingPermissions').on('change', function(evt) {
+			var $changedEl = $(evt.target);
+			var $form = $changedEl.closest('form');
+			$form.find('[name="action"]').prop('value', $changedEl.attr('name'));
+			var data = $form.find('input').serialize();
+			var email = $form.find('[name="email"]').val();
+			var phone = $form.find('[name="phone"]').val();
+			$changedEl.parent().addClass('loading');
+			$.ajax({
+				type: 'POST',
+				url: $form.attr('action'),
+				data: data,
+				success: function() {
+					$.get('/interface/MarketingPermissions?email=' + email + '&phone=' + phone, function(response) {
+						$('#MarketingPermissions').html(response).find('label').prepend('<span class="tinyloader"></span>');
+					});
+				}
+			});
+		
+		}).find('label').prepend('<span class="tinyloader"></span>');
+
 		// Function that updates the Klarna Checkout frame when called
 		mcf.updateKlarnaCheckoutFrame = function() {
 			var $kco = $('#KlarnaCheckout');
