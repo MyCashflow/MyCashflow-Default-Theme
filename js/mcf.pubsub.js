@@ -264,10 +264,11 @@ $(function() {
 				success: function(response) {
 					$el.html(response);
 					if (!$('#CartTable', $el).length) {
-						$('.CheckoutButton').hide();
+						$('#CartShareButtons').hide();
 						$('#SubmitCampaignCode').hide();
 					} else {
 						$('.CheckoutButton').show();
+						$('#CartShareButtons').show();
 						$('#SubmitCampaignCode').show();
 					}
 				}
