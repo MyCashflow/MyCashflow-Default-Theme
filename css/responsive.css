@@ -1133,6 +1133,41 @@
 	}
 }
 
+@media screen and (max-width: 800px) {
+	#CartFbShare {
+		border: 0;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#CartShareButtons {
+		width: auto;
+	}
+
+	#CartShareButtons:after {
+		clear: both;
+		content: '';
+		display: block;
+	}
+
+	.ShareButton {
+		display: block;
+		height: auto;
+		padding: 4px 9px 4px 29px !important;
+		width: 100%;
+	}
+
+	.ShareButton > i {
+		left: 10px;
+	}
+
+	#CartFbShare {
+		border: 0;
+		clear: both;
+		margin-bottom: 20px;
+	}
+}
+
 @media screen and (max-width: 280px) {
 	#SearchForm{opacity: 0;}
 	.LogoLink img{max-width: 40%;}
