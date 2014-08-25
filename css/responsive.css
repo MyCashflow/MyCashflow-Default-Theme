@@ -11,6 +11,16 @@
 }
 
 @media screen and (max-width: 980px) {
+	* {
+		-ms-word-break: break-all;
+		word-break: break-all;
+		word-break: break-word;
+
+		-webkit-hyphens: auto;
+		-moz-hyphens: auto;
+		-ms-hyphens: auto;
+		hyphens: auto;
+	}
 
 	body.AdminLoggedIn { padding: 0 0 36px; }
 	body.AdminLoggedIn #AdminTools { position: fixed; z-index: 2; top: auto; bottom: 0px; left: 0px; }
