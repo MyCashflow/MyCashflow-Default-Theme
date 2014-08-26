@@ -11,6 +11,16 @@
 }
 
 @media screen and (max-width: 980px) {
+	* {
+		-ms-word-break: break-all;
+		word-break: break-all;
+		word-break: break-word;
+
+		-webkit-hyphens: auto;
+		-moz-hyphens: auto;
+		-ms-hyphens: auto;
+		hyphens: auto;
+	}
 
 	body.AdminLoggedIn { padding: 0 0 36px; }
 	body.AdminLoggedIn #AdminTools { position: fixed; z-index: 2; top: auto; bottom: 0px; left: 0px; }
@@ -884,6 +894,9 @@
 		padding: 5px 5% 7px;
 		width: 100px;
 	}
+	.Product h2 {
+		word-wrap: break-word;
+	}
 	.Product .ProductImage{
 		height: 100px;
 		line-height: 100px;
@@ -1130,6 +1143,41 @@
 	.RestrictedLogin #CurrencyNavigation,
 	.RestrictedLogin .Breadcrumb {
 		display: none;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	#CartFbShare {
+		border: 0;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#CartShareButtons {
+		width: auto;
+	}
+
+	#CartShareButtons:after {
+		clear: both;
+		content: '';
+		display: block;
+	}
+
+	.ShareButton {
+		display: block;
+		height: auto;
+		padding: 4px 9px 4px 29px !important;
+		width: 100%;
+	}
+
+	.ShareButton > i {
+		left: 10px;
+	}
+
+	#CartFbShare {
+		border: 0;
+		clear: both;
+		margin-bottom: 20px;
 	}
 }
 
