@@ -17,7 +17,6 @@
 				<p class="Big">
 					<a class="Button" title="{%CheckoutCreateAccount}" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">{%CheckoutCreateAccount}</a>
 				</p>
-				<div id="MarketingPermissions">{MarketingPermissions}</div>
 				<form action="/account/register/" method="post" id="CheckoutThanksRegistrationForm" class="BlockForm">
 					<p>{%CheckoutCreateAccountInfo}</p>
 			',
@@ -26,8 +25,10 @@
 					</div>
 				</form>'
 		)}
-	</div>
 
+		<div id="MarketingPermissions">{MarketingPermissions}</div>
+
+	</div>
 
 	<div id="KlarnaCheckoutWrapper">
 		{KlarnaCheckout}
