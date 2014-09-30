@@ -54,5 +54,18 @@
 					</ul>'
 			)}
 
-			{Search}
+			<form action="/search/" method="get" id="SearchForm">
+				<div class="FormItem">
+					<label for="SearchInput">Haku:</label>
+					<input type="search" name="q" id="SearchInput" placeholder="Hae tuotetta nimen, tuoteryhmän tai ominaisuuden mukaan" value="{SearchKeyword}">
+					<div id="SearchCategoryFilter">
+						<select>
+							<option selected="selected" value="all">Kaikista tuoteryhmistä</option>
+							{Categories(levels: 1, helper: '{{ <option>{CategoryName}</option> }}'')}
+						</select>
+					</div>
+					<button type="submit" id="SearchButton"><span>Haku</span></button>
+				</div>
+			</form>
+
 		</header>

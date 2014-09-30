@@ -5,7 +5,11 @@
 		<div id="Primary" class="Column">
 			<div id="PageHeader">
 				{Path}
-				<h1>{PageTitle}</h1>
+				<h1>Hakutulokset hakusanalla <em>{SearchKeyword}</em></h1>
+				<div id="KlevuSearchFilters">
+					<p class="RelatedSearches">Samankaltaisia hakusanoja: <a href="#">Pissaa ja paskaa</a>, <a href="#">Kakkaa ja ureaa</a></p>
+					<p>Näytä hakutulokset kategoriasta: <a href="#">Tuoteryhmäryhmänen (23)</a>, <a href="#">Joku muu muka (12)</a></p>
+				</div>
 			</div>
 
 			{Products(
@@ -15,7 +19,7 @@
 				sort: 'search|name_asc|released_asc|price_asc',
 				before: '
 					<form action="{CurrentUrl}" method="get" id="PaginationSortForm">
-						{PaginationStatus}
+						{PaginationStatus} <a href="#" id="FilterToggler">Suodata hakutuloksia</a>
 						<div class="FormItem GroupItem">
 							{PaginationFormParameters(
 								name: 'keyword'
@@ -31,6 +35,48 @@
 							</div>
 						</div>
 					</form>
+					<div id="FilteringSearchResults" class="BlockForm">
+							<h2>Suodata hakutuloksia</h2>
+							<div class="FormItem">
+								<label>Väri</label>
+								<select>
+									<option>Mikä tahansa</option>
+									<option>Punainen (12)</option>
+									<option>Keltainen (8)</option>
+									<option>Sininen (4)</option>
+									<option>Vihreä (3)</option>
+								</select>
+							</div>
+							<div class="FormItem">
+								<label>Materiaali ja kuosi</label>
+								<select>
+									<option>Mikä tahansa</option>
+									<option>Farkku (23)</option>
+									<option>Värikäs ja trendikäs flanelli (12)</option>
+									<option>Burberry (12)</option>
+								</select>
+							</div>
+							<div class="FormItem">
+								<label>Kengän tai muun jalkahomman koko</label>
+								<select>
+									<option>Mikä tahansa</option>
+									<option>Seitsemänsataa kolmekymmentä kaksi (23)</option>
+									<option>Keltainen (1)</option>
+									<option>Sininen (1)</option>
+									<option>Vihreä (1)</option>
+								</select>
+							</div>
+							<div class="FormItem">
+								<label>Materiaali ja kuosi</label>
+								<select>
+									<option>Mikä tahansa</option>
+									<option>Kuosittelukuosi vuosi ulos suosi (2)</option>
+									<option>Värikäs flanelli (2)</option>
+									<option>Burberry (1)</option>
+								</select>
+							</div>
+							<span id="CloseSearchFilters">Sulje</span>
+						</div>
 				',
 				after: '{PaginationPages}',
 				helper: 'helpers/listproduct',

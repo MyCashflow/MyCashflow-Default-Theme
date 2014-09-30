@@ -110,7 +110,7 @@ $(function() {
 
 	// Create the search results element.
 	$searchResults.appendTo($searchForm);
-	$searchResults.width($searchForm.width());
+
 
 	// Create the search indicator & turn
 	// form brower's autocompletion off.
@@ -145,7 +145,14 @@ $(function() {
 				},
 
 				success: function(results) {
-					$searchResults.html(results).fadeTo(500, 0.9);
+					$('body').on('click.autoSuggestions', function() {
+						//$searchInput.val('').blur();
+						$searchResults.html('');
+						$searchForm.removeClass('SearchActive');
+						if (!html5inputTypes) $searchIndicator.hide().removeClass('CloseSearchResults');
+						$('body').off('click');
+					});
+					$searchResults.html(results).fadeIn(250);
 
 					// Test if we're dealing with HTML5 search input type and react accordingly
 					if (html5inputTypes) {
@@ -167,6 +174,34 @@ $(function() {
 			});
 		}
 	});
+
+
+	//--------------------------------------------------------------------------
+	// Klevu search
+	//--------------------------------------------------------------------------
+
+	var $searchCategoryFilter = $('#SearchCategoryFilter select');
+	$searchForm.on('change', $searchCategoryFilter, function(evt) {
+		if ($searchCategoryFilter.find('option:selected').val() === 'all') {
+			$searchCategoryFilter.parent('.CustomSelectWrap').addClass('default');
+		} else {
+			$searchCategoryFilter.parent('.CustomSelectWrap').removeClass('default');
+		}
+	}).trigger('change');
+
+	$('#FilterToggler').on('click', function(evt) {
+		$(this).hide();
+		evt.preventDefault();
+		$('#FilteringSearchResults').slideDown(125);
+	});
+
+	$('#CloseSearchFilters').on('click', function(evt) {
+		$('#FilteringSearchResults').slideUp(125, function() {
+			$('#FilterToggler').fadeIn(125);
+		});
+	});
+
+
 
 	//--------------------------------------------------------------------------
 	// Home Page Banners

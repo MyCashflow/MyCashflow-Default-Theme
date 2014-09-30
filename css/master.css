@@ -205,16 +205,19 @@ header .DropdownNavigation ul li a:hover {
 
 /* Search */
 #SearchForm {
-	position: absolute; right: 6px; bottom: 9px;
-	padding: 8px; height: 18px; z-index: 99;
-	background: #F8F8F8; border: 1px solid #D9D9D9;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+	position: absolute; right: 0; bottom: 0px;
+	padding: 8px 6px 9px 5px; height: 27px; z-index: 99;
+	width: 564px;
+	background: #F8F8F8;
+	border: 1px solid #D9D9D9;
+	border-bottom: 0; border-right: 0;
+	-moz-border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	border-radius: 5px 0 0 0;
 	zoom: 1;
 }
 .lt-ie9 #SearchForm {
-	width: 290px;
+	/*width: 290px;*/
 }
 #SearchForm.SearchActive {
 	-moz-border-bottom-left-radius: 0;
@@ -224,15 +227,45 @@ header .DropdownNavigation ul li a:hover {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 }
-#SearchForm .FormItem { border: 0; padding: 0; background: none; zoom: 1; }
+#SearchForm .FormItem { position: relative; z-index: 100; border: 0; padding: 0; background: none; zoom: 1; }
 #SearchForm label { display: none; }
-#SearchForm input { width: 240px; float: left; }
-#SearchForm button { margin-right: 0; }
+#SearchForm input { width: 100%; height: 31px; padding: 3px; float: left; }
+#SearchCategoryFilter { position: absolute; top: 4px; right: 48px; width: auto; }
+#SearchForm select { max-width: 100%; width: auto; float: right; font-size: 11px; color: #999; }
+#SearchForm .CustomSelect { text-align: right; font-size: 11px; }
+#SearchForm .CustomSelect .sel_outer,
+#SearchForm .CustomSelect.ActiveSelect .sel_outer {
+	padding-right: 21px;
+	background: none; border: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	text-shadow: none;
+}
+#SearchForm .CustomSelect .sel_outer .sel_inner {
+	color: #333; background: none;
+	border: 0; padding: 0; line-height: 22px;
+	font-weight: bold;
+}
+#SearchForm .default .CustomSelect .sel_outer .sel_inner { color: #999; font-weight: normal; }
+#SearchForm .CustomSelectWrap:hover .CustomSelect .sel_outer .sel_inner { color: #333; }
+#SearchForm .CustomSelect .sel_outer .sel_arrow {
+	width: 20px; height: 20px;
+	background-color: #333;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTlCOUFENzMyQjVBMTFFNEFEODdDMzVDRUIwNTc3NjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTlCOUFENzQyQjVBMTFFNEFEODdDMzVDRUIwNTc3NjMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBOUI5QUQ3MTJCNUExMUU0QUQ4N0MzNUNFQjA1Nzc2MyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBOUI5QUQ3MjJCNUExMUU0QUQ4N0MzNUNFQjA1Nzc2MyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pjthv6QAAABkSURBVHja7NYxCsAgDEBRIz23hl7c6iqKkITi8D9kDW/IEGm9dFE5XRYgQIAAAQIECNC62kcO85o2N3tl/HabUetSD2hUIzERoBml3mVPwB3qdFuuhCcfECBAgAABAvRvnwADAOU3qbDxf9aQAAAAAElFTkSuQmCC);
+}
+#SearchForm .default .CustomSelect .sel_outer .sel_arrow { background-color: #999; }
+#SearchForm .CustomSelectWrap:hover .CustomSelect .sel_outer .sel_arrow { background-color: #333; }
+
+#SearchForm button { position: absolute; top: 2px; right: 0px; }
 
 #LiveSearchResults {
+	width: 556px; float: none; clear: both; padding: 10px 0 9px;
 	display: none; margin: 0; list-style: none outside;
-	position: absolute; top: 35px; left: -1px;
-	z-index: 100; background: #F8F8F8; padding: 0 8px;
+	position: absolute; top: 36px; left: 8px;
+	background: #FFF; z-index: 99;
 	-moz-border-bottom-left-radius: 5px;
 	-moz-border-bottom-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
@@ -241,18 +274,21 @@ header .DropdownNavigation ul li a:hover {
 	border-bottom-right-radius: 5px;
 	border: 1px solid #D9D9D9;
 	border-top: 0; zoom: 1;
+	-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 .SearchActive #LiveSearchResults {
 	display: block;
 }
 #LiveSearchResults li {
 	width: 100%;
-	padding: 9px; margin: 0 -9px;
 }
-#LiveSearchResults li + li {
-	padding-top: 8px;
-	border-top: 1px solid #D9D9D9;
+#LiveSearchResults li a {
+	display: block;;
+	padding: 4px 14px 5px;
 }
+#LiveSearchResults li a:hover { background: #f2f2f2; }
 .SearchIndicator {
 	display: none; position: absolute;
 	top: 8px; left: 226px;
@@ -262,6 +298,41 @@ header .DropdownNavigation ul li a:hover {
 .CloseSearchResults { background-image: url(../i/search-close.gif); cursor: pointer; }
 
 .NoResults { padding: 0 15px; }
+
+#FilterToggler {
+	float: left;
+	margin-top: 18px;
+	margin-left: 3px;
+	font-size: 11px;
+}
+
+#FilteringSearchResults .FormItem { float: left; }
+
+#KlevuSearchFilters p { margin: 0; }
+
+#FilteringSearchResults {
+	position: relative;
+	width: auto; overflow: auto;
+	display: none; clear: both;
+	padding: 9px 9px 0; margin: 9px 6px 18px;
+	background: #ffffd9;
+	border: 1px solid #e5e5a1;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+#CloseSearchFilters {
+	display: block; margin: 0;
+	padding: 1px; border: 1px solid #E8E8E8;
+	position: absolute;
+	top: 1px; right: 1px;
+	width: 16px; height: 16px;
+	overflow: hidden; text-indent: -10000em;
+	background: #FFF url(../i/search-close.gif) no-repeat 50% 50%;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
 
 /* Same Form @ Content area */
 
