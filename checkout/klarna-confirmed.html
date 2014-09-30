@@ -5,7 +5,7 @@
 <div id="MultiPageCheckout" class="clearfix">
 
 	<div id="KlarnaThanksHeader" class="clearfix">
-		<h1>{%Hi} {OrderFirstName},</h1>
+		<h1>{%Hi}{OrderFirstName(before:'&nbsp;')},</h1>
 
 		<p class="Big">{%KlarnaCheckoutThanks} <a id="KlarnaCheckoutThanksLink" href="/checkout/thanks/"><strong>{%KlarnaCheckoutGoToSummary}</strong></a>.</p>
 
@@ -17,7 +17,6 @@
 				<p class="Big">
 					<a class="Button" title="{%CheckoutCreateAccount}" id="DisplayCheckoutForm" href="#CheckoutThanksRegistrationForm">{%CheckoutCreateAccount}</a>
 				</p>
-				<div id="MarketingPermissions">{MarketingPermissions}</div>
 				<form action="/account/register/" method="post" id="CheckoutThanksRegistrationForm" class="BlockForm">
 					<p>{%CheckoutCreateAccountInfo}</p>
 			',
@@ -26,8 +25,10 @@
 					</div>
 				</form>'
 		)}
-	</div>
 
+		<div id="MarketingPermissions">{MarketingPermissions}</div>
+
+	</div>
 
 	<div id="KlarnaCheckoutWrapper">
 		{KlarnaCheckout}

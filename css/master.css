@@ -1520,6 +1520,7 @@ table .CartProduct dt { clear: left; }
 	background-image: linear-gradient(#fff,#dedede);
 	border: 1px solid #ccc;
 	border-radius: 3px;
+	z-index: 99;
 }
 .ShareButton i {
 	position: absolute;

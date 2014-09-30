@@ -11,6 +11,8 @@ $(function() {
 	// Check if we're on Klarna Checkout view
 	if ($('#KlarnaCheckoutWrapper').length) {
 
+		$.ajaxSetup({ cache: false }); // Disable erroneous ajax caching in IE
+
 		// If the mcf.pubsub.js isn't loaded, don't even show the campaign code field
 		if (typeof mcf === 'undefined') {
 			window.mcf = window.mcf || {};
@@ -47,7 +49,7 @@ $(function() {
 					});
 				}
 			});
-		
+
 		}).find('label').prepend('<span class="tinyloader"></span>');
 
 		// Function that updates the Klarna Checkout frame when called
