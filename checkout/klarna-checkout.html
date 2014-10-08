@@ -6,7 +6,13 @@
 
 	<div id="KlarnaCheckoutWrapper">
 
-		{KlarnaCheckoutShippingInformation(before: '<h2><span class="KlarnaStages">1. </span>{%CheckoutChooseShippingMethod}</h2>')}
+		<fieldset id="KlarnaCheckoutShippingInformation">
+			{KlarnaCheckoutShippingInformation(
+				before: '
+					<h2><span class="KlarnaStages">1. </span>{%CheckoutChooseShippingMethod}</h2>
+					<p>{%KlarnaCheckoutShippingHelp}</p>'
+			)}
+		</fieldset>
 
 		<h2><span class="KlarnaStages">2. </span>{%CheckoutPreviewOrder}</h2>
 		<div id="PreviewContent">

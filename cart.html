@@ -25,31 +25,26 @@
 
 				<a class="Button CheckoutButton" href="/checkout/">{%OrderProducts}</a>
 
-				{Helper(
-					case: 'cartnotempty',
-					file: '{{
-						<div id="CartShareButtons">
-							<a href="#ShareCartLink" class="Button ShareButton" data-file="share-cart-link" id="ShowShareLink" title="{%CartShareLink}">
-								<i></i>{%CartShareLink}
-							</a>
-							<a href="#SendCart" class="Button ShareButton" data-file="send-cart" id="ShowSendCart" title="{%CartShareSendToEmail}">
-								<i></i>{%CartShareSendToEmail}
-							</a>
-							<div class="fb-share-button" data-href="{CartShareLink}" data-type="button" id="CartFbShare"></div>
-						</div>
-						<div id="fb-root"></div>
-						<script>
-							(function(d, s, id) {
-								var langCode = ('{CurrentLanguageCode}' === 'fi') ? 'fi_FI' : 'en_US',
-									js, fjs = d.getElementsByTagName(s)[0];
-								if (d.getElementById(id)) return;
-								js = d.createElement(s); js.id = id;
-								js.src = "//connect.facebook.net/" + langCode + "/all.js#xfbml=1";
-								fjs.parentNode.insertBefore(js, fjs);
-							}(document, 'script', 'facebook-jssdk'));
-						</script>
-					}}'
-				)}
+				<div id="CartShareButtons">
+					<a href="#ShareCartLink" class="Button ShareButton" data-file="share-cart-link" id="ShowShareLink" title="{%CartShareLink}">
+						<i></i>{%CartShareLink}
+					</a>
+					<a href="#SendCart" class="Button ShareButton" data-file="send-cart" id="ShowSendCart" title="{%CartShareSendToEmail}">
+						<i></i>{%CartShareSendToEmail}
+					</a>
+					<div class="fb-share-button" data-href="{CartShareLink}" data-type="button" id="CartFbShare"></div>
+				</div>
+				<div id="fb-root"></div>
+				<script>
+					(function(d, s, id) {
+						var langCode = ('{CurrentLanguageCode}' === 'fi') ? 'fi_FI' : 'en_US',
+							js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/" + langCode + "/all.js#xfbml=1";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
 
 			</div>
 

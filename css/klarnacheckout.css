@@ -3,8 +3,72 @@
 	margin: 36px auto 18px;
 	padding: 0;
 }
+
+#KlarnaThanksHeader {
+	background: #FAFAFA;
+	border-bottom: 1px solid #d9d9d9;
+	margin: 0 -15px;
+	padding: 18px 129px 9px;
+}
+#KlarnaThanksHeader #DisplayCheckoutForm {
+	float: left;
+}
+#KlarnaThanksHeader .Button {
+	margin-top: 2px;
+	margin-right: 3px;
+	margin-bottom: 9px;
+}
+#KlarnaThanksHeader button { display: none; }
+#KlarnaThanksHeader .Checks,
+#KlarnaThanksHeader .CheckWrap {
+	margin: 0; padding: 0;
+	width: auto; float: left;
+}
+#KlarnaThanksHeader label {
+	clear: none;
+	float: left;
+	width: auto;
+	margin: 0 3px 10px 0;
+	padding: 8px 9px;
+	border: 1px solid #D9D9D9;
+	border-bottom-color: #CCCCCC;
+	background-color: #E8E8E8;
+	background-repeat: repeat-x;
+	background-image: -o-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -moz-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -ms-linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #E8E8E8));
+	background-image: linear-gradient(top, #FAFAFA 0%, #E8E8E8 100%);
+	-webkit-box-shadow: inset 0 1px 0 #FFF;
+	-moz-box-shadow: inset 0 1px 0 #FFF;
+	box-shadow: inset 0 1px 0 #FFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+	cursor: pointer;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+#KlarnaThanksHeader label .tinyloader {
+	display: none;
+	float: left;
+	width: 16px; height: 16px;
+	margin-right: 5px;
+	background: url("../i/tiny-loader.gif") no-repeat left bottom;
+}
+#KlarnaThanksHeader label input {
+	top: 2px;
+	margin-right: 3px;
+	margin-left: 0;
+}
+#KlarnaThanksHeader label.loading .tinyloader { display: block; }
+#KlarnaThanksHeader label.loading input { display: none; }
+
 * + #KlarnaCheckoutWrapper { margin-top: 0; }
 #KlarnaCheckoutWrapper h2 { clear: both; }
+#KlarnaCheckoutWrapper h2 + p {
+	margin-top: -18px;
+}
 #KlarnaCheckoutWrapper .CartProduct h3 {
 	margin-bottom: 0;
 }
@@ -14,6 +78,8 @@
 }
 #KlarnaCheckoutShippingInformation {
 	position: relative;
+	margin-left: -36px;
+	padding-left: 36px;
 }
 #SelectOtherPaymentMethodTab .FormSubmit {
 	padding: 0 0 18px;

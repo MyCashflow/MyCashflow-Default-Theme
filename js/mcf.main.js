@@ -244,7 +244,7 @@ $(function() {
 	$crossSaleScrollers.each(function() {
 		initCrossSaleScroller($(this));
 	});
-	
+
 	function initCrossSaleScroller($elem) {
 		var $crossSaleScroller = $elem,
 			$crossSaleProducts = $('.CrossSaleProducts', $crossSaleScroller),
@@ -266,7 +266,7 @@ $(function() {
 					else if (pos === $items.length - 3) $crossSaleNext.fadeOut(250);
 				}
 			};
-			
+
 
 		$crossSaleScroller
 			.css('overflow', 'hidden')
@@ -415,7 +415,7 @@ $(function() {
 	// Removing products via Ajax
 	//--------------------------------------------------------------------------
 
-	$('#CartForm').on('click', 'a.CartRemove', function(evt) {
+	$('#Main').on('click', 'a.CartRemove', function(evt) {
 		var $self = $(this),
 			productId = $self.attr('href').split('/')[3];
 
@@ -523,20 +523,25 @@ $(function() {
 			$campaignCodeForm.fadeIn(200);
 		});
 	});
-	
+
 	//--------------------------------------------------------------------------
 	// Nosto support
 	//--------------------------------------------------------------------------
-	
+
+	// First we check if mcf.nosto.js plugin is correctly loaded
 	if (typeof $.fn.mcfNosto !== 'undefined') {
+		// Then we'll attach the plugin to all .nosto_element elements found from DOM
 		$('.nosto_element').mcfNosto({
 			success: function() {
+				// Success callback when nosto elements have been loaded and are found in the DOM
+				// This is the place to run your own JS if your productlists use any plugins etc.
 				var $crossSaleScroller = this.$elem.find('.CrossSaleScroller');
 				if ($crossSaleScroller.length) {
 					initCrossSaleScroller($crossSaleScroller);
 				}
 			},
 			error: function(msg) {
+				// Error callback if the Nosto products couldn't be loaded. Logs the error message.
 				if (typeof console === 'object') {
 				  console.log(msg);
 				}

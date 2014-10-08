@@ -11,6 +11,8 @@ $(function() {
 	// Check if we're on Klarna Checkout view
 	if ($('#KlarnaCheckoutWrapper').length) {
 
+		$.ajaxSetup({ cache: false }); // Disable erroneous ajax caching in IE
+
 		// If the mcf.pubsub.js isn't loaded, don't even show the campaign code field
 		if (typeof mcf === 'undefined') {
 			window.mcf = window.mcf || {};
@@ -23,6 +25,32 @@ $(function() {
 		var loc = window.location.href;
 		var thanksHash = loc.substr(loc.lastIndexOf('/'));
 		$('#KlarnaCheckoutThanksLink').attr('href', '/checkout/thanks' + thanksHash);
+
+		// Disable selecting the shipping method if no zip code is given
+		if ($.trim($('#postal_code').val()) === '') $('#shipping_method').prop('disabled', true);
+		else $('#shipping_method').prop('disabled', false);
+
+		// Subscribe to marketing lists via ajax
+		$('#MarketingPermissions').on('change', function(evt) {
+			var $changedEl = $(evt.target);
+			var $form = $changedEl.closest('form');
+			$form.find('[name="action"]').prop('value', $changedEl.attr('name'));
+			var data = $form.find('input').serialize();
+			var email = $form.find('[name="email"]').val();
+			var phone = $form.find('[name="phone"]').val();
+			$changedEl.parent().addClass('loading');
+			$.ajax({
+				type: 'POST',
+				url: $form.attr('action'),
+				data: data,
+				success: function() {
+					$.get('/interface/MarketingPermissions?email=' + email + '&phone=' + phone, function(response) {
+						$('#MarketingPermissions').html(response).find('label').prepend('<span class="tinyloader"></span>');
+					});
+				}
+			});
+
+		}).find('label').prepend('<span class="tinyloader"></span>');
 
 		// Function that updates the Klarna Checkout frame when called
 		mcf.updateKlarnaCheckoutFrame = function() {
@@ -53,6 +81,7 @@ $(function() {
 			var data = $kcoShippingInfo.find('input, select').serialize();
 			var $changedEl = $(evt.target);
 			var isCountry = $changedEl.is('#country');
+
 			$.ajax({
 				type: 'POST',
 				url: '/checkout/klarna/',
@@ -65,7 +94,13 @@ $(function() {
 					// Once changed and updated to backend, refresh preview and Klarna Checkout frame
 					var $previewContent = $('#PreviewContent');
 					$kcoShippingInfo.html(response);
+
+					// Disable selecting the shipping method if no zip code is given
+					if ($.trim($('#postal_code').val()) === '') $('#shipping_method').prop('disabled', true);
+					else $('#shipping_method').prop('disabled', false);
+
 					$('.CheckoutLoader', $kcoShippingInfo).remove();
+
 					$.ajax({
 						type: 'GET',
 						url: '/interface/Helper',
