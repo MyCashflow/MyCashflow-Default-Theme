@@ -409,7 +409,7 @@ $(function() {
 	// Removing products via Ajax
 	//--------------------------------------------------------------------------
 
-	$('#CartForm').on('click', 'a.CartRemove', function(evt) {
+	$('#Main').on('click', 'a.CartRemove', function(evt) {
 		var $self = $(this),
 			productId = $self.attr('href').split('/')[3];
 
