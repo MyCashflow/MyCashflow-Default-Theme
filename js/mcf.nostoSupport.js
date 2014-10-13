@@ -65,8 +65,10 @@
 	}
 
 	function getNostoScripts() {
+		// Get it only if it's not there
 		if (typeof $.fn.mcfNosto === 'undefined') {
 			$.getScript("/templates/js/mcf.nosto.js", function() {
+				// Check that the plugin was loaded and is usable
 				if (typeof $.fn.mcfNosto !== 'undefined') {
 					$('.nosto_element').mcfNosto({
 						error: function(msg) {
@@ -80,10 +82,28 @@
 
 	function getJQuery() {
 		if (typeof(jQuery) === 'undefined') {
-			var fallbackJq = document.createElement('script');
-			fallbackJq.src = '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js';
-			fallbackJq.onload = getNostoScripts;
-			document.getElementsByTagName('head')[0].appendChild(fallbackJq);
+			var fallbackJQuery = document.createElement('script');
+			fallbackJQuery.src = '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js';
+			fallbackJQuery.async = false;
+			fallbackJQuery.onload = fallbackJQuery.onreadystatechange = function() {
+				if (typeof jQuery === 'undefined') {
+					// Polling for IE7. Ugh.
+					var timer = null;
+					var timeout = setTimeout(function () {
+						clearInterval(timer);
+					}, 10000);
+					timer = setInterval(function () {
+						if (typeof jQuery === 'function') {
+							clearTimeout(timeout);
+							clearInterval(timer);
+							getNostoScripts();
+						}
+					}, 250);
+				} else {
+					getNostoScripts();
+				}
+			};
+			document.getElementsByTagName('head')[0].appendChild(fallbackJQuery);
 		} else {
 			getNostoScripts();
 		}
