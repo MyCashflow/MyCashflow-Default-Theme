@@ -166,10 +166,10 @@
 
 			var jqueryDefined = (typeof jQuery !== 'undefined');
 			if (!jqueryDefined || parseFloat(jQuery.fn.jquery) < MIN_JQUERY_VERSION) {
-				//
+				// Load jQuery first, then load Klarna.
 				loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', loadKlarnaDeps);
 			} else {
-				//
+				// Load Klarna.
 				loadKlarnaDeps();
 			}
 		}

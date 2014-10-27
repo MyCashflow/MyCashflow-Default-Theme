@@ -5,8 +5,11 @@
 
 /*jshint browser: true, jquery: true, laxbreak: true, curly: false, expr: true */
 
-$(function() {
+(function() {
 	'use strict';
+
+	var mcf = window.mcf || {};
+	window.mcf = mcf;
 
 	mcf.initKlarnaCheckout = function() {
 		// Check if we're on Klarna Checkout view
@@ -163,4 +166,4 @@ $(function() {
 			});
 		}
 	};
-});
+})();
