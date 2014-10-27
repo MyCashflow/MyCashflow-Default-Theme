@@ -8,8 +8,11 @@
 $(function() {
 	'use strict';
 
-	// Check if we're on Klarna Checkout view
-	if ($('#KlarnaCheckoutWrapper').length) {
+	mcf.initKlarnaCheckout = function() {
+		// Check if we're on Klarna Checkout view
+		if (!$('#KlarnaCheckoutWrapper').length) {
+			return false;
+		}
 
 		$.ajaxSetup({ cache: false }); // Disable erroneous ajax caching in IE
 
@@ -51,25 +54,6 @@ $(function() {
 			});
 
 		}).find('label').prepend('<span class="tinyloader"></span>');
-
-		// Function that updates the Klarna Checkout frame when called
-		mcf.updateKlarnaCheckoutFrame = function() {
-			var $kco = $('#KlarnaCheckout');
-			var mobile = false;
-			if (typeof window.matchMedia !== 'undefined') {
-				mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
-			}
-			if ($kco.length) {
-				$.ajax({
-					type: 'GET',
-					url: '/interface/KlarnaCheckout',
-					data: (mobile) ? { layout: 'mobile' } : { layout: 'desktop' },
-					success: function(response) {
-						$kco.html(response);
-					}
-				});
-			}
-		}
 
 		// And then do the first update on page load
 		mcf.updateKlarnaCheckoutFrame();
@@ -115,9 +99,7 @@ $(function() {
 					});
 
 					if (typeof $.fn.customSelect === 'function') $kcoShippingInfo.find('select').customSelect();
-
 					mcf.updateKlarnaCheckoutFrame();
-
 				}
 			});
 		});
@@ -161,7 +143,24 @@ $(function() {
 				}
 			});
 		});
+	};
 
-	}
-
+	// Function that updates the Klarna Checkout frame when called
+	mcf.updateKlarnaCheckoutFrame = function() {
+		var $kco = $('#KlarnaCheckout');
+		var mobile = false;
+		if (typeof window.matchMedia !== 'undefined') {
+			mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
+		}
+		if ($kco.length) {
+			$.ajax({
+				type: 'GET',
+				url: '/interface/KlarnaCheckout',
+				data: (mobile) ? { layout: 'mobile' } : { layout: 'desktop' },
+				success: function(response) {
+					$kco.html(response);
+				}
+			});
+		}
+	};
 });
