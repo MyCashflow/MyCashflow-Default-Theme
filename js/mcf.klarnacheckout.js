@@ -80,6 +80,7 @@
 				success: function(response) {
 					// Once changed and updated to backend, refresh preview and Klarna Checkout frame
 					var $previewContent = $('#PreviewContent');
+					var $otherPaymentMethodTab = $('#SelectOtherPaymentMethodTab');
 					$kcoShippingInfo.html(response);
 
 					// Disable selecting the shipping method if no zip code is given
@@ -98,6 +99,19 @@
 						success: function(response) {
 							$previewContent.html(response);
 							$('.CheckoutLoader', $previewContent).remove();
+						}
+					});
+
+					$.ajax({
+						type: 'GET',
+						url: '/interface/CheckoutPaymentMethods',
+						data: { exclude: 'current', before: '<p>{%KlarnaCheckoutOtherPaymentMethodIntro}</p>' },
+						beforeSend: function() {
+							$otherPaymentMethodTab.append('<div class="CheckoutLoader"></div>');
+						},
+						success: function(response) {
+							$('#CheckoutPaymentMethods').html(response);
+							$('.CheckoutLoader', $otherPaymentMethodTab).remove();
 						}
 					});
 

@@ -134,7 +134,7 @@
 	margin: 0 -6px;
 }
 
-.PaymentTab { display: none; }
+.PaymentTab { display: none; position: relative; }
 #KlarnaCheckoutTab { display: block; }
 
 #KlarnaCheckoutWrapper #SubmitCampaignCode {
