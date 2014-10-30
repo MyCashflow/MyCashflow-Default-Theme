@@ -73,35 +73,120 @@
 
 </div>
 <script type="text/javascript">
+	// Making the Klarna Checkout more plug and play.
+	// Adding of essential scripts and dictionary variables.
 
-	window.onload = function() {
-		// Making the Klarna Checkout more plug and play.
-		// Adding of essential scripts and dictionary variables.
+	(function() {
+		function contentLoaded(win, fn) {
+			/*!
+			 * contentloaded.js
+			 *
+			 * Author: Diego Perini (diego.perini at gmail.com)
+			 * Summary: cross-browser wrapper for DOMContentLoaded
+			 * Updated: 20101020
+			 * License: MIT
+			 * Version: 1.2
+			 *
+			 * URL:
+			 * http://javascript.nwbox.com/ContentLoaded/
+			 * http://javascript.nwbox.com/ContentLoaded/MIT-LICENSE
+			 *
+			 */
 
-		var mcf = window.mcf || {};
-		mcf.Lang = mcf.Lang || {};
-		mcf.Lang.CommentSaved = '{\%CheckoutSuccessCommentSaved}';
+			// @win window reference
+			// @fn function reference
 
-		mcf.addScriptToPage = function(scriptSrc) {
+			var done = false, top = true,
+
+			doc = win.document,
+			root = doc.documentElement,
+			modern = doc.addEventListener,
+
+			add = modern ? 'addEventListener' : 'attachEvent',
+			rem = modern ? 'removeEventListener' : 'detachEvent',
+			pre = modern ? '' : 'on',
+
+			init = function(e) {
+				if (e.type == 'readystatechange' && doc.readyState != 'complete') return;
+				(e.type == 'load' ? win : doc)[rem](pre + e.type, init, false);
+				if (!done && (done = true)) fn.call(win, e.type || e);
+			},
+
+			poll = function() {
+				try { root.doScroll('left'); } catch(e) { setTimeout(poll, 50); return; }
+				init('poll');
+			};
+
+			if (doc.readyState == 'complete') fn.call(win, 'lazy');
+			else {
+				if (!modern && root.doScroll) {
+					try { top = !win.frameElement; } catch(e) { }
+					if (top) poll();
+				}
+				doc[add](pre + 'DOMContentLoaded', init, false);
+				doc[add](pre + 'readystatechange', init, false);
+				win[add](pre + 'load', init, false);
+			}
+		}
+
+		var MIN_JQUERY_VERSION = 1.7;
+
+		function loadScript(scriptSrc, callback) {
 			var script = document.createElement('script');
-			script.type = 'text/javascript';
 			script.src = scriptSrc;
+			script.async = false;
+
+			script.onload = script.onreadystatechange = function() {
+				if (typeof jQuery === 'undefined') {
+					// Polling for IE7.
+					var timer = null;
+					var timeout = setTimeout(function () {
+						clearInterval(timer);
+					}, 10000);
+					timer = setInterval(function () {
+						if (typeof jQuery === 'function') {
+							clearTimeout(timeout);
+							clearInterval(timer);
+							callback && callback();
+						}
+					}, 250);
+				} else {
+					callback && callback();
+				}
+			};
+
 			document.getElementsByTagName('head')[0].appendChild(script);
 		};
 
-		if (typeof jQuery !== 'undefined') {
-			if (parseFloat(jQuery.fn.jquery) < 1.7) {
-				mcf.addScriptToPage('//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+		// Loads jQuery on demand.
+		function loadJqueryDeps() {
+			var mcf = window.mcf || {};
+			mcf.Lang = mcf.Lang || {};
+			mcf.Lang.CommentSaved = '{\%CheckoutSuccessCommentSaved}';
+
+			var jqueryDefined = (typeof jQuery !== 'undefined');
+			if (!jqueryDefined || parseFloat(jQuery.fn.jquery) < MIN_JQUERY_VERSION) {
+				// Load jQuery first, then load Klarna.
+				loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', loadKlarnaDeps);
+			} else {
+				// Load Klarna.
+				loadKlarnaDeps();
 			}
-		} else {
-			mcf.addScriptToPage('//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
 		}
 
-		if (typeof mcf.updateKlarnaCheckoutFrame !== 'function') {
-			mcf.addScriptToPage('{ThemeUrl}/js/mcf.klarnacheckout.js');
+		// Loads Klarna plugin on demand.
+		function loadKlarnaDeps() {
+			if (typeof mcf.initKlarnaCheckout !== 'function') {
+				loadScript('{ThemeUrl}/js/mcf.klarnacheckout.js', function() {
+					mcf.initKlarnaCheckout();
+				});
+			} else {
+				mcf.initKlarnaCheckout();
+			}
 		}
 
-	}
+		contentLoaded(window, loadJqueryDeps);
+	})();
 </script>
 {Helper(
 	file:'checkout/footer',

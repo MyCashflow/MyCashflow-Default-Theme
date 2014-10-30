@@ -5,11 +5,17 @@
 
 /*jshint browser: true, jquery: true, laxbreak: true, curly: false, expr: true */
 
-$(function() {
+(function() {
 	'use strict';
 
-	// Check if we're on Klarna Checkout view
-	if ($('#KlarnaCheckoutWrapper').length) {
+	var mcf = window.mcf || {};
+	window.mcf = mcf;
+
+	mcf.initKlarnaCheckout = function() {
+		// Check if we're on Klarna Checkout view
+		if (!$('#KlarnaCheckoutWrapper').length) {
+			return false;
+		}
 
 		$.ajaxSetup({ cache: false }); // Disable erroneous ajax caching in IE
 
@@ -52,25 +58,6 @@ $(function() {
 
 		}).find('label').prepend('<span class="tinyloader"></span>');
 
-		// Function that updates the Klarna Checkout frame when called
-		mcf.updateKlarnaCheckoutFrame = function() {
-			var $kco = $('#KlarnaCheckout');
-			var mobile = false;
-			if (typeof window.matchMedia !== 'undefined') {
-				mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
-			}
-			if ($kco.length) {
-				$.ajax({
-					type: 'GET',
-					url: '/interface/KlarnaCheckout',
-					data: (mobile) ? { layout: 'mobile' } : { layout: 'desktop' },
-					success: function(response) {
-						$kco.html(response);
-					}
-				});
-			}
-		}
-
 		// And then do the first update on page load
 		mcf.updateKlarnaCheckoutFrame();
 
@@ -93,6 +80,7 @@ $(function() {
 				success: function(response) {
 					// Once changed and updated to backend, refresh preview and Klarna Checkout frame
 					var $previewContent = $('#PreviewContent');
+					var $otherPaymentMethodTab = $('#SelectOtherPaymentMethodTab');
 					$kcoShippingInfo.html(response);
 
 					// Disable selecting the shipping method if no zip code is given
@@ -114,10 +102,21 @@ $(function() {
 						}
 					});
 
+					$.ajax({
+						type: 'GET',
+						url: '/interface/CheckoutPaymentMethods',
+						data: { exclude: 'current', before: '<p>{%KlarnaCheckoutOtherPaymentMethodIntro}</p>' },
+						beforeSend: function() {
+							$otherPaymentMethodTab.append('<div class="CheckoutLoader"></div>');
+						},
+						success: function(response) {
+							$('#CheckoutPaymentMethods').html(response);
+							$('.CheckoutLoader', $otherPaymentMethodTab).remove();
+						}
+					});
+
 					if (typeof $.fn.customSelect === 'function') $kcoShippingInfo.find('select').customSelect();
-
 					mcf.updateKlarnaCheckoutFrame();
-
 				}
 			});
 		});
@@ -161,7 +160,24 @@ $(function() {
 				}
 			});
 		});
+	};
 
-	}
-
-});
+	// Function that updates the Klarna Checkout frame when called
+	mcf.updateKlarnaCheckoutFrame = function() {
+		var $kco = $('#KlarnaCheckout');
+		var mobile = false;
+		if (typeof window.matchMedia !== 'undefined') {
+			mobile = (window.matchMedia('(max-width: 768px)').matches) ? true : false;
+		}
+		if ($kco.length) {
+			$.ajax({
+				type: 'GET',
+				url: '/interface/KlarnaCheckout',
+				data: (mobile) ? { layout: 'mobile' } : { layout: 'desktop' },
+				success: function(response) {
+					$kco.html(response);
+				}
+			});
+		}
+	};
+})();
