@@ -150,8 +150,8 @@ $(function() {
 					// Test if we're dealing with HTML5 search input type and react accordingly
 					if (html5inputTypes) {
 						$searchIndicator.hide();
-						$searchInput[0].addEventListener("search", function(e) {
-							$searchIndicator.trigger('click');
+						$searchInput[0].addEventListener('search', function(e) {
+							$searchInput.trigger('keyup');
 						}, false);
 					} else {
 						$searchIndicator.addClass('CloseSearchResults');
