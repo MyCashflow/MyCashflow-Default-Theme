@@ -517,4 +517,20 @@ $(function() {
 			$campaignCodeForm.fadeIn(200);
 		});
 	});
+
+	//--------------------------------------------------------------------------
+	// Initialize the packaging plugin.
+	//--------------------------------------------------------------------------
+
+	// It is recommended to initialize the packaging plugin from the template instead,
+	// so one can use translated strings and other interface helpers to initialize it:
+	// 
+	// <script>
+	//	// #CheckoutAcceptTerms is used as a reference point to insert the packaging checkbox.
+	//	// Here we're inserting the checkbox before the 'accept terms' form item.
+	//	$('#CheckoutAcceptTerms').mcfPackaging({
+	//		label: "Add packaging for {Product(id: 6, helper: '{{ {ProductPrice(currencysymbol: true)} }}')}?",
+	//		productId: PACKAGING_PRODUCT_ID
+	//	});
+	// </script>
 });
