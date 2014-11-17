@@ -519,7 +519,7 @@ $(function() {
 	});
 
 	//--------------------------------------------------------------------------
-	// Initialize the packaging plugin.
+	// Packaging/gift-wrapping plugin
 	//--------------------------------------------------------------------------
 
 	// It is recommended to initialize the packaging plugin from the template instead,
