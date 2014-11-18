@@ -1,3 +1,9 @@
+/*!
+ * File: mcf.packaging.js
+ * Part of MyCashFlow's default theme.
+ * Please don't edit this file unless necessary!
+ */
+
 ;(function($, window, document, undefined) {
 	var pluginName = 'mcfPackaging';
 	var defaults = {
