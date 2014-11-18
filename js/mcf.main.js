@@ -528,9 +528,15 @@ $(function() {
 	// <script>
 	//	// #CheckoutAcceptTerms is used as a reference point to insert the packaging checkbox.
 	//	// Here we're inserting the checkbox before the 'accept terms' form item.
-	//	$('#CheckoutAcceptTerms').mcfPackaging({
-	//		label: "Add packaging for {Product(id: 6, helper: '{{ {ProductPrice(currencysymbol: true)} }}')}?",
-	//		productId: PACKAGING_PRODUCT_ID
+	//	$('#OrderComments, #PreviewContent').mcfPackaging({
+	//		insert: 'after', // valid values are 'before' & 'after'
+	//		label: "Add packaging for {Product(id: PACKAGING_PRODUCT_ID, helper: '{{ {ProductPrice(currencysymbol: true)} }}')}?",
+	//		productId: PACKAGING_PRODUCT_ID,
+	//		onChange: function() {
+	//			if ($.isFunction(mcf.updateKlarnaCheckoutFrame)) {
+	//				mcf.updateKlarnaCheckoutFrame();
+	//			}
+	//		}
 	//	});
 	// </script>
 });

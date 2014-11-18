@@ -36,6 +36,9 @@
 							self.refreshCheckbox();
 							self.refreshCart();
 							self.$checkbox.removeAttr('disabled');
+							if ($.isFunction(self.settings.onChange)) {
+								self.settings.onChange(self.$formItem);
+							}
 						}
 					});
 				} else {
@@ -45,6 +48,9 @@
 						success: function() {
 							self.refreshCart();
 							self.$checkbox.removeAttr('disabled');
+							if ($.isFunction(self.settings.onChange)) {
+								self.settings.onChange(self.$formItem);
+							}
 						}
 					});
 				}
