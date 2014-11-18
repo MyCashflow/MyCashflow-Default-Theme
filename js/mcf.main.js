@@ -524,11 +524,11 @@ $(function() {
 
 	// It is recommended to initialize the packaging plugin from the template instead,
 	// so one can use translated strings and other interface helpers to initialize it:
-	// 
+	//
 	// <script>
 	//	// #CheckoutAcceptTerms is used as a reference point to insert the packaging checkbox.
 	//	// Here we're inserting the checkbox before the 'accept terms' form item.
-	//	$('#OrderComments, #PreviewContent').mcfPackaging({
+	//	$('#OrderComments, #KlarnaCheckoutWrapper #PreviewContent').mcfPackaging({
 	//		insert: 'after', // valid values are 'before' & 'after'
 	//		label: "Add packaging for {Product(id: PACKAGING_PRODUCT_ID, helper: '{{ {ProductPrice(currencysymbol: true)} }}')}?",
 	//		productId: PACKAGING_PRODUCT_ID,
