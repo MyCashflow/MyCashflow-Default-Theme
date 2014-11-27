@@ -531,7 +531,8 @@ $(function() {
 	//	$('#OrderComments, #KlarnaCheckoutWrapper #PreviewContent').mcfPackaging({
 	//		insert: 'after', // valid values are 'before' & 'after'
 	//		label: "Add packaging for {Product(id: PACKAGING_PRODUCT_ID, helper: '{{ {ProductPrice(currencysymbol: true)} }}')}?",
-	//		productId: PACKAGING_PRODUCT_ID,
+	//		productId: PACKAGING_PRODUCT_ID, // packaging product ID
+	//		detailsText: '--- PACKAGING ---', // used only when product ID not present
 	//		onChange: function() {
 	//			if ($.isFunction(mcf.updateKlarnaCheckoutFrame)) {
 	//				mcf.updateKlarnaCheckoutFrame();

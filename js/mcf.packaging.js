@@ -8,7 +8,8 @@
 	var pluginName = 'mcfPackaging';
 	var defaults = {
 		insert: 'before',
-		label: 'Lisää paketointi?'
+		label: 'Lisää paketointi?',
+		detailsText: '--- PAKETOINTI ---'
 	};
 
 	function Plugin(element, options) {
@@ -32,37 +33,48 @@
 
 			// Toggle the packaging product.
 			self.$checkbox.change(function() {
-				self.$checkbox.prop('disabled', true);
+				if (self.settings.productId) {
+					self.$checkbox.prop('disabled', true);
 
-				if (self.$checkbox.is(':checked')) {
-					mcf.publish('AddProducts', {
-						data: { products: [{ product_id: self.settings.productId }] },
-						trigger: $('<div/>'),
-						success: function() {
-							self.refreshCheckbox();
-							self.refreshCart();
-							self.$checkbox.removeAttr('disabled');
-							if ($.isFunction(self.settings.onChange)) {
-								self.settings.onChange(self.$formItem);
+					if (self.$checkbox.is(':checked')) {
+						mcf.publish('AddProducts', {
+							data: { products: [{ product_id: self.settings.productId }] },
+							trigger: $('<div/>'),
+							success: function() {
+								self.refreshCheckbox();
+								self.refreshCart();
+								self.$checkbox.removeAttr('disabled');
+								if ($.isFunction(self.settings.onChange)) {
+									self.settings.onChange(self.$formItem);
+								}
 							}
-						}
-					});
+						});
+					} else {
+						var cartProductId = self.deleteUrl.split('/')[3];
+						mcf.publish('RemoveProduct', {
+							data: cartProductId,
+							success: function() {
+								self.refreshCart();
+								self.$checkbox.removeAttr('disabled');
+								if ($.isFunction(self.settings.onChange)) {
+									self.settings.onChange(self.$formItem);
+								}
+							}
+						});
+					}
 				} else {
-					var cartProductId = self.deleteUrl.split('/')[3];
-					mcf.publish('RemoveProduct', {
-						data: cartProductId,
-						success: function() {
-							self.refreshCart();
-							self.$checkbox.removeAttr('disabled');
-							if ($.isFunction(self.settings.onChange)) {
-								self.settings.onChange(self.$formItem);
-							}
-						}
-					});
+					var $details = $('#OrderComments');
+					if (self.$checkbox.is(':checked')) {
+						$details.val($details.val() + "\n" + self.settings.detailsText);
+					} else {
+						$details.val($details.val().replace("\n" + self.settings.detailsText, ''));
+					}
 				}
 			});
 
-			self.refreshCheckbox();
+			if (self.settings.productId) {
+				self.refreshCheckbox();
+			}
 		},
 
 		// Checks if the packaging product is in the
