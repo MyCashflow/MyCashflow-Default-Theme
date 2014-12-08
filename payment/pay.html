@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<title>{%TransferToPayment}</title>
+	<meta charset="utf-8" />
+	<style type="text/css" media="all">
+		body {
+			text-align: center;
+			font-family: Helvetica, Arial, sans-serif;
+			padding: 2em;
+			font-size: 100%;
+			color: #333;
+		}
+		.NoLogoImage {
+			font-size: 1.5em;
+			text-decoration: none;;
+			color: #666;
+			font-weight: bold;
+		}
+		a { color: #006699; }
+		a:hover { color: #0099FF; }
+	</style>
+</head>
+<body>
+	{Logo(width: 480, height: 160)}
+	<h1>{%TransferToPayment} {TransactionTotal}&nbsp;{TransactionCurrency}</h1>
+	{TransactionPaymentForm(or: '<p>{%PaymentCancelled}</p>')}
+</body>
+</html>

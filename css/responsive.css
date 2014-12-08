@@ -907,7 +907,7 @@
 		max-height: 100px;
 	}
 
-	#CrossSaleScroller, #ScrollToNext, #ScrollToPrev, h2.BoxHeader,
+	.CrossSaleScroller, .ScrollToNext, .ScrollToPrev, h2.BoxHeader,
 	#PaginationSortForm{
 		display: none;
 	}
