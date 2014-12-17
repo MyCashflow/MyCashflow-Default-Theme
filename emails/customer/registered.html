@@ -1,0 +1,17 @@
+{Helper(file:'emails/helpers/emailheader')}
+{Helper(file:'emails/helpers/simpletop')}
+
+<!-- Content table starts -->
+<table cellpadding="18" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-content-top.gif) repeat-x left top;" width="100%">
+	<tr>
+		<td class="ContentCell" style="font-size: 16px; line-height: 24px;" height="100%">
+
+			{OrderEmailMessage}
+
+		</td>
+	</tr>
+</table>
+<!-- Content table ends -->
+
+{Helper(file:'emails/helpers/simplebottom')}
+{Helper(file:'emails/helpers/emailfooter')}
