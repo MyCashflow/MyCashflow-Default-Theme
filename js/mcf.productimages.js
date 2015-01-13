@@ -87,11 +87,12 @@ $(function() {
 			});
 
 			if ($bestMatch) {
+				var $parent = $bestMatch.closest('.FormItem');
 				if ($bestMatch.is(':radio')) {
-					$(':radio', $productBuyForm).attr('checked', false);
+					$(':radio', $parent).attr('checked', false);
 					$bestMatch.attr('checked', true);
 				} else {
-					$('option', $productBuyForm).attr('selected', false);
+					$('option', $parent).attr('selected', false);
 					$bestMatch.attr('selected', true).parent("select").trigger("change");
 				}
 			}
