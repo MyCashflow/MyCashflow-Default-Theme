@@ -261,9 +261,10 @@ header .DropdownNavigation ul li a:hover {
 
 #SearchForm button { position: absolute; top: 2px; right: 0px; }
 
-#LiveSearchResults {
-	width: 556px; float: none; clear: both; padding: 10px 0 9px;
-	display: none; margin: 0; list-style: none outside;
+#LiveSearch {
+	display: none;
+	float: none; clear: both;
+	padding: 10px 0 9px; margin: 0; width: 556px;
 	position: absolute; top: 36px; left: 8px;
 	background: #FFF; z-index: 99;
 	-moz-border-bottom-left-radius: 5px;
@@ -277,18 +278,39 @@ header .DropdownNavigation ul li a:hover {
 	-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	 -webkit-transition: opacity 0.2s ease-in-out;
+	 -moz-transition: opacity 0.2s ease-in-out;
+	 -o-transition: opacity 0.2s ease-in-out;
+	 transition: opacity 0.2s ease-in-out;
 }
-.SearchActive #LiveSearchResults {
+.SearchActive #LiveSearch {
 	display: block;
 }
-#LiveSearchResults li {
+#LiveSearch ul {
+	list-style: none outside;
+	margin: 0 0 9px;
+	border-bottom: 1px solid #d9d9d9;
+	padding-bottom: 9px;
+}
+#LiveSearch ul.PopularSearches {
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+#LiveSearch li {
 	width: 100%;
 }
-#LiveSearchResults li a {
-	display: block;;
+
+#LiveSearch h3, #LiveSearch li a {
+	display: block;
 	padding: 4px 14px 5px;
 }
-#LiveSearchResults li a:hover { background: #f2f2f2; }
+#LiveSearch .SearchSuggestions a {
+	text-decoration: none;
+	color: #333;
+}
+#LiveSearch .SearchSuggestions li.SelectedResult a { background: #f2f2f2; }
 .SearchIndicator {
 	display: none; position: absolute;
 	top: 8px; left: 226px;
@@ -333,6 +355,13 @@ header .DropdownNavigation ul li a:hover {
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
+
+.SearchFilter {
+	width: 162px; float: left;
+	padding: 0 15px;
+}
+
+.SearchSuggestions { clear: both; }
 
 /* Same Form @ Content area */
 

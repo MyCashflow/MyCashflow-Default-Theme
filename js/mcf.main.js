@@ -104,83 +104,16 @@ $(function() {
 
 	var $searchForm = $('#SearchForm'),
 		$searchInput = $('#SearchInput'),
-		$searchResults = $('<ul id="LiveSearchResults"></ul>'),
-		$searchIndicator = $('<span class="SearchIndicator"></span>'),
-		html5inputTypes = (typeof Modernizr === 'undefined') ? false : Modernizr.inputtypes.search;
+		$searchCategoryFilter = $('#SearchCategoryFilter select'),
+		$results = $('.SearchSuggestions li'),
+		$selectedResult,
+		$nextResult,
+		resultsCache = {},
+		searchKeyUpTimer;
 
-	// Create the search results element.
-	$searchResults.appendTo($searchForm);
-
-
-	// Create the search indicator & turn
-	// form brower's autocompletion off.
-	$searchIndicator.insertAfter($searchInput);
+	// Turn browser's form autocompletion off
 	$searchInput.attr('autocomplete', 'off');
 
-	$searchInput.keyup(function() {
-		if ($searchInput.val() === '') {
-			$searchResults.html('');
-			$searchForm.removeClass('SearchActive');
-			if (!html5inputTypes) $searchIndicator.hide().removeClass('CloseSearchResults');
-		}
-	});
-
-	$searchInput.typeWatch({
-		highlight: true,
-		wait: 500,
-
-		callback: function(searchQuery) {
-			$.ajax({
-				type: 'GET',
-				url: '/interface/SearchProducts',
-				data: {
-					query: searchQuery,
-					limit: 8,
-					helper: 'helpers/livesearchresults'
-				},
-
-				beforeSend: function() {
-					$searchForm.addClass('SearchActive');
-					$searchIndicator.fadeIn(500);
-				},
-
-				success: function(results) {
-					$('body').on('click.autoSuggestions', function() {
-						//$searchInput.val('').blur();
-						$searchResults.html('');
-						$searchForm.removeClass('SearchActive');
-						if (!html5inputTypes) $searchIndicator.hide().removeClass('CloseSearchResults');
-						$('body').off('click');
-					});
-					$searchResults.html(results).fadeIn(250);
-
-					// Test if we're dealing with HTML5 search input type and react accordingly
-					if (html5inputTypes) {
-						$searchIndicator.hide();
-						$searchInput[0].addEventListener('search', function(e) {
-							$searchInput.trigger('keyup');
-						}, false);
-					} else {
-						$searchIndicator.addClass('CloseSearchResults');
-					}
-
-					$searchIndicator.click(function() {
-						$searchInput.val('').blur();
-						$searchResults.html('');
-						$searchForm.removeClass('SearchActive');
-						if (!html5inputTypes) $searchIndicator.hide().removeClass('CloseSearchResults');
-					});
-				}
-			});
-		}
-	});
-
-
-	//--------------------------------------------------------------------------
-	// Klevu search
-	//--------------------------------------------------------------------------
-
-	var $searchCategoryFilter = $('#SearchCategoryFilter select');
 	$searchForm.on('change', $searchCategoryFilter, function(evt) {
 		if ($searchCategoryFilter.find('option:selected').val() === 'all') {
 			$searchCategoryFilter.parent('.CustomSelectWrap').addClass('default');
@@ -189,19 +122,116 @@ $(function() {
 		}
 	}).trigger('change');
 
-	$('#FilterToggler').on('click', function(evt) {
-		$(this).hide();
-		evt.preventDefault();
-		$('#FilteringSearchResults').slideDown(125);
+	$searchForm.on('change', $searchInput, function() {
+		if ($searchInput.val() === '') {
+			window.setTimeout(function() {
+				$searchForm.removeClass('SearchInitiated');
+				$searchForm.remove($('#SearchResults'));
+			}, 300);
+		}
 	});
 
-	$('#CloseSearchFilters').on('click', function(evt) {
-		$('#FilteringSearchResults').slideUp(125, function() {
-			$('#FilterToggler').fadeIn(125);
+	function cacheResults(helperfile, query) {
+		var deferred = resultsCache[helperfile + query];
+		if (!deferred) {
+			deferred = $.ajax({
+				type: 'GET',
+				url: '/interface/Helper',
+				data: {
+					file: helperfile,
+					query: query
+				}
+			});
+			resultsCache[helperfile + query] = deferred;
+		}
+		return deferred;
+	}
+
+	function getLivesearchResults(searchQuery) {
+		$.when(cacheResults('helpers/header-livesearch', searchQuery)).done(function(results) {
+			$searchForm.addClass('SearchInitiated');
+			if ($('#SearchResults').length) {
+				$('#SearchResults').replaceWith(results);
+			} else {
+				$('#LiveSearch').prepend(results);
+			}
+			$results = $('.SearchSuggestions li');
+			$selectedResult = null;
+			$nextResult = null;
 		});
+	}
+
+	function getFullResults(searchQuery) {
+		$.when(cacheResults('helpers/searchresults', searchQuery)).done(function(results) {
+			$('#Primary').html(results);
+		});
+	}
+
+
+	// Search input events
+	$searchInput
+		.focus(function() {
+			$searchForm.addClass('SearchActive');
+		})
+		.blur(function() {
+			window.setTimeout(function() {
+				$searchForm.removeClass('SearchActive');
+			}, 300);
+		})
+		.keydown(function(evt) {
+			var downKey = (evt.which === 40) ? true : false,
+				upKey = (evt.which === 38) ? true : false,
+				searchQuery;
+
+			clearTimeout(searchKeyUpTimer);
+
+			function fallbackSelection(downKey) {
+				// Select first / last
+				$selectedResult = (downKey) ? $results.first() : $results.last();
+				$selectedResult.addClass('SelectedResult');
+			}
+
+			if (downKey || upKey) {
+				// Down key
+				evt.preventDefault();
+				if ($selectedResult) {
+		            $selectedResult.removeClass('SelectedResult');
+		            $nextResult = (downKey) ? $selectedResult.next() : $selectedResult.prev();
+		            if ($nextResult.length > 0) {
+		            	// Select next / previous
+		                $selectedResult = $nextResult.addClass('SelectedResult');
+		            } else {
+		            	fallbackSelection(downKey)
+					}
+		        } else {
+		        	fallbackSelection(downKey)
+		        }
+		        searchQuery = $('a', $selectedResult).first().text();
+		        $searchInput.val(searchQuery);
+		    } else {
+				searchKeyUpTimer = setTimeout(function() {
+					getLivesearchResults($searchInput.val());
+				}, 300);
+			}
+		});
+
+	$searchForm.on('mouseenter', '.SearchSuggestions li', function(evt) {
+		var $that = $(evt.currentTarget);
+		$results.removeClass('SelectedResult');
+		$selectedResult = $that.addClass('SelectedResult');
+	}).on('mouseleave', '.SearchSuggestions li', function(evt) {
+		var $that = $(evt.currentTarget);
+		$that.removeClass('SelectedResult');
+		$selectedResult = null;
 	});
 
-
+	$('#Primary').on('click', '.SearchFilter li a', function(evt) {
+		var $that = $(evt.currentTarget),
+			href = $that.attr('href'),
+			q = $that.attr('href').substr(3);
+		getFullResults(q);
+		evt.preventDefault();
+	});
 
 	//--------------------------------------------------------------------------
 	// Home Page Banners
