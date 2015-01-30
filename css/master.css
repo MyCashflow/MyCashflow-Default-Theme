@@ -59,6 +59,11 @@ body.adminLoggedIn #AjaxMsg { top: 36px; }
 	position: relative; float: left;
 	width: 191px; padding: 0;
 }
+#Primary .Column {
+	width: 162px;
+	padding: 0 6px;
+	margin: 0 9px;
+}
 #MainNavigation {
 	margin-left: -192px;
 	min-height: 18px;
@@ -207,7 +212,7 @@ header .DropdownNavigation ul li a:hover {
 #SearchForm {
 	position: absolute; right: 0; bottom: 0px;
 	padding: 8px 6px 9px 5px; height: 27px; z-index: 99;
-	width: 564px;
+	width: 372px;
 	background: #F8F8F8;
 	border: 1px solid #D9D9D9;
 	border-bottom: 0; border-right: 0;
@@ -219,7 +224,7 @@ header .DropdownNavigation ul li a:hover {
 .lt-ie9 #SearchForm {
 	/*width: 290px;*/
 }
-#SearchForm.SearchActive {
+#SearchForm.SearchActive input {
 	-moz-border-bottom-left-radius: 0;
 	-moz-border-bottom-right-radius: 0;
 	-webkit-border-bottom-left-radius: 0;
@@ -259,13 +264,13 @@ header .DropdownNavigation ul li a:hover {
 #SearchForm .default .CustomSelect .sel_outer .sel_arrow { background-color: #999; }
 #SearchForm .CustomSelectWrap:hover .CustomSelect .sel_outer .sel_arrow { background-color: #333; }
 
-#SearchForm button { position: absolute; top: 2px; right: 0px; }
+#SearchForm button { position: absolute; top: 2px; right: 3px; margin-right: 0; }
 
 #LiveSearch {
 	display: none;
 	float: none; clear: both;
-	padding: 10px 0 9px; margin: 0; width: 556px;
-	position: absolute; top: 36px; left: 8px;
+	padding: 10px 0 9px; margin: -7px 0 0; width: 370px;
+	position: absolute; top: 100%; right: 6px;
 	background: #FFF; z-index: 99;
 	-moz-border-bottom-left-radius: 5px;
 	-moz-border-bottom-right-radius: 5px;
@@ -273,7 +278,7 @@ header .DropdownNavigation ul li a:hover {
 	-webkit-border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	border: 1px solid #D9D9D9;
+	border: 1px solid #0099ff;
 	border-top: 0; zoom: 1;
 	-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -283,8 +288,11 @@ header .DropdownNavigation ul li a:hover {
 	 -o-transition: opacity 0.2s ease-in-out;
 	 transition: opacity 0.2s ease-in-out;
 }
-.SearchActive #LiveSearch {
+.SearchActive + #LiveSearch {
 	display: block;
+}
+#LiveSearch p {
+	margin: 0 15px 9px;
 }
 #LiveSearch ul {
 	list-style: none outside;

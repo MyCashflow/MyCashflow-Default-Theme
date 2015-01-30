@@ -3,9 +3,13 @@
 	<h1>Hakutulokset hakusanalla <em>{SearchKeyword}</em></h1>
 </div>
 
-{KlevuSearchFilters}
+{SearchSuggestions(
+	before: '<p><strong>Kokeile myös näitä hakusanoja: </strong>',
+	after: '</p>',
+	helper: '{{ <a href="{SearchUrl}">{SearchKeyword}</a>&#8194; }}'
+)}
 
-{KlevuSearchSuggestions}
+{SearchFilters(before: '<h3>Suodata hakutuloksia</h3>')}
 
 {SearchProducts(
 	pagination: 'true',
@@ -13,7 +17,7 @@
 	limit: '30|15|60|90',
 	sort: 'search|name_asc|released_asc|price_asc',
 	before: '
-		<form action="{CurrentUrl}" method="get" id="PaginationSortForm">
+		<form action="{SearchUrl}" method="get" id="PaginationSortForm">
 			{PaginationStatus}
 			<div class="FormItem GroupItem">
 				{PaginationFormParameters(
@@ -33,5 +37,42 @@
 	',
 	after: '{PaginationPages}',
 	helper: 'helpers/listproduct',
-	or: '<p class="NoResults">{%SearchNoResults}</p>'
+	or: '
+		<form action="/search/" method="get" id="ContentSearch">
+			<div class="FormItem">
+				<label for="ContentSearchInput">Haku:</label>
+				<input type="search" name="q" id="ContentSearchInput" value="" placeholder="Hae" autocomplete="off">
+				<button type="submit" id="SearchButton"><span>Haku</span></button>
+			</div>
+		</form>
+
+		<p class="NoResults">Valitettavasti antamallasi hakusanalla ei löytynyt yhtään tuotetta.</p>
+		<div class="Column">
+			{SearchPopularTerms(
+				before: '<h3 class="AllCaps">Suosituimmat hakusanat</h3><ul>',
+				after: '</ul>',
+				helper: '{{ <li><a href="{SearchUrl}">{SearchKeyword}</a></li> }}'
+			)}
+		</div>
+		<div class="Column">
+		{TopSellers(
+			limit:10,
+			type:'normal',
+			helper:'{{
+				<li><a href="{ProductUrl}">{ProductName}</a></li>
+			}}',
+			before:'<h3 class="AllCaps">{%BestsellingProducts}</h3><ul>',
+			after:'</ul>'
+		)}
+		</div>
+		<div class="Column">
+			{Categories(
+				levels: '1',
+				before:'<h3 class="AllCaps">{%BrowseCategories}</h3>',
+				helper:'{{
+					<li><a href="{CategoryUrl}">{CategoryName}</a></li>
+				}}',
+			)}
+		</div>
+	'
 )}

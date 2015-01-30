@@ -38,26 +38,32 @@ $(function() {
 	// and made as chained select boxes
 	$('.BuyForm').mcfVariationSplitter();
 
-	// Bypass IE caching.
-	$.ajaxSetup({ cache: false });
-
-	//--------------------------------------------------------------------------
-	// Pagination & Forms
-	//--------------------------------------------------------------------------
-
-	var $paginationForms = $('#PaginationSortForm');
-
-	// Make selects pretty
-	$('select').customSelect();
-
 	// When variationsplitter creates new selects make them also pretty
 	$('.BuyForm').on('change', 'select', function(evt) {
 		$(evt.delegateTarget).find('select').customSelect();
 	});
 
-	// Make the pagination form autosubmit on change
-	$('button', $paginationForms).parent('div').hide();
-	$('select', $paginationForms).change(function() { $(this).closest($paginationForms).submit(); });
+	// Bypass IE caching.
+	$.ajaxSetup({ cache: false });
+
+	// Make selects pretty
+	$('select').customSelect();
+
+	//--------------------------------------------------------------------------
+	// Pagination & Forms
+	//--------------------------------------------------------------------------
+
+	function paginationForms() {
+		var $paginationForms = $('#PaginationSortForm');
+
+		$('select', $paginationForms).customSelect();
+
+		// Make the pagination form autosubmit on change
+		$('button', $paginationForms).parent('div').hide();
+		$('select', $paginationForms).change(function() { $(this).closest($paginationForms).submit(); });
+	}
+
+	paginationForms();
 
 	//--------------------------------------------------------------------------
 	// Advanced search
@@ -108,19 +114,14 @@ $(function() {
 		$results = $('.SearchSuggestions li'),
 		$selectedResult,
 		$nextResult,
+		previousSearchTerm = '',
+		currentSearchTerm = $searchInput.val().toLowerCase(),
+		selectedSearchTerm = false,
 		resultsCache = {},
 		searchKeyUpTimer;
 
 	// Turn browser's form autocompletion off
 	$searchInput.attr('autocomplete', 'off');
-
-	$searchForm.on('change', $searchCategoryFilter, function(evt) {
-		if ($searchCategoryFilter.find('option:selected').val() === 'all') {
-			$searchCategoryFilter.parent('.CustomSelectWrap').addClass('default');
-		} else {
-			$searchCategoryFilter.parent('.CustomSelectWrap').removeClass('default');
-		}
-	}).trigger('change');
 
 	$searchForm.on('change', $searchInput, function() {
 		if ($searchInput.val() === '') {
@@ -137,18 +138,19 @@ $(function() {
 			deferred = $.ajax({
 				type: 'GET',
 				url: '/interface/Helper',
-				data: {
-					file: helperfile,
-					query: query
-				}
+				data: dataObj
 			});
-			resultsCache[helperfile + query] = deferred;
+			resultsCache[query] = deferred;
 		}
 		return deferred;
 	}
 
 	function getLivesearchResults(searchQuery) {
-		$.when(cacheResults('helpers/header-livesearch', searchQuery)).done(function(results) {
+		var dataObj = {
+			query: searchQuery,
+			file: 'helpers/header-livesearch'
+		}
+		$.when(cacheResults(dataObj)).done(function(results) {
 			$searchForm.addClass('SearchInitiated');
 			if ($('#SearchResults').length) {
 				$('#SearchResults').replaceWith(results);
@@ -162,11 +164,13 @@ $(function() {
 	}
 
 	function getFullResults(searchQuery) {
-		$.when(cacheResults('helpers/searchresults', searchQuery)).done(function(results) {
+		var dataObj = $.deparam(searchQuery.substr(1));
+		dataObj.file = 'helpers/searchresults';
+		$.when(cacheResults(dataObj)).done(function(results) {
 			$('#Primary').html(results);
+			paginationForms();
 		});
 	}
-
 
 	// Search input events
 	$searchInput
@@ -179,6 +183,7 @@ $(function() {
 			}, 300);
 		})
 		.keydown(function(evt) {
+
 			var downKey = (evt.which === 40) ? true : false,
 				upKey = (evt.which === 38) ? true : false,
 				searchQuery;
@@ -192,7 +197,7 @@ $(function() {
 			}
 
 			if (downKey || upKey) {
-				// Down key
+
 				evt.preventDefault();
 				if ($selectedResult) {
 		            $selectedResult.removeClass('SelectedResult');
@@ -208,10 +213,29 @@ $(function() {
 		        }
 		        searchQuery = $('a', $selectedResult).first().text();
 		        $searchInput.val(searchQuery);
-		    } else {
-				searchKeyUpTimer = setTimeout(function() {
-					getLivesearchResults($searchInput.val());
-				}, 300);
+		       	selectedSearchTerm = searchQuery.toLowerCase();
+		    }
+		})
+		.keyup(function(evt) {
+
+			var downKey = (evt.which === 40) ? true : false,
+				upKey = (evt.which === 38) ? true : false;
+
+			if ( ! downKey || ! upKey) {
+
+		    	currentSearchTerm = $searchInput.val();
+
+		    	if (selectedSearchTerm !== false && selectedSearchTerm === currentSearchTerm) {
+		    		currentSearchTerm = previousSearchTerm;
+		    	}
+
+		    	previousSearchTerm = (previousSearchTerm === '') ? currentSearchTerm : previousSearchTerm;
+
+		    	if (previousSearchTerm !== currentSearchTerm) {
+					searchKeyUpTimer = setTimeout(function() {
+						getLivesearchResults($searchInput.val());
+					}, 300);
+				}
 			}
 		});
 
@@ -225,13 +249,19 @@ $(function() {
 		$selectedResult = null;
 	});
 
-	$('#Primary').on('click', '.SearchFilter li a', function(evt) {
+	$('#Primary').on('click', '.SearchFilter li a, .SearchSuggestions li a', function(evt) {
 		var $that = $(evt.currentTarget),
 			href = $that.attr('href'),
-			q = $that.attr('href').substr(3);
+			q = href.substr(href.lastIndexOf('?'));
+
 		getFullResults(q);
+		history.pushState(null, null, q);
 		evt.preventDefault();
 	});
+
+	$(window).on('popstate', function(evt) {
+		getFullResults(location.search);
+    });
 
 	//--------------------------------------------------------------------------
 	// Home Page Banners
