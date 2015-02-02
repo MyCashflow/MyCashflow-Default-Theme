@@ -128,12 +128,13 @@ $(function() {
 			window.setTimeout(function() {
 				$searchForm.removeClass('SearchInitiated');
 				$searchForm.remove($('#SearchResults'));
-			}, 300);
+			}, 350);
 		}
 	});
 
-	function cacheResults(helperfile, query) {
-		var deferred = resultsCache[helperfile + query];
+	function cacheResults(dataObj) {
+		var query = '/search/?' + $.param(dataObj);
+		var deferred = resultsCache[query];
 		if (!deferred) {
 			deferred = $.ajax({
 				type: 'GET',
@@ -164,8 +165,10 @@ $(function() {
 	}
 
 	function getFullResults(searchQuery) {
+		console.log(searchQuery);
 		var dataObj = $.deparam(searchQuery.substr(1));
 		dataObj.file = 'helpers/searchresults';
+		console.dir(dataObj);
 		$.when(cacheResults(dataObj)).done(function(results) {
 			$('#Primary').html(results);
 			paginationForms();
@@ -254,6 +257,7 @@ $(function() {
 			href = $that.attr('href'),
 			q = href.substr(href.lastIndexOf('?'));
 
+		console.log(q);
 		getFullResults(q);
 		history.pushState(null, null, q);
 		evt.preventDefault();
