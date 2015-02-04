@@ -72,6 +72,7 @@ $(function() {
 	function LiveSearch(opts) {
 		$.extend(this, {
 			$searchForm: $('#SearchForm'),
+			$liveSearchResults: $('#LiveSearch'),
 			$searchInput: $('#SearchInput'),
 			$searchCategoryFilter: $('#SearchCategoryFilter select'),
 			$results: $('.SearchSuggestions li'),
@@ -216,7 +217,7 @@ $(function() {
 			evt.preventDefault();
 		}
 
-		self.$searchForm
+		self.$liveSearchResults
 			.on('mouseenter', '.SearchSuggestions li', onSearchResultMouseEnter)
 			.on('mouseleave', '.SearchSuggestions li', onSearchResultMouseLeave);
 
@@ -258,7 +259,7 @@ $(function() {
 			if ($('#SearchResults').length) {
 				$('#SearchResults').replaceWith(results);
 			} else {
-				$('#LiveSearch').prepend(results);
+				self.$liveSearchResults.prepend(results);
 			}
 
 			self.$results = $('.SearchSuggestions li');
