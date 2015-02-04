@@ -328,6 +328,7 @@ header .DropdownNavigation ul li a:hover {
 .CloseSearchResults { background-image: url(../i/search-close.gif); cursor: pointer; }
 
 .NoResults { padding: 0 15px; }
+.NoResults .Notification { margin: 9px 0 18px; }
 
 #FilterToggler {
 	float: left;
@@ -370,6 +371,11 @@ header .DropdownNavigation ul li a:hover {
 }
 
 .SearchSuggestions { clear: both; }
+
+p.SearchSuggestions {
+	margin-left: 15px;
+	margin-right: 15px;
+}
 
 /* Same Form @ Content area */
 

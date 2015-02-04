@@ -54,6 +54,12 @@
 						before:'<h2 class="BoxHeader">{%RecommendedProducts}</h2><ul class="ProductList">',
 						after:'</ul>'
 					)}
+					{SearchPopularTerms(
+						limit: '10',
+						before: '<h2 class="BoxHeader">{%SearchPopularTerms}</h2><ul class="NavigationList">',
+						after: '</ul>',
+						helper: '{{ <li><a href="{SearchUrl}">{SearchKeyword}</a></li> }}'
+					)}
 					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
 				</div>
 			</div>

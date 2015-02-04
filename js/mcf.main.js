@@ -66,206 +66,222 @@ $(function() {
 	paginationForms();
 
 	//--------------------------------------------------------------------------
-	// Advanced search
-	//--------------------------------------------------------------------------
-
-	// To use advaced search just uncomment these next lines and
-	// call js/vendor/jquery.hashchange.js and js/mcf.advancedsearch.js in the helpers/scripts.html file.
-	// Also from helpers/sidebar-left.html change {Categories(show:'all')} to {Categories(show:'active')}
-
-	// There must be subcategories under each main category which then act as facets for the search.
-	// I.e. if you have main category named "Shoes", you could then have subcategory called "Color" and
-	// under that category subcategories called "Blue", "Green", "Yellow" etc. where the product would be.
-
-	// The plugin would make an advanced search form this data and
-	// the user can then select all the properties of the shoes that she wants and search for applicable products.
-
-	/* $('ul.Categories > li.Current', '#MainNavigation').each(function(index) {
-
-		var $that = $(this),
-			categoryRegex = /CategoryID-([\d]+)/,
-			categoryID = parseInt($that.attr('class').match(categoryRegex)[1], 10),
-			$subCategories = $that.find('> ul'),
-			$wrapper = $('<div class="FacetedNavigation" id="FacetedNav-' + categoryID + '"></div>');
-
-		$that.addClass('AdvancedSearchItem');
-		$subCategories.hide();
-		$subCategories.before($wrapper);
-
-		$wrapper.mcfAdvancedSearch({
-			id: categoryID,
-			mode: 'navigation',
-			results: '#Primary',
-			brands: 'checkbox',
-			get_form: function(el) {
-				el.find('select').customSelect();
-			}
-		});
-
-	}); */
-
-	//--------------------------------------------------------------------------
 	// Ajax Live Search
 	//--------------------------------------------------------------------------
 
-	var $searchForm = $('#SearchForm'),
-		$searchInput = $('#SearchInput'),
-		$searchCategoryFilter = $('#SearchCategoryFilter select'),
-		$results = $('.SearchSuggestions li'),
-		$selectedResult,
-		$nextResult,
-		previousSearchTerm = '',
-		currentSearchTerm = $searchInput.val().toLowerCase(),
-		selectedSearchTerm = false,
-		resultsCache = {},
-		searchKeyUpTimer;
+	function LiveSearch(opts) {
+		$.extend(this, {
+			$searchForm: $('#SearchForm'),
+			$searchInput: $('#SearchInput'),
+			$searchCategoryFilter: $('#SearchCategoryFilter select'),
+			$results: $('.SearchSuggestions li'),
+			$selectedResult: null,
+			$nextResult: null,
+			downKeyCode: 40,
+			upKeyCode: 38,
+			currentSearchTerm: null,
+			previousSearchTerm: null,
+			selectedSearchTerm: null,
+			searchKeyUpTimer: null,
+			resultsCache: {}
+		}, opts || {});
 
-	// Turn browser's form autocompletion off
-	$searchInput.attr('autocomplete', 'off');
+		// Turn browser's form autocompletion off
+		this.$searchInput.attr('autocomplete', 'off');
 
-	$searchForm.on('change', $searchInput, function() {
-		if ($searchInput.val() === '') {
-			window.setTimeout(function() {
-				$searchForm.removeClass('SearchInitiated');
-				$searchForm.remove($('#SearchResults'));
-			}, 350);
+		// Initialize.
+		this.currentSearchTerm = this.$searchInput.val().toLowerCase();
+		this.bindEvents();
+	}
+
+	LiveSearch.prototype.bindEvents = function() {
+		var self = this;
+
+		/**
+		 * Search input events
+		 */
+
+		function onSearchInputFocus() {
+			self.$searchForm.addClass('SearchActive');
 		}
-	});
 
-	function cacheResults(dataObj) {
-		var query = '/search/?' + $.param(dataObj);
-		var deferred = resultsCache[query];
+		function onSearchInputBlur() {
+			window.setTimeout(function() {
+				self.$searchForm.removeClass('SearchActive');
+			}, 300);
+		}
+
+		function onSearchInputKeyDown(evt) {
+			var downKey = evt.which == self.downKeyCode;
+			var upKey = evt.which == self.upKeyCode;
+
+			clearTimeout(self.searchKeyUpTimer);
+
+			function fallbackSelection(downKey) {
+				// Select first / last.
+				self.$selectedResult = (downKey)
+					? self.$results.first()
+					: self.$results.last();
+
+				self.$selectedResult.addClass('SelectedResult');
+			}
+
+			if (downKey || upKey) {
+				evt.preventDefault();
+
+				if (self.$selectedResult) {
+					self.$selectedResult.removeClass('SelectedResult');
+
+					// Select next / prev.
+					self.$nextResult = (downKey)
+						? self.$selectedResult.next()
+						: self.$selectedResult.prev();
+
+					if (self.$nextResult.length > 0) {
+						self.$selectedResult = self.$nextResult.addClass('SelectedResult');
+					} else {
+						fallbackSelection(downKey);
+					}
+				} else {
+					fallbackSelection(downKey);
+				}
+
+				var searchQuery = $('a', self.$selectedResult).first().text();
+				self.$searchInput.val(searchQuery);
+				self.selectedSearchTerm = searchQuery.toLowerCase();
+			}
+		}
+
+		function onSearchInputKeyUp(evt) {
+			var downKey = evt.which == self.downKeyCode;
+			var upKey = evt.which == self.upKeyCode;
+
+			if (!downKey || !upKey) {
+				self.currentSearchTerm = self.$searchInput.val();
+				if (self.selectedSearchTerm === self.currentSearchTerm) {
+					self.currentSearchTerm = self.previousSearchTerm;
+				}
+
+				self.previousSearchTerm = !!self.previousSearchTerm
+					? self.currentSearchTerm
+					: self.previousSearchTerm;
+
+				if (self.previousSearchTerm !== self.currentSearchTerm) {
+					self.searchKeyUpTimer = setTimeout(function() {
+						self.getLivesearchResults(self.$searchInput.val());
+					}, 300);
+				}
+			}
+		}
+
+		function onSearchInputChange() {
+			if (self.$searchInput.val() === '') {
+				window.setTimeout(function() {
+					self.$searchForm.removeClass('SearchInitiated');
+					self.$searchForm.remove($('#SearchResults'));
+				}, 350);
+			}
+		}
+
+		self.$searchInput
+			.on('focus', onSearchInputFocus)
+			.on('blur', onSearchInputBlur)
+			.on('keydown', onSearchInputKeyDown)
+			.on('keyup', onSearchInputKeyUp)
+			.on('change', self.$searchInput, onSearchInputChange);
+
+		/**
+		 * Search Form Events
+		 */
+
+		function onSearchResultMouseEnter(evt) {
+			var $that = $(evt.currentTarget);
+			self.$results.removeClass('SelectedResult');
+			self.$selectedResult = $that.addClass('SelectedResult');
+		}
+
+		function onSearchResultMouseLeave(evt) {
+			var $that = $(evt.currentTarget);
+			$that.removeClass('SelectedResult');
+			self.$selectedResult = null;
+		}
+
+		function onSearchFilterResultClick(evt) {
+			var $that = $(evt.currentTarget);
+			var href = $that.attr('href');
+			var q = href.substr(href.lastIndexOf('?'));
+
+			self.getFullResults(q);
+			history.pushState(null, null, q);
+			evt.preventDefault();
+		}
+
+		self.$searchForm
+			.on('mouseenter', '.SearchSuggestions li', onSearchResultMouseEnter)
+			.on('mouseleave', '.SearchSuggestions li', onSearchResultMouseLeave);
+
+		$('#Primary').on('click', '.SearchFilter li a, .SearchSuggestions a', onSearchFilterResultClick);
+
+		// Load the results when state changes.
+		$(window).on('popstate', function(evt) {
+			self.getFullResults(location.search);
+		});
+	}
+
+	LiveSearch.prototype.cacheResults = function(queryObj) {
+		var self = this;
+		var query = '/search/?' + $.param(queryObj);
+		var deferred = self.resultsCache[query];
+
 		if (!deferred) {
 			deferred = $.ajax({
 				type: 'GET',
 				url: '/interface/Helper',
-				data: dataObj
+				data: queryObj
 			});
-			resultsCache[query] = deferred;
+			self.resultsCache[query] = deferred;
 		}
-		return deferred;
-	}
 
-	function getLivesearchResults(searchQuery) {
-		var dataObj = {
+		return deferred;
+	};
+
+	LiveSearch.prototype.getLivesearchResults = function(searchQuery) {
+		var self = this;
+		var queryObj = {
 			query: searchQuery,
 			file: 'helpers/header-livesearch'
 		}
-		$.when(cacheResults(dataObj)).done(function(results) {
-			$searchForm.addClass('SearchInitiated');
+
+		$.when(self.cacheResults(queryObj)).done(function(results) {
+			self.$searchForm.addClass('SearchInitiated');
+
 			if ($('#SearchResults').length) {
 				$('#SearchResults').replaceWith(results);
 			} else {
 				$('#LiveSearch').prepend(results);
 			}
-			$results = $('.SearchSuggestions li');
-			$selectedResult = null;
-			$nextResult = null;
+
+			self.$results = $('.SearchSuggestions li');
+			self.$selectedResult = null;
+			self.$nextResult = null;
 		});
-	}
+	};
 
-	function getFullResults(searchQuery) {
-		console.log(searchQuery);
-		var dataObj = $.deparam(searchQuery.substr(1));
-		dataObj.file = 'helpers/searchresults';
-		console.dir(dataObj);
-		$.when(cacheResults(dataObj)).done(function(results) {
-			$('#Primary').html(results);
-			paginationForms();
-		});
-	}
+	LiveSearch.prototype.getFullResults = function(searchQuery) {
+		var self = this;
+		var queryObj = $.deparam(searchQuery.substr(1));
+		queryObj.file = 'helpers/searchresults';
 
-	// Search input events
-	$searchInput
-		.focus(function() {
-			$searchForm.addClass('SearchActive');
-		})
-		.blur(function() {
-			window.setTimeout(function() {
-				$searchForm.removeClass('SearchActive');
-			}, 300);
-		})
-		.keydown(function(evt) {
+		// Check if we're dealing with search query
+		if (typeof queryObj.q !== 'undefined') {
+		$.when(self.cacheResults(queryObj)).done(function(results) {
+				 $('#Primary').html(results);
+				paginationForms();
+			});
+		}
+	};
 
-			var downKey = (evt.which === 40) ? true : false,
-				upKey = (evt.which === 38) ? true : false,
-				searchQuery;
-
-			clearTimeout(searchKeyUpTimer);
-
-			function fallbackSelection(downKey) {
-				// Select first / last
-				$selectedResult = (downKey) ? $results.first() : $results.last();
-				$selectedResult.addClass('SelectedResult');
-			}
-
-			if (downKey || upKey) {
-
-				evt.preventDefault();
-				if ($selectedResult) {
-		            $selectedResult.removeClass('SelectedResult');
-		            $nextResult = (downKey) ? $selectedResult.next() : $selectedResult.prev();
-		            if ($nextResult.length > 0) {
-		            	// Select next / previous
-		                $selectedResult = $nextResult.addClass('SelectedResult');
-		            } else {
-		            	fallbackSelection(downKey)
-					}
-		        } else {
-		        	fallbackSelection(downKey)
-		        }
-		        searchQuery = $('a', $selectedResult).first().text();
-		        $searchInput.val(searchQuery);
-		       	selectedSearchTerm = searchQuery.toLowerCase();
-		    }
-		})
-		.keyup(function(evt) {
-
-			var downKey = (evt.which === 40) ? true : false,
-				upKey = (evt.which === 38) ? true : false;
-
-			if ( ! downKey || ! upKey) {
-
-		    	currentSearchTerm = $searchInput.val();
-
-		    	if (selectedSearchTerm !== false && selectedSearchTerm === currentSearchTerm) {
-		    		currentSearchTerm = previousSearchTerm;
-		    	}
-
-		    	previousSearchTerm = (previousSearchTerm === '') ? currentSearchTerm : previousSearchTerm;
-
-		    	if (previousSearchTerm !== currentSearchTerm) {
-					searchKeyUpTimer = setTimeout(function() {
-						getLivesearchResults($searchInput.val());
-					}, 300);
-				}
-			}
-		});
-
-	$searchForm.on('mouseenter', '.SearchSuggestions li', function(evt) {
-		var $that = $(evt.currentTarget);
-		$results.removeClass('SelectedResult');
-		$selectedResult = $that.addClass('SelectedResult');
-	}).on('mouseleave', '.SearchSuggestions li', function(evt) {
-		var $that = $(evt.currentTarget);
-		$that.removeClass('SelectedResult');
-		$selectedResult = null;
-	});
-
-	$('#Primary').on('click', '.SearchFilter li a, .SearchSuggestions li a', function(evt) {
-		var $that = $(evt.currentTarget),
-			href = $that.attr('href'),
-			q = href.substr(href.lastIndexOf('?'));
-
-		console.log(q);
-		getFullResults(q);
-		history.pushState(null, null, q);
-		evt.preventDefault();
-	});
-
-	$(window).on('popstate', function(evt) {
-		getFullResults(location.search);
-    });
+	new LiveSearch();
 
 	//--------------------------------------------------------------------------
 	// Home Page Banners

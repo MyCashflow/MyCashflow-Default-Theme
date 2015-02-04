@@ -7,11 +7,29 @@
 				{Path}
 				<h1>{%PageNotFound}</h1>
 			</div>
-			<div class="Content">
-				<div class="Notification Help">
-					<p>{%PageNotFoundInfo}</p>
+			<div class="Notification Error">
+				<p>{%PageNotFoundInfo}</p>
+			</div>
+			<div id="LandingPageWrapper" class="clearfix">
+				<div id="PrimaryFeatures">
+					{TopSellers(
+						limit:6,
+						classes:'first|',
+						type:'normal',
+						timelimit:'-2 years',
+						before:'<h2 class="BoxHeader">{%BestsellingProducts}</h2>',
+						helper: 'helpers/listproduct'
+					)}
 				</div>
-				<div id="ContentSearch">{Search(id: '404-search')}</div>
+				<div id="SecondaryFeatures">
+					{SearchPopularTerms(
+						limit: '10',
+						before: '<h2 class="BoxHeader">{%SearchPopularTerms}</h2><ul class="NavigationList">',
+						after: '</ul>',
+						helper: '{{ <li><a href="{SearchUrl}">{SearchKeyword}</a></li> }}'
+					)}
+					{Categories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
+				</div>
 			</div>
 		</div>
 		{Helper(file:'helpers/sidebar-right')}

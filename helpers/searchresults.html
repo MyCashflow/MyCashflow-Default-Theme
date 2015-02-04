@@ -1,15 +1,15 @@
 <div id="PageHeader">
 	{Path}
-	<h1>Hakutulokset hakusanalla <em>{SearchKeyword}</em></h1>
+	<h1>{%SearchPageTitle} <em>{SearchKeyword}</em></h1>
 </div>
 
 {SearchSuggestions(
-	before: '<p><strong>Kokeile myös näitä hakusanoja: </strong>',
+	before: '<p class="SearchSuggestions"><strong>{%SearchSuggestionsLabel}: </strong>',
 	after: '</p>',
 	helper: '{{ <a href="{SearchUrl}">{SearchKeyword}</a>&#8194; }}'
 )}
 
-{SearchFilters(before: '<h3>Suodata hakutuloksia</h3>')}
+{SearchFilters(limit: '8')}
 
 {SearchProducts(
 	pagination: 'true',
@@ -30,7 +30,7 @@
 					{PaginationLimit}
 				</div>
 				<div>
-					<button type="submit">Lähetä</button>
+					<button type="submit">{%Send}</button>
 				</div>
 			</div>
 		</form>
@@ -38,41 +38,29 @@
 	after: '{PaginationPages}',
 	helper: 'helpers/listproduct',
 	or: '
-		<form action="/search/" method="get" id="ContentSearch">
-			<div class="FormItem">
-				<label for="ContentSearchInput">Haku:</label>
-				<input type="search" name="q" id="ContentSearchInput" value="" placeholder="Hae" autocomplete="off">
-				<button type="submit" id="SearchButton"><span>Haku</span></button>
+		<div class="Notification Error">
+			<p>{%SearchNoResults}</p>
+		</div>
+		<div id="LandingPageWrapper" class="clearfix">
+			<div id="PrimaryFeatures">
+				{TopSellers(
+					limit:6,
+					classes:'first|',
+					type:'normal',
+					timelimit:'-2 years',
+					before:'<h2 class="BoxHeader">{%BestsellingProducts}</h2>',
+					helper: 'helpers/listproduct'
+				)}
 			</div>
-		</form>
-
-		<p class="NoResults">Valitettavasti antamallasi hakusanalla ei löytynyt yhtään tuotetta.</p>
-		<div class="Column">
-			{SearchPopularTerms(
-				before: '<h3 class="AllCaps">Suosituimmat hakusanat</h3><ul>',
-				after: '</ul>',
-				helper: '{{ <li><a href="{SearchUrl}">{SearchKeyword}</a></li> }}'
-			)}
-		</div>
-		<div class="Column">
-		{TopSellers(
-			limit:10,
-			type:'normal',
-			helper:'{{
-				<li><a href="{ProductUrl}">{ProductName}</a></li>
-			}}',
-			before:'<h3 class="AllCaps">{%BestsellingProducts}</h3><ul>',
-			after:'</ul>'
-		)}
-		</div>
-		<div class="Column">
-			{Categories(
-				levels: '1',
-				before:'<h3 class="AllCaps">{%BrowseCategories}</h3>',
-				helper:'{{
-					<li><a href="{CategoryUrl}">{CategoryName}</a></li>
-				}}',
-			)}
+			<div id="SecondaryFeatures">
+				{SearchPopularTerms(
+					limit: '10',
+					before: '<h2 class="BoxHeader">{%SearchPopularTerms}</h2><ul class="NavigationList">',
+					after: '</ul>',
+					helper: '{{ <li><a href="{SearchUrl}">{SearchKeyword}</a></li> }}'
+				)}
+				{Categories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
+			</div>
 		</div>
 	'
 )}
