@@ -88,7 +88,7 @@ $(function() {
 
 				if (verbose) {
 					$('.CheckoutLoader', el).remove();
-					$('select', el).customSelect();
+					if (typeof $.fn.customSelect === 'function') $('select', el).customSelect();
 				}
 
 				if (el.attr('id') === 'CheckoutShippingAddress') {
@@ -104,7 +104,7 @@ $(function() {
 
 			get_success: function(el, response) {
 				$('.CheckoutLoader', el).remove();
-				$('select', el).customSelect();
+				if (typeof $.fn.customSelect === 'function') $('select', el).customSelect();
 
 				// Add SelectedMethod class to selected method's wrapper
 				var selectedMethodClass = 'SelectedMethod';
