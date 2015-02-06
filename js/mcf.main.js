@@ -116,8 +116,6 @@ $(function() {
 			var downKey = evt.which == self.downKeyCode;
 			var upKey = evt.which == self.upKeyCode;
 
-			clearTimeout(self.searchKeyUpTimer);
-
 			function fallbackSelection(downKey) {
 				// Select first / last.
 				self.$selectedResult = (downKey)
@@ -157,6 +155,8 @@ $(function() {
 			var downKey = evt.which == self.downKeyCode;
 			var upKey = evt.which == self.upKeyCode;
 
+			clearTimeout(self.searchKeyUpTimer);
+
 			if (!downKey || !upKey) {
 				self.currentSearchTerm = self.$searchInput.val();
 				if (self.selectedSearchTerm === self.currentSearchTerm) {
@@ -170,7 +170,7 @@ $(function() {
 				if (self.previousSearchTerm !== self.currentSearchTerm) {
 					self.searchKeyUpTimer = setTimeout(function() {
 						self.getLivesearchResults(self.$searchInput.val());
-					}, 300);
+					}, 500);
 				}
 			}
 		}
