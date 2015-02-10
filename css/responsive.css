@@ -454,7 +454,7 @@
 	}
 	#MainNavigation ul.Categories li ul li span.NavOpener,
 	#MainNavigation ul.Categories li ul li ul li span.NavOpener{
-		width: 100%;
+		width: 20px;
 		top: -1px;
 		line-height: inherit;
 		background-position: 7px 11px;
@@ -1243,7 +1243,7 @@
 	#ShowShareLink i { background-image: url(../i/share_icon2x.png); background-size: 12px 12px; }
 }
 
-@media only screen and (min-device-width: 980px) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-width: 781px) and (min-device-width: 980px) and (-webkit-min-device-pixel-ratio: 2) {
 	#MainNavigation ul.Categories li span.NavOpener{
 		background: url(../i/arrows2x.png) no-repeat -1px -1px;
 		background-size: 69px 69px;
