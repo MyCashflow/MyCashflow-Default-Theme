@@ -47,7 +47,14 @@ $(function() {
 	$.ajaxSetup({ cache: false });
 
 	// Make selects pretty
-	$('select').customSelect();
+	if (typeof $.fn.customSelect === 'function') {
+		$('select').customSelect();
+
+		// When variationsplitter creates new selects make them also pretty
+		$('.BuyForm').on('change', 'select', function(evt) {
+			$(evt.delegateTarget).find('select').customSelect();
+		});
+	}
 
 	//--------------------------------------------------------------------------
 	// Pagination & Forms
@@ -498,12 +505,14 @@ $(function() {
 				onComplete: function() {
 					// Bind custom selects and variationsplitter to modal
 					$('#cboxContent').removeData('plugin_mcfVariationSplitter');
-					$('#cboxContent').mcfVariationSplitter().find('select').customSelect();
+					if (typeof $.fn.customSelect === 'function') {
+						$('#cboxContent').mcfVariationSplitter().find('select').customSelect();
 
-					// Make variationsplitter-made selects pretty too
-					$('#cboxContent').on('change', 'select', function(evt) {
-						$(evt.delegateTarget).find('select').customSelect();
-					});
+						// Make variationsplitter-made selects pretty too
+						$('#cboxContent').on('change', 'select', function(evt) {
+							$(evt.delegateTarget).find('select').customSelect();
+						});
+					}
 				}
 			}, mcf.colorboxOpts));
 		}

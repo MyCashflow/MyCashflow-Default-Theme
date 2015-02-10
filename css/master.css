@@ -1446,6 +1446,10 @@ td.CartTotal {
 }
 .CartQuantity {
 	text-align: center;
+	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .CartQuantity input {
 	margin: 0 auto;
