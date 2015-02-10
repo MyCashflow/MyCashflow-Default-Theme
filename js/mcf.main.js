@@ -91,7 +91,7 @@ $(function() {
 		this.$searchInput.attr('autocomplete', 'off');
 
 		// Initialize.
-		this.currentSearchTerm = this.$searchInput.val().toLowerCase();
+		this.currentSearchTerm = (this.$searchInput.val()) ? this.$searchInput.val().toLowerCase() : '';
 		this.bindEvents();
 	}
 
