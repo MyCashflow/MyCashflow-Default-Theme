@@ -172,7 +172,7 @@
 
 		if (id === 'CheckoutShippingMethods' || id === 'CheckoutPaymentMethods') {
 			var $responseTag = $el.find('[name=response_tag]');
-			var preselect = $responseTag.val().match(/preselect:(\'|#039;)(true|false)(\'|#039;)/);
+			var preselect = ($responseTag.length) ? $responseTag.val().match(/preselect:(\'|#039;)(true|false)(\'|#039;)/) : null;
 			preselect = (preselect && preselect[2] === "true");
 			opts.preselect = preselect;
 		}
