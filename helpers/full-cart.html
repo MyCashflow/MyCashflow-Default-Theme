@@ -11,27 +11,23 @@
 				</tr>
 			</thead>
 			<tfoot>
-				{CartSubTotal(
+				{CartSubTotalWithoutTax(
 					before: '<tr><th scope="row" colspan="4">{%CheckoutProductsTotal}</th><td class="CartTotal">',
 					after: '</td></tr>'
 				)}
-				{CartShippingCosts(
+				{CartShippingCostsWithoutTax(
 					before: '<tr><th scope="row" colspan="4">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></th><td class="CartTotal">',
 					after: '</td></tr>'
 				)}
-				{CartPaymentCosts(
+				{CartPaymentCostsWithoutTax(
 					before: '<tr><th scope="row" colspan="4">{%PaymentMethod}: <strong>{CartPaymentMethod}</strong></th><td class="CartTotal">',
 					after: '</td></tr>'
 				)}
-				{CartDiscount(
+				{CartDiscountWithoutTax(
 					before: '<tr><th scope="row" colspan="4">{%CampaignCode}: <strong>{CartCouponCode}</strong></th><td class="CartTotal CartDiscount">-',
 					after: '</td></tr>'
 				)}
-				{CartPartPayment(
-					before: '<tr><th scope="row" colspan="4">{%PartPayment}</th><td class="CartTotal">',
-					after: '</td></tr>'
-				)}
-				{CartTotal(
+				{CartTotalWithoutTax(
 					before: '<tr id="FullTotal"><th scope="row" colspan="4">{%Total}</th><td class="CartTotal">',
 					after: '</td></tr>'
 				)}
@@ -52,13 +48,13 @@
 				{CartProductDetails}
 			</th>
 			<td class="CartPrice">
-				{CartProductComparePrice(
+				{CartProductComparePriceWithoutTax(
 					before: '
-						<span class="CartDiscount">{CartProductPrice}</span><br>
+						<span class="CartDiscount">{CartProductPriceWithoutTax}</span><br>
 						<span class="ProductComparePrice">',
 					after: '
 						</span>',
-					or: '{CartProductPrice}'
+					or: '{CartProductPriceWithoutTax}'
 				)}
 			</td>
 			<td class="CartQuantity">

@@ -9,10 +9,11 @@
 			</div>
 			<div id="ProductBuy" class="BlockForm">
 				<div id="ProductShortDesc">{ProductShortDesc}</div>
-				{ProductPrices}
+				{ProductPrices(includetax:'false')}
 				{ProductAvailability}
 				{ProductBuy(
-					variations: 'radio'
+					variations: 'radio',
+					includetax: 'false'
 				)}
 			</div>
 			<div id="ProductImages">

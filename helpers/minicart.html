@@ -6,12 +6,12 @@
 			<dl>
 				<dt>{%Price}</dt>
 				<dd>
-					{CartProductComparePrice(
+					{CartProductComparePriceWithoutTax(
 						before: '
-							<span class="CartDiscount">{CartProductPrice}</span>&ensp;<span class="ProductComparePrice">',
+							<span class="CartDiscount">{CartProductPriceWithoutTax}</span>&ensp;<span class="ProductComparePrice">',
 						after: '
 							</span>',
-						or: '{CartProductPrice}'
+						or: '{CartProductPriceWithoutTax}'
 					)}
 				<dt>{%Quantity}</dt>
 				<dd>{CartProductQuantity(mode:'preview')}</dd>
@@ -23,7 +23,7 @@
 		</ul>
 		<dl id="MiniCartFooter">
 			<dt>{%CheckoutProductsTotal}</dt>
-			<dd class="SubTotal">{CartSubTotal}</dd>
+			<dd class="SubTotal">{CartSubTotalWithoutTax}</dd>
 			<dd class="CartLink"><a href="/cart/">{%ShoppingCartEdit}</a></dd>
 			<dd class="CheckoutLink"><a href="/checkout/" class="Button CheckoutButton">{%OrderProducts}</a></dd>
 		</dl>',

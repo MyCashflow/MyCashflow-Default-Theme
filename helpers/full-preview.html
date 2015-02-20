@@ -10,25 +10,33 @@
 	</thead>
 
 	<tfoot>
-		{CartSubTotal(
+		{CartSubTotalWithoutTax(
 			before:	'<tr><th scope="row" colspan="4">{%CheckoutProductsTotal}</th><td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
-		{CartShippingCosts(
+		{CartShippingCostsWithoutTax(
 			before:	'<tr><th scope="row" colspan="4">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></th><td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
-		{CartPaymentCosts(
+		{CartPaymentCostsWithoutTax(
 			before:	'<tr><th scope="row" colspan="4">{%PaymentMethod}: <strong>{CartPaymentMethod}</strong></th><td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
-		{CartDiscount(
+		{CartDiscountWithoutTax(
 			before:	'<tr><th scope="row" colspan="4">{%CampaignCode}: <strong>{CartCouponCode}</strong></th><td class="CartTotal CartDiscount">-',
 			after:	'</td></tr>'
 		)}
-		{CartTotal(
-			before:	'<tr id="FullTotal"><th scope="row" colspan="4">{%Total}</th><td class="CartTotal">',
+		{CartTotalWithoutTax(
+			before:	'<tr><th scope="row" colspan="4">{%Total} ({%VAT}&nbsp;0%)</th><td class="CartTotal">',
 			after:	'</td></tr>'
+		)}
+		{CartTax(
+			before:	'<tr><th scope="row" colspan="4">{%Tax} ({%VAT}&nbsp;{CartTaxRate}%)</th><td class="CartTotal">',
+			after: '</td></tr>'
+		)}
+		{CartTotal(
+			before:	'<tr id="FullTotal"><th scope="row" colspan="4">{%Total} ({%VAT}&nbsp;{CartTaxRate}%)</th><td class="CartTotal">',
+			after: '</td></tr>'
 		)}
 	</tfoot>
 
@@ -48,13 +56,13 @@
 						{CartProductDetails}
 					</th>
 					<td class="CartPrice">
-						{CartProductComparePrice(
+						{CartProductComparePriceWithoutTax(
 							before: '
-								<span class="CartDiscount">{CartProductPrice}</span><br>
+								<span class="CartDiscount">{CartProductPriceWithoutTax}</span><br>
 								<span class="ProductComparePrice">',
 							after: '
 								</span>',
-							or: '{CartProductPrice}'
+							or: '{CartProductPriceWithoutTax}'
 						)}
 					</td>
 					<td class="CartQuantity">
@@ -62,7 +70,7 @@
 							mode: 'preview'
 						)}
 					</td>
-					<td class="CartTotal">{CartProductTotal}</td>
+					<td class="CartTotal">{CartProductTotalWithoutTax}</td>
 				</tr>
 			}}'
 		)}

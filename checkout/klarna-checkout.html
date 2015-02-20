@@ -35,6 +35,7 @@
 		<h2><span class="KlarnaStages">3. </span>{%KlarnaCheckoutFinishAndPay}</h2>
 
 		{CheckoutPaymentMethods(
+			includetax: 'false',
 			exclude: 'current',
 			before: '
 				<ul id="KlarnaOtherPaymentMethods" class="clearfix">

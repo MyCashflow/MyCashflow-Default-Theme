@@ -10,21 +10,29 @@
 	</thead>
 
 	<tfoot>
-		{CartShippingCosts(
+		{CartShippingCostsWithoutTax(
 			before:	'<tr><th scope="row" colspan="3">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></td><td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
-		{CartPaymentCosts(
+		{CartPaymentCostsWithoutTax(
 			before:	'<tr><th scope="row" colspan="3">{%PaymentMethod}: <strong>{CartPaymentMethod}</strong></td><td class="CartTotal">',
 			after:	'</td></tr>'
 		)}
-		{CartDiscount(
+		{CartDiscountWithoutTax(
 			before:	'<tr><th scope="row" colspan="3">{%CampaignCode}: <strong>{CartCouponCode}</strong></td><td class="CartTotal CartDiscount">-',
 			after:	'</td></tr>'
 		)}
+		{CartTotalWithoutTax(
+			before:	'<tr><th scope="row" colspan="3">{%Total} ({%VAT}&nbsp;0%)</th><td class="CartTotal">',
+			after: '</td></tr>'
+		)}
+		{CartTax(
+			before:	'<tr><th scope="row" colspan="3">{%Tax} ({%VAT}&nbsp;{CartTaxRate}%)</th><td class="CartTotal">',
+			after: '</td></tr>'
+		)}
 		{CartTotal(
-			before:	'<tr id="FullTotal"><th scope="row" colspan="3">{%Total}</th><td class="CartTotal">',
-			after:	'</td></tr>'
+			before:	'<tr id="FullTotal"><th scope="row" colspan="3">{%Total} ({%VAT}&nbsp;{CartTaxRate}%)</th><td class="CartTotal">',
+			after: '</td></tr>'
 		)}
 	</tfoot>
 
@@ -37,13 +45,14 @@
 						{CartProductDetails}
 					</th>
 					<td class="CartPrice">
-						{CartProductComparePrice(
+						{CartProductComparePriceWithoutTax(
+							includetax: 'false',
 							before: '
-								<span class="CartDiscount">{CartProductPrice}</span><br>
+								<span class="CartDiscount">{CartProductPriceWithoutTax}</span><br>
 								<span class="ProductComparePrice">',
 							after: '
 								</span>',
-							or: '{CartProductPrice}'
+							or: '{CartProductPriceWithoutTax}'
 						)}
 					</td>
 					<td class="CartQuantity">
@@ -51,7 +60,7 @@
 							mode: 'preview'
 						)}
 					</td>
-					<td class="CartTotal">{CartProductTotal}</td>
+					<td class="CartTotal">{CartProductTotalWithoutTax}</td>
 				</tr>
 			}}'
 		)}
