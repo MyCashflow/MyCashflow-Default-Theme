@@ -32,11 +32,7 @@
 					{SubCategories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
 					{Brands(
 						category: 'current',
-						before: '<h2 class="BoxHeader">Tuotemerkit</h2><ul class="NavigationList BrandsNavigation">',
-						after: '</ul>',
-						helper: '{{
-							<li><a href="{SearchUrl(category:'current',brand:'current')}" title="{BrandName}">{BrandName}</a></li>
-						}}'
+						before: '<h2 class="BoxHeader">{%Brands}</h2>'
 					)}
 				</div>
 			</div>
