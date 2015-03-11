@@ -378,11 +378,7 @@
 	button, input[type="button"], input[type="reset"], input[type="submit"], .Button {
 		padding: 5px;
 	}
-	/*#SearchForm{ height: 21px; }
-	#SearchForm input{height: 26px;}*/
 	#SearchForm button { height: 24px; }
-
-	/*.SearchActive #LiveSearchResults{ opacity: 1 !important; top: 38px; width: 290px !important; }*/
 
 	#LiveSearchResults li{
 		margin: 0;

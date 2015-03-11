@@ -215,14 +215,11 @@ header .DropdownNavigation ul li a:hover {
 	width: 372px;
 	background: #F8F8F8;
 	border: 1px solid #D9D9D9;
-	border-bottom: 0; border-right: 0;
+	border-width: 1px 0 0 1px;
 	-moz-border-radius: 5px 0 0 0;
 	-webkit-border-radius: 5px 0 0 0;
 	border-radius: 5px 0 0 0;
 	zoom: 1;
-}
-.lt-ie9 #SearchForm {
-	/*width: 290px;*/
 }
 #SearchForm.SearchActive input {
 	-moz-border-bottom-left-radius: 0;
