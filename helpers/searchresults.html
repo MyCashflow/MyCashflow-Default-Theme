@@ -1,6 +1,12 @@
 <div id="PageHeader">
 	{Path}
-	<h1>{%SearchPageTitle} <em>{SearchKeyword}</em></h1>
+	<h1>
+		{SearchKeyword(
+			before: '{%SearchPageTitle} <em>',
+			after: '</em>',
+			or: '{%SearchNoTerms}'
+		)}
+	</h1>
 </div>
 
 {SearchSuggestions(
