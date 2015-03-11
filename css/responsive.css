@@ -342,6 +342,21 @@
 	#Footer{
 		background: #fff;
 	}
+
+	/* Search */
+	.SearchFilters {
+		width: 100%; overflow: hidden;
+		margin-bottom: 18px;
+	}
+	.SearchSuggestions, .SearchFilter {
+		text-align: left;
+	}
+	#PaginationSortForm {
+		clear: both;
+		float: none;
+		display: block;
+		overflow: hidden;
+	}
 }
 
 @media screen and (max-width: 780px) {
@@ -390,7 +405,7 @@
 		padding: 9px;
 		text-decoration: none;
 	}
-	#SearchForm button{height: 26px;}
+	#SearchForm button { height: 26px; }
 
 	/* Product page */
 	.Product .AddToCart{
@@ -605,6 +620,14 @@
 	#ModalBuying img {
 		display: none;
 	}
+	/* Search */
+	.SearchFilters, .SearchFilter {
+		float: none;
+		display: block;
+		width: auto;
+		margin-bottom: 18px;
+	}
+
 }
 
 @media screen and (max-width: 680px) {
@@ -1187,6 +1210,14 @@
 		border: 0;
 		clear: both;
 		margin-bottom: 20px;
+	}
+	/* Search */
+	.SearchSuggestions strong,
+	.SearchSuggestions strong a {
+		display: block;
+	}
+	.SearchFilters, .SearchFilter {
+		display: none;
 	}
 }
 

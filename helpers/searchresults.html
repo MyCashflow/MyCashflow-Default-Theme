@@ -9,7 +9,7 @@
 	helper: '{{ <a href="{SearchUrl}">{SearchKeyword}</a>&#8194; }}'
 )}
 
-{SearchFilters(limit: '8')}
+{SearchFilters(limit: '8', before: '<div class="SearchFilters">', after: '</div>')}
 
 {SearchProducts(
 	pagination: 'true',
