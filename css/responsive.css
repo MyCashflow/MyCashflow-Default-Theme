@@ -342,6 +342,21 @@
 	#Footer{
 		background: #fff;
 	}
+
+	/* Search */
+	.SearchFilters {
+		width: 100%; overflow: hidden;
+		margin-bottom: 18px;
+	}
+	.SearchSuggestions, .SearchFilter {
+		text-align: left;
+	}
+	#PaginationSortForm {
+		clear: both;
+		float: none;
+		display: block;
+		overflow: hidden;
+	}
 }
 
 @media screen and (max-width: 780px) {
@@ -378,11 +393,7 @@
 	button, input[type="button"], input[type="reset"], input[type="submit"], .Button {
 		padding: 5px;
 	}
-	#SearchForm{ height: 21px; }
-	#SearchForm input{height: 26px;}
-
-	.SearchActive #LiveSearchResults{ opacity: 1 !important; top: 38px; width: 290px !important; }
-	.SearchIndicator{ top: 10px;}
+	#SearchForm button { height: 24px; }
 
 	#LiveSearchResults li{
 		margin: 0;
@@ -394,7 +405,7 @@
 		padding: 9px;
 		text-decoration: none;
 	}
-	#SearchForm button{height: 26px;}
+	#SearchForm button { height: 26px; }
 
 	/* Product page */
 	.Product .AddToCart{
@@ -609,6 +620,14 @@
 	#ModalBuying img {
 		display: none;
 	}
+	/* Search */
+	.SearchFilters, .SearchFilter {
+		float: none;
+		display: block;
+		width: auto;
+		margin-bottom: 18px;
+	}
+
 }
 
 @media screen and (max-width: 680px) {
@@ -737,9 +756,9 @@
 
 	/* Search */
 	#SearchForm{
-		padding: 10px 0;
+		padding: 12px 0;
 		right: auto;
-		width: 100%;
+		bottom: auto;
 		height: 20px;
 		border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0;
 		position: absolute;
@@ -750,22 +769,24 @@
 	}
 	#SearchForm input{
 		margin: -3px 0 0 12px;
-		width: 60%;
+		width: 100%;
 		height: 30px;
 		padding: 5px 6px;
 		border-radius: 15px;
 		-moz-border-radius: 15px;
 		-webkit-border-radius: 15px;
 	}
-	.SearchIndicator{
-		left: auto;
-		left: 54%;
-		top: 11px;
+	#SearchForm.SearchActive input {
+		border-radius: 15px;
+		-moz-border-radius: 15px;
+		-webkit-border-radius: 15px;
 	}
 	#SearchForm button{
 		background: url("../i/zoom.png") no-repeat center center transparent;
 		border: none;
 		height: 25px;
+		top: -2px;
+		bottom: auto;
 		margin: 0 0 0 10px;
 		width: 25px;
 		box-shadow: none !important; -moz-box-shadow: none !important; -webkit-box-shadow: none !important;
@@ -776,22 +797,33 @@
 	#SearchForm button span{
 		display: none;
 	}
-	.SearchActive #LiveSearchResults{
-		top: 41px;
-		width: 166.667% !important;
+	#LiveSearch {
+		top: 100%; bottom: auto;
+		right: auto; left: auto;
+		margin: 43px 0 0;
+		width: 100% !important;
 		padding: 0;
 		border-right: none;
-		box-shadow: 0px 2px 10px -3px rgba(0,0,0,0.2);
-		-moz-box-shadow: 0px 2px 10px -3px rgba(0,0,0,0.2);
-		-webkit-box-shadow: 0px 2px 10px -3px rgba(0,0,0,0.2);
+		border-left: none;
+		box-shadow: 0;
+		-moz-box-shadow: 0;
+		-webkit-box-shadow: 0;
+		border-radius: 0;
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
 	}
-	.SearchActive #LiveSearchResults li{
-		padding: 0px 5% !important;
+	#LiveSearch ul {
 		margin: 0;
-		width: 90%;
+		padding: 5px 0;
 	}
-	.SearchActive #LiveSearchResults li a{
+	#LiveSearch  li{
+		padding: 0px;
+		margin: 0;
 	}
+	#LiveSearch li a, #LiveSearch h3, #LiveSearch p {
+		padding: 5px 20px; margin: 0;
+	}
+	#LiveSearch h3 { padding-top: 10px; }
 
 	/* Main Menu */
 	#MainNavigation{
@@ -1178,6 +1210,14 @@
 		border: 0;
 		clear: both;
 		margin-bottom: 20px;
+	}
+	/* Search */
+	.SearchSuggestions strong,
+	.SearchSuggestions strong a {
+		display: block;
+	}
+	.SearchFilters, .SearchFilter {
+		display: none;
 	}
 }
 

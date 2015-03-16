@@ -1,0 +1,72 @@
+<div id="PageHeader">
+	{Path}
+	<h1>
+		{SearchKeyword(
+			before: '{%SearchPageTitle} <em>',
+			after: '</em>',
+			or: '{%SearchNoTerms}'
+		)}
+	</h1>
+</div>
+
+{SearchSuggestions(
+	before: '<p class="SearchSuggestions"><strong>{%SearchSuggestionsLabel}: </strong>',
+	after: '</p>',
+	helper: '{{ <a href="{SearchUrl}">{SearchKeyword}</a>&#8194; }}'
+)}
+
+{SearchFilters(limit: '8', before: '<div class="SearchFilters">', after: '</div>')}
+
+{SearchProducts(
+	pagination: 'true',
+	classes: 'first||',
+	limit: '30|15|60|90',
+	sort: 'search|name_asc|released_asc|released_desc|price_asc|price_desc',
+	before: '
+		<form action="{SearchUrl}" method="get" id="PaginationSortForm">
+			{PaginationStatus}
+			<div class="FormItem GroupItem">
+				{PaginationFormParameters(
+					name: 'keyword'
+				)}
+				<div>
+					{PaginationSort}
+				</div>
+				<div>
+					{PaginationLimit}
+				</div>
+				<div>
+					<button type="submit">{%Send}</button>
+				</div>
+			</div>
+		</form>
+	',
+	after: '{PaginationPages}',
+	helper: 'helpers/listproduct',
+	or: '
+		<div class="Notification Error">
+			<p>{%SearchNoResults}</p>
+		</div>
+		<div id="LandingPageWrapper" class="clearfix">
+			<div id="PrimaryFeatures">
+				{TopSellers(
+					limit:6,
+					classes:'first|',
+					type:'normal',
+					timelimit:'-4 months',
+					before:'<h2 class="BoxHeader">{%BestsellingProducts}</h2>',
+					helper: 'helpers/listproduct'
+				)}
+			</div>
+			<div id="SecondaryFeatures">
+				{SearchPopularTerms(
+					limit: '10',
+					before: '<h2 class="BoxHeader">{%SearchPopularTerms}</h2><ul class="NavigationList">',
+					after: '</ul>',
+					helper: '{{ <li><a href="{SearchUrl}">{SearchKeyword}</a></li> }}'
+				)}
+				{Categories(before:'<h2 class="BoxHeader">{%BrowseCategories}</h2>')}
+			</div>
+		</div>
+	'
+)}
