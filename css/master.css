@@ -288,6 +288,10 @@ header .DropdownNavigation ul li a:hover {
 .SearchActive + #LiveSearch {
 	display: block;
 }
+#LiveSearch.SearchOffline,
+.SearchActive + #LiveSearch.SearchOffline {
+	padding: 0; display: none;
+}
 #LiveSearch p {
 	margin: 0 15px 9px;
 }
