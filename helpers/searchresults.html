@@ -7,6 +7,7 @@
 			or: '{%SearchNoTerms}'
 		)}
 	</h1>
+	{Notifications(group: 'search')}
 </div>
 
 {SearchSuggestions(
@@ -44,9 +45,6 @@
 	after: '{PaginationPages}',
 	helper: 'helpers/listproduct',
 	or: '
-		<div class="Notification Error">
-			<p>{%SearchNoResults}</p>
-		</div>
 		<div id="LandingPageWrapper" class="clearfix">
 			<div id="PrimaryFeatures">
 				{TopSellers(
