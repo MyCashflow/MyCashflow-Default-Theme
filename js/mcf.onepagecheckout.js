@@ -116,16 +116,19 @@
 				break;
 		}
 
+		// When focus leaves the fieldset
 		$el.on('blur.mcfCheckout', 'input, select, textarea', function(evt) {
 			clearTimeout(keyUpTimer);
 
+			// Check after a wait if the focus really left the fieldset
 			window.setTimeout(function() {
 				var isFocused = $el.find('input, select, textarea').filter(':focus').length;
 				if (!isFocused) saveData.call(self, evt.type);
 				clearTimeout(keyUpTimer);
-			}, 1500);
+			}, 800);
 		});
 
+		// If user doesn't do anything for a while, update the checkout behind
 		$el.on('keyup.mcfCheckout', 'input:not(:radio, :checkbox), select:not(#country, #shipping_country), textarea', function(evt) {
 			var target = $(evt.target);
 			clearTimeout(keyUpTimer);
@@ -133,9 +136,10 @@
 			keyUpTimer = setTimeout(function() {
 				self._isChanged = true;
 				saveData.call(self, evt.type);
-			}, 5000);
+			}, 3000);
 		});
 
+		// On country, shipping or payment method change, update the checkout immediately
 		$el.on('change.mcfCheckout', 'input, select, textarea', function(evt) {
 			var target = $(evt.target);
 			clearTimeout(keyUpTimer);
