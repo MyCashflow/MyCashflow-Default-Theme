@@ -171,7 +171,10 @@ header .DropdownNavigation:hover .CurrencyIcon {
 header .DropdownNavigation ul {
 	position: absolute; overflow: hidden;
 	top: 35px; left: -9999em;
-	width: 180px; background: #FFF;
+	box-sizing: border-box;
+	min-width: 100%;
+	max-width: 320px;
+	background: #FFF;
 	margin: 0; padding: 0;
 	border: 1px solid #d9d9d9;
 	border-bottom: 1px solid #CCC;
@@ -180,8 +183,7 @@ header .DropdownNavigation ul {
 	-webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 	-moz-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;border-radius: 0 0 5px 5px;
 }
 header .DropdownNavigation:hover ul { left: 0; }
 header .DropdownNavigation ul li { padding: 0; }
