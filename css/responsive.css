@@ -138,8 +138,8 @@
 	}
 	#LandingPageWrapper #PrimaryFeatures{ width: 100%; }
 	#LandingPageWrapper #SecondaryFeatures{ display: none; }
-	#ShopLikes {
-		width: 100%; overflow: hidden;
+	#ShopLikes, .fb-like {
+		width: 100% !important; overflow: hidden;
 		margin: 0 0 18px; padding: 0 6px;
 		-ms-box-sizing: border-box;
 		-moz-box-sizing: border-box;
