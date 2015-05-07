@@ -492,6 +492,9 @@ p.SearchSuggestions {
 .CategoryDescription { padding: 9px 15px 0; }
 
 .CategoryImageWrapper { float: right; margin: 9px 6px 18px 9px; }
+.BrandLogoWrapper {
+	padding: 9px 15px;
+}
 .CategoryImageWrapper img { display: block; }
 .CategoryImageWrapper a {
 	display: block;
