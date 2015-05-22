@@ -290,10 +290,6 @@ header .DropdownNavigation ul li a:hover {
 .SearchActive + #LiveSearch {
 	display: block;
 }
-#LiveSearch.SearchOffline,
-.SearchActive + #LiveSearch.SearchOffline {
-	padding: 0; display: none;
-}
 #LiveSearch p {
 	margin: 0 15px 9px;
 }
@@ -308,11 +304,9 @@ header .DropdownNavigation ul li a:hover {
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
-
 #LiveSearch li {
 	width: 100%;
 }
-
 #LiveSearch h3, #LiveSearch li a {
 	display: block;
 	padding: 4px 14px 5px;
@@ -333,6 +327,20 @@ header .DropdownNavigation ul li a:hover {
 .NoResults { padding: 0 15px; }
 .NoResults .Notification { margin: 9px 0 18px; }
 
+/* Search offline */
+#LiveSearch.SearchOffline { display: none; }
+.SearchActive + #LiveSearch.SearchOffline {
+	padding: 0; display: block;
+}
+#LiveSearch.SearchOffline h3 {
+	padding-top: 18px;
+}
+#LiveSearch.SearchOffline ul {
+	border-bottom: 0;
+	margin: 0; padding-bottom: 18px;
+}
+
+/* Search filters */
 #FilterToggler {
 	float: left;
 	margin-top: 18px;
