@@ -69,6 +69,10 @@ h2 { font-size: 15px; }
 h3 { font-size: 12px; margin: 0; }
 h4 { font-size: 11px; text-transform: uppercase; margin: 0; }
 
+.AllCaps {
+	text-transform: uppercase;
+}
+
 /* Headers in a pretty box */
 
 .BoxHeader {
@@ -251,16 +255,19 @@ ol {
 	background: url(../i/close.png) no-repeat 50% 50%;
 }
 #Primary > .Notification {
-	border-top: 0;
 	border-left: 0;
 	border-right: 0;
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;
 	margin-bottom: 0;
+	margin-top: -1px;
 	font-size: 15px;
 	padding-top: 17px;
 	padding-bottom: 18px;
+}
+#PageHeader + .Notification {
+	margin-top: 17px;
 }
 
 /* Banners

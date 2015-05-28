@@ -3,41 +3,37 @@
 	<div id="Main" class="clearfix">
 		{Helper(file:'helpers/sidebar-left')}
 		<div id="Primary" class="Column">
-			{BrandLogo(link: 'false', width: '162', height: '108', before: '<div class="CategoryImageWrapper">', after: '</div>')}
-			<div id="PageHeader">
-				{Path}
-				<h1>{PageTitle}</h1>
+			<div id="LandingPageWrapper" class="clearfix">
+				<div id="PrimaryFeatures">
+					{BrandImage(width:384,link:'true')}
+					<div id="PageHeader">
+						{Path}
+						<h1>{PageTitle}</h1>
+					</div>
+					<div class="CategoryDescription">{BrandDescription}</div>
+					{Products(
+						classes:'first|',
+						helper: 'helpers/listproduct'
+					)}
+				</div>
+				<div id="SecondaryFeatures">
+					{BrandLogo(link: 'false', width: '162', height: '108', before: '<div class="BrandLogoWrapper">', after: '</div>')}
+					{BrandTopSellers(
+						limit: 10,
+						type: 'normal',
+						helper: 'helpers/listproduct-small',
+						before: '<h2 class="BoxHeader">{%MostPopularProducts}</h2><ul class="ProductList">',
+						after: '</ul>'
+					)}
+					{BrandHotPicks(
+						limit: 10,
+						type: 'normal',
+						helper: 'helpers/listproduct-small',
+						before: '<h2 class="BoxHeader">{%RecommendedProducts}</h2><ul class="ProductList">',
+						after: '</ul>'
+					)}
+				</div>
 			</div>
-			{CategoryDescription(before:'<div class="CategoryDescription">',after:'</div>')}
-
-			{Products(
-				pagination: 'true',
-				classes: 'first||',
-				limit: '30|15|60|90',
-				sort: 'name_asc|released_asc|price_asc',
-				before: '
-					<form action="{CurrentUrl}" method="get" id="PaginationSortForm">
-						{PaginationStatus}
-						<div class="FormItem GroupItem">
-							{PaginationFormParameters(
-								name: 'keyword'
-							)}
-							<div>
-								{PaginationSort}
-							</div>
-							<div>
-								{PaginationLimit}
-							</div>
-							<div>
-								<button type="submit">Lähetä</button>
-							</div>
-						</div>
-					</form>
-				',
-				after: '{PaginationPages}',
-				helper: 'helpers/listproduct'
-			)}
-
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

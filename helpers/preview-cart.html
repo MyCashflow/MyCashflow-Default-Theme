@@ -15,20 +15,20 @@
 	{CartShippingCostsWithoutTax(
 		before:	'
 			<tr>
-				<th scope="row" colspan="3">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></td>
+				<th scope="row" colspan="3">{%CheckoutShipping}: <strong>{CartShippingMethod}</strong></th>
 				<td class="CartTotal">',
 		after: '</td></tr>'
 	)}
 	{CartPaymentCostsWithoutTax(
 		before: '
 			<tr>
-				<th scope="row" colspan="3">{%PaymentMethod}: <strong>{CartPaymentMethod}</strong></td>
+				<th scope="row" colspan="3">{%PaymentMethod}: <strong>{CartPaymentMethod}</strong></th>
 				<td class="CartTotal">',
 		after: '</td></tr>'
 	)}
 	{CartDiscountWithoutTax(
 		before: '<tr>
-			<th scope="row" colspan="3">{%CampaignCode}: <strong>{CartCouponCode}</strong></td>
+			<th scope="row" colspan="3">{%CampaignCode}: <strong>{CartCouponCode}</strong></th>
 			<td class="CartTotal CartDiscount">-',
 		after: '</td></tr>'
 	)}

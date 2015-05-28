@@ -3,40 +3,7 @@
 	<div id="Main" class="clearfix">
 		{Helper(file:'helpers/sidebar-left')}
 		<div id="Primary" class="Column">
-			<div id="PageHeader">
-				{Path}
-				<h1>{PageTitle}</h1>
-			</div>
-
-			{Products(
-				pagination: 'true',
-				classes: 'first||',
-				limit: '30|15|60|90',
-				sort: 'search|name_asc|released_asc|price_asc',
-				before: '
-					<form action="{CurrentUrl}" method="get" id="PaginationSortForm">
-						{PaginationStatus}
-						<div class="FormItem GroupItem">
-							{PaginationFormParameters(
-								name: 'keyword'
-							)}
-							<div>
-								{PaginationSort}
-							</div>
-							<div>
-								{PaginationLimit}
-							</div>
-							<div>
-								<button type="submit">Lähetä</button>
-							</div>
-						</div>
-					</form>
-				',
-				after: '{PaginationPages}',
-				helper: 'helpers/listproduct',
-				or: '<p class="NoResults">{%SearchNoResults}</p>'
-			)}
-
+			{Helper(file:'helpers/searchresults', query: '{SearchKeyword}')}
 		</div>
 		{Helper(file:'helpers/sidebar-right')}
 	</div>

@@ -55,4 +55,10 @@
 			)}
 
 			{Search}
+			{SearchPopularTerms(
+				before: '<div id="LiveSearch"><h3 class="AllCaps">{%SearchPopularTerms}</h3><p>',
+				after: '</p></div>',
+				helper: '{{ <a href="{SearchUrl}">{SearchKeyword}</a>&#8194; }}',
+				or: '<div id="LiveSearch" class="SearchOffline"></div>'
+			)}
 		</header>

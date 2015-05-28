@@ -1,0 +1,13 @@
+<div id="SearchResults">
+
+	{SearchSuggestions}
+
+	{SearchProducts(
+		before: '<h3 class="AllCaps">{%SearchProductsTitle} &ldquo;{SearchKeyword}&rdquo;</h3><ul class="SearchResults">',
+		after: '</ul>',
+		limit: '4',
+		helper: '{{
+			<li><a href="{ProductUrl}">{ProductName}</a></li>
+		}}'
+	)}
+</div>

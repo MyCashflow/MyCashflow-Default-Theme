@@ -9,14 +9,7 @@
 $(function() {
 	'use strict';
 
-	// Uncomment next lines to make phone number required
-	/* var $phoneInput = $("#phone");
-	$phoneInput.closest(".FormItem").addClass("required").closest("form").submit(function(event) {
-		if ($phoneInput.val() === "") {
-			event.preventDefault();
-			alert("Puhelinnumero on pakollinen tieto.");
-		}
-	}); */
+	// To make phone number required, just set all the shipping methods to require the phone number
 
 	$('.TermsLink').attr('href', '/interface/TermsAndConditions').colorbox(
 		$.extend({}, mcf.colorboxOpts, {

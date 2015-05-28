@@ -91,7 +91,7 @@ $(function() {
 				if ($bestMatch.is(':radio')) {
 					$(':radio', $parent).attr('checked', false);
 					$bestMatch.attr('checked', true);
-				} else {
+				} else if ($parent.hasClass('BuyFormQuantity') === false) {
 					$('option', $parent).attr('selected', false);
 					$bestMatch.attr('selected', true).parent("select").trigger("change");
 				}
@@ -107,6 +107,7 @@ $(function() {
 	$productBuyForm.on('change', function (evt) {
 		var $changedEl = $(evt.target),
 			$bestMatch = null,
+			$parent = $changedEl.closest('.FormItem'),
 			inputValue = $changedEl.is(':radio')
 				? $.trim($changedEl.parent('label').text())
 				: $.trim($changedEl.find(':selected').text());
@@ -135,7 +136,7 @@ $(function() {
 				}
 			});
 
-			if ($bestMatch) {
+			if ($bestMatch && $parent.hasClass('BuyFormQuantity') === false) {
 				$bestMatch.trigger('click', [true]);
 			}
 		}
