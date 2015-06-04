@@ -299,7 +299,11 @@ ol {
 }
 
 .Banner > * { margin: 0 auto 9px; }
-.Banner img { display: block; margin: 0 auto 9px; }
+.Banner img { display: block; margin: 0 auto 9px; max-width: 100%; }
+.Banner > span.Banner {
+	border: 0; padding: 0; margin: 0;
+	font-weight: bold; font-size: 15px;
+}
 
 /* Banners at footer */
 
