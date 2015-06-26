@@ -485,25 +485,24 @@
 	}
 	#MainNavigation ul.Categories li span.NavOpener{
 		border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0;
+		border: 0;
 		left: -1px;
 		padding: 6px 0 8px;
 		top: -1px;
-		width: 100%;
+		width: 36px;
 		z-index: 1;
 		background: url(../i/mobile_menu_arrows.png) no-repeat 14px 10px;
 	}
 	#MainNavigation ul.Categories li span.NavOpener:hover{
+		background-color: transparent;
 		border-color: #D9D9D9;
-		background: url(../i/mobile_menu_arrows.png) no-repeat 14px 10px rgba(0,0,0,0.05);
 		color: #006699;
 	}
 	#MainNavigation ul.Categories li ul li span.NavOpener:hover{
-		background: url(../i/mobile_menu_arrows.png) no-repeat 7px 11px transparent;
 		color: #0099ff;
 	}
 	#MainNavigation ul.Categories li a:hover{
 		border-color: #D9D9D9;
-		background-color: rgba(0,0,0,0.05);
 	}
 	#MainNavigation ul.Categories li ul a:hover{
 		background-color: transparent;
@@ -1246,7 +1245,7 @@
 		background-size: 13px 63px;
 	}
 	#MainNavigation ul.Categories li span.NavOpener:hover{
-		background: url(../i/mobile_menu_arrows2x.png) no-repeat 14px 10px rgba(0,0,0,0.05);
+		background: url(../i/mobile_menu_arrows2x.png) no-repeat 14px 10px transparent;
 		background-size: 13px 63px;
 	}
 	#MainNavigation ul.Categories li ul li span.NavOpener:hover{
