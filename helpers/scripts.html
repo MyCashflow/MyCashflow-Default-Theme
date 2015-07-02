@@ -54,3 +54,64 @@
 
 //]]>
 </script>
+
+<!-- TaxFreePro scripts -->
+<script type="text/javascript" src="https://taxfree.pro/embed.js"></script>
+<script type="text/javascript">
+	if ($('body').hasClass('Checkout')) {
+		TaxFreeProData = $.extend(TaxFreeProData, {
+			email: function() {
+				var email;
+				if ($('input#email').length) {
+					email = $('input#email').val();
+				} else {
+					email = TaxFreeProData.email;
+				}
+				return email;
+			},
+			change: function(response) {
+				var $emailWrapper = $('input#email').closest('.FormItem');
+
+				$('.tfp-customer, .tfp-error, .tfp-refund').remove();
+				if(response.status == 'success' || typeof(response.data.errors[1]) == "undefined") {
+					$emailWrapper.after('<div class="Notification Success tfp-customer">TaxFree.pro-tunnukset aktivoitu. <a href="https://taxfree.pro/" target="_blank">Tarkasta palautustietosi täältä.</a> Etkö tiedä minne toimittaisit tilauksesi? <a target="_blank" href="http://taxfree.pro/fi/toimituspisteet">Katso mahdolliset toimituspisteet tästä.</a></div>');
+				} else {
+					$emailWrapper.after('<div class="Notification tfp-customer"><a class="tfp-customer-register" href="//taxfree.pro/fi/register?return_address='+encodeURI('{CurrentUrl}')+'" target="_blank">Rekisteröidy nyt TaxFree.pro -käyttäjäksi</a> tai anna TaxFree.pro-tilisi sähköpostiosoite veronpalautuksen saamiseksi.</div>');
+				}
+
+
+				if(response.status == 'success') {
+					$('#CheckoutAcceptTerms').prepend('<div class="Notification Success tfp-refund"><div class="tfp-refund-title">Palautuksesi määrä:</div><div class="tfp-refund-value">'+response.data.refund.toFixed(2).replace('.', ',')+' &euro;</div></div>');
+				} else {
+					var show = false;
+					var html = '<div class="Notification Error tfp-error"><div class="tfp-error-title">TaxFree-palautuksessa ilmeni virheitä:</div>';
+					for(var i in response.data.errors) {
+						if(i > 2) { show = true; }
+						html += '<div class="tfp-error-value">'+response.data.errors[i]+'</div>';
+					}
+					html += '</div>';
+					if(show) {
+						$('#CheckoutAcceptTerms').prepend(html);
+					}
+				}
+			}
+		});
+
+		var tfp = new TaxFreePro(TaxFreeProData);
+
+		// Initial TaxFreePro update
+		tfp.update();
+
+		$('#CheckoutBillingAddress').on('change', 'input#email', function() {
+			// Update TaxFreePro when the email changes
+			tfp.update();
+		});
+		$(document).ajaxSuccess(function(event, xhr, settings) {
+			if (settings.url == "/checkout/") {
+				// Update TaxFreePro if there was ajax calls to /checkout/
+				tfp.update();
+			}
+		});
+	}
+
+</script>
