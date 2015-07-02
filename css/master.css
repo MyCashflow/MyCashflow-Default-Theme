@@ -1611,7 +1611,7 @@ table .CartProduct dt { clear: left; }
 	color: #222;
 }
 
-/* Chekcout
+/* Checkout
 -------------------------------------------------------------- */
 
 /* Primary buttons in blue */
@@ -1744,6 +1744,18 @@ a.Button.PrimaryAction,
 }
 #CheckoutStage .CompletedCheckoutStage {
 	color: #444;
+}
+
+/* TaxFreePro Notifications */
+
+.tfp-customer, .tfp-refund, .tfp-error {
+	text-align: left;
+	margin-bottom: 18px;
+	clear: both;
+}
+.tfp-refund-value {
+	font-weight: bold;
+	font-size: 20px;
 }
 
 /* Multi page checout
