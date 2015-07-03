@@ -58,6 +58,8 @@
 <!-- TaxFreePro scripts -->
 <script type="text/javascript" src="https://taxfree.pro/embed.js"></script>
 <script type="text/javascript">
+//<![CDATA[
+	// Check that the user is at the checkout
 	if ($('body').hasClass('Checkout')) {
 		TaxFreeProData = $.extend(TaxFreeProData, {
 			email: function() {
@@ -70,21 +72,32 @@
 				return email;
 			},
 			change: function(response) {
+
 				var $emailWrapper = $('input#email').closest('.FormItem');
 
-				$('.tfp-customer, .tfp-error, .tfp-refund').remove();
-				if(response.status == 'success' || typeof(response.data.errors[1]) == "undefined") {
-					$emailWrapper.after('<div class="Notification Success tfp-customer">TaxFree.pro-tunnukset aktivoitu. <a href="https://taxfree.pro/" target="_blank">Tarkasta palautustietosi täältä.</a> Etkö tiedä minne toimittaisit tilauksesi? <a target="_blank" href="http://taxfree.pro/fi/toimituspisteet">Katso mahdolliset toimituspisteet tästä.</a></div>');
+				var userSuccessMessage = '<div class="Notification Success TaxFreeProNotification">';
+				userSuccessMessage += '<p>{\%TaxFreeProUserRegistered}</p>';
+				userSuccessMessage += '</div>';
+
+				var taxFreeProRegisterUrl = '//taxfree.pro/fi/register?return_address=' + encodeURI('{ShopUrl}{CurrentUrl}');
+				var userNotRegisteredMessage = '<div class="Notification TaxFreeProNotification"><p>';
+				userNotRegisteredMessage += '{\%TaxFreeProUserRegisterHeader} ';
+				userNotRegisteredMessage += '<a href="' + taxFreeProRegisterUrl + '" target="_blank">{\%TaxFreeProUserRegisterLink}</a> {\%TaxFreeProUserRegisterOrLogin}';
+				userNotRegisteredMessage += '</p></div>';
+
+				$('.TaxFreeProNotification').remove();
+
+				if (response.status === 'success' || typeof(response.data.errors[1]) === 'undefined') {
+					$emailWrapper.after(userSuccessMessage);
 				} else {
-					$emailWrapper.after('<div class="Notification tfp-customer"><a class="tfp-customer-register" href="//taxfree.pro/fi/register?return_address='+encodeURI('{CurrentUrl}')+'" target="_blank">Rekisteröidy nyt TaxFree.pro -käyttäjäksi</a> tai anna TaxFree.pro-tilisi sähköpostiosoite veronpalautuksen saamiseksi.</div>');
+					$emailWrapper.after(userNotRegisteredMessage);
 				}
 
-
 				if(response.status == 'success') {
-					$('#CheckoutAcceptTerms').prepend('<div class="Notification Success tfp-refund"><div class="tfp-refund-title">Palautuksesi määrä:</div><div class="tfp-refund-value">'+response.data.refund.toFixed(2).replace('.', ',')+' &euro;</div></div>');
+					$('#CheckoutAcceptTerms').prepend('<div class="Notification Success TaxFreeProNotification"><h3>{\%TaxFreeProRefundAmount}</h3><p class="TaxFreeProRefund">'+response.data.refund.toFixed(2).replace('.', ',')+' &euro;</p></div>');
 				} else {
 					var show = false;
-					var html = '<div class="Notification Error tfp-error"><div class="tfp-error-title">TaxFree-palautuksessa ilmeni virheitä:</div>';
+					var html = '<div class="Notification Error TaxFreeProNotification"><h3>{\%TaxFreeProErrorsTitle}</h3>';
 					for(var i in response.data.errors) {
 						if(i > 2) { show = true; }
 						html += '<div class="tfp-error-value">'+response.data.errors[i]+'</div>';
@@ -113,5 +126,5 @@
 			}
 		});
 	}
-
+//]]>
 </script>

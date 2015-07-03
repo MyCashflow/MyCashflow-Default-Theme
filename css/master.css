@@ -1748,14 +1748,24 @@ a.Button.PrimaryAction,
 
 /* TaxFreePro Notifications */
 
-.tfp-customer, .tfp-refund, .tfp-error {
+.TaxFreeProNotification {
 	text-align: left;
 	margin-bottom: 18px;
+	padding: 18px 18px 18px 72px;
+	background-image: url(../i/tax-free-pro-logo.png);
+	background-repeat: no-repeat;
+	background-position: 15px 50%;
+	font-size: 15px;
 	clear: both;
 }
-.tfp-refund-value {
+.TaxFreeProNotification h3 {
+	font-size: 15px;
+	color: #222;
+}
+.TaxFreeProRefund {
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 26px;
+	line-height: 27px;
 }
 
 /* Multi page checout
