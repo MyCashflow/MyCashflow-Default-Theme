@@ -60,7 +60,7 @@
 <script type="text/javascript">
 //<![CDATA[
 	// Check that the user is at the checkout
-	if ($('body').hasClass('Checkout')) {
+	if ($('body').hasClass('Checkout') && typeof TaxFreeProData !== 'undefined') {
 		TaxFreeProData = $.extend(TaxFreeProData, {
 			email: function() {
 				var email;
