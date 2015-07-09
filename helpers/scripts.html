@@ -60,21 +60,9 @@
 <script type="text/javascript">
 //<![CDATA[
 	// Check that the user is at the checkout
-	if ($('body').hasClass('Checkout') && typeof TaxFreeProData !== 'undefined') {
-		$.extend(TaxFreeProData, {
-			email: function() {
-				var email;
-				if ($('input#email').length) {
-					email = $('input#email').val();
-				} else {
-					email = TaxFreeProData.data.email;
-				}
-				return email;
-			},
+	if ($('body').hasClass('Checkout')) {
+		var TaxFreeProData = {
 			change: function(response) {
-
-				var $emailWrapper = $('input#email').closest('.FormItem');
-
 				var userSuccessMessage = '<div class="Notification Success TaxFreeProNotification">';
 				userSuccessMessage += '<p>{\%TaxFreeProUserRegistered}</p>';
 				userSuccessMessage += '</div>';
@@ -87,6 +75,7 @@
 
 				$('.TaxFreeProNotification').remove();
 
+				var $emailWrapper = $('input#email').closest('.FormItem');
 				if (response.status === 'success' || typeof(response.data.errors[1]) === 'undefined') {
 					$emailWrapper.after(userSuccessMessage);
 				} else {
@@ -96,7 +85,6 @@
 				var $insertPoint = $('body').is('.MultiPageCheckout') ? $('#PreviewContent') : $('#CheckoutAcceptTerms');
 				if(response.status == 'success') {
 					$insertPoint.prepend('<div class="Notification Success TaxFreeProNotification"><h3>{\%TaxFreeProRefundAmount}</h3><p class="TaxFreeProRefund">'+response.data.refund.toFixed(2).replace('.', ',')+' &euro;</p></div>');
-					$insertPoint.find('.TaxFreeProNotification').toggle(tfp.options.pickuppoint);
 				} else {
 					var show = false;
 					var html = '<div class="Notification Error TaxFreeProNotification"><h3>{\%TaxFreeProErrorsTitle}</h3>';
@@ -110,13 +98,14 @@
 					}
 				}
 			}
-		});
+		};
 
 		var tfp = TaxFreePro(TaxFreeProData);
 
 		var helpers = {
-			updateData: function () {
+			updateData: function (overrideEmail) {
 				$.getJSON('/interface/TaxFreeProData', function (res) {
+					tfp.options.email = overrideEmail ? overrideEmail : res.data.email;
 					tfp.options.api_key = res.api_key;
 					tfp.options.vat = res.data.vat;
 					tfp.options.total = res.data.total;
@@ -130,8 +119,8 @@
 		helpers.updateData();
 
 		// Update TaxFreePro on multi-page checkout email change.
-		$('body.MultiPageCheckout input#email').on('change', function() {
-			helpers.updateData();
+		$('body.MultiPageCheckout').on('change', 'input, select', function(evt) {
+			helpers.updateData($(this).val());
 		});
 
 		// Update TaxFreePro if there was ajax calls to /checkout/
