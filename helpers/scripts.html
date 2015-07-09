@@ -61,13 +61,13 @@
 //<![CDATA[
 	// Check that the user is at the checkout
 	if ($('body').hasClass('Checkout') && typeof TaxFreeProData !== 'undefined') {
-		TaxFreeProData = $.extend(TaxFreeProData, {
+		$.extend(TaxFreeProData, {
 			email: function() {
 				var email;
 				if ($('input#email').length) {
 					email = $('input#email').val();
 				} else {
-					email = TaxFreeProData.email;
+					email = TaxFreeProData.data.email;
 				}
 				return email;
 			},
@@ -93,8 +93,10 @@
 					$emailWrapper.after(userNotRegisteredMessage);
 				}
 
+				var $insertPoint = $('body').is('.MultiPageCheckout') ? $('#PreviewContent') : $('#CheckoutAcceptTerms');
 				if(response.status == 'success') {
-					$('#CheckoutAcceptTerms').prepend('<div class="Notification Success TaxFreeProNotification"><h3>{\%TaxFreeProRefundAmount}</h3><p class="TaxFreeProRefund">'+response.data.refund.toFixed(2).replace('.', ',')+' &euro;</p></div>');
+					$insertPoint.prepend('<div class="Notification Success TaxFreeProNotification"><h3>{\%TaxFreeProRefundAmount}</h3><p class="TaxFreeProRefund">'+response.data.refund.toFixed(2).replace('.', ',')+' &euro;</p></div>');
+					$insertPoint.find('.TaxFreeProNotification').toggle(tfp.options.pickuppoint);
 				} else {
 					var show = false;
 					var html = '<div class="Notification Error TaxFreeProNotification"><h3>{\%TaxFreeProErrorsTitle}</h3>';
@@ -104,25 +106,38 @@
 					}
 					html += '</div>';
 					if(show) {
-						$('#CheckoutAcceptTerms').prepend(html);
+						$insertPoint.prepend(html);
 					}
 				}
 			}
 		});
 
-		var tfp = new TaxFreePro(TaxFreeProData);
+		var tfp = TaxFreePro(TaxFreeProData);
+
+		var helpers = {
+			updateData: function () {
+				$.getJSON('/interface/TaxFreeProData', function (res) {
+					tfp.options.api_key = res.api_key;
+					tfp.options.vat = res.data.vat;
+					tfp.options.total = res.data.total;
+					tfp.options.pickuppoint = res.data.pickuppoint;
+					tfp.update();
+				});
+			}
+		};
 
 		// Initial TaxFreePro update
-		tfp.update();
+		helpers.updateData();
 
-		$('#CheckoutBillingAddress').on('change', 'input#email', function() {
-			// Update TaxFreePro when the email changes
-			tfp.update();
+		// Update TaxFreePro on multi-page checkout email change.
+		$('body.MultiPageCheckout input#email').on('change', function() {
+			helpers.updateData();
 		});
+
+		// Update TaxFreePro if there was ajax calls to /checkout/
 		$(document).ajaxSuccess(function(event, xhr, settings) {
 			if (settings.url == "/checkout/") {
-				// Update TaxFreePro if there was ajax calls to /checkout/
-				tfp.update();
+				helpers.updateData();
 			}
 		});
 	}
