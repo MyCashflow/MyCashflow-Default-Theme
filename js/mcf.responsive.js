@@ -1,4 +1,8 @@
 $(function() {
+	// Show/hide mobile navigation
+	$('#MainNavigation').on('click', 'h2',function() {
+		$(this).next('ul').toggleClass('show-the-menu');
+	});
 
 	// Change the checkout type 'MultiPageCheckout' if it's supported and we're using mobile resolutions
 	// Saves it's state into local storage
@@ -28,7 +32,7 @@ $(function() {
 			}
 
 		}
-	}
+	};
 
 	// Listen for matchMedia changes with enquire: http://wicky.nillia.ms/enquire.js/ <3
 	enquire.register('screen and (min-width: 981px)', {
@@ -65,7 +69,7 @@ $(function() {
 			mcf.changeCheckoutType('MultiPageCheckout');
 
 			// Wrap the whole cart as one big link
-			$('#MiniCartWrapper').wrapInner('<a href="/cart/" id="ResponsiveCartLink"></a>')
+			$('#MiniCartWrapper').wrapInner('<a href="/cart/" id="ResponsiveCartLink"></a>');
 
 			// If the cart is empty, display the price as indication
 			$('.CartEmpty').html('0,00&euro;').addClass('CartEmptyPrice');
@@ -83,12 +87,7 @@ $(function() {
 		match: function() {
 
 			// Create header for mobile navigation
-			$('#MainNavigation').find('.Categories').before('<h2 class="MobileMenu BoxHeader">' + mcf.Lang.BrowseCategories + '</h2>');
-
-			// Show/hide mobile navigation
-			$('#MainNavigation h2').click(function() {
-				$(this).next('ul').toggleClass('show-the-menu');
-			});
+			$('#MainNavigation:not(:has(> .MobileMenu))').find('.Categories').before('<h2 class="MobileMenu BoxHeader">' + mcf.Lang.BrowseCategories + '</h2>');
 
 			// Remove the events from dropdowns, so that there's no unwanted jitter
 			$('#Header').find('.DropdownNavigation').off('mouseenter');
