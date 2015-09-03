@@ -27,6 +27,22 @@ $(function() {
 		})
 	);
 
+	// Disable submit button on submit and return it back if submitting takes long
+	$('#OnePageCheckout, #MultiPageCheckout').on('submit', 'form', function(evt) {
+		var $that = $(this).find('button[type="submit"]');
+		$that.prop('disabled', true);
+		setTimeout(function() {
+			$that.prop('disabled', false);
+		}, 5000);
+	});
+
+	// If coming to page with back or forward, remove the disabling
+	$(window).bind("pageshow", function(event) {
+	    if (event.originalEvent.persisted) {
+	        $(this).find('button[type="submit"]').prop('disabled', false);
+	    }
+	});
+
 	//--------------------------------------------------------------------------
 	// One-Page Checkout
 	//--------------------------------------------------------------------------
