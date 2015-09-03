@@ -334,7 +334,7 @@ input[type="radio"] {
 .FormError input,
 .FormError select,
 .FormError textarea {
-	border-color: #900;	
+	border-color: #900;
 }
 .FormErrorMessage, .GroupErrorMessage {
 	position: relative;
@@ -422,10 +422,10 @@ input[type="radio"] {
 	margin-right: 5px;
 }
 .ReplacedSelect {
-	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	-ms-box-sizing: content-box;
-	box-sizing: content-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 	position: relative;
 	margin-right: 0px;
 	z-index: 10;
@@ -441,12 +441,17 @@ input[type="radio"] {
 	opacity: 0;
 }
 .CustomSelect {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 	display: block;
 	position: absolute;
 	z-index: 1;
 	top: -2px;
 	left: 0;
 	width: 100%;
+	max-width: 100%;
 }
 .CustomSelect span {
 	display: block;
