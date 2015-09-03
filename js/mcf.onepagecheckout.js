@@ -15,7 +15,6 @@
 			dependencies: 'auto',
 			return_self: 'auto',
 			response_type: 'html',
-			update_self: false,
 
 			post_start: function(el, fromEvent, verbose, jqXHR, settings) {},
 			post_success: function($el, response, verbose, textStatus, jqXHR) {},
