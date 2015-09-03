@@ -1132,7 +1132,12 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 	margin: 0 -9px 18px; padding: 8px;
 	border: 1px solid #D9D9D9; background-color: #FCFCFC;
 }
-
+#ProductBuy .BuyForm .BuyFormVariationSelect {
+	/* Ugly FF-hack for https://bugzilla.mozilla.org/show_bug.cgi?id=823483 */
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
 #ProductBuy .BuyForm .FormItem {
 	padding-top: 9px; margin-bottom: -9px;
 }
