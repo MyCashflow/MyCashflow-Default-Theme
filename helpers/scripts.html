@@ -13,6 +13,7 @@
 	 This is done with mode: 'development' attribute: http://www.mycashflow.fi/english/interface/Minify -->
 {MinifyJS(
 	mode: 'production',
+	support_scripts: 'false',
 	files: 'js/vendor/jquery-1.7.1.min.js|
 		js/vendor/underscore.min.js|
 		js/vendor/jquery.serializeobject.js|
@@ -55,80 +56,4 @@
 //]]>
 </script>
 
-<!-- TaxFreePro scripts -->
-<script type="text/javascript" src="https://taxfree.pro/embed.js"></script>
-<script type="text/javascript">
-//<![CDATA[
-	// Check that the user is at the checkout
-	if ($('body').hasClass('Checkout')) {
-		var TaxFreeProData = {
-			change: function(response) {
-				var userSuccessMessage = '<div class="Notification Success TaxFreeProNotification">';
-				userSuccessMessage += '<p>{\%TaxFreeProUserRegistered}</p>';
-				userSuccessMessage += '</div>';
-
-				var taxFreeProRegisterUrl = '//taxfree.pro/fi/register?return_address=' + encodeURI('{ShopUrl}{CurrentUrl}');
-				var userNotRegisteredMessage = '<div class="Notification TaxFreeProNotification"><p>';
-				userNotRegisteredMessage += '{\%TaxFreeProUserRegisterHeader} ';
-				userNotRegisteredMessage += '<a href="' + taxFreeProRegisterUrl + '" target="_blank">{\%TaxFreeProUserRegisterLink}</a> {\%TaxFreeProUserRegisterOrLogin}';
-				userNotRegisteredMessage += '</p></div>';
-
-				$('.TaxFreeProNotification').remove();
-
-				var $emailWrapper = $('input#email').closest('.FormItem');
-				if (response.status === 'success' || typeof(response.data.errors[1]) === 'undefined') {
-					$emailWrapper.after(userSuccessMessage);
-				} else {
-					$emailWrapper.after(userNotRegisteredMessage);
-				}
-
-				var $insertPoint = $('body').is('.MultiPageCheckout') ? $('#PreviewContent') : $('#CheckoutAcceptTerms');
-				if(response.status == 'success') {
-					$insertPoint.prepend('<div class="Notification Success TaxFreeProNotification"><h3>{\%TaxFreeProRefundAmount}</h3><p class="TaxFreeProRefund">'+response.data.refund.toFixed(2).replace('.', ',')+' &euro;</p></div>');
-				} else {
-					var show = false;
-					var html = '<div class="Notification Error TaxFreeProNotification"><h3>{\%TaxFreeProErrorsTitle}</h3>';
-					for(var i in response.data.errors) {
-						if(i > 2) { show = true; }
-						html += '<div class="tfp-error-value">'+response.data.errors[i]+'</div>';
-					}
-					html += '</div>';
-					if(show) {
-						$insertPoint.prepend(html);
-					}
-				}
-			}
-		};
-
-		var tfp = TaxFreePro(TaxFreeProData);
-
-		var helpers = {
-			updateData: function (overrideEmail) {
-				$.getJSON('/interface/TaxFreeProData', function (res) {
-					tfp.options.email = overrideEmail ? overrideEmail : res.data.email;
-					tfp.options.api_key = res.api_key;
-					tfp.options.vat = res.data.vat;
-					tfp.options.total = res.data.total;
-					tfp.options.pickuppoint = res.data.pickuppoint;
-					tfp.update();
-				});
-			}
-		};
-
-		// Initial TaxFreePro update
-		helpers.updateData();
-
-		// Update TaxFreePro on multi-page checkout email change.
-		$('body.MultiPageCheckout').on('change', 'input, select', function(evt) {
-			helpers.updateData($(this).val());
-		});
-
-		// Update TaxFreePro if there was ajax calls to /checkout/
-		$(document).ajaxSuccess(function(event, xhr, settings) {
-			if (settings.url == "/checkout/") {
-				helpers.updateData();
-			}
-		});
-	}
-//]]>
-</script>
+{SupportScripts}
