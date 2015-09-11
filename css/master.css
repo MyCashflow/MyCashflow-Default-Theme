@@ -1798,6 +1798,38 @@ a.Button.PrimaryAction,
 	padding-bottom: 45px;
 }
 
+
+/* TaxFreePro Notifications */
+
+.TaxFreeProNotification,
+#MultiPageCheckout .TaxFreeProNotification {
+	text-align: left;
+	margin: -18px 0 18px;
+	padding: 18px 18px 18px 72px !important;
+	background-image: url(../i/tax-free-pro-logo.png);
+	background-repeat: no-repeat;
+	background-position: 15px 50%;
+	font-size: 15px;
+	clear: both;
+}
+#MultiPageCheckout .TaxFreeProNotification {
+	margin: -18px 0 18px 126px;
+}
+#MultiPageCheckout .TaxFreeProRefund {
+	margin: 0 0 18px;
+}
+.TaxFreeProNotification h3,
+#MultiPageCheckout .TaxFreeProNotification h3 {
+	font-size: 15px;
+	color: #222;
+}
+.TaxFreeProRefund,
+#MultiPageCheckout .TaxFreeProRefund {
+	font-weight: bold;
+	font-size: 26px;
+	line-height: 27px;
+}
+
 /* Login page */
 
 #Checkout #SubmitAccountLogin {
