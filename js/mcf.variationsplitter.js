@@ -60,7 +60,7 @@ $(function() {
 					triggers: level ? _.pluck(temp, 'value') : null
 				};
 
-				var price = keyValue[1].match(/(\d+\,\d+\€)/),
+				var price = keyValue[1].match(/(\d+,\d+)/),
 					availability = (availability)
 						? availability[1]
 						: $el.next('.FormHelp').text(),
@@ -69,7 +69,7 @@ $(function() {
 						: $el.find('input');
 
 				price = price
-					? price[1]
+					? _.last(price)
 					: 'N/A';
 
 				if (isLast) {
@@ -177,7 +177,7 @@ $(function() {
 			$buyFormSubmit.attr('disabled', 'disabled');
 
 			var $infoWrap = $('<p class="FormHelp VariationInfo"></p>'),
-				$price = $('<strong>></strong>'),
+				$price = $('<strong></strong>'),
 				$availability = $('<span></span>');
 
 			$infoWrap.append($price);
