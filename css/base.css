@@ -167,6 +167,13 @@ ol {
 	list-style-type: decimal;
 }
 
+/* Images  */
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
 /* Some default classes
 -------------------------------------------------------------- */
 
