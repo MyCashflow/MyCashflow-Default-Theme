@@ -36,7 +36,7 @@
 
 			// Dirty-check for state.
 			self._timer = setInterval(function () {
-				if (self.$elem.children().length) {
+				if (self.$elem.find('> [data-nosto-id]').length) {
 					clearTimeout(self._timeout);
 					clearInterval(self._timer);
 					self.replaceNosto(self.$elem, self.settings.success, self.settings.error);
@@ -48,7 +48,7 @@
 
 			// Get the product IDs.
 			var ids = [];
-			$elem.children().each(function () {
+			$elem.find('> [data-nosto-id]').each(function () {
 				ids.push($(this).attr('data-nosto-id'));
 			});
 			if (!ids) {
