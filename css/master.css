@@ -1019,12 +1019,16 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 /* Product
 -------------------------------------------------------------- */
 
-#ProductLikes {
+#ProductLikes,
+#ProductImages .ExtShareButtons {
 	position: relative;
 	z-index: 1001;
 	width: 276px;
 	margin: 9px -9px;
+	padding: 0;
 }
+#ProductImages .ExtShareButtons { margin-bottom: 0; }
+#ProductImages .ExtShareButton { margin: 0.25em 0.5em 0.25em 0; }
 
 #ProductImages, #ProductBuy {
 	position: relative; float: left;
