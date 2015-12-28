@@ -70,6 +70,9 @@ $(function() {
 					? $.trim($(this).parent('label').text())
 					: $.trim($(this).text());
 
+				var priceRegex = /\, .?\d+\W\d+.+$/;
+				inputValue = inputValue.replace(priceRegex, '');
+
 				var matchA = inputValue.toLowerCase(),
 					matchB = imageText.toLowerCase(),
 					matches = matchA.length > matchB.length
