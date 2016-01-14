@@ -32,10 +32,6 @@
 		var thanksHash = loc.substr(loc.lastIndexOf('/'));
 		$('#KlarnaCheckoutThanksLink').attr('href', '/checkout/thanks' + thanksHash);
 
-		// Disable selecting the shipping method if no zip code is given
-		if ($.trim($('#postal_code').val()) === '') $('#shipping_method').prop('disabled', true);
-		else $('#shipping_method').prop('disabled', false);
-
 		// Subscribe to marketing lists via ajax
 		$('#MarketingPermissions').on('change', function(evt) {
 			var $changedEl = $(evt.target);
@@ -82,10 +78,6 @@
 					var $previewContent = $('#PreviewContent');
 					var $otherPaymentMethodTab = $('#SelectOtherPaymentMethodTab');
 					$kcoShippingInfo.html(response);
-
-					// Disable selecting the shipping method if no zip code is given
-					if ($.trim($('#postal_code').val()) === '') $('#shipping_method').prop('disabled', true);
-					else $('#shipping_method').prop('disabled', false);
 
 					$('.CheckoutLoader', $kcoShippingInfo).remove();
 
