@@ -320,6 +320,9 @@
 	.GroupItem > div.FormError{padding-bottom: 19px;}
 
 	/* Checkout Bank Logos*/
+	#CHECKOUT {
+		max-width: 100%;
+	}
 	.CheckoutPaymentServiceProcess{
 		text-align: center;
 	}
