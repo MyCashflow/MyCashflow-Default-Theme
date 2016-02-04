@@ -7,7 +7,7 @@
 	<div id="KlarnaThanksHeader" class="clearfix">
 		<h1>{%Hi}{OrderFirstName(before:'&nbsp;')},</h1>
 
-		<p class="Big">{%KlarnaCheckoutThanks} <a id="KlarnaCheckoutThanksLink" href="/checkout/thanks/"><strong>{%KlarnaCheckoutGoToSummary}</strong></a>.</p>
+		<p class="Big">{%KlarnaCheckoutThanks} <a id="KlarnaCheckoutThanksLink" href="/checkout/thanks/{TransactionHash}"><strong>{%KlarnaCheckoutGoToSummary}</strong></a>.</p>
 
 		{CheckoutRegistrationForm(
 			before: '
