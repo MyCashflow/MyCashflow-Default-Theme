@@ -27,11 +27,6 @@
 			}
 		}
 
-		// Fix the link to shop's own thanks-page from the Klarna's thanks-page
-		var loc = window.location.href;
-		var thanksHash = loc.substr(loc.lastIndexOf('/'));
-		$('#KlarnaCheckoutThanksLink').attr('href', '/checkout/thanks' + thanksHash);
-
 		// Subscribe to marketing lists via ajax
 		$('#MarketingPermissions').on('change', function(evt) {
 			var $changedEl = $(evt.target);
