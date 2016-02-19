@@ -1,0 +1,57 @@
+{Helper(file:'helpers/header')}
+<div id="SidebarBg">
+	<div id="Main" class="clearfix">
+		{Helper(file:'helpers/sidebar-left')}
+		<div id="Primary" class="Column">
+			<div id="BannerScroller">
+				<div id="ScrollableBanners">
+					{CategoryImage(
+						width: 576,
+						before: '
+							<div class="FrontBanner" id="FrontpageCategoryImage">
+						',
+						after: '
+							<div class="BannerInfo">
+								<h3>{PageTitle}</h3>
+							</div>
+						</div>'
+					)}
+					{Banners(name:'frontpage',helper:'helpers/homepage-banners')}
+				</div>
+			</div>
+			{CategoryDescription(before:'<div class="CategoryDescription">',after:'</div>')}
+			<div id="ShopLikes" class="fb-like" data-send="true" data-width="354" data-show-faces="true" data-font="arial" data-href="{FacebookPageURL(or: '{ShopUrl}{CanonicalUrl}')}"></div>
+
+			{Products(
+				pagination: 'true',
+				classes: 'first||',
+				limit: '30|15|60|90',
+				sort: 'manual|name_asc|released_desc|price_asc',
+				before: '
+					<form action="{CurrentUrl}" method="get" id="PaginationSortForm">
+						{PaginationStatus}
+						<div class="FormItem GroupItem">
+							{PaginationFormParameters(
+								name: 'keyword'
+							)}
+							<div>
+								{PaginationSort}
+							</div>
+							<div>
+								{PaginationLimit}
+							</div>
+							<div>
+								<button type="submit">Lähetä</button>
+							</div>
+						</div>
+					</form>
+				',
+				after: '{PaginationPages(items: 7)}',
+				helper: 'helpers/listproduct'
+			)}
+
+		</div>
+		{Helper(file:'helpers/sidebar-right')}
+	</div>
+</div>
+{Helper(file:'helpers/footer')}
