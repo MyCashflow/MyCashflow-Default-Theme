@@ -14,6 +14,20 @@
 				{ProductBuy(
 					variations: 'radio'
 				)}
+				{AvailabilityNotificationForm(
+					before:'
+						<div id="AvailabilityNotifications">
+							<h2>{%AvailabilityNotificationIntroTitle}</h2>
+							<p>{%AvailabilityNotificationIntroText}</p>
+							<a href="#AvailabilityNotificationModal" class="Button inlineColorbox">{%SubscribeAvailabilityNotification}</a>
+							<div style="display: none;" id="AvailabilityNotificationModalWrapper">
+								<div id="AvailabilityNotificationModal">
+									<h2>{%AvailabilityNotificationModalTitle}</h2>',
+					after: '
+								</div>
+						</div>
+					</div>'
+				)}
 			</div>
 			<div id="ProductImages">
 				{ProductImages}

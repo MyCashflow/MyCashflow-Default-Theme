@@ -1134,7 +1134,11 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 #ProductBuy .BuyForm fieldset {
 	clear: left; position: relative;
 	margin: 0 -9px 18px; padding: 8px;
-	border: 1px solid #D9D9D9; background-color: #FCFCFC;
+	border: 1px solid #D9D9D9;
+	background-color: #FCFCFC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 #ProductBuy .BuyForm .BuyFormVariationSelect {
 	/* Ugly FF-hack for https://bugzilla.mozilla.org/show_bug.cgi?id=823483 */
@@ -1224,6 +1228,26 @@ ul.ProductList, ol.ProductList { margin: 0; font-weight: bold; }
 #ModalBuying form {
 	width: auto; float: left;
 	padding-right: 30px;
+}
+
+/* Availability notifications
+-------------------------------------------------------------- */
+
+#AvailabilityNotifications {
+	border: 1px solid #d9d9d9;
+	background: #fcfcfc;
+	margin: 0 -9px;
+	padding: 9px 9px 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+#AvailabilityNotifications .Button {
+	padding: 4px 9px 5px;
+	font-weight: bold;
+}
+#AvailabilityNotificationModal .CheckWrap .label {
+	display: none;
 }
 
 /* Scroller styles for crosssales */
