@@ -44,6 +44,12 @@
 
 									{OrderEmailMessage}
 
+									{OrderPaymentTransactions(helper: '{{
+										{TransactionPaymentLink(
+											before: '<h2>Maksa tilauksesi oheisesta linkistä</h2><p><a href="',
+											after: '">Siirry tilauksen maksusivulle</a></p>')}
+									}}')}
+
 									<p>{OrderTrackingCode(before:'{%TrackingCode}:&nbsp;<strong>',after:'</strong>')}</p>
 
 									{Helper(file: 'emails/helpers/ordercontents')}
