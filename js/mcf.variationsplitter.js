@@ -11,7 +11,8 @@ $(function() {
 	'use strict';
 
 	var pluginName = 'mcfVariationSplitter',
-		defaults = {};
+		defaults = {},
+		BREAKING_CHARS_REGEX = /\"/g;
 
 	function Plugin(element, options) {
 		this.element = element;
@@ -117,7 +118,7 @@ $(function() {
 			groupValues = _.uniq(groupValues);
 
 			$.each(groupValues, function (j, value) {
-				optionsHtml.push('<option value="' + value + '">' + value + '</option>');
+				optionsHtml.push('<option value="' + value.replace(BREAKING_CHARS_REGEX, '') + '">' + value + '</option>');
 			});
 
 			markup.push('<label for="VariationGroupSelect-' + level + '">' + labels[i] + ':</label>');
@@ -192,7 +193,7 @@ $(function() {
 
 				var groupData = _.find(variationGroups, function(group) {
 					var triggersMatch = !_.difference(group.triggers, activeFilters).length;
-					var valueMatches = _.last(activeFilters) === group.value;
+					var valueMatches = _.last(activeFilters) === group.value.replace(BREAKING_CHARS_REGEX, '');
 					return triggersMatch && valueMatches;
 				});
 
