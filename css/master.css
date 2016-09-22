@@ -1539,21 +1539,16 @@ table .CartProduct dd,
 table .CartProduct dt { float: left; }
 table .CartProduct dt { clear: left; }
 
-.CartPic { width: 36px; }
-.CartPic a {
-	display: block; position: relative;
-	text-align: center; background: #FFF;
-	width: 34px; height: 34px; line-height: 30px;
+.CartPic img {
+	vertical-align: middle;
+	display: inline;
+	margin: 0 auto;
+	width: 32px;
+	max-width: none;
 	border: 1px solid #d9d9d9;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-}
-.CartPic a:hover { border-color: #09f; }
-.CartPic a img {
-	vertical-align: middle;
-	display: inline;
-	margin: 0 auto;
 }
 .EditableCart tfoot td,
 .EditableCart tfoot th,
