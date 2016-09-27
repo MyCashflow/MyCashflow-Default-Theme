@@ -96,7 +96,7 @@ $(function() {
 					$bestMatch.attr('checked', true);
 				} else if ($parent.hasClass('BuyFormQuantity') === false) {
 					$('option', $parent).attr('selected', false);
-					$bestMatch.attr('selected', true).parent("select").trigger("change");
+					$bestMatch.attr('selected', true).parent("select").trigger("change", [true]);
 				}
 			}
 		}
@@ -107,40 +107,42 @@ $(function() {
 	// Change the preview image when a different product
 	// variant is selected. Matching is done by comparing
 	// the variant's name against the image titles.
-	$productBuyForm.on('change', function (evt) {
-		var $changedEl = $(evt.target),
-			$bestMatch = null,
-			$parent = $changedEl.closest('.FormItem'),
-			inputValue = $changedEl.is(':radio')
-				? $.trim($changedEl.parent('label').text())
-				: $.trim($changedEl.find(':selected').text());
+	$productBuyForm.on('change', function (evt, triggered) {
+		if (!triggered) {
+			var $changedEl = $(evt.target),
+				$bestMatch = null,
+				$parent = $changedEl.closest('.FormItem'),
+				inputValue = $changedEl.is(':radio')
+					? $.trim($changedEl.parent('label').text())
+					: $.trim($changedEl.find(':selected').text());
 
-		if (inputValue.length >= filterLengthLimit) {
-			var $thumbnails = $('li a', $productThumbnails).sort(function(a, b) {
-				var labelA = $(a).attr('title'),
-					labelB = $(b).attr('title');
-				return labelA.length > labelB.length;
-			});
+			if (inputValue.length >= filterLengthLimit) {
+				var $thumbnails = $('li a', $productThumbnails).sort(function(a, b) {
+					var labelA = $(a).attr('title'),
+						labelB = $(b).attr('title');
+					return labelA.length > labelB.length;
+				});
 
-			$thumbnails.each(function() {
-				var matchA = $.trim($(this).attr('title').toLowerCase()),
-					matchB = inputValue.toLowerCase(),
-					matches = matchA.length > matchB.length
-						? matchA.indexOf(matchB)
-						: matchB.indexOf(matchA);
+				$thumbnails.each(function() {
+					var matchA = $.trim($(this).attr('title').toLowerCase()),
+						matchB = inputValue.toLowerCase(),
+						matches = matchA.length > matchB.length
+							? matchA.indexOf(matchB)
+							: matchB.indexOf(matchA);
 
-				if (matchA === matchB) {
-					$bestMatch = $(this);
-					return false;
+					if (matchA === matchB) {
+						$bestMatch = $(this);
+						return false;
+					}
+
+					if (matches > -1) {
+						$bestMatch = $(this);
+					}
+				});
+
+				if ($bestMatch && $parent.hasClass('BuyFormQuantity') === false) {
+					$bestMatch.trigger('click', [true]);
 				}
-
-				if (matches > -1) {
-					$bestMatch = $(this);
-				}
-			});
-
-			if ($bestMatch && $parent.hasClass('BuyFormQuantity') === false) {
-				$bestMatch.trigger('click', [true]);
 			}
 		}
 	});
