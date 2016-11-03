@@ -203,12 +203,12 @@ $(function() {
 					$availability.text(groupData.availability);
 
 					var $groupEl = $(groupData.el);
-					$groupEl.attr('checked', 'checked');
-					$buyFormSelect.val($groupEl.attr('value'));
+					$groupEl.prop('checked', true);
+					$buyFormSelect.val($groupEl.val());
 					$buyFormSubmit.removeAttr('disabled');
 				} else {
 					$infoWrap.hide();
-					$buyFormRadios.removeAttr('checked');
+					$buyFormRadios.prop('checked', false);
 					$buyFormSelect.val('');
 					$buyFormSubmit.attr('disabled', 'disabled');
 				}
