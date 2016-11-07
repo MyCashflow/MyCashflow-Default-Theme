@@ -174,8 +174,8 @@ $(function() {
 			$availability.hide();
 			$buyFormFieldset.hide();
 
-			$buyFormRadios.removeAttr('checked');
-			$buyFormSubmit.attr('disabled', 'disabled');
+			$buyFormRadios.prop('checked', false);
+			$buyFormSubmit.prop('disabled', true);
 
 			var $infoWrap = $('<p class="FormHelp VariationInfo"></p>'),
 				$price = $('<strong></strong>'),
@@ -203,14 +203,14 @@ $(function() {
 					$availability.text(groupData.availability);
 
 					var $groupEl = $(groupData.el);
-					$groupEl.attr('checked', 'checked');
-					$buyFormSelect.val($groupEl.attr('value'));
-					$buyFormSubmit.removeAttr('disabled');
+					$groupEl.prop('checked', true);
+					$buyFormSelect.val($groupEl.val());
+					$buyFormSubmit.prop('disabled', false);
 				} else {
 					$infoWrap.hide();
-					$buyFormRadios.removeAttr('checked');
+					$buyFormRadios.prop('checked', false);
 					$buyFormSelect.val('');
-					$buyFormSubmit.attr('disabled', 'disabled');
+					$buyFormSubmit.prop('disabled', true);
 				}
 
 				$variationGroupsWrap.append(plugin.renderVariationGroups(variationGroups, activeFilters, maxGroupLevel + 1));
