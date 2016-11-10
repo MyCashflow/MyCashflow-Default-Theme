@@ -20,6 +20,8 @@
 			<SinglePage supported="true" />
 			<MultiPage supported="true" default="default" />
 		</Checkout>
+
+		<ProductBundles supported="true" />
 	</Features>
 
 	<Settings>
