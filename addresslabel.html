@@ -48,7 +48,14 @@
 		}
 		.Sender {
 			position: absolute;
-			left: 10mm; bottom: 10mm;
+			left: 10mm; top: 45mm;
+			text-align: left;
+			font-size: 11pt;
+			line-height: 14pt;
+		}
+		.Receiver {
+			position: absolute;
+			right: 10mm; top: 75mm;
 			text-align: left;
 			font-size: 11pt;
 			line-height: 14pt;
@@ -62,6 +69,7 @@
 <body>
 	{Logo}
 	<div class="Content">
+		<div class="Receiver">
 		<p>
 			{OrderShippingCompany(after:'<br />')}
 			{OrderShippingName}
@@ -69,6 +77,7 @@
 			{OrderShippingZip(before:'<br>')} {OrderShippingCity}
 			{OrderShippingCountry(before:'<br>')}
 		</p>
+		</div>
 		<div class="Sender">
 			<h2>{%Sender}</h2>
 			<p>
