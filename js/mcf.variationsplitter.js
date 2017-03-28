@@ -52,13 +52,17 @@ $(function() {
 					if (availability) keyValue[1] = keyValue[1].replace(' (' + availability[1] + ')', '');
 				}
 
+				var triggers = level ? _.map(temp, function (trigger) {
+					return trigger.value.replace(BREAKING_CHARS_REGEX, '');
+				}) : null;
+
 				var group = {
 					last: isLast,
 					level: level,
 					label: $.trim(keyValue[0]),
 					group: $.trim(keyValue[0]) + '-' + level,
 					value: $.trim(keyValue[1]),
-					triggers: level ? _.pluck(temp, 'value') : null
+					triggers: triggers
 				};
 
 				var price = keyValue[1].match(/(\d+,\d+)/),
@@ -192,7 +196,7 @@ $(function() {
 					activeFilters = plugin.getActiveFilters(maxGroupLevel);
 
 				var groupData = _.find(variationGroups, function(group) {
-					var triggersMatch = !_.difference(group.triggers, activeFilters).length;
+					var triggersMatch = group.level === maxGroupLevel && !_.difference(group.triggers, activeFilters).length;
 					var valueMatches = _.last(activeFilters) === group.value.replace(BREAKING_CHARS_REGEX, '');
 					return triggersMatch && valueMatches;
 				});
