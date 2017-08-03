@@ -181,7 +181,7 @@ th h3 .ProductVariation { font-size: 9pt; font-weight: normal; vertical-align: t
 th h3 + * { margin-top: 3.5pt; }
 
 table dl { padding-left: 25mm; font-size: 8.5pt !important; }
-table dl dt { width: 23mm !important; margin: 0 0 0 -25mm; padding: 0; }
+table dl dt { width: 23mm !important; margin: 0 0 0 -25mm; padding: 0; word-wrap: break-word; word-break: break-all; }
 
 table tr th.CartProduct { min-width: 60mm; }
 
