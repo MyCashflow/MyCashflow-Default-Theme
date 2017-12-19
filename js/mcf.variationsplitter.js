@@ -62,7 +62,7 @@ $(function() {
 					triggers: level ? _.pluck(temp, 'value') : null
 				};
 
-				var price = keyValue[1].match(/(\d+\s?\d+,\d+)/),
+				var price = keyValue[1].match(/\d?\s?\d+,\d+/),
 					availability = (availability)
 						? availability[1]
 						: $el.next('.FormHelp').text(),
