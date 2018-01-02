@@ -50,7 +50,13 @@
 											after: '">Siirry tilauksen maksusivulle</a></p>')}
 									}}')}
 
-									<p>{OrderTrackingCode(before:'{%TrackingCode}:&nbsp;<strong><a href="{OrderTrackingUrl}">',after:'</a></strong>')}</p>
+									<p>
+										{OrderTrackingUrl(
+											before: '{%TrackOrder}: <strong><a href="',
+											after: '">{OrderTrackingCode}</a></strong>',
+											or: '{OrderTrackingCode(before:'{%TrackingCode}:&nbsp;<strong>',after:'</strong>')}'
+										)}
+									</p>
 
 									{Helper(file: 'emails/helpers/ordercontents')}
 
