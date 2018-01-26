@@ -1,0 +1,50 @@
+<div class="{ProductClass} Product Bundle">
+	
+	{BundleUrl(
+		before:'<a class="ProductImage" href="',
+		after:'" title="{BundleName}">
+			{BundleImageUrl(
+				imagesize:'list',
+				before:'<img src="',
+				after:'" alt="{BundleName}">'
+			)}
+		</a>'
+	)}
+				   
+		
+	<h2 class="ProductName">
+		<a href="{BundleUrl}" {ProductLinkData}>{BundleName}</a>
+	</h2>
+
+	{BundlePrice(
+		html: 'true',
+		currencysymbol: 'true',
+		before: '
+			<p class="ListProductPrices">
+				<strong class="ProductPrice">',
+		after: '
+				</strong>
+				{BundleComparePrice(
+					html: 'true',
+					currencysymbol: 'true',
+					before: '<span class="ProductComparePrice">',
+					after: '</span>'
+				)}
+			</p>
+
+			{BundleAvailability(
+				html: 'false',
+				before: '<p class="ListProductAvailability">',
+				after: '</p>'
+			)}
+
+			<a href="{BundleUrl}" class="Button" {ProductLinkData(type: 'add_to_cart')}>{%AddToCart}</a>',
+		else: '
+			{BundleAvailability(
+				html: 'false',
+				before: '<p class="ListProductAvailability">',
+				after: '</p>'
+			)}
+		'
+	)}
+</div>
