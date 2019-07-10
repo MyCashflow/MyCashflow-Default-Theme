@@ -22,7 +22,7 @@
 	<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: center;">{OrderProductQuantity}</td>
 	<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
 		{OrderProductPrice(
-			after: '<br><small style="color: #666;">{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>'
+			after: '{OrderProductTaxRate(before: '<br><small style="color: #666;">&nbsp{%VAT}', after: '%</small>')}'
 		)}
 	</td>
 	<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;">
