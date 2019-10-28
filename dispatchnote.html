@@ -34,7 +34,12 @@
 				<dt>{%CheckoutCustomerInformation}</dt>
 				<dd>{OrderCustomerInformation}</dd>
 			</dl>
-			{OrderInfo}
+			<dl class="OrderInfo">
+				<dt class="OrderDate">{%Date}</dt><dd class="OrderDate">{OrderDate}</dd>
+				<dt class="OrderNumber">{%Ordernumber}</dt><dd class="OrderNumber">16</dd>
+				<dt class="OrderPaymentMethod">{%PaymentMethod}</dt><dd class="OrderPaymentMethod">{OrderPaymentMethod(show_price: 'false')}</dd>
+				<dt class="OrderShippingMethod">{%CheckoutShipping}</dt><dd class="OrderShippingMethod">{OrderShippingMethod}</dd>
+			</dl>
 		</div>
 	</div>
 
