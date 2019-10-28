@@ -101,7 +101,7 @@
 							after: '<br><small>{OrderShippingCostsTax}</small></td></tr>'
 						)}
 						{OrderPaymentCosts(
-							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod(show_price:false)}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
+							before: '<tr class="CartTotal"><th scope="row" colspan="4">{%PaymentCosts}: {OrderPaymentMethod(show_price: 'false')}<br><small>{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small></th><td class="CartTotal">',
 							after: '<br><small>{OrderPaymentCostsTax}</small></td></tr>'
 						)}
 						<tr class="CartTotal" id="FullTotal">
