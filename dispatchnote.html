@@ -39,6 +39,14 @@
 				<dt class="OrderNumber">{%Ordernumber}</dt><dd class="OrderNumber">16</dd>
 				<dt class="OrderPaymentMethod">{%PaymentMethod}</dt><dd class="OrderPaymentMethod">{OrderPaymentMethod(show_price: 'false')}</dd>
 				<dt class="OrderShippingMethod">{%CheckoutShipping}</dt><dd class="OrderShippingMethod">{OrderShippingMethod}</dd>
+				{OrderTrackingCode(
+					before: '<dt class="OrderTrackingCode">{%TrackingCode}</dt><dd class="OrderTrackingCode"></dd>',
+					after: '</dd>'
+				)}
+				{OrderPickupPoint(
+					before: '<dt class="OrderPickupPoint">{%PickupPoint}</dt><dd class="OrderPickupPoint"></dd>',
+					after: '</dd>'
+				)}
 			</dl>
 		</div>
 	</div>
