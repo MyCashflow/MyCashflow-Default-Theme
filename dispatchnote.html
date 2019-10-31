@@ -40,11 +40,15 @@
 				<dt class="OrderPaymentMethod">{%PaymentMethod}</dt><dd class="OrderPaymentMethod">{OrderPaymentMethod(show_price: 'false')}</dd>
 				<dt class="OrderShippingMethod">{%CheckoutShipping}</dt><dd class="OrderShippingMethod">{OrderShippingMethod}</dd>
 				{OrderTrackingCode(
-					before: '<dt class="OrderTrackingCode">{%TrackingCode}</dt><dd class="OrderTrackingCode"></dd>',
+					before: '<dt class="OrderTrackingCode">{%TrackingCode}</dt><dd class="OrderTrackingCode">',
 					after: '</dd>'
 				)}
 				{OrderPickupPoint(
-					before: '<dt class="OrderPickupPoint">{%PickupPoint}</dt><dd class="OrderPickupPoint"></dd>',
+					before: '<dt class="OrderPickupPoint">{%PickupPoint}</dt><dd class="OrderPickupPoint">',
+					after: '</dd>'
+				)}
+				{OrderComments(
+					before: '<dt class="OrderComments">{%CheckoutOrderComments}</dt><dd class="OrderComments">',
 					after: '</dd>'
 				)}
 			</dl>
