@@ -289,3 +289,30 @@ tr#FullTotal td.CartTotal { font-size: 12pt; }
 	font-weight: normal;
 	margin-bottom: 4em;
 }
+
+/* Fix dl list overflow */
+
+.CartProduct dl,
+#OrderInfo dl {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 0;
+}
+.CartProduct dt,
+#OrderInfo dt {
+	flex-basis: 30%;
+	margin: 0 0 5pt;
+	min-width: 33mm;
+	width: auto !important;
+	word-wrap: normal;
+	word-break: normal;
+}
+#OrderInfo dt {
+	margin-bottom: 0;
+}
+.CartProduct dd,
+#OrderInfo dd {
+	flex-basis: 50%;
+	flex-grow: 1;
+	margin: 0;
+}
