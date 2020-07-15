@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{%Receipt} {OrderNumber}</title>
 
-<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css?date=20170803" />
+<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css?date=20200612" />
 
 </head>
 
@@ -46,7 +46,9 @@
 		</div>
 		<div class="AddressColumn">
 			<h3>{%OrderInformation}</h3>
-			{OrderInfo}
+			<div id="OrderInfo">
+				{OrderInfo}
+			</div>
 			<h3>{%Returner}</h3>
 			<p>
 				{OrderCustomerInformation}
