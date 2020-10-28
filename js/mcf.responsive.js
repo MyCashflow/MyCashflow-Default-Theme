@@ -4,43 +4,8 @@ $(function() {
 		$(this).next('ul').toggleClass('show-the-menu');
 	});
 
-	// Change the checkout type 'MultiPageCheckout' if it's supported and we're using mobile resolutions
-	// Saves it's state into local storage
-	mcf.changeCheckoutType = function(changeToType) {
-		if (typeof Modernizr !== 'undefined' && Modernizr.localstorage) {
-
-			var switchableCheckout = localStorage.getItem('switchableCheckout'),
-				currentCheckoutType = ($('body').hasClass('SinglePageCheckout')) ? 'SinglePageCheckout' : 'MultiPageCheckout';
-
-			if (!switchableCheckout) {
-				switchableCheckout = (currentCheckoutType === 'SinglePageCheckout') ? 'true' : 'false';
-				localStorage.setItem('switchableCheckout', switchableCheckout);
-			}
-
-			if (switchableCheckout === 'true' && changeToType !== currentCheckoutType) {
-				$.ajax({
-					type: 'GET',
-					url: '/checkout/?' + changeToType,
-					data: { ajax: true },
-					error: function(jqXHR, textStatus, errorThrown) {
-						if (jqXHR.status === 400) {
-							// We get error if the other checkout type isn't supported and stop switching
-							localStorage.setItem('switchableCheckout', 'false');
-						}
-					}
-				});
-			}
-
-		}
-	};
-
 	// Listen for matchMedia changes with enquire: http://wicky.nillia.ms/enquire.js/ <3
-	enquire.register('screen and (min-width: 981px)', {
-		match: function() {
-			// If we're bigger, go back to single page checkout
-			mcf.changeCheckoutType('SinglePageCheckout');
-		}
-	}).register('screen and (max-width: 980px)', {
+	enquire.register('screen and (max-width: 980px)', {
 
 		match: function() {
 
@@ -64,9 +29,6 @@ $(function() {
 					};
 				$(window).on('scroll.responsiveEvents', _.throttle(throttledScroll, 100));
 			});
-
-			// If we go below the 980px width, change the checkout type
-			mcf.changeCheckoutType('MultiPageCheckout');
 
 			// Wrap the whole cart as one big link
 			$('#MiniCartWrapper').wrapInner('<a href="/cart/" id="ResponsiveCartLink"></a>');
