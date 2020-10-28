@@ -1,0 +1,107 @@
+<html>
+<head>
+	<title>{%GiftCard}</title>
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Share:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<style>
+		@page {
+			margin: 0;
+			size: A6 landscape;
+		}
+		html, body {
+			font-family: 'Share', cursive;
+			font-size: 15px;
+			height: 100%;
+		}
+		.GiftCardBalance {
+			font-size: 17pt;
+			font-style: italic;
+			position: absolute;
+			top: 35px;
+			right: 35px;
+		}
+		.GiftCardBody {
+			align-items: center;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			padding: 25px;
+		}
+		.GiftCardDetails {
+			align-self: end;
+			display: flex;
+			padding-top: 25px;
+			width: 100%;
+		}
+		.GiftCardDetails .Detail {
+			background: #f0f0f0;
+			border-radius: 2px;
+			flex: 1;
+			padding: 10px;
+		}
+		.GiftCardDetails .Detail + .Detail {
+			margin-left: 25px;
+		}
+		.GiftCardDetails .Detail .Label {
+			color: #777777;
+			font-size: 80%;
+			margin-bottom: 3px;
+		}
+		.ShopInfo {
+			align-items: center;
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+			justify-content: center;
+		}
+		.ShopLogo {
+			margin: 15px 0;
+		}
+		.ShopLogo img {
+			max-height: 150px;
+			max-width: 250px;
+		}
+		h1 {
+			font-size: 13pt;
+			margin: 0 0 3px;
+		}
+		h3 {
+			color: #444444;
+			font-size: 15pt;
+			margin: 0;
+		}
+		.Monospace {
+			font-family: 'Nanum Gothic Coding', monospace;
+		}
+	</style>
+</head>
+<body>
+	<div class="GiftCardBody">
+		<div class="ShopInfo">
+			{LogoUrl(
+				before: '<div class="ShopLogo"><img src="',
+				after: '" /></div>'
+			)}
+			<h1>{%GiftCard}</h1>
+			<h3>{ShopName}</h3>
+		</div>
+		<div class="GiftCardDetails">
+			<div class="Detail">
+				<div class="Label">{%GiftCardCode}</div>
+				<div class="Value Monospace">{GiftCardCode}</div>
+			</div>
+			{GiftCardExpiryDate(
+				before: '
+					<div class="Detail">
+						<div class="Label">{%GiftCardExpires}</div>
+						<div class="Value">',
+				after: '</div>
+					</div>'
+			)}
+		</div>
+	</div>
+	<div class="GiftCardBalance">
+		{GiftCardBalance}
+	</div>
+</body>
+</html>
