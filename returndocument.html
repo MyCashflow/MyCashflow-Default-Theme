@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{%Receipt} {OrderNumber}</title>
 
-<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css?date=20200612" />
+<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css?date=20210304" />
 
 </head>
 
@@ -49,7 +49,7 @@
 			<div id="OrderInfo">
 				{OrderInfo}
 			</div>
-			<h3>{%Returner}</h3>
+			<h3 id="ReturnedBy">{%Returner}</h3>
 			<p>
 				{OrderCustomerInformation}
 			</p>
@@ -78,6 +78,13 @@
 						after: ')</small>'
 					)}
 				</th>
+			</tr>
+			<tr class="BorderSection">
+				<td>
+					{%ReturnReason}:
+				</td>
+				<td  class="Border">
+				</td>
 			</tr>
 		}}',
 		after: '

@@ -102,7 +102,10 @@ body {
 #OrderInfo dl {
 	margin: 0; width: 45mm;
 }
-
+#ReturnedBy {
+	clear: both;
+	padding-top: 15pt;
+}
 #CustomerInfo {
 	position: relative; float: left;
 	width: 41.1mm; padding: 7pt 0;
@@ -315,4 +318,13 @@ tr#FullTotal td.CartTotal { font-size: 12pt; }
 	flex-basis: 50%;
 	flex-grow: 1;
 	margin: 0;
+}
+.BorderSection {
+	height: 30pt;
+	position: relative;
+}
+td.Border {
+	display: block;
+	height: 20pt;
+	border-bottom: 0.25pt solid #000 !important;
 }
