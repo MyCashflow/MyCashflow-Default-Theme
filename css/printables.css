@@ -197,11 +197,25 @@ tr#FullTotal td.CartTotal { font-size: 12pt; }
 #VatInfo table {
 	width: auto; margin: 0 auto;
 	font-size: 7.5pt; line-height: 9pt;
+	min-width: 50%;
 }
 #VatInfo table td,
 #VatInfo table th {
 	padding: 3px 9px;
 }
+
+#TransactionsInfo { margin: 0 auto 1em; text-align: center; font-size: 7.5pt; }
+#TransactionsInfo table {
+	width: auto;
+	margin: 0 auto 20pt auto;
+	font-size: 7.5pt; line-height: 9pt;
+	min-width: 50%;
+}
+#TransactionsInfo table td,
+#TransactionsInfo table th {
+	padding: 3px 9px;
+}
+
 #PaymentDetails {
 	width: 100%; border-collapse: collapse;
 	border: 0.5pt solid black;
