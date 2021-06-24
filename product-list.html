@@ -9,13 +9,21 @@
 				<h1>{PageTitle}</h1>
 			</div>
 			{CategoryDescription(before:'<div class="CategoryDescription">',after:'</div>')}
-
+					
+			{Bundles(
+				category:'{CategoryID}',
+				classes:'first|',
+				helper: 'helpers/listbundle',
+				before:'<h2 class="BoxHeader">{%Bundles}</h2>'
+			)}
+			
 			{Products(
 				pagination: 'true',
 				classes: 'first||',
 				limit: '30|15|60|90',
 				sort: 'manual|name_asc|released_desc|price_asc',
 				before: '
+					<h2 class="BoxHeader">{%CheckoutOrderContent}</h2>
 					<form action="{CurrentUrl}" method="get" id="PaginationSortForm">
 						{PaginationStatus}
 						<div class="FormItem GroupItem">
