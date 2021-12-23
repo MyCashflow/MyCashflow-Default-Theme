@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{%Receipt} {OrderNumber}</title>
+
+	<link rel="stylesheet" type="text/css" href="{ThemeUrl}/css/printables.css?date=20210603" />
+
+</head>
+
+<body>
+<div id="Logo" style="width: 100%">
+	{Logo}
+</div>
+
+<div>
+	{ContactCompany}
+	<br>
+	{ContactStreetAddress1(
+	after: '{ContactStreetAddress2(before: ',&ensp;')},'
+	)}
+	{ContactZip} {ContactCity}
+	<br>
+	{ContactBusinessID(before: 'Y-tunnus:&ensp;')}
+	<br>
+	{ContactPhone(after:'<br>')}
+	{ContactInternet(after:'<br>')}
+</div>
+
+<div id="InfoWrapper">
+		<dl>
+			<dt class="OrderDate">{%Date}</dt><dd class="OrderDate">{OrderDate}</dd>
+			<dt class="OrderNumber">{%Ordernumber}</dt><dd class="OrderDate">{OrderNumber}</dd>
+		</dl>
+</div>
+
+{OrderProducts(
+before: '
+	<table>
+		<thead>
+		<tr>
+			<th scope="col">{%Product}</th>
+			<th scope="col">{%Quantity}</th>
+			<th scope="col">{%Price}</th>
+			<th scope="col">{%Total}</th>
+		</tr>
+		</thead>
+		<tbody>
+		',
+		helper: '{{
+		<tr>
+			<th>
+				<h3>
+					{OrderProductName}
+					{OrderProductVariation(before: ' <br /><em>',after:'</em>')}
+				</h3>
+				{OrderProductCode(
+				before: '<dl><dt>{%ProductCode}</dt><dd>',
+				after: '</dd></dl>'
+				)}
+				{OrderProductWarranty(
+				before: '<dl><dt>{%Warranty}</dt><dd>',
+				after: '&nbsp;{%Months}</dd></dl>'
+				)}
+				{OrderProductChoices}
+			</th>
+			<td>{OrderProductQuantity}</td>
+			<td>
+				{OrderProductPrice(
+				after: '<br><small>{%VAT}&nbsp;{OrderProductTaxRate(after:'%')}</small>',
+				before: '{OrderProductComparePrice(before: '<span style="color: #888; text-decoration: line-through;">', after: '</span>')}&ensp;'
+				)}
+			</td>
+			<td>
+				{OrderProductTotal(
+				after: '<br><small>{OrderProductTotalTax}</small>'
+				)}
+			</td>
+		</tr>
+		}}',
+		after: '
+		</tbody>
+		<tfoot>
+		<tr>
+			<th scope="row" colspan="3">{%Total} <br><small>{%VAT} {OrderTaxRate(after:'%')}</small></th>
+			<td>
+				{OrderTotal}<br>
+				<small>{OrderTax}</small>
+			</td>
+		</tr>
+		</tfoot>
+	</table>
+'
+)}
+<div>
+	{OrderTotalsByTaxRate}
+	{OrderVATDescription}
+</div>
+<div>
+	<table>
+	{OrderPaymentTransactions(only_paid: true, helper:'{{
+		<tr>
+			<td>
+				{%PaymentMethod}: {TransactionPaymentMethod}<br>
+				{%TransactionNumber} {TransactionId}{EcrTransactionReceiptNumber(before:'-')}<br>
+				{%TransactionTime} {EcrTransactionDateTime}<br>
+				{%TransactionTotal} {TransactionTotal}<br>
+				{EcrTransactionCustomerReceipt(before:'<pre style="margin-top: 1em;">', after:'</pre>')}
+			</td>
+		</tr>
+	}}')}
+	</table>
+</div>
+
+
+</body>
+</html>
