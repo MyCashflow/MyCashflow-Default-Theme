@@ -1,5 +1,188 @@
 {Helper(file:'emails/helpers/emailheader')}
-
-<a href="{OrderReceiptUrl}">{%DownloadReceipt}</a>
-
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td width="100%">
+			<table align="left" style="margin-right: 10px; max-width: 320px;">
+				<tr>
+					<td>
+						{Logo(width: 320, height: 80)}
+					</td>
+				</tr>
+		</td>
+	</tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="background: #FFFFFF; border: 2px solid #b5b5b5; overflow: hidden; text-align: left; border-radius: 10px; box-shadow: 0 10px 25px #CCCCCC;" class="ContainerTable">
+	<tr>
+		<td style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-sidebar-bg.gif) repeat-y right top;" height="100%">
+			<table width="100%" cellpadding="20" cellspacing="0" border="0" bgcolor="#cacaca" style="background: #cacaca url({ShopUrl}{ThemeUrl}/i/email-header-bg.gif) repeat-x left top; border-bottom: 1px solid #b5b5b5;">
+				<tr>
+					<td>
+						<h1 style="margin: 0; padding: 0; font-size: 25px; color: #333; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{OrderEmailTitle}</h1>
+					</td>
+				</tr>
+			</table>
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-sidebar-bg.gif) repeat-y right top;">
+				<tr>
+					<td valign="top" width="100%" height="100%">
+						<table cellpadding="18" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-content-top.gif) repeat-x left top;" width="100%">
+							<tr>
+								<td class="ContentCell" style="font-size: 16px; line-height: 24px;" height="100%">
+									{%PosReceiptMessage}
+									<h3>{%CheckoutOrderContents}</h3>
+									{OrderProducts(
+										before: '
+											<table style="text-align: left;" cellpadding="0" cellspacing="0" id="EmailProducts" width="100%">
+												<thead>
+													<tr valign="top">
+														<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: left;">{%Product}</th>
+														<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: center;">{%Quantity}</th>
+														<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 9px 4px 0; font-size: 15px; text-align: right;">{%Price}</th>
+														<th scope="col" style="border-bottom: 2px solid #444444; padding: 12px 0 4px 0; font-size: 15px; text-align: right;">{%Total}</th>
+													</tr>
+												</thead>
+										',
+										helper: 'emails/helpers/orderproduct',
+										after: '
+												<tfoot>
+													<tr valign="top">
+														<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
+															{%CheckoutProductsTotal}
+															<br><small style="color: #666;">{%VAT}&nbsp;{OrderTaxRate(after:'%')}</small>
+														</th>
+														<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;">
+															<strong>{OrderSubTotal}</strong><br>
+															<small style="color: #666;">{OrderSubtotalTax}</small>
+														</td>
+													</tr>
+													{OrderShippingCosts(
+														before: '<tr valign="top">
+															<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">{%ShippingCosts}: {OrderShippingMethod}
+															<br><small style="color: #666;">{%VAT}&nbsp;{OrderShippingCostsTaxRate(after:'%')}</small>
+														</th>
+														<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;"><strong>',
+														after: '</strong><br><small style="color: #666;">{OrderShippingCostsTax}</small></td></tr>'
+													)}
+													{OrderPaymentCosts(
+														before: '<tr valign="top">
+															<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
+																{%PaymentCosts}: {OrderPaymentMethod}<br>
+																<small style="color: #666;">{%VAT}&nbsp;{OrderPaymentCostsTaxRate(after:'%')}</small>
+															</th>
+															<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;"><strong>',
+														after: '</strong><br><small style="color: #666;">{OrderPaymentCostsTax}</small></td></tr>'
+													)}
+													<tr valign="top">
+														<th scope="row" colspan="3" style="border-bottom: 1px solid #D9D9D9; padding: 8px 9px 9px 0; font-size: 12px; text-align: right;">
+															{%Total}
+															<br><small style="color: #666;">{%VAT}&nbsp;{OrderTaxRate(after:'%')}</small>
+														</th>
+														<td style="border-bottom: 1px solid #D9D9D9; padding: 8px 0 9px 0; font-size: 12px; text-align: right;">
+															<strong style="font-size: 15px;">{OrderTotal}</strong><br>
+															<small style="color: #666;">{OrderTax}</small>
+														</td>
+													</tr>
+												</tfoot>
+											</table>
+										'
+									)}
+									<div id="PaymentTransactions" style="font-size: 12px; margin: 18px auto; text-align: center;">
+										{OrderPaymentTransactions(
+											before: '
+												<table id="OrderTotalsByTaxRate" cellpadding="0" cellspacing="0" style="font-size: 12px; text-align: left; margin: 0 auto;">
+													<thead>
+														<tr>
+															<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0; text-align: left;">{%Date}</th>
+															<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: left;">{%PaymentMethod}</th>
+															<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%PaymentReference}</th>
+															<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%PaymentStatus}</th>
+															<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%Total}</th>
+														</tr>
+													</thead>
+													<tbody>
+											',
+											helper: '{{
+												<tr>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0; text-align: right;">{TransactionDate}</td>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TransactionPaymentMethod}</td>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TransactionReference}</td>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TransactionStatus}</td>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TransactionTotal}</td>
+												</tr>
+											}}',
+											after: '
+													</tbody>
+												</table>
+											'
+										)}
+									</div>
+									<div id="VatInfo" style="font-size: 12px; margin: 18px auto; text-align: center;">
+										{TaxSummary(
+											before: '
+												<table id="OrderTotalsByTaxRate" cellpadding="0" cellspacing="0" style="font-size: 12px; text-align: left; margin: 0 auto;">
+													<tr>
+														<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0; text-align: left;">{%TaxRate}</th>
+														<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%TotalWithoutTax}</th>
+														<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%TotalTax}</th>
+														<th scope="col" style="border-bottom: 1px solid #444444; padding: 4px 0 4px 9px; text-align: right;">{%TotalWithTax}</th>
+													</tr>
+											',
+											after: '
+													<tr>
+														<th scope="row" style="border-bottom: 1px solid #D9D9D9; padding: 4px 0; text-align: left;">{%Total}</th>
+														<th style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{OrderTotalWithoutTax}</th>
+														<th style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{OrderTax}</th>
+														<th style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{OrderTotal}</th>
+													</tr>
+												</table>
+											',
+											helper: {{
+												<tr>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0; text-align: left; font-weight: bold;">{TaxSummaryRowTaxRate(after:'%')}</td>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TaxSummaryRowWithoutTax}</td>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TaxSummaryRowTax}</td>
+													<td style="border-bottom: 1px solid #D9D9D9; padding: 4px 0 4px 9px; text-align: right;">{TaxSummaryRowTotal}</td>
+												</tr>
+											}}
+										)}
+										{OrderVATDescription}
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td style="background: #f0f0f0 url({ShopUrl}{ThemeUrl}/i/email-sidebar-top.gif) repeat-x left top; border-left: 1px solid #e2e2e2;" valign="top" width="241">
+						<table cellpadding="18" cellspacing="0" border="0" bgcolor="#f0f0f0" height="100%" width="241">
+							<tr>
+								<td style="font-size: 15px; overflow: hidden;" id="SidebarContent" width="204">
+									<div style="width: 204px; overflow: hidden;">
+										{Helper(
+											file: 'emails/helpers/emaildocuments',
+											before: '<h3 style="font-size: 20px; color: #444; margin: 0 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%OrderDocuments}</h3><ul>',
+											after: '</ul>'
+										)}
+										<h3 style="font-size: 20px; color: #444; margin: 0 0 0.5em; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);">{%OrderInformation}</h3>
+										<div style="font-size: 15px; font-weight: normal; margin: 0 0 1em;">
+											{OrderDate(
+												before: '<strong>{%Date}</strong><br /><span style="margin-left: 25px">',
+												after: '</span><br />'
+											)}
+											{OrderNumber(
+												before: '<strong>{%Ordernumber}</strong><br /><span style="margin-left: 25px">',
+												after: '</span><br />'
+											)}
+											{OrderComments(
+												before: '<strong>{%CheckoutOrderComments}</strong><div style="padding-left: 25px" class="CommentsWrapper">',
+												after: '</div>'
+											)}
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
 {Helper(file:'emails/helpers/emailfooter')}
