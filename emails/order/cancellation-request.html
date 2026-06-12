@@ -1,0 +1,38 @@
+{Helper(file:'emails/helpers/emailheader')}
+{Helper(file:'emails/helpers/simpletop')}
+
+<!-- Content table starts -->
+<table cellpadding="18" cellspacing="0" border="0" style="background: #ffffff url({ShopUrl}{ThemeUrl}/i/email-content-top.gif) repeat-x left top;" width="100%">
+	<tr>
+		<td class="ContentCell" style="font-size: 16px; line-height: 24px;" height="100%">
+
+			{%EmailTextOrderCancellationRequest}
+
+			<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 18px 0; font-size: 14px; line-height: 21px;">
+				<tr valign="top">
+					<th scope="row" style="padding: 4px 18px 4px 0; text-align: left; white-space: nowrap;">{%EmailLabelOrderCancellationRequestReceivedAt}</th>
+					<td style="padding: 4px 0; text-align: left; width: 100%;">{OrderCancellationRequestReceivedAt}</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row" style="padding: 4px 18px 4px 0; text-align: left; white-space: nowrap;">{%EmailLabelOrderCancellationRequestSubmittedBy}</th>
+					<td style="padding: 4px 0; text-align: left; width: 100%;">{OrderName}</td>
+				</tr>
+				{OrderCancellationRequestReason(
+					before: '<tr valign="top"><th scope="row" style="padding: 4px 18px 4px 0; text-align: left; white-space: nowrap;">{%EmailLabelOrderCancellationRequestReason}</th><td style="padding: 4px 0; text-align: left; width: 100%;">',
+					after: '</td></tr>'
+				)}
+			</table>
+
+			{Helper(file:'emails/helpers/cancellation-request-contents')}
+
+			<p style="font-size: 14px; line-height: 21px; color: #555;">{%OrderCancellationProcessText}</p>
+
+			<p style="font-size: 13px; line-height: 20px; color: #888;">{%EmailFooterOrderCancellationRequest}</p>
+
+		</td>
+	</tr>
+</table>
+<!-- Content table ends -->
+
+{Helper(file:'emails/helpers/simplebottom')}
+{Helper(file:'emails/helpers/emailfooter')}
