@@ -16,10 +16,18 @@
 						classes:'first|',
 						helper: 'helpers/listproduct'
 					)}
+					{Bundles(
+						category:'{CategoryID}',
+						classes:'first|',
+						helper: 'helpers/listbundle',
+						before:'<h2 class="BoxHeader">{%Bundles}</h2>'
+					)}
 					{Products(
 						classes:'first|',
-						helper: 'helpers/listproduct'
+						helper: 'helpers/listproduct',
+						before:'<h2 class="BoxHeader">{%CheckoutOrderContent}</h2>'
 					)}
+					
 				</div>
 				<div id="SecondaryFeatures">
 					{CategoryNewProducts(
